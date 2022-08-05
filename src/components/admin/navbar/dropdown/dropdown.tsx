@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { Menu, Transition } from "@headlessui/react";
-import { List } from "./list";
+import { List } from "./dropdown.list";
 
 export const Dropdown: React.FC = () => {
   return (

@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { setCollapsed } from "../../../slice/collapsed";
 import { FiMenu } from "react-icons/fi";
 import { Search } from "./search";
-import { Dropdown } from "./dropdown";
+import { Dropdown } from "./dropdown/dropdown";
 
 export const Navbar: React.FC = () => {
   const collapsed = useAppSelector((state) => state.config.collapsed);
