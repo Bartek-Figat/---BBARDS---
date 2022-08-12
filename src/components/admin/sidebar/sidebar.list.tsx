@@ -1,23 +1,23 @@
-import {
-  MdOutlineManageAccounts,
-  MdOutlineNotificationsActive,
-} from "react-icons/md";
+import { MdOutlineManageAccounts } from "react-icons/md";
 import { AiOutlineCalendar } from "react-icons/ai";
-import { BsChatDots } from "react-icons/bs";
+import { BsChatDots, BsBookmarks } from "react-icons/bs";
 import { RiContactsBookLine } from "react-icons/ri";
 import { FiLogOut, FiMail } from "react-icons/fi";
 import { TbNotes } from "react-icons/tb";
+import { ImProfile } from "react-icons/im";
 
 export const sibarList = [
   {
     id: 1,
-    icon: MdOutlineManageAccounts,
-    content: "Account Settings",
+    icon: ImProfile,
+
+    content: "Profile",
   },
+
   {
     id: 2,
-    icon: MdOutlineNotificationsActive,
-    content: "Notification",
+    icon: BsBookmarks,
+    content: "Bookmarks",
   },
   {
     id: 3,
@@ -27,25 +27,30 @@ export const sibarList = [
   {
     id: 4,
     icon: FiMail,
-    content: "Mail",
+    content: "Message",
   },
   {
     id: 5,
-    icon: BsChatDots,
-    content: "Chat",
-  },
-  {
-    id: 6,
     icon: RiContactsBookLine,
     content: "Contacts",
   },
   {
+    id: 6,
+    icon: BsChatDots,
+    content: "Chat",
+  },
+  {
     id: 7,
     icon: TbNotes,
-    content: "Notes",
+    content: "Notification",
   },
   {
     id: 8,
+    icon: MdOutlineManageAccounts,
+    content: "Account Settings",
+  },
+  {
+    id: 9,
     icon: FiLogOut,
     content: "Logout",
   },

@@ -4,22 +4,14 @@ import { LSideBar } from "./sidebar/sidebar";
 import { Content } from "./content";
 import { Navbar } from "./navbar/navbar";
 const Dasboard: React.FC = () => {
-  const collapsed = useAppSelector((state) => state.config.collapsed);
+  const { collapsed } = useAppSelector((state) => state.config);
 
   return (
-    <div className="flex h-screen w-scree">
-      <div
-        className={`h-scree bg-purple , ${
-          !collapsed ? "grow-[0.06]" : null
-        } ease-in-out duration-300`}
-      >
+    <div className="flex w-full">
+      <div className="flex flex-auto sticky h-screen bg-purple lg:w-[15%]  sm:w-[20%]">
         <LSideBar />
       </div>
-      <div
-        className={`h-scree duration-300, ${
-          !collapsed ? " grow-[0.86]" : "grow-[0.94]"
-        } ease-in-out duration-300`}
-      >
+      <div className="lg:w-[85%] sm:w-[80%]">
         <Navbar />
         <Content />
       </div>

@@ -1,9 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { SummaryList } from "./header/summaryList";
+import { Profile } from "./profile/profile";
 
 export const Content: React.FunctionComponent = () => {
   return (
-    <div className="h-full w-full">
-      <Outlet />
+    <div>
+      <SummaryList />
+      <Profile />
     </div>
   );
 };
