@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router-dom";
+import { Home } from "../components/home";
 
 export function PublicRouter() {
   return (
     <Routes>
-      <Route path="/" element={<p>HOME</p>} />
+      <Route path="/" element={<Home />} />
     </Routes>
   );
 }
