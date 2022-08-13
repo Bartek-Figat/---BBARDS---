@@ -1,10 +1,13 @@
-import Dasboard from "./components/admin/admin";
+import { BrowserRouter } from "react-router-dom";
+import { PrivateRouter } from "router/PrivateRouter";
+import { PublicRouter } from "./router/PublicRouter";
 
 function App() {
   return (
-    <div className="flex h-screen w-scree bg-[#f2f2f4]">
-      <Dasboard />
-    </div>
+    <BrowserRouter>
+      <PublicRouter />
+      <PrivateRouter />
+    </BrowserRouter>
   );
 }
 

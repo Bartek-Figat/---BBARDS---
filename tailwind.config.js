@@ -19,6 +19,12 @@ module.exports = {
         purple: "rgb(17 24 39)",
         "purple-hover": "rgba(255, 255, 255, 0.1)",
       },
+      backgroundImage: {
+        "hero-image": "url('assets/images/01.jpg')",
+      },
+      container: {
+        center: true,
+      },
     },
   },
   plugins: [],
