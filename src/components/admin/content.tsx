@@ -3,7 +3,7 @@ import { Profile } from "./profile/profile";
 
 export const Content: React.FunctionComponent = () => {
   return (
-    <div>
+    <div className="flex-grow">
       <SummaryList />
       <Profile />
     </div>

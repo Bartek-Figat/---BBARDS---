@@ -1,20 +1,15 @@
-export const Profile: React.FC = () => {
-  const currencyNumberFormat = (number: number | bigint) => {
-    return new Intl.NumberFormat("us-US", {
-      style: "currency",
-      currency: "USA",
-    }).format(number);
-  };
+import { currencyNumberFormat, fromatPhoneNumber } from "util/helper";
 
+export const Profile: React.FC = () => {
   return (
     <div className="flex justify-center w-full p-4">
-      <div className="flex justify-center max-auto w-full">
+      <div className="flex justify-center w-full">
         <div className="grid grid-cols-1 gap-x-8 gap-y-2 lg:grid-cols-16  md:grid-cols-14 sm:grid-cols-14">
-          <div className="flex justify-center flex-wrap items-center flex-col rounded-md mb-8 p-2 bg-white">
+          <div className="flex justify-center items-center flex-col rounded-md mb-8 p-2 bg-white">
             <div className="flex flex-col w-[100%] h-[15rem] p-4">
               <div className="flex justify-between mb-5 border-b-2 border-gray-100 p-2">
                 <h2 className="text-black text-lg">Membership</h2>
-                <button className="bg-blue-200 rounded-md px-4 py-1 text-blue-900 font-[600]">
+                <button className="bg-blue-200 hover:bg-blue-300 rounded-md px-4 py-1 text-blue-900  font-[600]">
                   Edite
                 </button>
               </div>
@@ -90,7 +85,7 @@ export const Profile: React.FC = () => {
                   </li>
                   <li className="flex justify-between items-center pb-2 mb-2 border-b-2 border-gray-100">
                     <h5>Phone:</h5>
-                    <p>+12027953213</p>
+                    <p>{fromatPhoneNumber("2027953213")}</p>
                   </li>
                   <li className="flex justify-between items-center pb-2 mb-2">
                     <h5>Skype:</h5>

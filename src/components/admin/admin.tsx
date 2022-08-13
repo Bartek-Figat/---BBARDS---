@@ -11,7 +11,7 @@ const Dasboard: React.FC = () => {
       <div className="flex flex-auto sticky h-screen bg-purple lg:w-[15%]  sm:w-[20%]">
         <LSideBar />
       </div>
-      <div className="lg:w-[85%] sm:w-[80%]">
+      <div className="lg:w-[85%] sm:w-[80%] h-screen overflow-y-auto">
         <Navbar />
         <Content />
       </div>
