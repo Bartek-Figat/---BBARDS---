@@ -5,8 +5,8 @@ import { FiMenu } from "react-icons/fi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Search } from "./search";
 import { NotificationCircle } from "./notificationCricle";
-import userImage from "../../../assets/images/user.png";
-import logo from "../../../assets/images/logo.png";
+import userImage from "assets/images/user.png";
+import logo from "assets/images/logo.png";
 
 export const Navbar: React.FC = () => {
   const collapsed = useAppSelector((state) => state.config.collapsed);

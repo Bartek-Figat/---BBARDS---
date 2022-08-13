@@ -1,6 +1,6 @@
 import React from "react";
 import { IconType } from "react-icons";
-import profileImage from "../../../assets/images/photo-1599566150163-29194dcaad36.avif";
+import profileImage from "assets/images/photo-1599566150163-29194dcaad36.avif";
 import { sibarList } from "./sidebar.list";
 
 const NavigationList = ({ children }: { children: React.ReactNode }) => {
