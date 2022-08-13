@@ -20,6 +20,57 @@ import properties from "assets/images/suggest/properties.png";
 import fashion from "assets/images/suggest/fashion.png";
 
 export default function SwiperContainer() {
+  let imgTitleMap = [
+    {
+      img: electronics,
+      title: "Electronics",
+    },
+    {
+      img: hospitality,
+      title: "Hospitality",
+    },
+    {
+      img: gadgets,
+      title: "Gadgets",
+    },
+    {
+      img: education,
+      title: "Education",
+    },
+    {
+      img: software,
+      title: "Software",
+    },
+    {
+      img: food,
+      title: "Food",
+    },
+    {
+      img: services,
+      title: "Services",
+    },
+    {
+      img: animals,
+      title: "Animals",
+    },
+    {
+      img: automobile,
+      title: "Automobile",
+    },
+    {
+      img: furniture,
+      title: "Furniture",
+    },
+    {
+      img: properties,
+      title: "Properties",
+    },
+    {
+      img: fashion,
+      title: "fashion",
+    },
+  ];
+
   return (
     <div className="container relative">
       <div className="absolute -bottom-24 w-full">
@@ -37,42 +88,13 @@ export default function SwiperContainer() {
           }}
           autoplay={{ delay: 3000 }}
         >
-          <SwiperSlide>
-            <AdSlide img={electronics} title={"Electronics"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={hospitality} title={"Hospitality"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={gadgets} title={"Gadgets"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={education} title={"Education"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={software} title={"Software"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={food} title={"Food"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={services} title={"Services"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={animals} title={"Animals"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={automobile} title={"Automobile"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={furniture} title={"Furniture"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={properties} title={"Properties"} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <AdSlide img={fashion} title={"Fashion"} />
-          </SwiperSlide>
+          {imgTitleMap.map(({ img, title }) => {
+            return (
+              <SwiperSlide>
+                <AdSlide img={img} title={title} />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
     </div>
