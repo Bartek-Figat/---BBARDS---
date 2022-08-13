@@ -5,7 +5,7 @@ export const Search: React.FC = () => {
   return (
     <div>
       <div className=" w-full sm:rounded-full flex-1 ml-10 hidden lg:flex">
-        <form className="w-full ">
+        <form className="w-full">
           <div className="relative flex rounded-lg bg-[#f5f5fd] items-center">
             <input
               type="search"

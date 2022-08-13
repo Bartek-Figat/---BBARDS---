@@ -1,21 +1,25 @@
 import { FiSearch } from "react-icons/fi";
+import { GoSettings } from "react-icons/go";
 
 export const Search: React.FC = () => {
   return (
-    <div className="flex lg:w-[36rem] md:w-[20rem] sm:w-[1rem] sm:rounded-full">
-      <form className="w-full mr-2">
-        <div className="relative">
-          <input
-            type="search"
-            name="search"
-            placeholder="Search..."
-            className="w-full h-10 pl-10 pr-5 text-sm rounded-lg appearance-none focus:outline-none border"
-          />
-          <button type="submit" className="absolute top-0 left-0 mt-3 ml-4">
-            <FiSearch className="w-4 h-4 stroke-current" />
-          </button>
-        </div>
-      </form>
+    <div>
+      <div className="w-full sm:rounded-full flex-1 ml-10 hidden lg:flex">
+        <form className="w-full">
+          <div className="relative flex rounded-lg bg-[#f5f5fd] items-center">
+            <input
+              type="search"
+              name="search"
+              placeholder="Search, Whatever You Needs..."
+              className="w-full h-10 pl-10 text-sm appearance-none focus:outline-none bg-[#f5f5fd] rounded-lg"
+            />
+            <button type="submit" className="absolute top-0 left-0 mt-3 ml-4">
+              <FiSearch className="w-4 h-4 stroke-current" />
+            </button>
+            <GoSettings className="w-4 h-4 stroke-current mr-4" />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

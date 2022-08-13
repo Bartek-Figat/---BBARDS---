@@ -8,12 +8,12 @@ module.exports = {
         // sm: { min: "550px", max: "767px" },
         tablet: { max: "640px" },
         laptop: { max: "1024px" },
-        desktop: { max: "1200px" },
+        desktop: { min: "900px", max: "1200px" },
       },
       gridTemplateColumns: {
-        16: "repeat(2, minmax(30rem, 20rem))",
-        14: "repeat(auto-fit, minmax(40rem, 20rem))",
-        12: "repeat(1, minmax(40rem, 20rem))",
+        16: "repeat(2, minmax(30rem, 10rem))",
+        14: "repeat(2, minmax(20rem, 30rem))",
+        12: "repeat(auto-fit, minmax(20rem, 30rem))",
       },
       colors: {
         purple: "rgb(17 24 39)",

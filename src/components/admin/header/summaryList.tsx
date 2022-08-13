@@ -1,6 +1,6 @@
 import { Box, Header, Content, Wrapper } from "./list.props";
 
-export const SummaryList: React.FunctionComponent = () => {
+export const SummaryList: React.FC = () => {
   return (
     <Wrapper>
       <Header>
