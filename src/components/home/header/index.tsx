@@ -2,8 +2,9 @@ import React from "react";
 import { Navbar } from "../navbar/navbar";
 import { FaEye } from "react-icons/fa";
 import SwiperContainer from "./swiper/swiper";
+import { slidesMap } from "./swiper/Slides";
 
-export function Header() {
+export const Header: React.FC = () => {
   return (
     <header className="w-screen bg-gray-400 relative">
       <Navbar />
@@ -26,8 +27,7 @@ export function Header() {
           </div>
         </div>
       </div>
-
-      <SwiperContainer />
+      <SwiperContainer images={slidesMap} />
     </header>
   );
-}
+};

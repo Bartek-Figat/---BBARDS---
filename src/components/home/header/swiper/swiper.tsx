@@ -1,14 +1,13 @@
 import { Autoplay, A11y } from "swiper";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
+import { ISlideImages } from "./Slides";
 import "swiper/css";
 
-import { AdSlide } from "./adSlide";
-import { slidesMap } from "./Slides";
+interface Props {
+  images: ISlideImages[];
+}
 
-export default function SwiperContainer() {
+export default function SwiperContainer({ images }: Props) {
   return (
     <div className="container relative">
       <div className="absolute -bottom-24 w-full">
@@ -26,10 +25,16 @@ export default function SwiperContainer() {
           }}
           autoplay={{ delay: 3000 }}
         >
-          {slidesMap.map(({ img, title }) => {
+          {Object.values(images).map(({ img, title }) => {
             return (
               <SwiperSlide>
-                <AdSlide img={img} title={title} />
+                <div className="bg-[#dffbff] flex flex-col justify-center items-center rounded-lg border-b-[2px] border-[#0044bb] py-7">
+                  <img className="h-[50px]" src={img} alt={title} />
+                  <p className="text-base mt-5 font-medium">{title}</p>
+                  <p className="text-[#0044bb] text-sm mt-1 font-medium">
+                    (4,521) ads
+                  </p>
+                </div>
               </SwiperSlide>
             );
           })}

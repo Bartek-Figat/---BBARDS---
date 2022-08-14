@@ -11,7 +11,12 @@ import furniture from "assets/images/suggest/furniture.png";
 import properties from "assets/images/suggest/properties.png";
 import fashion from "assets/images/suggest/fashion.png";
 
-export const slidesMap = [
+export interface ISlideImages {
+  img: string;
+  title: string;
+}
+
+export const slidesMap: ISlideImages[] = [
   {
     img: electronics,
     title: "Electronics",
