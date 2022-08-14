@@ -7,6 +7,7 @@ import { Search } from "./search";
 import { NotificationCircle } from "./notificationCricle";
 import userImage from "assets/images/user.png";
 import logo from "assets/images/logo.png";
+import { Dropdown } from "./dropdown/dropdown";
 
 export const Navbar: React.FC = () => {
   const collapsed = useAppSelector((state) => state.config.collapsed);
@@ -25,6 +26,7 @@ export const Navbar: React.FC = () => {
       >
         <FiMenu size={20} />
       </button>
+      <Dropdown />
       <img className="h-10 ml-10" src={logo} alt="" />
       <div className="ml-10 hidden lg:flex items-center">
         <img className="rounded-full w-10 h-10" src={userImage} alt="" />
