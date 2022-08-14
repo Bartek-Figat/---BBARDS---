@@ -64,7 +64,7 @@ export const Dropdown: React.FC = () => {
                 Jackon Honson
               </a>
               <div className="flex mt-2">
-                <button className="text-xs bg-[#0044bb] hover:bg-blue-900 py-2 px-4 rounded-md text-white font-bold w-full flex flex-row justify-center items-center uppercase">
+                <button className="text-xs leading-6 bg-[#0044bb] hover:bg-blue-900 py-2 px-4 rounded-md text-white font-bold w-full flex flex-row justify-center items-center uppercase">
                   <FaPlusCircle className="mr-2" />
                   Post Your Ad
                 </button>
@@ -76,7 +76,7 @@ export const Dropdown: React.FC = () => {
                 <Tab>
                   {({ selected }) => (
                     <button
-                      className={`px-9 py-2 text-xs uppercase font-medium ${
+                      className={`px-9 py-2 text-xs uppercase font-medium leading-6 ${
                         selected
                           ? "bg-[#F5F5F5] text-[#0044bb] border-b-[3px] border-[#0044bb]"
                           : "border-b-[1px] border-[#e8e8e8]"
@@ -89,7 +89,7 @@ export const Dropdown: React.FC = () => {
                 <Tab>
                   {({ selected }) => (
                     <button
-                      className={`px-9 py-2 text-xs uppercase font-medium ${
+                      className={`px-9 py-2 text-xs uppercase font-medium leading-6 ${
                         selected
                           ? "bg-[#F5F5F5] text-[#0044bb] border-b-[3px] border-[#0044bb]"
                           : "border-b-[1px] border-[#e8e8e8]"
