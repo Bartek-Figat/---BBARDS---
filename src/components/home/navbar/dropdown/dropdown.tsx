@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setCollapsed } from "../../../../slice/collapsed";
 import { FaPlusCircle } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import TabButton from "./TabButton";
 
 export const Dropdown: React.FC = () => {
   const collapsed = useAppSelector((state) => state.config.collapsed);
@@ -75,28 +76,12 @@ export const Dropdown: React.FC = () => {
               <Tab.List>
                 <Tab>
                   {({ selected }) => (
-                    <button
-                      className={`px-9 py-2 text-xs uppercase font-medium leading-6 ${
-                        selected
-                          ? "bg-[#F5F5F5] text-[#0044bb] border-b-[3px] border-[#0044bb]"
-                          : "border-b-[1px] border-[#e8e8e8]"
-                      }`}
-                    >
-                      Main Menu
-                    </button>
+                    <TabButton selected={selected}>Main Menu</TabButton>
                   )}
                 </Tab>
                 <Tab>
                   {({ selected }) => (
-                    <button
-                      className={`px-9 py-2 text-xs uppercase font-medium leading-6 ${
-                        selected
-                          ? "bg-[#F5F5F5] text-[#0044bb] border-b-[3px] border-[#0044bb]"
-                          : "border-b-[1px] border-[#e8e8e8]"
-                      }`}
-                    >
-                      Author Menu
-                    </button>
+                    <TabButton selected={selected}> Author Menu</TabButton>
                   )}
                 </Tab>
               </Tab.List>
