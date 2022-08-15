@@ -9,7 +9,7 @@ interface Props {
 
 export default function SwiperContainer({ images }: Props) {
   return (
-    <div className="container relative">
+    <div className="md:container relative mx-4">
       <div className="absolute -bottom-24 w-full">
         <Swiper
           modules={[Autoplay, A11y]}

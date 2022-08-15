@@ -8,9 +8,9 @@ export const Header: React.FC = () => {
   return (
     <header className="w-screen bg-gray-400 relative">
       <Navbar />
-      <div className="bg-cover bg-no-repeat bg-center bg-hero-image bg-gray-400  w-full h-[32rem]">
-        <div className="bg-[#0044bb]/50 w-full h-full flex items-center">
-          <div className="container flex flex-wrap justify-center">
+      <div className="bg-cover bg-no-repeat bg-center bg-hero-image bg-gray-400 w-full">
+        <div className="bg-[#0044bb]/50 w-full h-full pt-20 pb-44">
+          <div className="md:container mx-4 flex flex-wrap justify-center">
             <hgroup className="text-center text-white">
               <h1 className="text-4xl font-bold">
                 You can #Buy, #Rent, #Booking anything from here.
