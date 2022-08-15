@@ -6,7 +6,10 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setCollapsed } from "../../../../slice/collapsed";
 import { FaPlusCircle } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import Accordion from "./accordion/Accordion";
+import AccordionItem from "./accordion/AccordionItem";
 import TabButton from "./TabButton";
+import NavigationItem from "./NavigationItem";
 
 export const Dropdown: React.FC = () => {
   const collapsed = useAppSelector((state) => state.config.collapsed);
@@ -88,18 +91,100 @@ export const Dropdown: React.FC = () => {
               <Tab.Panels>
                 <Tab.Panel>
                   <ul>
-                    <li className="p-3 border-b-[1px] border-[#e8e8e8]">
-                      <a href="">TODO</a>
+                    <NavigationItem path="">Home</NavigationItem>
+                    <li>
+                      <Accordion>
+                        <AccordionItem title="Categories">
+                          <ul>
+                            <NavigationItem path="">
+                              Category List
+                            </NavigationItem>
+                            <NavigationItem path="">
+                              Category Details
+                            </NavigationItem>
+                          </ul>
+                        </AccordionItem>
+                      </Accordion>
                     </li>
-                    <li className="p-3 border-b-[1px] border-[#e8e8e8]">
-                      <a href="">TODO</a>
+                    <li>
+                      <Accordion>
+                        <AccordionItem title="Advertise List">
+                          <ul>
+                            <NavigationItem path="">
+                              Ad List Column 3
+                            </NavigationItem>
+                            <NavigationItem path="">
+                              Ad List Column 2
+                            </NavigationItem>
+                            <NavigationItem path="">
+                              Ad List Column 1
+                            </NavigationItem>
+                          </ul>
+                        </AccordionItem>
+                      </Accordion>
                     </li>
-                    <li className="p-3 border-b-[1px] border-[#e8e8e8]">
-                      <a href="">TODO</a>
+                    <li>
+                      <Accordion>
+                        <AccordionItem title="Advertise Details">
+                          <ul>
+                            <NavigationItem path="">
+                              Ad Details Grid
+                            </NavigationItem>
+                            <NavigationItem path="">
+                              Ad Details Left
+                            </NavigationItem>
+                            <NavigationItem path="">
+                              Ad Details Right
+                            </NavigationItem>
+                          </ul>
+                        </AccordionItem>
+                      </Accordion>
                     </li>
+                    <li>
+                      <Accordion>
+                        <AccordionItem title="Pages">
+                          <ul>
+                            <NavigationItem path="">
+                              Ad Details Grid
+                            </NavigationItem>
+                            <NavigationItem path="">
+                              Ad Details Left
+                            </NavigationItem>
+                            <NavigationItem path="">
+                              Ad Details Right
+                            </NavigationItem>
+                          </ul>
+                        </AccordionItem>
+                      </Accordion>
+                    </li>
+                    <li>
+                      <Accordion>
+                        <AccordionItem title="Blogs">
+                          <ul>
+                            <NavigationItem path="">Blog List</NavigationItem>
+                            <NavigationItem path="">
+                              Blog Details
+                            </NavigationItem>
+                          </ul>
+                        </AccordionItem>
+                      </Accordion>
+                    </li>
+                    <NavigationItem path="">Contact</NavigationItem>
                   </ul>
                 </Tab.Panel>
-                <Tab.Panel>TODO</Tab.Panel>
+                <Tab.Panel>
+                  <ul>
+                    <NavigationItem path="">Dashboard</NavigationItem>
+                    <NavigationItem path="">Profile</NavigationItem>
+                    <NavigationItem path="">Ad Post</NavigationItem>
+                    <NavigationItem path="">My Ads</NavigationItem>
+                    <NavigationItem path="">Settings</NavigationItem>
+                    <NavigationItem path="">Bookmark</NavigationItem>
+                    <NavigationItem path="">Message</NavigationItem>
+                    <NavigationItem path="">Notification</NavigationItem>
+                    <NavigationItem path="">Logout</NavigationItem>
+                  </ul>
+                </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
           </Dialog.Panel>
