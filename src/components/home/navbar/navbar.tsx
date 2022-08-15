@@ -2,12 +2,12 @@ import React from "react";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { setCollapsed } from "../../../slice/collapsed";
 import { FiMenu } from "react-icons/fi";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Search } from "./search";
 import { NotificationCircle } from "./notificationCricle";
 import userImage from "assets/images/user.png";
 import logo from "assets/images/logo.png";
 import { Dropdown } from "./dropdown/dropdown";
+import { FaPlusCircle } from "react-icons/fa";
 
 export const Navbar: React.FC = () => {
   const collapsed = useAppSelector((state) => state.config.collapsed);
@@ -36,9 +36,9 @@ export const Navbar: React.FC = () => {
 
       <div className="ml-10 hidden lg:flex">
         <NotificationCircle />
-        <div className="flex flx-row w-[10rem]">
-          <button className="bg-[#0044bb] hover:bg-blue-700 p-2 rounded-md text-white font-bold w-full flex flex-row justify-center items-center">
-            <AiOutlinePlusCircle className="text-xl mr-2" />
+        <div className="flex">
+          <button className="text-xs leading-6 bg-[#0044bb] hover:bg-blue-900 py-2 px-4 rounded-md text-white font-bold w-full flex flex-row justify-center items-center uppercase">
+            <FaPlusCircle className="mr-2" />
             Post Your Ad
           </button>
         </div>
