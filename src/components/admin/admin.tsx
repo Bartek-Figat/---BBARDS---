@@ -1,12 +1,9 @@
 import React from "react";
-import { useAppSelector } from "../../store/hooks";
 import { LSideBar } from "./sidebar/sidebar";
 import { Content } from "./content";
 import { Navbar } from "./navbar/navbar";
 
 const Dasboard: React.FC = () => {
-  const { collapsed } = useAppSelector((state) => state.config);
-
   return (
     <div className="flex">
       <div className="flex w-screen">

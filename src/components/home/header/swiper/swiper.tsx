@@ -27,7 +27,7 @@ export default function SwiperContainer({ images }: Props) {
         >
           {Object.values(images).map(({ img, title }) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={title}>
                 <div className="bg-[#dffbff] flex flex-col justify-center items-center rounded-lg border-b-[2px] border-[#0044bb] py-7">
                   <img className="h-[50px]" src={img} alt={title} />
                   <p className="text-base mt-5 font-medium">{title}</p>
