@@ -1,0 +1,14 @@
+name: Update AUTHORS
+on:
+  push:
+    branches:
+      - main
+jobs:
+  updateAuthors:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking...
+      - uses: actions/checkout@v3
+
+      - name: Extract current git commit
+      - run: ${{ github.event.head_commit.message }} > Commit MSG

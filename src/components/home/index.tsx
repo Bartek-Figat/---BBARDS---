@@ -6,7 +6,9 @@ export function Home() {
   return (
     <>
       <Header />
-      <FeaturedAds />
+      <div className="flex justify-center">
+        <FeaturedAds />
+      </div>
     </>
   );
 }
