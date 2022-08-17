@@ -41,8 +41,8 @@ export const FeaturedAds = () => {
     <div className="container mt-44 flex">
       <div className="w-1/2">
         <hgroup>
-          <h2>Find your needs in our best Featured Ads</h2>
-          <p>
+          <h2 className="text-4xl font-bold">Find your needs in our best <span className="text-dark-blue italic">Featured Ads</span></h2>
+          <p className="text-lg">
             Lorem ipsum dolor sit amet consectetur adipisicing elit aspernatur
             illum vel sunt libero voluptatum repudiandae veniam maxime tenetur
             fugiat eaque alias nobis doloremque culpa nam.
@@ -50,10 +50,10 @@ export const FeaturedAds = () => {
         </hgroup>
         <button className="bg-[#0044bb] border-2 border-[#0044bb] hover:bg-[#0044bb] text-white px-5 py-3 rounded-md uppercase font-medium flex justify-center items-center mt-11">
           <FaEye className="text-xl mr-2" />
-          Show all ads
+          view all featured
         </button>
       </div>
-      <div className="w-1/2">
+      <div className="w-1/2 ml-12">
         <Swiper
           modules={[Autoplay, A11y, Navigation, Thumbs, Controller]}
           spaceBetween={6}
