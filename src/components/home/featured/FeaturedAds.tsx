@@ -2,9 +2,9 @@ import { FaEye } from "react-icons/fa";
 import SwiperCore, {
   A11y,
   Autoplay,
+  Controller,
   Navigation,
   Thumbs,
-  Controller,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { faker } from "@faker-js/faker";
@@ -17,25 +17,7 @@ import { useEffect, useState } from "react";
 import "swiper/css";
 
 export const FeaturedAds = () => {
-  const [thumbsSwiper, setThumbsdSwiper] = useState<SwiperCore>();
-  const [indexSlide, setIndexSlide] = useState<number | undefined>();
-
-  // const slides = Array.from({ length: 5 }).map((element, i) => {
-  //   const fakerImage = `${faker.image.technics()}?random=${Date.now()}`;
-  //   console.log(fakerImage);
-  //   return (
-  //     <>
-  //       <SwiperSlide className="p-2" key="product1">
-  //         <img className="w-[100%] rounded-xl" src={fakerImage} alt="product" />
-  //       </SwiperSlide>
-  //       ;
-  //     </>
-  //   );
-  // });
-
-  useEffect(() => {
-    console.log("indexSlide", indexSlide);
-  }, [indexSlide]);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
 
   return (
     <div className="container mt-44 flex">
@@ -56,46 +38,45 @@ export const FeaturedAds = () => {
       <div className="w-1/2">
         <Swiper
           modules={[Autoplay, A11y, Navigation, Thumbs, Controller]}
-          spaceBetween={50}
+          spaceBetween={6}
           loop={true}
           thumbs={{
             swiper:
               thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
           }}
-          centeredSlides={true}
-          initialSlide={indexSlide || 0}
+          loopedSlides={4}
           autoplay={true}
           className="w-[100%]"
         >
-          <SwiperSlide className="p-3">
+          <SwiperSlide className="">
             <img
-              className="w-[100%] rounded-xl object-cover"
+              className="w-[100%] rounded-xl"
               src={product1}
               alt="product1"
             />
           </SwiperSlide>
-          <SwiperSlide className="p-3">
+          <SwiperSlide className="">
             <img
               className="w-[100%] rounded-xl"
               src={product2}
               alt="product1"
             />
           </SwiperSlide>
-          <SwiperSlide className="p-3">
+          <SwiperSlide className="">
             <img
               className="w-[100%] rounded-xl"
               src={product3}
               alt="product1"
             />
           </SwiperSlide>
-          <SwiperSlide className="p-3">
+          <SwiperSlide className="">
             <img
               className="w-[100%] rounded-xl"
               src={product4}
               alt="product1"
             />
           </SwiperSlide>
-          <SwiperSlide className="p-3">
+          <SwiperSlide className="">
             <img
               className="w-[100%] rounded-xl"
               src={product5}
@@ -105,34 +86,31 @@ export const FeaturedAds = () => {
         </Swiper>
 
         <Swiper
-          onSwiper={setThumbsdSwiper}
+          onSwiper={setThumbsSwiper}
           slidesPerView={4}
-          slidesPerGroup={5}
           spaceBetween={6}
           loop={true}
-          watchSlidesProgress
+          watchSlidesProgress={true}
           modules={[Autoplay, A11y, Navigation, Thumbs, Controller]}
+          loopedSlides={4}
+          centeredSlides={true}
           autoplay={true}
-          onSlideChangeTransitionEnd={(swiper) =>
-            setIndexSlide(swiper.activeIndex)
-          }
-          className="w-[100%] p-2"
-          // onSlideChange={(swiper) => setIndexSlide(swiper.activeIndex)}
+          className="w-[100%]"
         >
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded-xl m-1" src={product1} alt="" />
+            <img className="w-[100%] rounded" src={product1} alt="" />
           </SwiperSlide>
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded-xl m-1" src={product2} alt="" />
+            <img className="w-[100%] rounded" src={product2} alt="" />
           </SwiperSlide>
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded-xl m-1" src={product3} alt="" />
+            <img className="w-[100%] rounded" src={product3} alt="" />
           </SwiperSlide>
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded-xl m-1" src={product4} alt="" />
+            <img className="w-[100%] rounded" src={product4} alt="" />
           </SwiperSlide>
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded-xl m-1" src={product5} alt="" />
+            <img className="w-[100%] rounded" src={product5} alt="" />
           </SwiperSlide>
         </Swiper>
       </div>
