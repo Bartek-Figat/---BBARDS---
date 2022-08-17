@@ -29,7 +29,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: ${{ env.GIT_COMMIT_MESSAGE_BODY }}
+          branch: ${{ env.GIT_COMMIT_MESSAGE_SUBJECT_SANITIZED }}
           token: ${{ secrets.GITHUB_TOKEN }}
           body: Automated PR
           delete-branch: true
