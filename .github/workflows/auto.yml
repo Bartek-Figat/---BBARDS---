@@ -32,3 +32,6 @@ jobs:
           committer: ${{ env.GIT_COMMIT_COMMITTER_NAME }}"
           author: ${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
           branch: ${{ env.GIT_COMMIT_MESSAGE_BODY }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          body: Automated PR
+          delete-branch: true
