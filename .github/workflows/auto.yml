@@ -17,18 +17,10 @@ jobs:
         uses: rlespinasse/git-commit-data-action@v1
 
       - name: Create Pull Request
-        uses: devops-infra/action-pull-request@v0.5.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          title: ${{ github.event.commits[0].message }}
-          assignee: ${{ github.actor }}
-          body: "**Automated pull request**"
-          new_string: ${{ github.event.commits[0].message }}
-
-      - name: Create Pull Request
         if: startsWith(github.ref, 'refs/heads/feature')
         uses: devops-infra/action-pull-request@v0.5.0
         with:
+          target_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
           title: ${{ github.event.commits[0].message }}
           assignee: ${{ github.actor }}
