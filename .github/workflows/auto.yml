@@ -32,4 +32,3 @@ jobs:
           branch: ${{ env.GIT_COMMIT_MESSAGE_SUBJECT_SANITIZED }}
           token: ${{ secrets.GITHUB_TOKEN }}
           body: Automated PR
-          delete-branch: true
