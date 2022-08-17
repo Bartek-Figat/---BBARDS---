@@ -2,7 +2,8 @@ name: CI
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
 
   workflow_dispatch:
 
@@ -16,19 +17,10 @@ jobs:
       - name: Expose git commit data
         uses: rlespinasse/git-commit-data-action@v1
 
-      # Runs a set of commands using the runners shell
-      - name: Print git commit data
-        run: |
-          echo " - ${{ env.GIT_COMMIT_COMMITTER }}"
-          echo " - ${{ env.GIT_COMMIT_COMMITTER_NAME }}"
-          echo " - ${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
-          echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT }}"
-          echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT_SANITIZED }}"
-          echo " - ${{ env.GIT_COMMIT_MESSAGE_BODY }}"
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
+          base: main
           committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }}" <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
           autor: ${{ env.GIT_COMMIT_AUTHOR_NAME }}" <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
           branch: ${{ env.GIT_COMMIT_MESSAGE_SUBJECT_SANITIZED }}
