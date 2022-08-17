@@ -29,7 +29,8 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          committer: ${{ env.GIT_COMMIT_COMMITTER_NAME }}"
+          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }}" <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          autor: ${{ env.GIT_COMMIT_AUTHOR_NAME }}" <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
           branch: ${{ env.GIT_COMMIT_MESSAGE_SUBJECT_SANITIZED }}
           token: ${{ secrets.GITHUB_TOKEN }}
           body: Automated PR
