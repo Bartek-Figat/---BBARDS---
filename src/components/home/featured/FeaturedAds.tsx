@@ -6,16 +6,34 @@ import SwiperCore, {
   Navigation,
   Thumbs,
 } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { faker } from "@faker-js/faker";
+import { Swiper, SwiperSlide, useSwiperSlide } from "swiper/react";
 import product1 from "assets/images/product/01.jpg";
 import product2 from "assets/images/product/02.jpg";
 import product3 from "assets/images/product/03.jpg";
 import product4 from "assets/images/product/04.jpg";
 import product5 from "assets/images/product/05.jpg";
-import { useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import "swiper/css";
+import clsx from "clsx";
 
+interface SlideContentProps {
+  children: ReactNode;
+}
+
+function SlideContent({ children }: SlideContentProps) {
+  const swiperSlide = useSwiperSlide();
+
+  return (
+    <div
+      className={clsx(
+        "p-1",
+        swiperSlide.isActive && "border-2 border-[#0044bb] rounded-lg"
+      )}
+    >
+      {children}
+    </div>
+  );
+}
 export const FeaturedAds = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
 
@@ -98,19 +116,29 @@ export const FeaturedAds = () => {
           className="w-[100%]"
         >
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded" src={product1} alt="" />
+            <SlideContent>
+              <img className="w-[100%] rounded" src={product1} alt="" />
+            </SlideContent>
           </SwiperSlide>
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded" src={product2} alt="" />
+            <SlideContent>
+              <img className="w-[100%] rounded" src={product2} alt="" />
+            </SlideContent>
           </SwiperSlide>
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded" src={product3} alt="" />
+            <SlideContent>
+              <img className="w-[100%] rounded" src={product3} alt="" />
+            </SlideContent>
           </SwiperSlide>
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded" src={product4} alt="" />
+            <SlideContent>
+              <img className="w-[100%] rounded" src={product4} alt="" />
+            </SlideContent>
           </SwiperSlide>
           <SwiperSlide className="p-2">
-            <img className="w-[100%] rounded" src={product5} alt="" />
+            <SlideContent>
+              <img className="w-[100%] rounded" src={product5} alt="" />
+            </SlideContent>
           </SwiperSlide>
         </Swiper>
       </div>
