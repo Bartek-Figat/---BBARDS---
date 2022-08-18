@@ -2,8 +2,7 @@ name: CI
 
 on:
   push:
-    branches-ignore:
-      - main
+    branches: [main]
 
   workflow_dispatch:
 
@@ -20,13 +19,12 @@ jobs:
       - name: Create pull request
         uses: devops-infra/action-pull-request@v0.5.0
         with:
-          source_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          title: ${{ github.event.commits[0].message }}
-          assignee: ${{ github.actor }}
-          label: automatic,feature
-          template: .github/PULL_REQUEST_TEMPLATE/FEATURE.md
-          old_string: "**Write you description here**"
-          new_string: ${{ github.event.commits[0].message }}
-          get_diff: true
-          allow_no_diff: true
+          source_branch: ${{ github.event.release.target_commitish }}
+          target_branch: main
+          title: "${{ github.event.release.name }} -> main"
+          body: |
+            This PR was auto-generated after the release because the
+            release branch has changes that aren't in main.
+          assignee: masterHAWK99
+          get_diff: false
