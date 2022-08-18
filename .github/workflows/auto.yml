@@ -22,8 +22,6 @@ jobs:
         uses: devops-infra/action-pull-request@v0.5.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: main
-          target_branch: develop/FE#14
           title: ${{ github.event.commits[0].message }}
           assignee: ${{ github.actor }}
           label: automatic,feature
