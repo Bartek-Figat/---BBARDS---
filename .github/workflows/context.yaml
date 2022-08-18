@@ -13,10 +13,10 @@ jobs:
           echo " - ${{ github.refs }}"
       - name: Committer
         run: |
-          echo " - ${{ event.commits[0].committer.username }}"
+          echo " - ${{ github.event.commits[0].committer.username }}"
       - name: Message
         run: |
-          echo " - ${{ event.commits[0].message }}"
+          echo " - ${{ github.event.commits[0].message }}"
       - name: Event
         run: |
-          echo " - ${{ event.commits[0] }}"
+          echo " - ${{ github.event.commits[0] }}"
