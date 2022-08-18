@@ -20,7 +20,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: main
           title: ${{ github.event.commits[0].message }}
-          assignee: ${{ github.actor }}
           label: develop
           old_string: "**Write you description here**"
           new_string: ${{ github.event.commits[0].message }}
