@@ -12,7 +12,7 @@ import product2 from "assets/images/product/02.jpg";
 import product3 from "assets/images/product/03.jpg";
 import product4 from "assets/images/product/04.jpg";
 import product5 from "assets/images/product/05.jpg";
-import { ReactNode, SetStateAction, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import "swiper/css";
 import clsx from "clsx";
 
