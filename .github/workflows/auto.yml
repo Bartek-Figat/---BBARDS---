@@ -1,8 +1,6 @@
 on:
   push:
-    branches-ignore:
-      - master
-      - release/*
+    branches: main
 
   workflow_dispatch:
 
@@ -26,4 +24,4 @@ jobs:
           label: develop
           old_string: "**Write you description here**"
           new_string: ${{ github.event.commits[0].message }}
-          get_diff: true
+          get_diff: false
