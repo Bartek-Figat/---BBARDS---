@@ -12,7 +12,7 @@ import product2 from "assets/images/product/02.jpg";
 import product3 from "assets/images/product/03.jpg";
 import product4 from "assets/images/product/04.jpg";
 import product5 from "assets/images/product/05.jpg";
-import { ReactNode, useState } from "react";
+import { ReactNode, SetStateAction, useEffect, useState } from "react";
 import "swiper/css";
 import clsx from "clsx";
 
@@ -36,9 +36,12 @@ function SlideContent({ children }: SlideContentProps) {
 }
 export const FeaturedAds = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
+  const [sliderIndex, setSliderIndex] = useState<number>(0);
+
+  console.log("sliderIndex", [sliderIndex]);
 
   return (
-    <div className="container mt-44 flex">
+    <div className="flex justify-center w-[70%] mt-44">
       <div className="w-1/2">
         <hgroup>
           <h2 className="text-4xl font-bold">Find your needs in our best <span className="text-dark-blue italic">Featured Ads</span></h2>
@@ -57,44 +60,43 @@ export const FeaturedAds = () => {
         <Swiper
           modules={[Autoplay, A11y, Navigation, Thumbs, Controller]}
           spaceBetween={6}
-          loop={true}
           thumbs={{
             swiper:
               thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
           }}
-          loopedSlides={4}
-          autoplay={true}
           className="w-[100%]"
+          loop={true}
+          autoplay={true}
         >
-          <SwiperSlide className="">
+          <SwiperSlide>
             <img
               className="w-[100%] rounded-xl"
               src={product1}
               alt="product1"
             />
           </SwiperSlide>
-          <SwiperSlide className="">
+          <SwiperSlide>
             <img
               className="w-[100%] rounded-xl"
               src={product2}
               alt="product1"
             />
           </SwiperSlide>
-          <SwiperSlide className="">
+          <SwiperSlide>
             <img
               className="w-[100%] rounded-xl"
               src={product3}
               alt="product1"
             />
           </SwiperSlide>
-          <SwiperSlide className="">
+          <SwiperSlide>
             <img
               className="w-[100%] rounded-xl"
               src={product4}
               alt="product1"
             />
           </SwiperSlide>
-          <SwiperSlide className="">
+          <SwiperSlide>
             <img
               className="w-[100%] rounded-xl"
               src={product5}
@@ -104,6 +106,9 @@ export const FeaturedAds = () => {
         </Swiper>
 
         <Swiper
+          onSlideChangeTransitionEnd={(swiper) =>
+            setSliderIndex(swiper.realIndex)
+          }
           onSwiper={setThumbsSwiper}
           slidesPerView={4}
           spaceBetween={6}
