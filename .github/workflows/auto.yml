@@ -4,8 +4,6 @@ on:
   push:
     branches: [main]
 
-  workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,6 +13,7 @@ jobs:
 
       - name: Expose git commit data
         uses: rlespinasse/git-commit-data-action@v1
+        run: echo " - ${{ github.event.release.target_commitish }}"
 
       - name: Create pull request
         uses: devops-infra/action-pull-request@v0.5.0
