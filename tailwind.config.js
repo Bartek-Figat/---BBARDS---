@@ -19,6 +19,9 @@ module.exports = {
         purple: "rgb(17 24 39)",
         "purple-hover": "rgba(255, 255, 255, 0.1)",
         "dark-blue": "#0044bb",
+        "gray-dark": "#777777",
+        "gray-chalk": "#f5f5f5",
+        gray: "#e8e8e8",
       },
       backgroundImage: {
         "hero-image": "url('assets/images/01.jpg')",
