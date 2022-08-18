@@ -8,3 +8,15 @@ jobs:
       - name: Dump GitHub context
         id: github_context_step
         run: echo '${{ github.repository }}'
+      - name: Heads
+        run: |
+          echo " - ${{ github.refs }}"
+      - name: Committer
+        run: |
+          echo " - ${{ event.commits[0].committer.username }}"
+      - name: Message
+        run: |
+          echo " - ${{ event.commits[0].message }}"
+      - name: Event
+        run: |
+          echo " - ${{ event.commits[0] }}"
