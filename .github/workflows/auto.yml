@@ -18,9 +18,10 @@ jobs:
         uses: devops-infra/action-pull-request@v0.5.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          target_branch: develop/FE#14
+          target_branch: main
           title: ${{ github.event.commits[0].message }}
+          assignee: ${{ github.actor }}
           label: develop
           old_string: "**Write you description here**"
           new_string: ${{ github.event.commits[0].message }}
-          get_diff: false
+          get_diff: true
