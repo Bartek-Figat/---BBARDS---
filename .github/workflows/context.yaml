@@ -17,6 +17,3 @@ jobs:
       - name: Message
         run: |
           echo " - ${{ github.event.commits[0].message }}"
-      - name: Event
-        run: |
-          echo " - ${{ github.event.commits[0] }}"

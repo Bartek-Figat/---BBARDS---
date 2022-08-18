@@ -26,8 +26,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: main
+          title: ${{ github.event.commits[0].message }}
           label: enhancement
-          reviewer: masterHAWK99
+          assignee: masterHAWK99
           body: |
             This auto PR
           get_diff: false
