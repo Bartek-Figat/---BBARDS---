@@ -1,6 +1,8 @@
+name: CI
+
 on:
   push:
-    branches: main
+    branches-ignore: [main]
 
   workflow_dispatch:
 
@@ -10,7 +12,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
+      - name: Github Data
+        run: |
+          echo " - ${{ github.event.release.target_commitish }}"
       - name: Expose git commit data
         uses: rlespinasse/git-commit-data-action@v1
 
@@ -20,8 +27,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: main
           title: ${{ github.event.commits[0].message }}
-          assignee: ${{ github.actor }}
-          label: develop
-          old_string: "**Write you description here**"
-          new_string: ${{ github.event.commits[0].message }}
-          get_diff: true
+          label: enhancement
+          assignee: masterHAWK99
+          body: |
+            This auto PR
+          get_diff: false
+          allow_no_diff: true
