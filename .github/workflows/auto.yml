@@ -24,9 +24,6 @@ jobs:
         uses: devops-infra/action-pull-request@v0.5.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: ${{ github.event.release.target_commitish }}
-          target_branch: main
-          title: "${{ github.event.release.name }} -> main"
           body: |
             This PR was auto-generated after the release because the
             release branch has changes that aren't in main.
