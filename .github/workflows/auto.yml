@@ -29,4 +29,4 @@ jobs:
           template: .github/PULL_REQUEST_TEMPLATE/FEATURE.md
           old_string: "**Write you description here**"
           new_string: ${{ github.event.commits[0].message }}
-          get_diff: true
+          get_diff: false
