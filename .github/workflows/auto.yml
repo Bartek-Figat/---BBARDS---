@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches-ignore: [main]
 
   workflow_dispatch:
 
@@ -12,11 +12,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Github Data
         run: |
           echo " - ${{ github.event.release.target_commitish }}"
-
       - name: Expose git commit data
         uses: rlespinasse/git-commit-data-action@v1
 
@@ -24,9 +25,9 @@ jobs:
         uses: devops-infra/action-pull-request@v0.5.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          target_branch: main
           body: |
             This PR was auto-generated after the release because the
             release branch has changes that aren't in main.
-          assignee: masterHAWK99
           get_diff: false
           allow_no_diff: true
