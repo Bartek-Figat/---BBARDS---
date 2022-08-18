@@ -7,4 +7,4 @@ jobs:
     steps:
       - name: Dump GitHub context
         id: github_context_step
-        run: echo '${{ github.repository.contributors_url }}'
+        run: echo '${{ github.repository }}'
