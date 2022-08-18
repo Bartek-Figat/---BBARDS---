@@ -18,15 +18,6 @@ jobs:
       - name: Expose git commit data
         uses: rlespinasse/git-commit-data-action@v1
 
-  pull_request:
-    name: Create Pull Request
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
       - name: Create pull request
         uses: devops-infra/action-pull-request@v0.5.0
         with:
