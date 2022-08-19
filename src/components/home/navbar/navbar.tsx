@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
   const collapsed = useAppSelector((state) => state.config.collapsed);
   const dispatch = useAppDispatch();
   return (
-    <div className="flex w-full p-4 justify-between items-center bg-white">
+    <div className="flex max-w-[100%] p-4 justify-between items-center bg-white">
       <button
         onClick={() =>
           dispatch(

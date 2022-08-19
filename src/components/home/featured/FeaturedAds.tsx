@@ -41,10 +41,13 @@ export const FeaturedAds = () => {
   console.log("sliderIndex", [sliderIndex]);
 
   return (
-    <div className="flex justify-center w-[70%] mt-44">
+    <div className="flex justify-center w-[70%] mt-44 m-auto">
       <div className="w-1/2">
         <hgroup>
-          <h2 className="text-4xl font-bold">Find your needs in our best <span className="text-dark-blue italic">Featured Ads</span></h2>
+          <h2 className="text-4xl font-bold">
+            Find your needs in our best{" "}
+            <span className="text-dark-blue italic">Featured Ads</span>
+          </h2>
           <p className="text-lg">
             Lorem ipsum dolor sit amet consectetur adipisicing elit aspernatur
             illum vel sunt libero voluptatum repudiandae veniam maxime tenetur
