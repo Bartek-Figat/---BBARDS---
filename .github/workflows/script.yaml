@@ -1,0 +1,24 @@
+name: Run Script
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: jannekem/run-python-script-action@v1
+        with:
+          script: |
+            import os
+            import requests
+
+            headers = {"Authorization": f'token ${{ secrets.GITHUB_TOKEN }}',
+                       "Accept": "application/vnd.github+json"}
+            res = requests.get(f"https://api.github.com/repos/${{ github.repository_owner }}/${{ github.repository }}/collabolators", headers = headers)
+            print(res)

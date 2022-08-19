@@ -16,11 +16,11 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./src",
-    "outDir": "./dist",
+    "outDir": "dist",
     "paths": {
       "assets": ["/assets/*"]
     }
   },
   "exclude": ["node_modules"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js"]
+  "include": ["src", "src/**/*.ts", "src/**/*.tsx", "src/**/*.js"]
 }
