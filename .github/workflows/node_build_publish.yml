@@ -19,7 +19,6 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          yarn ci
           yarn install
           yarn run build
       - name: Deploy 🚀
