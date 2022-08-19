@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.bfb656b5.css",
-    "main.js": "/static/js/main.c0f256e0.js",
-    "static/js/787.aeb25a11.chunk.js": "/static/js/787.aeb25a11.chunk.js",
-    "static/media/01.jpg": "/static/media/01.15df005915ac025f74fc.jpg",
-    "static/media/photo-1599566150163-29194dcaad36.avif": "/static/media/photo-1599566150163-29194dcaad36.f8bcfdcc4637cc5b8373.avif",
-    "static/media/logo.png": "/static/media/logo.39243d9020cc34c1993f.png",
-    "static/media/04.jpg": "/static/media/04.24762cf4c631f3bb09c4.jpg",
-    "static/media/03.jpg": "/static/media/03.cdbd3d52574f72ea1393.jpg",
-    "static/media/02.jpg": "/static/media/02.635f01de1774c74fe606.jpg",
-    "static/media/education.png": "/static/media/education.fabd0f7b98046d6d8a4e.png",
-    "static/media/05.jpg": "/static/media/05.7a4900c09e49e74ea0cb.jpg",
-    "index.html": "/index.html",
-    "main.bfb656b5.css.map": "/static/css/main.bfb656b5.css.map",
-    "main.c0f256e0.js.map": "/static/js/main.c0f256e0.js.map",
-    "787.aeb25a11.chunk.js.map": "/static/js/787.aeb25a11.chunk.js.map"
+    "main.css": "/tsx-react/static/css/main.01899fcc.css",
+    "main.js": "/tsx-react/static/js/main.f105c276.js",
+    "static/js/787.aeb25a11.chunk.js": "/tsx-react/static/js/787.aeb25a11.chunk.js",
+    "static/media/01.jpg": "/tsx-react/static/media/01.15df005915ac025f74fc.jpg",
+    "static/media/photo-1599566150163-29194dcaad36.avif": "/tsx-react/static/media/photo-1599566150163-29194dcaad36.f8bcfdcc4637cc5b8373.avif",
+    "static/media/logo.png": "/tsx-react/static/media/logo.39243d9020cc34c1993f.png",
+    "static/media/04.jpg": "/tsx-react/static/media/04.24762cf4c631f3bb09c4.jpg",
+    "static/media/03.jpg": "/tsx-react/static/media/03.cdbd3d52574f72ea1393.jpg",
+    "static/media/02.jpg": "/tsx-react/static/media/02.635f01de1774c74fe606.jpg",
+    "static/media/education.png": "/tsx-react/static/media/education.fabd0f7b98046d6d8a4e.png",
+    "static/media/05.jpg": "/tsx-react/static/media/05.7a4900c09e49e74ea0cb.jpg",
+    "index.html": "/tsx-react/index.html",
+    "main.01899fcc.css.map": "/tsx-react/static/css/main.01899fcc.css.map",
+    "main.f105c276.js.map": "/tsx-react/static/js/main.f105c276.js.map",
+    "787.aeb25a11.chunk.js.map": "/tsx-react/static/js/787.aeb25a11.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bfb656b5.css",
-    "static/js/main.c0f256e0.js"
+    "static/css/main.01899fcc.css",
+    "static/js/main.f105c276.js"
   ]
 }
