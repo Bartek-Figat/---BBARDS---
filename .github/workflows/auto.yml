@@ -30,6 +30,6 @@ jobs:
           label: enhancement
           assignee: masterHAWK99
           body: |
-            This auto PR
+            Please read the PR and leave a comment.
           get_diff: false
           allow_no_diff: true
