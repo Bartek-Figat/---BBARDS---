@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.badge {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  clip-path: polygon(0 0, 53% 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+}
