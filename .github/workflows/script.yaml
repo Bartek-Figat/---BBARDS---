@@ -2,9 +2,9 @@ name: Run Script
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches:
+      - master
+      - main
 
 jobs:
   build:
