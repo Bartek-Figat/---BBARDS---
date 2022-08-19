@@ -57,16 +57,14 @@ export const Dropdown: React.FC = () => {
               </button>
             </Dialog.Title>
             <Dialog.Description className="flex flex-col items-center py-4">
-              <a className="border-[3px] border-[#0044bb] rounded-full" href="">
+              <p className="border-[3px] border-[#0044bb] rounded-full">
                 <img
                   className="rounded-full w-[120px] m-[3px]"
                   src={avatar}
                   alt=""
                 />
-              </a>
-              <a className="font-bold mt-2 text-lg" href="">
-                Jackon Honson
-              </a>
+              </p>
+              <p className="font-bold mt-2 text-lg">Jackon Honson</p>
               <div className="flex mt-2">
                 <button className="text-xs leading-6 bg-[#0044bb] hover:bg-blue-900 py-2 px-4 rounded-md text-white font-bold w-full flex flex-row justify-center items-center uppercase">
                   <FaPlusCircle className="mr-2" />
