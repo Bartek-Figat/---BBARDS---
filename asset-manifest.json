@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/tsx-react/static/css/main.409fb502.css",
+    "main.css": "/tsx-react/static/css/main.e975e7a1.css",
     "main.js": "/tsx-react/static/js/main.11d1486c.js",
     "static/js/787.aeb25a11.chunk.js": "/tsx-react/static/js/787.aeb25a11.chunk.js",
     "static/media/01.jpg": "/tsx-react/static/media/01.15df005915ac025f74fc.jpg",
@@ -12,12 +12,12 @@
     "static/media/education.png": "/tsx-react/static/media/education.fabd0f7b98046d6d8a4e.png",
     "static/media/05.jpg": "/tsx-react/static/media/05.7a4900c09e49e74ea0cb.jpg",
     "index.html": "/tsx-react/index.html",
-    "main.409fb502.css.map": "/tsx-react/static/css/main.409fb502.css.map",
+    "main.e975e7a1.css.map": "/tsx-react/static/css/main.e975e7a1.css.map",
     "main.11d1486c.js.map": "/tsx-react/static/js/main.11d1486c.js.map",
     "787.aeb25a11.chunk.js.map": "/tsx-react/static/js/787.aeb25a11.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.409fb502.css",
+    "static/css/main.e975e7a1.css",
     "static/js/main.11d1486c.js"
   ]
 }
