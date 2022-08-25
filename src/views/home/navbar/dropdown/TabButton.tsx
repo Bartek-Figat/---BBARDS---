@@ -5,7 +5,7 @@ interface TabButtonProps {
   children: ReactNode;
 }
 
-function TabButton({ selected, children }: TabButtonProps) {
+export function TabButton({ selected, children }: TabButtonProps) {
   return (
     <button
       className={`px-9 py-2 text-xs uppercase font-medium leading-6 ${
@@ -18,4 +18,3 @@ function TabButton({ selected, children }: TabButtonProps) {
     </button>
   );
 }
-export default TabButton;

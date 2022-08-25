@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Dasboard from "../views/admin/admin";
+import { Dasboard } from "../views/admin/admin";
 
 export function PrivateRouter() {
   return (

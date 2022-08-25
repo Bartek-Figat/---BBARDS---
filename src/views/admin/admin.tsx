@@ -3,7 +3,7 @@ import { LSideBar } from "./sidebar/sidebar";
 import { Content } from "./content";
 import { Navbar } from "./navbar/navbar";
 
-const Dasboard: React.FC = () => {
+export const Dasboard: React.FC = () => {
   return (
     <div className="flex">
       <div className="flex w-screen">
@@ -18,5 +18,3 @@ const Dasboard: React.FC = () => {
     </div>
   );
 };
-
-export default Dasboard;

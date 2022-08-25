@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar } from "../navbar/navbar";
 import { FaEye } from "react-icons/fa";
-import SwiperContainer from "./swiper/swiper";
+import { SwiperContainer } from "./swiper/swiper";
 import { slidesMap } from "./swiper/Slides";
 
 export const Header: React.FC = () => {
