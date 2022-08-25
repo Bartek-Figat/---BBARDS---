@@ -5,6 +5,7 @@ import { FiMenu } from "react-icons/fi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Search } from "components/search/search";
 import { NotificationCircle } from "./notificationCricle";
+import { PrimaryButton } from "components/buttons/PrimaryButton";
 
 export const Navbar: React.FC = () => {
   const collapsed = useAppSelector((state) => state.config.collapsed);
@@ -29,12 +30,14 @@ export const Navbar: React.FC = () => {
 
       <div className="flex">
         <NotificationCircle />
-        <div className="flex">
-          <button className="bg-blue-600 hover:bg-blue-700 p-2 rounded-md text-white font-bold w-full flex flex-row justify-center items-center">
-            <AiOutlinePlusCircle className="text-xl mr-2" />
-            Post Your Ad
-          </button>
-        </div>
+        <PrimaryButton
+          render={() => (
+            <>
+              <AiOutlinePlusCircle className="text-xl mr-2" />
+              Post Your Ad
+            </>
+          )}
+        />
       </div>
     </div>
   );
