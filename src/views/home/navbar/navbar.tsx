@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setCollapsed } from "../../../slice/collapsed";
 import { FiMenu, FiSearch } from "react-icons/fi";
-import { Search } from "./search";
+import { Search } from "components/search/search";
 import { NotificationCircle } from "./notificationCricle";
 import userImage from "assets/images/user.png";
 import logo from "assets/images/logo.png";
