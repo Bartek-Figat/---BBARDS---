@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { setCollapsed } from "../../../slice/collapsed";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { Search } from "./search";
+import { Search } from "components/search/search";
 import { NotificationCircle } from "./notificationCricle";
 
 export const Navbar: React.FC = () => {
@@ -24,7 +24,7 @@ export const Navbar: React.FC = () => {
         >
           <FiMenu size={20} />
         </button>
-        <Search />
+        <Search className="ml-10 hidden lg:flex" />
       </div>
 
       <div className="flex">
