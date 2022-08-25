@@ -18,7 +18,8 @@
     "baseUrl": "./src",
     "outDir": "dist",
     "paths": {
-      "assets": ["/assets/*"]
+      "assets": ["/assets/*"],
+      "components": ["/components/*"]
     }
   },
   "exclude": ["node_modules"],
