@@ -2,7 +2,7 @@ import { HashRouter } from "react-router-dom";
 import { PrivateRouter } from "router/PrivateRouter";
 import { PublicRouter } from "./router/PublicRouter";
 
-function App() {
+export function App() {
   return (
     <HashRouter>
       <PublicRouter />
@@ -10,5 +10,3 @@ function App() {
     </HashRouter>
   );
 }
-
-export default App;

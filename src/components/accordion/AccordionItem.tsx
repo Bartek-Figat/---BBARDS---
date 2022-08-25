@@ -7,7 +7,7 @@ interface AccordionItemProps {
   children: ReactNode;
 }
 
-function AccordionItem({ title, children }: AccordionItemProps) {
+export function AccordionItem({ title, children }: AccordionItemProps) {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
@@ -31,5 +31,3 @@ function AccordionItem({ title, children }: AccordionItemProps) {
     </div>
   );
 }
-
-export default AccordionItem;

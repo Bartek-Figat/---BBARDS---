@@ -7,7 +7,7 @@ interface Props {
   images: ISlideImages[];
 }
 
-export default function SwiperContainer({ images }: Props) {
+export function SwiperContainer({ images }: Props) {
   return (
     <div className="md:container relative">
       <div className="absolute -bottom-24 w-full">

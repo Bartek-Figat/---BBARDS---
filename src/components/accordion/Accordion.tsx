@@ -4,8 +4,6 @@ interface AccordionProps {
   children: ReactNode;
 }
 
-function Accordion({ children }: AccordionProps) {
+export function Accordion({ children }: AccordionProps) {
   return <div className="w-full">{children}</div>;
 }
-
-export default Accordion;

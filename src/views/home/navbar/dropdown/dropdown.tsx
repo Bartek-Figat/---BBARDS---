@@ -6,10 +6,10 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { setCollapsed } from "../../../../slice/collapsed";
 import { FaPlusCircle } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import Accordion from "../../../../components/accordion/Accordion";
-import AccordionItem from "../../../../components/accordion/AccordionItem";
-import TabButton from "./TabButton";
-import NavigationItem from "./NavigationItem";
+import { Accordion } from "../../../../components/accordion/Accordion";
+import { AccordionItem } from "../../../../components/accordion/AccordionItem";
+import { TabButton } from "./TabButton";
+import { NavigationItem } from "./NavigationItem";
 
 export const Dropdown: React.FC = () => {
   const collapsed = useAppSelector((state) => state.config.collapsed);
