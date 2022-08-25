@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/tsx-react/static/css/main.e975e7a1.css",
-    "main.js": "/tsx-react/static/js/main.26d342cf.js",
+    "main.css": "/tsx-react/static/css/main.681d88b9.css",
+    "main.js": "/tsx-react/static/js/main.b6656c74.js",
     "static/js/787.aeb25a11.chunk.js": "/tsx-react/static/js/787.aeb25a11.chunk.js",
     "static/media/01.jpg": "/tsx-react/static/media/01.15df005915ac025f74fc.jpg",
     "static/media/photo-1599566150163-29194dcaad36.avif": "/tsx-react/static/media/photo-1599566150163-29194dcaad36.f8bcfdcc4637cc5b8373.avif",
@@ -12,12 +12,12 @@
     "static/media/education.png": "/tsx-react/static/media/education.fabd0f7b98046d6d8a4e.png",
     "static/media/05.jpg": "/tsx-react/static/media/05.7a4900c09e49e74ea0cb.jpg",
     "index.html": "/tsx-react/index.html",
-    "main.e975e7a1.css.map": "/tsx-react/static/css/main.e975e7a1.css.map",
-    "main.26d342cf.js.map": "/tsx-react/static/js/main.26d342cf.js.map",
+    "main.681d88b9.css.map": "/tsx-react/static/css/main.681d88b9.css.map",
+    "main.b6656c74.js.map": "/tsx-react/static/js/main.b6656c74.js.map",
     "787.aeb25a11.chunk.js.map": "/tsx-react/static/js/787.aeb25a11.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e975e7a1.css",
-    "static/js/main.26d342cf.js"
+    "static/css/main.681d88b9.css",
+    "static/js/main.b6656c74.js"
   ]
 }
