@@ -19,7 +19,8 @@
     "outDir": "dist",
     "paths": {
       "assets": ["/assets/*"],
-      "components": ["/components/*"]
+      "components": ["/components/*"],
+      "util": ["/util/*"]
     }
   },
   "exclude": ["node_modules"],
