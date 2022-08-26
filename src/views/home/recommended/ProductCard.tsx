@@ -57,12 +57,12 @@ export const ProductCard = ({
           </div>
         </div>
         <div className="p-4">
-          <div className="flex items-center border-b-[1px] border-gray text-gray-dark pb-4">
+          <div className="flex items-center border-b-[1px] border-gray-mercury text-gray-dark pb-4">
             <FaTags />
             <p className="ml-2">Automobiles / Private Car</p>
           </div>
           <p className="text-lg font-medium pt-4">{title}</p>
-          <div className="flex items-center justify-between border-b-[1px] border-gray text-gray-dark py-4">
+          <div className="flex items-center justify-between border-b-[1px] border-gray-mercury text-gray-dark py-4">
             <div className="flex items-center">
               <IoLocationSharp />
               <p className="ml-2">{location}</p>
