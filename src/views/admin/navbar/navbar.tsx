@@ -1,28 +1,19 @@
 import React from "react";
-import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import { setCollapsed } from "../../../slice/collapsed";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Search } from "components/search/search";
 import { NotificationCircle } from "./notificationCricle";
 import { PrimaryButton } from "components/buttons/PrimaryButton";
+import { useCollapsed } from "util/useReduxToggle";
 
 export const Navbar: React.FC = () => {
-  const collapsed = useAppSelector((state) => state.config.collapsed);
-  const dispatch = useAppDispatch();
+  const [handleToggle, _handleToggleOff, _handleToggleOn, _collapsed] =
+    useCollapsed();
+
   return (
     <div className="flex p-4 justify-between">
       <div className="flex">
-        <button
-          onClick={() =>
-            dispatch(
-              setCollapsed({
-                collapsed: !collapsed,
-              })
-            )
-          }
-          className="mx-4"
-        >
+        <button onClick={handleToggle} className="mx-4">
           <FiMenu size={20} />
         </button>
         <Search className="ml-10 hidden lg:flex" />
