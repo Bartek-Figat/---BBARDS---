@@ -5,7 +5,7 @@ import { sibarList } from "./sidebar.list";
 
 const NavigationList = ({ children }: { children: React.ReactNode }) => {
   return (
-    <li className="flex items-center cursor-pointer p-4 font-medium text-gray-200 leading-4 hover:bg-purple-hover duration-200 ease-in-out rounded-md">
+    <li className="flex items-center cursor-pointer p-4 font-medium text-[#cdd1cf] text-[rgb(229 231 235)] leading-4 hover:bg-purple-hover duration-200 ease-in-out rounded-md">
       {children}
     </li>
   );
