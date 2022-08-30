@@ -11,6 +11,9 @@ module.exports = {
         desktop: { min: "900px", max: "1200px" },
       },
       gridTemplateColumns: {
+        24: "repeat(1, minmax(15rem, 20rem))",
+        22: "repeat(2, minmax(15rem, 20rem))",
+        18: "repeat(4, minmax(15rem, 15rem))",
         16: "repeat(2, minmax(30rem, 10rem))",
         14: "repeat(2, minmax(20rem, 30rem))",
         12: "repeat(auto-fit, minmax(20rem, 30rem))",
@@ -22,6 +25,7 @@ module.exports = {
         "gray-dark": "#777777",
         "gray-chalk": "#f5f5f5",
         "gray-mercury": "#e8e8e8",
+        "cold-gray": "#575656",
       },
       backgroundImage: {
         "hero-image": "url('assets/images/01.jpg')",
