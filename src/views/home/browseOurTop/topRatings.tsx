@@ -37,7 +37,7 @@ export const TopRatings = () => {
         {Array.from({ length: 8 }).map(() =>
           topList.map(({ img, title, price, type, location, time }) => {
             return (
-              <div className="flex flex-col bg-[#f2f3f5] rounded-md">
+              <div className="flex flex-col bg-gray-chalk rounded-md">
                 <div className="relative group">
                   <div className="overflow-hidden relative rounded-sm">
                     <img
@@ -68,7 +68,7 @@ export const TopRatings = () => {
                   </div>
                 </div>
                 <div className="flex justify-center flex-col">
-                  <ol className="flex items-center mb-3 p-2 m-2 border-b-[1px] border-b-[#e8e8e8] text-[#777777]">
+                  <ol className="flex items-center mb-3 p-2 m-2 border-b-[1px] border-b-gray-mercury text-gray-dark">
                     <li className="m-1">
                       <BsFillTagsFill />
                     </li>
@@ -85,13 +85,13 @@ export const TopRatings = () => {
                     </h5>
                   </div>
                   <div className="flex justify-center items-center">
-                    <div className="flex text-sm mr-4 text-[#575656] font-medium p-1">
+                    <div className="flex text-sm mr-4 text-cold-gray font-medium p-1">
                       <span className="flex flex-row justify-center items-center p-1">
                         <GoLocation />
                         {location}
                       </span>
                     </div>
-                    <div className="flex flex-col text-sm mr-4 text-[#575656] font-medium p-1">
+                    <div className="flex flex-col text-sm mr-4 text-cold-gray font-medium p-1">
                       <span className="flex flex-row justify-center items-center p-1">
                         <BsClockHistory />
                         {time}
@@ -99,19 +99,19 @@ export const TopRatings = () => {
                     </div>
                   </div>
                   <div className="flex">
-                    <div className="flex justify-between items-center m-auto border-t-[1px] border-t-[#e8e8e8] p-2 w-[90%]">
+                    <div className="flex justify-between items-center m-auto border-t-[1px] border-t-gray-mercury p-2 w-[90%]">
                       <h5 className="font-bold">
                         {`$${price}`}{" "}
-                        <span className="font-medium text-[#575656]">
+                        <span className="font-medium text-cold-gray">
                           /per week
                         </span>
                       </h5>
                       <div className="flex justify-center items-center">
-                        <div className="border-l-2 border-l-[#e8e8e8]">
-                          <IoGitCompareOutline className="m-1  hover:text-[#0044bb] hover:font-semibold cursor-pointer" />
+                        <div className="border-l-2 border-l-gray-mercury">
+                          <IoGitCompareOutline className="m-1  hover:text-dark-blue hover:font-semibold cursor-pointer" />
                         </div>
-                        <div className="border-l-2 border-l-[#e8e8e8]">
-                          <BsHeart className="m-1  hover:text-[#0044bb] hover:font-semibold cursor-pointer border-l-2 border-l-[#e8e8e8]" />
+                        <div className="border-l-2 border-l-light-silver">
+                          <BsHeart className="m-1  hover:text-dark-blue hover:font-semibold cursor-pointer border-l-2 border-l-gray-mercury" />
                         </div>
                       </div>
                     </div>
