@@ -11,6 +11,10 @@ module.exports = {
         desktop: { min: "900px", max: "1200px" },
       },
       gridTemplateColumns: {
+        32: "repeat(auto-fit, minmax(25rem, 25rem))",
+        30: "repeat(2, minmax(20rem, 15rem))",
+        28: "repeat(3, minmax(15rem, 20rem))",
+        26: "repeat(4, minmax(15rem, 15rem))",
         24: "repeat(1, minmax(15rem, 20rem))",
         22: "repeat(2, minmax(15rem, 20rem))",
         18: "repeat(4, minmax(15rem, 15rem))",
@@ -29,6 +33,12 @@ module.exports = {
       },
       backgroundImage: {
         "hero-image": "url('assets/images/01.jpg')",
+        "los-angeles": "url('assets/images/cities/01.jpg')",
+        "san-francisco": "url('assets/images/cities/02.jpg')",
+        california: "url('assets/images/cities/03.jpg')",
+        "new-york": "url('assets/images/cities/04.jpg')",
+        manhattan: "url('assets/images/cities/05.jpg')",
+        baltimore: "url('assets/images/cities/06.jpg')",
       },
       container: {
         center: true,
