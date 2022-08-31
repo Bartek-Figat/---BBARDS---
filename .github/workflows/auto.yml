@@ -28,7 +28,7 @@ jobs:
           target_branch: main
           title: ${{ github.event.commits[0].message }}
           label: enhancement
-          assignee: masterHAWK99 namelessolo
+          assignee: "masterHAWK99" "namelessolo"
           body: |
             Please read the PR and leave a comment.
           get_diff: false
