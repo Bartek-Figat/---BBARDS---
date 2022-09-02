@@ -8,12 +8,13 @@ import { Accordion } from "components/accordion/Accordion";
 import { AccordionItem } from "components/accordion/AccordionItem";
 import { TabButton } from "components/tabs/TabButton";
 import { NavigationItem } from "./NavigationItem";
-import { useCollapsed } from "util/useReduxToggle";
 
-export const Dropdown: React.FC = () => {
-  const [_handleToggle, handleToggleOff, _handleToggleOn, collapsed] =
-    useCollapsed();
+interface Props {
+  handleToggle: () => void;
+  collapsed: boolean;
+}
 
+export const Dropdown: React.FC<Props> = ({ handleToggle, collapsed }) => {
   return (
     <>
       {collapsed && (
@@ -32,14 +33,14 @@ export const Dropdown: React.FC = () => {
         <Dialog
           className="fixed top-0 bg-white h-full z-50"
           open={collapsed}
-          onClose={handleToggleOff}
+          onClose={handleToggle}
         >
           <Dialog.Panel>
             <Dialog.Title className="flex border-b-[1px] border-[#e8e8e8] justify-between items-center p-4">
               <img className="h-10" src={logo} alt="" />
               <button
                 className="h-[40px] w-[40px] rounded-full shadow-xl hover:bg-[#0044bb] hover:text-white"
-                onClick={handleToggleOff}
+                onClick={handleToggle}
               >
                 <IoClose className="text-xl mx-auto" />
               </button>
