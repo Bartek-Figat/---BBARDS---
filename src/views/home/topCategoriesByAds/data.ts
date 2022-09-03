@@ -1,0 +1,98 @@
+export const data = [
+  {
+    category: 'electronics',
+    amount: 2137,
+    link: '/',
+    products: [
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+    ],
+  },
+  {
+    category: 'gadgets',
+    amount: 2137,
+    link: '/',
+    products: [
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+    ],
+  },
+  {
+    category: 'furnitures',
+    amount: 2137,
+    link: '/',
+    products: [
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+    ],
+  },
+  {
+    category: 'animals',
+    amount: 2137,
+    link: '/',
+    products: [
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+    ],
+  },
+  {
+    category: 'fashions',
+    amount: 2137,
+    link: '/',
+    products: [
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+    ],
+  },
+  {
+    category: 'motorbikes',
+    amount: 2137,
+    link: '/',
+    products: [
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+    ],
+  },
+  {
+    category: 'properties',
+    amount: 2137,
+    link: '/',
+    products: [
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+    ],
+  },
+  {
+    category: 'automobiles',
+    amount: 2137,
+    link: '/',
+    products: [
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+      { product: 'Ipsum', amount: 37, link: '/' },
+      { product: 'Lorem', amount: 21, link: '/' },
+    ],
+  },
+];
