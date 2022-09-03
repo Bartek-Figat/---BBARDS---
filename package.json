@@ -36,10 +36,15 @@
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "extends": [
-      "prettier"
+      "prettier",
+      "plugin:react-hooks/recommended",
+      "eslint:recommended",
+      "plugin:react/recommended"
     ],
     "plugins": [
-      "@typescript-eslint"
+      "@typescript-eslint",
+      "react-hooks",
+      "react"
     ]
   },
   "browserslist": {
@@ -59,6 +64,8 @@
     "@typescript-eslint/parser": "^5.36.1",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.31.4",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "2.7.1"
