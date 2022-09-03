@@ -10,8 +10,7 @@ import { PrimaryButton } from "components/buttons/PrimaryButton";
 import { useCollapsed } from "util/useReduxToggle";
 
 export const Navbar: React.FC = () => {
-  const [handleToggle, _handleToggleOff, _handleToggleOn, _collapsed] =
-    useCollapsed();
+  const [handleToggle, collapsed] = useCollapsed();
   const [isSearchCollapsed, setSearchCollapsed] = useState(false);
 
   return (
@@ -23,7 +22,7 @@ export const Navbar: React.FC = () => {
         >
           <FiMenu size={20} />
         </button>
-        <Dropdown />
+        <Dropdown handleToggle={handleToggle} collapsed={collapsed} />
         <img className="h-10 ml-10" src={logo} alt="" />
         <div className="ml-10 hidden lg:flex items-center">
           <img className="rounded-full w-10 h-10" src={userImage} alt="" />
