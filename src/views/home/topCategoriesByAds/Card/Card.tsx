@@ -1,20 +1,20 @@
 import ListElement from '../ListElement/ListElement';
+import { Link } from 'react-router-dom';
+import { nanoid } from '@reduxjs/toolkit';
 
 type Props = {
   category: string;
   amount: number;
-  link: string;
   products: {
     product: string;
     amount: number;
-    link: string;
   }[];
 };
 
-const Card: React.FC<Props> = ({ category, amount, products, link }) => {
+const Card: React.FC<Props> = ({ category, amount, products }) => {
   return (
     <div className='w-11/12 sm:w-64 bg-gray-chalk hover:bg-white hover:shadow-gray-400 hover:shadow-xl ease-in duration-300 rounded-lg overflow-hidden'>
-      <a href={link}>
+      <Link to={category}>
         <div className='relative'>
           <img
             className='h-32 w-full object-cover'
@@ -27,13 +27,14 @@ const Card: React.FC<Props> = ({ category, amount, products, link }) => {
             <p className='text-sm'>({amount})</p>
           </div>
         </div>
-      </a>
+      </Link>
       <ul className='px-5 py-3 '>
         {products.map(({ amount, product }) => (
           <ListElement
             amount={amount}
-            category={product}
-            link={link}
+            product={product}
+            category={category}
+            key={nanoid()}
           />
         ))}
       </ul>

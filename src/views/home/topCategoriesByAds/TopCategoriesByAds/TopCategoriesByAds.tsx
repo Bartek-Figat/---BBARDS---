@@ -2,7 +2,7 @@ import Card from '../Card/Card';
 import { data } from '../data';
 import { FaEye } from 'react-icons/fa';
 
-export const Wrapper = () => {
+export const TopCategoriesByAds = () => {
   return (
     <section className='max-w-6xl mx-auto text-center px-4 mt-32'>
       <h2 className='text-4xl font-bold mb-4'>
@@ -13,11 +13,11 @@ export const Wrapper = () => {
         veniam maxime tenetur.
       </p>
       <ul className='flex flex-wrap justify-center gap-8'>
-        {data.map(({ category, amount, link, products }) => {
+        {data.map(({ category, amount, products }) => {
           return (
             <Card
+              key={category}
               category={category}
-              link={link}
               amount={amount}
               products={products}
             />

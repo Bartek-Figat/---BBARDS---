@@ -4,7 +4,7 @@ import { FeaturedAds } from './featured/FeaturedAds';
 import { RecommendedAds } from './recommended/RecommendedAds';
 import { TrendingAds } from './trending/TrendingAds';
 import { BrowseOurTop } from './browseOurTop/BrowserTop';
-import { Wrapper } from './topCategoriesByAds/Wrapper/Wrapper';
+import { TopCategoriesByAds } from './topCategoriesByAds/TopCategoriesByAds/TopCategoriesByAds';
 
 export function Home() {
   return (
@@ -14,7 +14,7 @@ export function Home() {
       <RecommendedAds />
       <TrendingAds />
       <BrowseOurTop />
-      <Wrapper />
+      <TopCategoriesByAds />
     </>
   );
 }
