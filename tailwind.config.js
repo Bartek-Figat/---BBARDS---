@@ -26,6 +26,7 @@ module.exports = {
         "gray-chalk": "#f5f5f5",
         "gray-mercury": "#e8e8e8",
         "cold-gray": "#575656",
+        "black-blue": "#080229",
       },
       backgroundImage: {
         "hero-image": "url('assets/images/01.jpg')",
