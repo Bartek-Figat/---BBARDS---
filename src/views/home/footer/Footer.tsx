@@ -19,7 +19,7 @@ export const Footer = () => {
                 type="search"
                 placeholder="Enter Your Email Address"
                 className="overflow-hidden outline-none mx-2"
-              ></input>
+              />
             </form>
           </div>
         </div>
