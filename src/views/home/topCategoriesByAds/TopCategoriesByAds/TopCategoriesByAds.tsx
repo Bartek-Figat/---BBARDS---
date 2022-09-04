@@ -1,6 +1,6 @@
 import Card from '../Card/Card';
+import LinkSection from '../LinkSection/LinkSection';
 import { data } from '../data';
-import { FaEye } from 'react-icons/fa';
 
 export const TopCategoriesByAds = () => {
   return (
@@ -24,10 +24,7 @@ export const TopCategoriesByAds = () => {
           );
         })}
       </ul>
-      <button className='mx-auto bg-[#0044bb] border-2 border-[#0044bb] hover:bg-[#0044bb] text-white px-5 py-3 rounded-md uppercase font-medium flex justify-center items-center mt-11'>
-        <FaEye className='text-xl mr-2' />
-        view all categories
-      </button>
+      <LinkSection to='/'>view all categories</LinkSection>
     </section>
   );
 };
