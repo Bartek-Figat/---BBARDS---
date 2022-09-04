@@ -22,6 +22,7 @@ module.exports = {
         purple: 'rgb(17 24 39)',
         'purple-hover': 'rgba(255, 255, 255, 0.1)',
         'dark-blue': '#0044bb',
+        'dark-blue-hover': '#0022aa',
         'gray-dark': '#777777',
         'gray-chalk': '#f5f5f5',
         'gray-mercury': '#e8e8e8',
