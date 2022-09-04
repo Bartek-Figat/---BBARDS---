@@ -13,21 +13,5 @@ export const useCollapsed = () => {
     );
   };
 
-  const handleToggleOff = () => {
-    dispatch(
-      setCollapsed({
-        collapsed: false,
-      })
-    );
-  };
-
-  const handleToggleOn = () => {
-    dispatch(
-      setCollapsed({
-        collapsed: true,
-      })
-    );
-  };
-
-  return [handleToggle, handleToggleOff, handleToggleOn, collapsed] as const;
+  return [handleToggle, collapsed] as const;
 };
