@@ -18,7 +18,7 @@ const Card: React.FC<Props> = ({ category, amount, products }) => {
         <div className='relative'>
           <img
             className='h-32 w-full object-cover'
-            src={require(`../../../../assets/images/category/${category}.jpg`)}
+            src={require(`assets/images/category/${category}.jpg`)}
             alt={category}
           />
           <div className='absolute w-full h-full bg-dark-blue opacity-40 top-0 left-0'></div>
