@@ -35,9 +35,12 @@ export const TopRatings = () => {
     <div className="flex justify-center w-full p-4">
       <div className="grid gap-5 lg:grid-cols-18 md:grid-cols-22 sm:grid-cols-24">
         {Array.from({ length: 8 }).map(() =>
-          topList.map(({ img, title, price, type, location, time }) => {
+          topList.map(({ img, title, price, type, location, time }, index) => {
             return (
-              <div className="flex flex-col bg-gray-chalk rounded-md">
+              <div
+                key={index}
+                className="flex flex-col bg-gray-chalk rounded-md"
+              >
                 <div className="relative group">
                   <div className="overflow-hidden relative rounded-sm">
                     <img
