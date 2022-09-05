@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { citiesContent } from "./cityData";
 
@@ -9,7 +10,10 @@ export const CityPart = () => {
           return (
             <div
               key={city}
-              className={`bg-center bg-no-repeat bg-cover h-72 rounded-lg group ${image} ${span}`}
+              className={`bg-center bg-no-repeat bg-cover h-72 rounded-lg group ${
+                span !== "" ? "lg:col-span-2" : ""
+              }`}
+              style={{ backgroundImage: `url(${image})` }}
             >
               <div className="flex justify-center w-full h-full">
                 <div className="flex items-end">
