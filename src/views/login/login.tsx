@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "assets/images/logo.png";
-import { TabButton } from "../../components/tabs/TabButton";
+import { TabButton } from "components/tabs/TabButton";
 import { Tab } from "@headlessui/react";
 import { FaUnlock } from "react-icons/fa";
 import { FaUserCheck } from "react-icons/fa";
