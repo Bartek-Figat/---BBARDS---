@@ -14,7 +14,7 @@ function AsideSection() {
         </Link>
       </div>
 
-      <div className="absolute top-2/4 left-2/4 flex flex-col items-center md:w-[280px] lg:w-[460px] xl:w-[600px] -translate-y-2/4 -translate-y-2/4 -translate-x-2/4 -translate-x-2/4">
+      <div className="absolute top-2/4 left-2/4 flex flex-col items-center md:w-[280px] lg:w-[460px] xl:w-[600px] -translate-y-2/4 -translate-x-2/4">
         <img src={logo} alt="" />
 
         <hgroup className="text-center flex flex-col items-center">
