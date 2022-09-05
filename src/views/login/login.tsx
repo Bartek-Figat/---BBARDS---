@@ -112,22 +112,36 @@ function Login() {
                   <h2 className="text-4xl font-bold">Register</h2>
                   <p className="mt-2">Setup a new account in a minute.</p>
                 </hgroup>
-                <input
-                  className="mt-11 w-full border-b-[2px] border-gray-mercury focus:border-dark-blue focus:outline-none py-2.5 pl-5"
-                  type="text"
-                  placeholder="Phone number"
-                />
-                <input
-                  className="mt-5 w-full border-b-[2px] border-gray-mercury focus:border-dark-blue focus:outline-none py-2.5 pl-5"
-                  type="text"
-                  placeholder="Password"
-                />
-                <input
-                  className="mt-5 w-full border-b-[2px] border-gray-mercury focus:border-dark-blue focus:outline-none py-2.5 pl-5"
-                  type="text"
-                  placeholder="Repeat Password"
-                />
-
+                <label>
+                  <input
+                    className="mt-11 w-full border-b-[2px] border-gray-mercury focus:border-dark-blue focus:outline-none py-2.5 pl-5 peer"
+                    type="text"
+                    placeholder="Phone number"
+                  />
+                  <p className="text-sm pl-4 mt-1 hidden peer-focus:block">
+                    Please follow this example - 01XXXXXXXXX
+                  </p>
+                </label>
+                <label>
+                  <input
+                    className="mt-5 w-full border-b-[2px] border-gray-mercury focus:border-dark-blue focus:outline-none py-2.5 pl-5 peer"
+                    type="text"
+                    placeholder="Password"
+                  />
+                  <p className="text-sm pl-4 mt-1 hidden peer-focus:block">
+                    Password must be 6 characters
+                  </p>
+                </label>
+                <label>
+                  <input
+                    className="mt-5 w-full border-b-[2px] border-gray-mercury focus:border-dark-blue focus:outline-none py-2.5 pl-5 peer"
+                    type="text"
+                    placeholder="Repeat Password"
+                  />
+                  <p className="text-sm pl-4 mt-1 hidden peer-focus:block">
+                    Password must be 6 characters
+                  </p>
+                </label>
                 <div className="mt-5 flex justify-between">
                   <div className="flex flex-row-reverse items-center">
                     <label className="ml-2" htmlFor="remember">
@@ -144,7 +158,6 @@ function Login() {
                     />
                   </div>
                 </div>
-
                 <button
                   className="w-full bg-dark-blue text-white mt-5 py-2 font-medium uppercase rounded-lg flex justify-center items-center"
                   type="submit"
@@ -153,7 +166,6 @@ function Login() {
                   <FaUserCheck />
                   <p className="ml-2">Create new account</p>
                 </button>
-
                 <p className="mt-12 text-center text-lg w-[290px] m-auto">
                   Already have an account? click on the{" "}
                   <span className="text-dark-blue font-medium">
