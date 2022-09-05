@@ -22,6 +22,9 @@ module.exports = {
         14: "repeat(2, minmax(20rem, 30rem))",
         12: "repeat(auto-fit, minmax(20rem, 30rem))",
       },
+      gridColumn: {
+        "span-16": "col-span-2",
+      },
       colors: {
         purple: "rgb(17 24 39)",
         "purple-hover": "rgba(255, 255, 255, 0.1)",
