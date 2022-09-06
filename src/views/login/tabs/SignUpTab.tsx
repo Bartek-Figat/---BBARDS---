@@ -15,7 +15,8 @@ function SignUpTab() {
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
   interface IFormInput {
-    phone: string;
+    name: string;
+    email: string;
     password: string;
     repeatPassword: string;
   }
@@ -30,17 +31,26 @@ function SignUpTab() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-11">
           <FormInputWithTooltip
-            id="phone"
-            placeholder="Phone number"
+            id="name"
+            placeholder="Name"
             register={register}
             options={{
               required: "This is required",
-              minLength: {
-                value: 4,
-                message: "Min length is 4",
+            }}
+            tooltip={errors.name && errors.name.message}
+          />
+          <FormInputWithTooltip
+            id="email"
+            placeholder="E-mail"
+            register={register}
+            options={{
+              required: "This is required",
+              pattern: {
+                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                message: "Wrong email pattern",
               },
             }}
-            tooltip={errors.phone && errors.phone.message}
+            tooltip={errors.email && errors.email.message}
           />
           <FormInputWithTooltip
             id="password"

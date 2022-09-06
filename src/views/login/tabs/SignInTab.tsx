@@ -15,7 +15,7 @@ function SignInTab() {
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
   interface IFormInput {
-    phone: string;
+    email: string;
     password: string;
   }
 
@@ -29,13 +29,13 @@ function SignInTab() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-11">
           <FormInputWithTooltip
-            id="phone"
-            placeholder="Phone number"
+            id="email"
+            placeholder="E-mail"
             register={register}
             options={{
               required: "This is required",
             }}
-            tooltip={errors.phone && errors.phone.message}
+            tooltip={errors.email && errors.email.message}
           />
 
           <FormInputWithTooltip
