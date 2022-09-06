@@ -38,11 +38,22 @@ module.exports = {
       },
       backgroundImage: {
         "hero-image": "url('assets/images/01.jpg')",
+        "los-angeles": "url('assets/images/cities/01.jpg')",
+        "san-francisco": "url('assets/images/cities/02.jpg')",
+        california: "url('assets/images/cities/03.jpg')",
+        "new-york": "url('assets/images/cities/04.jpg')",
+        manhattan: "url('assets/images/cities/05.jpg')",
+        baltimore: "url('assets/images/cities/06.jpg')",
+        "low-poly": "url('assets/images/bg/03.jpg')",
       },
       container: {
         center: true,
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: "class", // only generate classes
+    }),
+  ],
 };
