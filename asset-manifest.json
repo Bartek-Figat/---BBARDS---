@@ -1,23 +1,33 @@
 {
   "files": {
-    "main.css": "/tsx-react/static/css/main.18eaec38.css",
-    "main.js": "/tsx-react/static/js/main.4a8a4e4f.js",
+    "main.css": "/tsx-react/static/css/main.681beb9f.css",
+    "main.js": "/tsx-react/static/js/main.18284b9e.js",
     "static/js/787.aeb25a11.chunk.js": "/tsx-react/static/js/787.aeb25a11.chunk.js",
-    "static/media/01.jpg": "/tsx-react/static/media/01.15df005915ac025f74fc.jpg",
-    "static/media/photo-1599566150163-29194dcaad36.avif": "/tsx-react/static/media/photo-1599566150163-29194dcaad36.f8bcfdcc4637cc5b8373.avif",
-    "static/media/logo.png": "/tsx-react/static/media/logo.39243d9020cc34c1993f.png",
-    "static/media/04.jpg": "/tsx-react/static/media/04.24762cf4c631f3bb09c4.jpg",
     "static/media/03.jpg": "/tsx-react/static/media/03.cdbd3d52574f72ea1393.jpg",
+    "static/media/01.jpg": "/tsx-react/static/media/01.96783b04746c92b102f4.jpg",
+    "static/media/photo-1599566150163-29194dcaad36.avif": "/tsx-react/static/media/photo-1599566150163-29194dcaad36.f8bcfdcc4637cc5b8373.avif",
+    "static/media/04.jpg": "/tsx-react/static/media/04.24762cf4c631f3bb09c4.jpg",
     "static/media/02.jpg": "/tsx-react/static/media/02.635f01de1774c74fe606.jpg",
-    "static/media/education.png": "/tsx-react/static/media/education.fabd0f7b98046d6d8a4e.png",
     "static/media/05.jpg": "/tsx-react/static/media/05.7a4900c09e49e74ea0cb.jpg",
+    "static/media/logo.png": "/tsx-react/static/media/logo.39243d9020cc34c1993f.png",
+    "static/media/motorbikes.jpg": "/tsx-react/static/media/motorbikes.1721b5600c0186f5ab84.jpg",
+    "static/media/properties.jpg": "/tsx-react/static/media/properties.ea96db1a6ee39c864d57.jpg",
+    "static/media/furnitures.jpg": "/tsx-react/static/media/furnitures.d0aa13025f80f9d2b256.jpg",
+    "static/media/06.jpg": "/tsx-react/static/media/06.07a678a4d92b24053259.jpg",
+    "static/media/automobiles.jpg": "/tsx-react/static/media/automobiles.0713b08f7f28ebeda641.jpg",
+    "static/media/fashions.jpg": "/tsx-react/static/media/fashions.d0b1d36c78ba6479374d.jpg",
+    "static/media/bussiness.jpg": "/tsx-react/static/media/bussiness.b046817ff3dc33a4b731.jpg",
+    "static/media/agriculture.jpg": "/tsx-react/static/media/agriculture.a6b81659919ef6ee22e7.jpg",
+    "static/media/animals.jpg": "/tsx-react/static/media/animals.b81552824ba6ed191024.jpg",
+    "static/media/electronics.jpg": "/tsx-react/static/media/electronics.97e6ae1fedba3c1ece99.jpg",
+    "static/media/education.png": "/tsx-react/static/media/education.fabd0f7b98046d6d8a4e.png",
     "index.html": "/tsx-react/index.html",
-    "main.18eaec38.css.map": "/tsx-react/static/css/main.18eaec38.css.map",
-    "main.4a8a4e4f.js.map": "/tsx-react/static/js/main.4a8a4e4f.js.map",
+    "main.681beb9f.css.map": "/tsx-react/static/css/main.681beb9f.css.map",
+    "main.18284b9e.js.map": "/tsx-react/static/js/main.18284b9e.js.map",
     "787.aeb25a11.chunk.js.map": "/tsx-react/static/js/787.aeb25a11.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.18eaec38.css",
-    "static/js/main.4a8a4e4f.js"
+    "static/css/main.681beb9f.css",
+    "static/js/main.18284b9e.js"
   ]
 }
