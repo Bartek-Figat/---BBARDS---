@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <div className="bg-black-blue w-full py-10">
+    <div className="bg-black-blue w-full py-10 sm:text-sm">
       <div className="container">
         <div className="grid grid-cols-2 gap-4 mb-16">
           <div className="w-full">
@@ -26,15 +26,75 @@ export const Footer = () => {
             </form>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 border-b border-gray-dark border-0">
           <div className="w-full">
-            <h3 className="text-gray-chalk relative border-b border-gray-dark pb-3.5 before:content-[''] before:absolute before:w-1/3 before:h-0.5 before:bg-dark-blue before:bottom-0">
+            <h3 className="text-gray-chalk relative border-b border-gray-dark pb-3.5 mb-5 before:content-[''] before:absolute before:w-1/3 before:h-0.5 before:bg-dark-blue before:-bottom-[1px]">
+              Contact us
+            </h3>
+            <ul className="text-gray-dark">
+              <li className="mb-5">
+                <p>1420 West Jalkuri Fatullah,</p>
+                <p>Narayanganj, BD</p>
+              </li>
+              <li className="mb-5">
+                <p>support@classicads.com</p>
+                <p> info@classicads.com</p>
+              </li>
+              <li className="mb-5">
+                <p>+8801838288389</p>
+                <p>+8801941101915</p>
+              </li>
+            </ul>
+          </div>
+          <div className="w-full">
+            <h3 className="text-gray-chalk relative border-b mb-5 border-gray-dark pb-3.5 before:content-[''] before:absolute before:w-1/3 before:h-0.5 before:bg-dark-blue before:-bottom-[1px]">
+              Quick links
+            </h3>
+            <ul className="text-gray-dark">
+              <li className="mb-5">
+                <a href="#">Store Location</a>
+              </li>
+              <li className="mb-5">
+                <a href="#">Order Tracking</a>
+              </li>
+              <li className="mb-5">
+                <a href="#">My Account</a>
+              </li>
+              <li className="mb-5">
+                <a href="#">Size Guide</a>
+              </li>
+              <li className="mb-5">
+                <a href="#">Faq</a>
+              </li>
+            </ul>
+          </div>
+          <div className="w-full">
+            <h3 className="text-gray-chalk relative border-b mb-5 border-gray-dark pb-3.5 before:content-[''] before:absolute before:w-1/3 before:h-0.5 before:bg-dark-blue before:-bottom-[1px]">
+              Information
+            </h3>
+            <ul className="text-gray-dark">
+              <li className="mb-5">
+                <a href="#">About Us</a>
+              </li>
+              <li className="mb-5">
+                <a href="#">Delivery System</a>
+              </li>
+              <li className="mb-5">
+                <a href="#">Secure Payment</a>
+              </li>
+              <li className="mb-5">
+                <a href="#">Contact Us</a>
+              </li>
+              <li className="mb-5">
+                <a href="#">Sitemap</a>
+              </li>
+            </ul>
+          </div>
+          <div className="w-full">
+            <h3 className="text-gray-chalk relative border-b border-gray-dark pb-3.5 before:content-[''] before:absolute before:w-1/3 before:h-0.5 before:bg-dark-blue before:-bottom-[1px]">
               Contact us
             </h3>
           </div>
-          <div className="bg-white w-full">test</div>
-          <div className="bg-white w-full">test</div>
-          <div className="bg-white w-full">test</div>
         </div>
       </div>
     </div>
