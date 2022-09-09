@@ -32,7 +32,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .tsx,.ts"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
@@ -40,6 +42,7 @@
       "prettier",
       "plugin:react-hooks/recommended",
       "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
       "plugin:react/recommended"
     ],
     "plugins": [
@@ -51,25 +54,9 @@
     "rules": {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "jsx-a11y/anchor-is-valid": 0,
       "@typescript-eslint/no-unused-vars": 0,
       "react/react-in-jsx-scope": 0,
-      "react/display-name": 0,
-      "react/prop-types": 0,
-      "@typescript-eslint/explicit-member-accessibility": 0,
-      "@typescript-eslint/indent": 0,
-      "@typescript-eslint/member-delimiter-style": 0,
-      "@typescript-eslint/no-var-requires": 0,
-      "@typescript-eslint/no-use-before-define": 0,
-      "@typescript-eslint/explicit-function-return-type": 0,
-      "@typescript-eslint/no-explicit-any": 0,
-      "@typescript-eslint/no-non-null-assertion": 0,
-      "no-undef": 0,
-      "no-unused-vars": 0,
-      "jsx-a11y/label-has-for": 0,
-      "jsx-a11y/no-noninteractive-tabindex": 0,
-      "prettier/prettier": 0,
-      "react/no-unescaped-entities": 0
+      "react/prop-types": 0
     }
   },
   "browserslist": {
@@ -92,17 +79,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.4",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
     "prettier": "2.7.1"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint",
-      "prettier --write"
-    ],
-    "*.{json,md,yaml,yml,scss,css}": [
-      "prettier --write"
-    ]
   }
 }
