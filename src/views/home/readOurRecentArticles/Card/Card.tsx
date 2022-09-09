@@ -16,7 +16,7 @@ type Props = {
 
 const Card: React.FC<Props> = ({ author, category, date, text, title, id }) => {
   return (
-    <div className="w-full bg-gray-chalk rounded-xl overflow-hidden hover:bg-white hover:shadow-gray-400 hover:shadow-2xl duration-500 group">
+    <div className="w-full bg-gray-chalk rounded-xl overflow-hidden hover:bg-white hover:shadow-gray-400 hover:shadow-xl duration-500 group">
       <Image id={id} category={category} />
       <div className="p-4">
         <div className="flex justify-between mt-10">
@@ -38,9 +38,7 @@ const Card: React.FC<Props> = ({ author, category, date, text, title, id }) => {
           className="uppercase flex items-center gap-4 hover:text-dark-blue duration-300"
         >
           <span className="font-bold">read more</span>
-          <span>
-            <CgArrowLongRight />
-          </span>
+          <CgArrowLongRight />
         </Link>
       </div>
     </div>
