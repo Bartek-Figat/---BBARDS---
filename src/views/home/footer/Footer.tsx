@@ -35,7 +35,7 @@ export const Footer = () => {
           <div className="w-full">
             <form className="w-full bg-white rounded flex justify-between items-center">
               <input
-                type="search"
+                type="email"
                 placeholder="Enter Your Email Address"
                 className="overflow-hidden outline-none mx-2 h-14 w-3/5"
               />
