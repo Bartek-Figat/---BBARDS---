@@ -5,6 +5,7 @@ import express from "assets/images/pay-cards/03.jpg";
 import payPal from "assets/images/pay-cards/04.jpg";
 import store from "assets/images/app-store.png";
 import play from "assets/images/play-store.png";
+import { Link } from "react-router-dom";
 import {
   FaFacebookF,
   FaLinkedinIn,
@@ -18,6 +19,84 @@ import {
 export const Footer = () => {
   const aClass = `hover:text-white hover:underline easy-in duration-700`;
   const h3Class = `text-gray-chalk relative border-b border-cold-gray pb-3.5 mb-5 text-2xl font-semibold before:content-[''] before:absolute before:w-1/3 before:h-0.5 before:bg-dark-blue before:-bottom-[1px]`;
+  const quickLinks = [
+    {
+      name: "Store Location",
+      href: "/",
+    },
+    {
+      name: "Order Tracking",
+      href: "/",
+    },
+    {
+      name: "My Account",
+      href: "/",
+    },
+    {
+      name: "Size Guide",
+      href: "/",
+    },
+    {
+      name: "Faq",
+      href: "/",
+    },
+  ];
+  const information = [
+    {
+      name: "About Us",
+      href: "/",
+    },
+    {
+      name: "Delivery System",
+      href: "/",
+    },
+    {
+      name: "Secure Payment",
+      href: "/",
+    },
+    {
+      name: "Contact Us",
+      href: "/",
+    },
+    {
+      name: "Sitemap",
+      href: "/",
+    },
+  ];
+  const icons = [
+    {
+      name: <FaFacebookF />,
+      href: "/",
+    },
+    {
+      name: <FaLinkedinIn />,
+      href: "/",
+    },
+    {
+      name: <FaGooglePlusG />,
+      href: "/",
+    },
+    {
+      name: <FaYoutube />,
+      href: "/",
+    },
+    {
+      name: <FaPinterestP />,
+      href: "/",
+    },
+    {
+      name: <FaInstagram />,
+      href: "/",
+    },
+    {
+      name: <FaDribbble />,
+      href: "/",
+    },
+    {
+      name: <FaTwitter />,
+      href: "/",
+    },
+  ];
   return (
     <div className="bg-black-blue w-full sm:text-sm">
       <div className="container py-10">
@@ -40,12 +119,12 @@ export const Footer = () => {
                 className="overflow-hidden outline-none mx-2 h-14 w-3/5"
               />
               <button className="bg-dark-blue text-white py-2.5 w-1/3 rounded mx-2">
-                <span>Subscribe</span>
+                Subscribe
               </button>
             </form>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-4 border-b border-cold-gray border-0">
+        <div className="grid grid-cols-4 gap-4 border-b border-cold-gray">
           <div className="w-full">
             <h3 className={h3Class}>Contact us</h3>
             <ul className="text-cold-gray">
@@ -66,67 +145,31 @@ export const Footer = () => {
           <div className="w-full">
             <h3 className={h3Class}>Quick links</h3>
             <ul className="text-gray-dark">
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  Store Location
-                </a>
-              </li>
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  Order Tracking
-                </a>
-              </li>
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  My Account
-                </a>
-              </li>
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  Size Guide
-                </a>
-              </li>
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  Faq
-                </a>
-              </li>
+              {quickLinks.map((links) => (
+                <li className="mb-5">
+                  <Link to={links.href} className={aClass}>
+                    {links.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="w-full">
             <h3 className={h3Class}>Information</h3>
             <ul className="text-gray-dark">
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  About Us
-                </a>
-              </li>
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  Delivery System
-                </a>
-              </li>
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  Secure Payment
-                </a>
-              </li>
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  Contact Us
-                </a>
-              </li>
-              <li className="mb-5">
-                <a href="#" className={aClass}>
-                  Sitemap
-                </a>
-              </li>
+              {information.map((info) => (
+                <li className="mb-5">
+                  <Link to={info.href} className={aClass}>
+                    {info.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="w-full">
-            <a href="#">
+            <Link to="/">
               <img src={logo} alt="logo" />
-            </a>
+            </Link>
             <ul className="text-cold-gray">
               <li className="mb-6 mt-5">
                 <h5 className="text-white">929,238</h5>
@@ -142,18 +185,18 @@ export const Footer = () => {
         <div className="grid grid-cols-3 py-12 gap-4">
           <div className="">
             <div className="flex justify-around">
-              <a href="#">
-                <img src={master} />
-              </a>
-              <a href="#">
-                <img src={visa} />
-              </a>
-              <a href="#">
-                <img src={express} />
-              </a>
-              <a href="#">
-                <img src={payPal} />
-              </a>
+              <Link to="/">
+                <img src={master} alt="Master Card" />
+              </Link>
+              <Link to="/">
+                <img src={visa} alt="Visa" />
+              </Link>
+              <Link to="/">
+                <img src={express} alt="American Express" />
+              </Link>
+              <Link to="/">
+                <img src={payPal} alt="PayPal" />
+              </Link>
             </div>
           </div>
           <div className="flex justify-around text-gray-dark">
@@ -165,12 +208,12 @@ export const Footer = () => {
             </button>
           </div>
           <div className="flex justify-around">
-            <a href="#">
-              <img src={play} />
-            </a>
-            <a href="#">
-              <img src={store} />
-            </a>
+            <Link to="/">
+              <img src={play} alt="Google Play" />
+            </Link>
+            <Link to="/">
+              <img src={store} alt="App Store" />
+            </Link>
           </div>
         </div>
       </div>
@@ -178,51 +221,16 @@ export const Footer = () => {
         <div className="container grid grid-cols-2 justify-between">
           <p className="text-cold-gray">
             All Copyrights Reserved © 2021 - Developed by
-            <a href="#" className="text-dark-blue">
+            <Link to="/" className="text-dark-blue">
               &nbsp;Mironcoder
-            </a>
+            </Link>
           </p>
           <ul className="flex text-gray-dark justify-around w-full">
-            <li>
-              <a href="#">
-                <FaFacebookF />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <FaTwitter />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <FaLinkedinIn />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <FaGooglePlusG />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <FaYoutube />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <FaPinterestP />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <FaInstagram />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <FaDribbble />
-              </a>
-            </li>
+            {icons.map((icon) => (
+              <li>
+                <Link to={icon.href}>{icon.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
