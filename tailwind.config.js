@@ -45,9 +45,13 @@ module.exports = {
         manhattan: "url('assets/images/cities/05.jpg')",
         baltimore: "url('assets/images/cities/06.jpg')",
         "low-poly": "url('assets/images/bg/03.jpg')",
+        "add-post": "url('assets/images/bg/02.png')",
       },
       container: {
         center: true,
+      },
+      backgroundPosition: {
+        "add-post2": "center center / cover no-repeat",
       },
     },
   },

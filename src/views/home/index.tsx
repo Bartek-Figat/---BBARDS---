@@ -6,6 +6,7 @@ import { TrendingAds } from "./trending/TrendingAds";
 import { BrowseOurTop } from "./browseOurTop/BrowserTop";
 import { TopCities } from "./topCities/TopCities";
 import { TopCategoriesByAds } from "./topCategoriesByAds/TopCategoriesByAds/TopCategoriesByAds";
+import PostAd from "./postAd/PostAd/PostAd";
 
 export function Home() {
   return (
@@ -17,6 +18,7 @@ export function Home() {
       <BrowseOurTop />
       <TopCities />
       <TopCategoriesByAds />
+      <PostAd />
     </>
   );
 }
