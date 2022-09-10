@@ -34,6 +34,8 @@ module.exports = {
         "gray-chalk": "#f5f5f5",
         "gray-mercury": "#e8e8e8",
         "cold-gray": "#575656",
+        "black-blue": "#080229",
+        "purple-blue": "#0d0633",
         "black-heading": "#232d3b",
       },
       backgroundImage: {
