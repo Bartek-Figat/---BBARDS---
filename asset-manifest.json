@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/tsx-react/static/css/main.b6a6989d.css",
-    "main.js": "/tsx-react/static/js/main.abdfad61.js",
+    "main.css": "/tsx-react/static/css/main.8d4c3855.css",
+    "main.js": "/tsx-react/static/js/main.a3893cac.js",
     "static/js/787.aeb25a11.chunk.js": "/tsx-react/static/js/787.aeb25a11.chunk.js",
+    "static/media/02.png": "/tsx-react/static/media/02.f30f92d3ea16aaf26d5d.png",
     "static/media/03.jpg": "/tsx-react/static/media/03.cdbd3d52574f72ea1393.jpg",
     "static/media/01.jpg": "/tsx-react/static/media/01.96783b04746c92b102f4.jpg",
     "static/media/photo-1599566150163-29194dcaad36.avif": "/tsx-react/static/media/photo-1599566150163-29194dcaad36.f8bcfdcc4637cc5b8373.avif",
@@ -22,12 +23,12 @@
     "static/media/electronics.jpg": "/tsx-react/static/media/electronics.97e6ae1fedba3c1ece99.jpg",
     "static/media/education.png": "/tsx-react/static/media/education.fabd0f7b98046d6d8a4e.png",
     "index.html": "/tsx-react/index.html",
-    "main.b6a6989d.css.map": "/tsx-react/static/css/main.b6a6989d.css.map",
-    "main.abdfad61.js.map": "/tsx-react/static/js/main.abdfad61.js.map",
+    "main.8d4c3855.css.map": "/tsx-react/static/css/main.8d4c3855.css.map",
+    "main.a3893cac.js.map": "/tsx-react/static/js/main.a3893cac.js.map",
     "787.aeb25a11.chunk.js.map": "/tsx-react/static/js/787.aeb25a11.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b6a6989d.css",
-    "static/js/main.abdfad61.js"
+    "static/css/main.8d4c3855.css",
+    "static/js/main.a3893cac.js"
   ]
 }
