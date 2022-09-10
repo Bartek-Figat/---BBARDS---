@@ -98,14 +98,14 @@ export const Footer = () => {
     },
   ];
   return (
-    <div className="bg-black-blue w-full sm:text-sm">
-      <div className="container py-10">
-        <div className="grid grid-cols-2 gap-4 mb-16">
+    <div className="flex flex-col items-center bg-black-blue w-full sm:text-xs lg:text-lg md:text-base">
+      <div className="container items-center pt-10 ">
+        <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-4 mb-16">
           <div className="w-full">
             <h2 className="text-white text-4xl font-bold">
               Subscribe for Latest Offers
             </h2>
-            <p className="text-cold-gray">
+            <p className="text-cold-gray mt-5">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Laboriosam, aliquid reiciendis! Exercitationem soluta provident
               non.
@@ -124,7 +124,7 @@ export const Footer = () => {
             </form>
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-4 border-b border-cold-gray">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2  gap-4 border-b border-cold-gray">
           <div className="w-full">
             <h3 className={h3Class}>Contact us</h3>
             <ul className="text-cold-gray">
@@ -145,8 +145,8 @@ export const Footer = () => {
           <div className="w-full">
             <h3 className={h3Class}>Quick links</h3>
             <ul className="text-gray-dark">
-              {quickLinks.map((links) => (
-                <li className="mb-5">
+              {quickLinks.map((links, index) => (
+                <li className="mb-5" key={index}>
                   <Link to={links.href} className={aClass}>
                     {links.name}
                   </Link>
@@ -157,8 +157,8 @@ export const Footer = () => {
           <div className="w-full">
             <h3 className={h3Class}>Information</h3>
             <ul className="text-gray-dark">
-              {information.map((info) => (
-                <li className="mb-5">
+              {information.map((info, index) => (
+                <li className="mb-5" key={index}>
                   <Link to={info.href} className={aClass}>
                     {info.name}
                   </Link>
@@ -168,7 +168,9 @@ export const Footer = () => {
           </div>
           <div className="w-full">
             <Link to="/">
-              <img src={logo} alt="logo" />
+              <div className="w-3/4 tablet:w-[40%] xs:w-[40%]">
+                <img src={logo} alt="logo" />
+              </div>
             </Link>
             <ul className="text-cold-gray">
               <li className="mb-6 mt-5">
@@ -182,24 +184,22 @@ export const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="grid grid-cols-3 py-12 gap-4">
-          <div className="">
-            <div className="flex justify-around">
-              <Link to="/">
-                <img src={master} alt="Master Card" />
-              </Link>
-              <Link to="/">
-                <img src={visa} alt="Visa" />
-              </Link>
-              <Link to="/">
-                <img src={express} alt="American Express" />
-              </Link>
-              <Link to="/">
-                <img src={payPal} alt="PayPal" />
-              </Link>
-            </div>
+        <div className="flex w-full my-12 xs:flex-col xs:items-center xs:justify-around xs:h-40">
+          <div className="flex justify-around w-1/3">
+            <Link to="/">
+              <img src={master} alt="Master Card" />
+            </Link>
+            <Link to="/">
+              <img src={visa} alt="Visa" />
+            </Link>
+            <Link to="/">
+              <img src={express} alt="American Express" />
+            </Link>
+            <Link to="/">
+              <img src={payPal} alt="PayPal" />
+            </Link>
           </div>
-          <div className="flex justify-around text-gray-dark">
+          <div className="flex justify-around  text-gray-dark w-1/3">
             <button className="border w-2/5 rounded-md border-gray-dark duration-500 hover:border-white hover:text-white">
               English
             </button>
@@ -207,7 +207,7 @@ export const Footer = () => {
               USD
             </button>
           </div>
-          <div className="flex justify-around">
+          <div className="flex justify-around w-1/3">
             <Link to="/">
               <img src={play} alt="Google Play" />
             </Link>
@@ -218,16 +218,16 @@ export const Footer = () => {
         </div>
       </div>
       <div className=" w-full py-4 bg-purple-blue">
-        <div className="container grid grid-cols-2 justify-between">
-          <p className="text-cold-gray">
+        <div className="container flex lg:flex-row xs:flex-col xs:items-center">
+          <p className="text-cold-gray w-1/2  xs:text-center xs:mb-5">
             All Copyrights Reserved © 2021 - Developed by
             <Link to="/" className="text-dark-blue">
               &nbsp;Mironcoder
             </Link>
           </p>
-          <ul className="flex text-gray-dark justify-around w-full">
-            {icons.map((icon) => (
-              <li>
+          <ul className="flex text-gray-dark justify-around w-1/2 sm:text-center">
+            {icons.map((icon, index) => (
+              <li key={index}>
                 <Link to={icon.href}>{icon.name}</Link>
               </li>
             ))}

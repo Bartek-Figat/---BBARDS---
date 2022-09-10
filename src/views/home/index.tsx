@@ -9,7 +9,6 @@ import { TopCities } from "./topCities/TopCities";
 import { TopCategoriesByAds } from "./topCategoriesByAds/TopCategoriesByAds/TopCategoriesByAds";
 import { ReadOurRecentArticles } from "./readOurRecentArticles/ReadOurRecentArticles/ReadOurRecentArticles";
 
-
 export function Home() {
   return (
     <>
@@ -18,10 +17,10 @@ export function Home() {
       <RecommendedAds />
       <TrendingAds />
       <BrowseOurTop />
-      <Footer />
       <TopCities />
       <TopCategoriesByAds />
       <ReadOurRecentArticles />
+      <Footer />
     </>
   );
 }
