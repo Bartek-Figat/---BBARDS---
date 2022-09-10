@@ -7,6 +7,7 @@ import { BrowseOurTop } from "./browseOurTop/BrowserTop";
 import { Footer } from "./footer/Footer";
 import { TopCities } from "./topCities/TopCities";
 import { TopCategoriesByAds } from "./topCategoriesByAds/TopCategoriesByAds/TopCategoriesByAds";
+import { ReadOurRecentArticles } from "./readOurRecentArticles/ReadOurRecentArticles/ReadOurRecentArticles";
 
 export function Home() {
   return (
@@ -18,6 +19,7 @@ export function Home() {
       <BrowseOurTop />
       <TopCities />
       <TopCategoriesByAds />
+      <ReadOurRecentArticles />
       <Footer />
     </>
   );
