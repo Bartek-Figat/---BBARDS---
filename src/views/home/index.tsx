@@ -8,7 +8,6 @@ import { Footer } from "./footer/Footer";
 import { TopCities } from "./topCities/TopCities";
 import { TopCategoriesByAds } from "./topCategoriesByAds/TopCategoriesByAds/TopCategoriesByAds";
 
-
 export function Home() {
   return (
     <>
@@ -17,9 +16,9 @@ export function Home() {
       <RecommendedAds />
       <TrendingAds />
       <BrowseOurTop />
-      <Footer />
       <TopCities />
       <TopCategoriesByAds />
+      <Footer />
     </>
   );
 }
