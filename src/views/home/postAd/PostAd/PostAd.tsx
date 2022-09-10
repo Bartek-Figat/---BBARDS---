@@ -1,5 +1,6 @@
 import React from "react";
-import SectionLink from "../SectionLink/SectionLink";
+import { SecondaryLink } from "components/buttons/SecondaryLink";
+import { HiPlusCircle } from "react-icons/hi";
 
 export const PostAd = () => {
   return (
@@ -12,7 +13,12 @@ export const PostAd = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit aspernatur
           illum vel sunt libero voluptatum repudiandae veniam maxime tenetur.
         </p>
-        <SectionLink />
+        <SecondaryLink to="#">
+          <>
+            <HiPlusCircle className="text-xl" />
+            post your ad
+          </>
+        </SecondaryLink>
       </div>
     </section>
   );

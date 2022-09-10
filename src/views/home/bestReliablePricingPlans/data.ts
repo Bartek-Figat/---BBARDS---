@@ -5,75 +5,75 @@ export const data = {
     options: [
       {
         text: "1 Regular Ad for 7 days",
-        available: true,
+        isAvailable: true,
       },
       {
         text: "No Credit card required",
-        available: false,
+        isAvailable: false,
       },
       {
         text: "No Top or Featured Ad",
-        available: false,
+        isAvailable: false,
       },
       {
         text: "No Ad will be bumped up",
-        available: false,
+        isAvailable: false,
       },
       {
         text: "Limited Support",
-        available: true,
+        isAvailable: true,
       },
     ],
   },
   standard: {
-    name: "standard plane",
+    name: "standard plan",
     price: "23",
     options: [
       {
         text: "1 Recom Ad for 30 days",
-        available: true,
+        isAvailable: true,
       },
       {
-        text: "No Featured Ad Available",
-        available: false,
+        text: "No Featured Ad isAvailable",
+        isAvailable: false,
       },
       {
         text: "No Ad will be bumped up",
-        available: false,
+        isAvailable: false,
       },
       {
-        text: "No Top Ad Available",
-        available: false,
+        text: "No Top Ad isAvailable",
+        isAvailable: false,
       },
       {
         text: "Basic Support",
-        available: true,
+        isAvailable: true,
       },
     ],
   },
   premium: {
-    name: "premium plane",
+    name: "premium plan",
     price: "49",
     options: [
       {
         text: "1 Featured Ad for 60 days",
-        available: true,
+        isAvailable: true,
       },
       {
         text: "Access to All features",
-        available: true,
+        isAvailable: true,
       },
       {
         text: "With Recommended",
-        available: true,
+        isAvailable: true,
       },
       {
         text: "Ad Top Category",
-        available: true,
+        isAvailable: true,
       },
       {
         text: "Priority Support",
-        available: true,
+        isAvailable: true,
       },
     ],
   },

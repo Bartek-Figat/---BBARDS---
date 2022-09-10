@@ -50,9 +50,6 @@ module.exports = {
       container: {
         center: true,
       },
-      backgroundPosition: {
-        "add-post2": "center center / cover no-repeat",
-      },
     },
   },
   plugins: [

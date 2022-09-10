@@ -4,18 +4,20 @@ import { HiPlusSm } from "react-icons/hi";
 type Props = {
   options: {
     text: string;
-    available: boolean;
+    isAvailable: boolean;
   }[];
 };
 
-const OptionList: React.FC<Props> = ({ options }) => {
+export const OptionList: React.FC<Props> = ({ options }) => {
   return (
-    <ul className="text-gray-dark flex flex-col gap-5">
-      {options.map(({ text, available }, i) => {
+    <ul className="text-gray-dark flex flex-col gap-5 mb-11">
+      {options.map(({ text, isAvailable }, idx) => {
         return (
-          <li className="flex items-center" key={i}>
+          <li className="flex items-center" key={idx}>
             <HiPlusSm
-              className={`text-dark-blue text-2xl ${!available && "rotate-45"}`}
+              className={`text-dark-blue text-2xl ${
+                !isAvailable && "rotate-45"
+              }`}
             />
             <p>{text}</p>
           </li>
@@ -24,5 +26,3 @@ const OptionList: React.FC<Props> = ({ options }) => {
     </ul>
   );
 };
-
-export default OptionList;

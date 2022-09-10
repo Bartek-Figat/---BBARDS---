@@ -1,8 +1,8 @@
 import React from "react";
-import CardContainer from "../CardContainer/CardContainer";
 import { BsBicycle } from "react-icons/bs";
 import { FaCarSide } from "react-icons/fa";
 import { GiCommercialAirplane } from "react-icons/gi";
+import { Card } from "../Card/Card";
 import { data } from "../data";
 
 export const BestReliablePricingPlans = () => {
@@ -14,19 +14,19 @@ export const BestReliablePricingPlans = () => {
         vel sunt libero voluptatum repudiandae veniam maxime tenetur.
       </p>
       <div className="flex gap-8 justify-center flex-wrap px-4">
-        <CardContainer
+        <Card
           icon={<BsBicycle />}
           name={data.free.name}
           price={data.free.price}
           options={data.free.options}
         />
-        <CardContainer
+        <Card
           icon={<FaCarSide />}
           name={data.standard.name}
           price={data.standard.price}
           options={data.standard.options}
         />
-        <CardContainer
+        <Card
           icon={<GiCommercialAirplane />}
           name={data.premium.name}
           price={data.premium.price}

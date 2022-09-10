@@ -6,7 +6,7 @@ type Props = {
   icon: React.ReactNode;
 };
 
-const Heading: React.FC<Props> = ({ name, price, icon }) => {
+export const Heading: React.FC<Props> = ({ name, price, icon }) => {
   return (
     <div className="font-bold text-left border-b-[1px] border-gray-mercury pb-5 mb-5">
       <div className="text-dark-blue text-6xl absolute top-2 right-3">
@@ -17,5 +17,3 @@ const Heading: React.FC<Props> = ({ name, price, icon }) => {
     </div>
   );
 };
-
-export default Heading;
