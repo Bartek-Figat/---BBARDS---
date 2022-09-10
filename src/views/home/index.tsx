@@ -7,13 +7,9 @@ import { BrowseOurTop } from "./browseOurTop/BrowserTop";
 import { Footer } from "./footer/Footer";
 import { TopCities } from "./topCities/TopCities";
 import { TopCategoriesByAds } from "./topCategoriesByAds/TopCategoriesByAds/TopCategoriesByAds";
-<<<<<<< HEAD
 import { PostAd } from "./postAd/PostAd/PostAd";
 import { BestReliablePricingPlans } from "./bestReliablePricingPlans/BestReliablePricingPlans/BestReliablePricingPlans";
-=======
 import { ReadOurRecentArticles } from "./readOurRecentArticles/ReadOurRecentArticles/ReadOurRecentArticles";
-
->>>>>>> main
 
 export function Home() {
   return (
@@ -26,12 +22,9 @@ export function Home() {
       <Footer />
       <TopCities />
       <TopCategoriesByAds />
-<<<<<<< HEAD
       <PostAd />
       <BestReliablePricingPlans />
-=======
       <ReadOurRecentArticles />
->>>>>>> main
     </>
   );
 }
