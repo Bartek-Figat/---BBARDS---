@@ -5,6 +5,9 @@ import { RecommendedAds } from "./recommended/RecommendedAds";
 import { TrendingAds } from "./trending/TrendingAds";
 import { BrowseOurTop } from "./browseOurTop/BrowserTop";
 import { Footer } from "./footer/Footer";
+import { TopCities } from "./topCities/TopCities";
+import { TopCategoriesByAds } from "./topCategoriesByAds/TopCategoriesByAds/TopCategoriesByAds";
+
 
 export function Home() {
   return (
@@ -15,6 +18,8 @@ export function Home() {
       <TrendingAds />
       <BrowseOurTop />
       <Footer />
+      <TopCities />
+      <TopCategoriesByAds />
     </>
   );
 }

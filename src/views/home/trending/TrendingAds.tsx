@@ -20,6 +20,7 @@ export const TrendingAds = () => {
         {productsMap.map(({ img, title, price, type, location, time }) => {
           return (
             <ProductCard
+              key={title}
               img={img}
               title={title}
               price={price}

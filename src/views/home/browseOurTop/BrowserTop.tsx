@@ -44,7 +44,7 @@ export const BrowseOurTop = () => {
       </div>
       <TopRatings />
       <div className="flex justify-center">
-        <button className="bg-[#0044bb] border-2 border-[#0044bb] hover:bg-[#0044bb] text-white px-5 py-3 rounded-md uppercase font-medium flex justify-center items-center mt-11">
+        <button className="bg-dark-blue border-2 border-dark-blue hover:bg-dark-blue text-white px-5 py-3 rounded-md uppercase font-medium flex justify-center items-center mt-11">
           <FaEye className="text-xl mr-2" />
           view all ads
         </button>

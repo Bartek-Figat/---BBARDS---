@@ -16,6 +16,7 @@
     "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.34.2",
     "react-icons": "^4.4.0",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
@@ -36,11 +37,40 @@
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "extends": [
-      "prettier"
+      "prettier",
+      "plugin:react-hooks/recommended",
+      "eslint:recommended",
+      "plugin:react/recommended"
     ],
     "plugins": [
-      "@typescript-eslint"
-    ]
+      "@typescript-eslint",
+      "react-hooks",
+      "react",
+      "prettier"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "jsx-a11y/anchor-is-valid": 0,
+      "@typescript-eslint/no-unused-vars": 0,
+      "react/react-in-jsx-scope": 0,
+      "react/display-name": 0,
+      "react/prop-types": 0,
+      "@typescript-eslint/explicit-member-accessibility": 0,
+      "@typescript-eslint/indent": 0,
+      "@typescript-eslint/member-delimiter-style": 0,
+      "@typescript-eslint/no-var-requires": 0,
+      "@typescript-eslint/no-use-before-define": 0,
+      "@typescript-eslint/explicit-function-return-type": 0,
+      "@typescript-eslint/no-explicit-any": 0,
+      "@typescript-eslint/no-non-null-assertion": 0,
+      "no-undef": 0,
+      "no-unused-vars": 0,
+      "jsx-a11y/label-has-for": 0,
+      "jsx-a11y/no-noninteractive-tabindex": 0,
+      "prettier/prettier": 0,
+      "react/no-unescaped-entities": 0
+    }
   },
   "browserslist": {
     "production": [
@@ -55,10 +85,14 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.4",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "2.7.1"
