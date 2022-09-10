@@ -1,7 +1,7 @@
 import React from "react";
 import SectionLink from "../SectionLink/SectionLink";
 
-const AddPost = () => {
+export const PostAd = () => {
   return (
     <section className=" w-full bg-gradient-to-r from-dark-blue to-[#080229] text-white mt-28">
       <div className="flex flex-col items-center text-center bg-add-post bg-cover bg-center bg-no-repeat pt-14 pb-96 lg:pt-28">
@@ -17,5 +17,3 @@ const AddPost = () => {
     </section>
   );
 };
-
-export default AddPost;

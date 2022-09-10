@@ -6,7 +6,8 @@ import { TrendingAds } from "./trending/TrendingAds";
 import { BrowseOurTop } from "./browseOurTop/BrowserTop";
 import { TopCities } from "./topCities/TopCities";
 import { TopCategoriesByAds } from "./topCategoriesByAds/TopCategoriesByAds/TopCategoriesByAds";
-import PostAd from "./postAd/PostAd/PostAd";
+import { PostAd } from "./postAd/PostAd/PostAd";
+import { BestReliablePricingPlans } from "./bestReliablePricingPlans/BestReliablePricingPlans/BestReliablePricingPlans";
 
 export function Home() {
   return (
@@ -19,6 +20,7 @@ export function Home() {
       <TopCities />
       <TopCategoriesByAds />
       <PostAd />
+      <BestReliablePricingPlans />
     </>
   );
 }
