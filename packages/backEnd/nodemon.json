@@ -1,0 +1,7 @@
+{
+  "exec": "ts-node src/server.ts",
+  "watch": ["src", ".env"],
+  "ext": "ts, js, json",
+  "ignore": ["node_modules", "dist", "coverage"],
+  "restartable": "rs"
+}

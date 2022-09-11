@@ -1,4 +1,3 @@
-
 ## Gitflow
 
 - Checkout a new branch in your repo, use folder before, accordingly to branch intentions and the key after slash.
@@ -8,10 +7,10 @@
 ```
 
 - Available folders names:
+
   - hotfix
   - feature
   - develop
-
 
 - When committing changes to your branch, use the key at the beginning of your commit message.
 

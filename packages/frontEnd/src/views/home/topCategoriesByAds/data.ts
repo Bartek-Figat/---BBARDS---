@@ -1,208 +1,208 @@
 export const data = [
   {
-    category: 'electronics',
+    category: "electronics",
     amount: 2137,
     products: [
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
     ],
   },
   {
-    category: 'gadgets',
+    category: "gadgets",
     amount: 2137,
     products: [
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
     ],
   },
   {
-    category: 'furnitures',
+    category: "furnitures",
     amount: 2137,
     products: [
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
     ],
   },
   {
-    category: 'animals',
+    category: "animals",
     amount: 2137,
     products: [
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
     ],
   },
   {
-    category: 'fashions',
+    category: "fashions",
     amount: 2137,
     products: [
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
     ],
   },
   {
-    category: 'motorbikes',
+    category: "motorbikes",
     amount: 2137,
     products: [
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
     ],
   },
   {
-    category: 'properties',
+    category: "properties",
     amount: 2137,
     products: [
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
     ],
   },
   {
-    category: 'automobiles',
+    category: "automobiles",
     amount: 2137,
     products: [
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
       {
-        product: 'ipsum',
+        product: "ipsum",
         amount: 37,
       },
       {
-        product: 'lorem',
+        product: "lorem",
         amount: 21,
       },
     ],
