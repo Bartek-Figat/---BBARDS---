@@ -1,6 +1,5 @@
 ## Table of Contents
 
-- [Installation](#Installation)
 - [Download](#Download)
 - [Installation](#Installation)
 - [Modules](#Modules)
