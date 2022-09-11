@@ -1,47 +1,61 @@
-## To run the project, correctly install the sharing modules in the root directory
+## Table of Contents
+
+- [Installation](#Installation)
+- [Download](#Download)
+- [Installation](#Installation)
+- [Modules](#Modules)
+- [API Documentation](#API)
+- [Contributing](#Contributing)
+- [Application demo](https://bartek-figat.github.io/tsx-react/)
+
+## Download
 
 ```bash
-   yarn install
+   https://github.com/Bartek-Figat/tsx-react.git
 ```
 
-## To run the project, in the root directory use:
+## Installation
+
+Use the falwing script to install modules in the front-end and back-end directory
 
 ```bash
-   yarn start
+  yarn install
 ```
 
-## Modules installation
+To run the project, in the root directory use.
 
-## yarn workspace <workspace_name> <command>
+The command will start the front-end and back-end
 
-### This will run the chosen Yarn command in the selected workspace. Example:
-
-```javascript
-yarn workspace @bbards-ts/front-end add react react-dom --dev
+```bash
+  yarn start
 ```
 
-## This will add react and react-dom as devDependencies in your packages/@bbards-ts/front-end/package.json.
+## Modules
 
-### If you want to remove a package:
+Modules installation
 
-```javascript
-yarn workspace web-project remove some-package
+```bash
+  yarn workspace <workspace_name> <command>
 ```
 
-## Available Scripts for front-end
+Example:
 
-In the project directory, you can run:
+```bash
+  yarn workspace @bbards-ts/front-end add react react-dom --dev
+```
 
-### `yarn start`
+If you want to remove a package:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+  yarn workspace web-project remove some-package
+```
 
-### Swaggier API
+## API
 
-Runs the app in the development mode.\
-Open [http://localhost:8080/api-docs/](http://localhost:8080/api-docs/) to view it in the browser.
+Swaggier API
 
-Take a look at our [CONTRIBUTING](https://github.com/Bartek-Figat/tsx-react/blob/main/CONTRIBUTING.md) file to learn how to get started with gitflow.
+Open [http://localhost:8080/api-docs/](http://localhost:8080/api-docs/) in the browser.
 
-[Application demo](https://bartek-figat.github.io/tsx-react/)
+## Contributing
+
+Take a look at our [CONTRIBUTING.md](https://github.com/Bartek-Figat/tsx-react/blob/main/CONTRIBUTING.md) file to learn how to get started with gitflow.
