@@ -1,0 +1,189 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Api Documentation",
+    "version": "0.0.1",
+    "description": "This is a simple CRUD API application made with Express and documented with Swagger"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1",
+      "description": "Local dev"
+    }
+  ],
+  "tags": [
+    {
+      "name": "User",
+      "description": "User routes"
+    }
+  ],
+  "paths": {
+    "/registration": {
+      "post": {
+        "tags": ["User"],
+        "description": "User Registration",
+        "required": true,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "User name",
+                    "example": "Name"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "email@email.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "example": "Password"
+                  },
+                  "repeatPassword": {
+                    "type": "string",
+                    "description": "User repeatPassword",
+                    "example": "Password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User registered successfully"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Invalid request body from registration",
+                    "errors": {
+                      "name": [
+                        "Name can't be blank",
+                        "Name must be at least 3 characters or more"
+                      ],
+                      "password": [
+                        "Password must be at least 6 characters",
+                        "Password can't be blank",
+                        "Password must be at least 6 characters"
+                      ],
+                      "email": [
+                        "Email can't be blank",
+                        "Email is not a valid email"
+                      ],
+                      "repeatPassword": [
+                        "Repeat password is not equal to password"
+                      ]
+                    },
+                    "error": "Bad request"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["User"],
+        "description": "User Login",
+        "required": true,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "email@email.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "example": "Password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "token ": "xxxxx.yyyyy.zzzzz"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Invalid request body from registration",
+                    "errors": {
+                      "name": [
+                        "Name can't be blank",
+                        "Name must be at least 3 characters or more"
+                      ],
+                      "password": [
+                        "Password must be at least 6 characters",
+                        "Password can't be blank",
+                        "Password must be at least 6 characters"
+                      ]
+                    },
+                    "error": "Bad request"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": ["User"],
+        "description": "User Login",
+        "required": true
+      }
+    },
+    "/logout": {
+      "get": {
+        "tags": ["User"],
+        "description": "User Login",
+        "required": true
+      }
+    }
+  }
+}

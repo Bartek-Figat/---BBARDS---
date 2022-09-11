@@ -37,15 +37,10 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `yarn build`
+### Swaggier API
 
-Builds the app for production to the `build` folder.
-
-## Available Scripts for back-end
-
-In the project directory, you can run:
-
-### `yarn run dev`
+Runs the app in the development mode.\
+Open [http://localhost:8080/api-docs/](http://localhost:8080/api-docs/) to view it in the browser.
 
 Take a look at our [CONTRIBUTING](https://github.com/Bartek-Figat/tsx-react/blob/main/CONTRIBUTING.md) file to learn how to get started with gitflow.
 

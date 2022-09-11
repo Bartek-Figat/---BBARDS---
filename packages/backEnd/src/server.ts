@@ -4,7 +4,8 @@ import helemt from "helmet";
 import compression from "compression";
 import morgan from "morgan";
 import cors from "cors";
-
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./api/documentation.json";
 import userRouter from "./routes/user.routes";
 
 config({ path: "../../.env" });
@@ -36,6 +37,7 @@ server.use(morgan("tiny"));
 server.enable("trust proxy");
 
 server.use("/api/v1", userRouter);
+server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 server.listen(Port, () =>
   console.log(`Server is starting cleanup at: http://localhost:${Port}`)
 );

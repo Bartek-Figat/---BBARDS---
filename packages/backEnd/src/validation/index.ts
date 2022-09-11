@@ -49,3 +49,35 @@ export const userRegisterValidatioin: RequestHandler = async (
     });
   }
 };
+
+export const userLoginValidation: RequestHandler = async (req, res, next) => {
+  const constraints = {
+    password: {
+      presence: { allowEmpty: false },
+      type: "string",
+      length: {
+        minimum: 6,
+        tooShort: "must be at least %{count} characters",
+      },
+    },
+    email: {
+      type: "string",
+      presence: { allowEmpty: false },
+      email: true,
+    },
+  };
+  try {
+    const result = validate(req.body, constraints);
+    if (result) {
+      return res.status(400).json({
+        message: "Invalid request body from login",
+        errors: result,
+      });
+    }
+    return next();
+  } catch (err) {
+    return res.status(400).json({
+      message: "Invalid body",
+    });
+  }
+};
