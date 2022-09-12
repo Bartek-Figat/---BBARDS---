@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCheck } from "react-icons/fa";
 import FormSubmit from "../form/FormSubmit";
 import FormInputWithTooltip from "../form/FormInputWithTooltip";
 import FormCheckboxInput from "../form/FormCheckboxInput";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useAppDispatch } from "../../../store/hooks";
+import { signup } from "../../../slice/auth";
 
 function SignUpTab() {
   const {
@@ -13,7 +15,23 @@ function SignUpTab() {
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+
+  const [submitStatus, setSubmitStatus] = useState("waiting");
+
+  let dispatch = useAppDispatch();
+
+  const onSubmit: SubmitHandler<IFormInput> = ({
+    name,
+    email,
+    password,
+    repeatPassword,
+  }) => {
+    dispatch(signup({ name, email, password, repeatPassword }))
+      .then(() => setSubmitStatus("success"))
+      .catch(() => {
+        setSubmitStatus("error");
+      });
+  };
 
   interface IFormInput {
     name: string;
@@ -105,6 +123,15 @@ function SignUpTab() {
           <p className="ml-2">Create new account</p>
         </FormSubmit>
       </form>
+
+      {submitStatus === "success" && (
+        <p className="mt-5 text-green-400">You are successfully registered!</p>
+      )}
+      {submitStatus === "error" && (
+        <p className="mt-5 text-red-400">
+          Something wrong happened... Try again!
+        </p>
+      )}
 
       <p className="mt-12 text-center text-lg w-[290px] m-auto">
         Already have an account? click on the{" "}

@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import config from "../slice/collapsed";
+import auth from "../slice/auth";
 
 export const store = configureStore({
   reducer: {
     config,
+    auth,
   },
 });
 
