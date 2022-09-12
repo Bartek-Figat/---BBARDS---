@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 function SignUpTab() {
   const {
     register,
+    watch,
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
@@ -74,6 +75,11 @@ function SignUpTab() {
               minLength: {
                 value: 8,
                 message: "Min length is 8",
+              },
+              validate: (value: string) => {
+                if (watch("password") !== value) {
+                  return "Passwords do no match";
+                }
               },
             }}
             tooltip={errors.repeatPassword && errors.repeatPassword.message}
