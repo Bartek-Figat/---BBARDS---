@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FaUserCheck } from "react-icons/fa";
 import FormSubmit from "../form/FormSubmit";
 import FormInputWithTooltip from "../form/FormInputWithTooltip";
 import FormCheckboxInput from "../form/FormCheckboxInput";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAppDispatch } from "../../../store/hooks";
-import { signup } from "../../../slice/auth";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { signup } from "../../../slice/register";
 
 function SignUpTab() {
   const {
@@ -16,9 +16,8 @@ function SignUpTab() {
     handleSubmit,
   } = useForm<IFormInput>();
 
-  const [submitStatus, setSubmitStatus] = useState("waiting");
-
-  let dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.register.status);
 
   const onSubmit: SubmitHandler<IFormInput> = ({
     name,
@@ -26,11 +25,7 @@ function SignUpTab() {
     password,
     repeatPassword,
   }) => {
-    dispatch(signup({ name, email, password, repeatPassword }))
-      .then(() => setSubmitStatus("success"))
-      .catch(() => {
-        setSubmitStatus("error");
-      });
+    dispatch(signup({ name, email, password, repeatPassword }));
   };
 
   interface IFormInput {
@@ -124,10 +119,13 @@ function SignUpTab() {
         </FormSubmit>
       </form>
 
-      {submitStatus === "success" && (
+      {status === "success" && (
         <p className="mt-5 text-green-400">You are successfully registered!</p>
       )}
-      {submitStatus === "error" && (
+      {status === "pending" && (
+        <p className="mt-5">Your data is processing...</p>
+      )}
+      {status === "error" && (
         <p className="mt-5 text-red-400">
           Something wrong happened... Try again!
         </p>

@@ -23,29 +23,36 @@ export const signup = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue("");
+      const errorObject = error as Error;
+
+      return thunkAPI.rejectWithValue(errorObject.message);
     }
   }
 );
 
-interface AuthState {
-  isLoggedIn: boolean;
-  user: any;
+interface RegisterState {
+  status: "waiting" | "success" | "pending" | "error";
 }
 
-const initialState: AuthState = {
-  isLoggedIn: false,
-  user: null,
+const initialState: RegisterState = {
+  status: "waiting",
 };
 
-export const authSlice = createSlice({
-  name: "auth",
+export const registerSlice = createSlice({
+  name: "register",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(signup.fulfilled, (state, action) => {});
-    builder.addCase(signup.rejected, (state, action) => {});
+    builder.addCase(signup.fulfilled, (state, action) => {
+      state.status = "success";
+    });
+    builder.addCase(signup.pending, (state, action) => {
+      state.status = "pending";
+    });
+    builder.addCase(signup.rejected, (state, action) => {
+      state.status = "error";
+    });
   },
 });
 
-export default authSlice.reducer;
+export default registerSlice.reducer;
