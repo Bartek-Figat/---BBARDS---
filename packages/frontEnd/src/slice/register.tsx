@@ -8,7 +8,7 @@ interface RegisterProps {
   repeatPassword: string;
 }
 
-export const signup = createAsyncThunk(
+export const signUp = createAsyncThunk(
   "auth/register",
   async (
     { name, email, password, repeatPassword }: RegisterProps,
@@ -43,13 +43,13 @@ export const registerSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(signup.fulfilled, (state, action) => {
+    builder.addCase(signUp.fulfilled, (state, action) => {
       state.status = "success";
     });
-    builder.addCase(signup.pending, (state, action) => {
+    builder.addCase(signUp.pending, (state, action) => {
       state.status = "pending";
     });
-    builder.addCase(signup.rejected, (state, action) => {
+    builder.addCase(signUp.rejected, (state, action) => {
       state.status = "error";
     });
   },

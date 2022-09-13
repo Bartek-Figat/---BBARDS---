@@ -6,7 +6,7 @@ import FormInputWithTooltip from "../form/FormInputWithTooltip";
 import FormCheckboxInput from "../form/FormCheckboxInput";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { signup } from "../../../slice/register";
+import { signUp } from "../../../slice/register";
 
 function SignUpTab() {
   const {
@@ -25,7 +25,7 @@ function SignUpTab() {
     password,
     repeatPassword,
   }) => {
-    dispatch(signup({ name, email, password, repeatPassword }));
+    dispatch(signUp({ name, email, password, repeatPassword }));
   };
 
   interface IFormInput {
