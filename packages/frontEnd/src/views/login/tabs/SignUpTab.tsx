@@ -5,14 +5,28 @@ import FormSubmit from "../form/FormSubmit";
 import FormInputWithTooltip from "../form/FormInputWithTooltip";
 import FormCheckboxInput from "../form/FormCheckboxInput";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { signUp } from "../../../slice/register";
 
 function SignUpTab() {
   const {
     register,
+    watch,
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.register.status);
+
+  const onSubmit: SubmitHandler<IFormInput> = ({
+    name,
+    email,
+    password,
+    repeatPassword,
+  }) => {
+    dispatch(signUp({ name, email, password, repeatPassword }));
+  };
 
   interface IFormInput {
     name: string;
@@ -75,6 +89,11 @@ function SignUpTab() {
                 value: 8,
                 message: "Min length is 8",
               },
+              validate: (value: string) => {
+                if (watch("password") !== value) {
+                  return "Passwords do no match";
+                }
+              },
             }}
             tooltip={errors.repeatPassword && errors.repeatPassword.message}
           />
@@ -99,6 +118,18 @@ function SignUpTab() {
           <p className="ml-2">Create new account</p>
         </FormSubmit>
       </form>
+
+      {status === "success" && (
+        <p className="mt-5 text-green-400">You are successfully registered!</p>
+      )}
+      {status === "pending" && (
+        <p className="mt-5">Your data is processing...</p>
+      )}
+      {status === "error" && (
+        <p className="mt-5 text-red-400">
+          Something wrong happened... Try again!
+        </p>
+      )}
 
       <p className="mt-12 text-center text-lg w-[290px] m-auto">
         Already have an account? click on the{" "}
