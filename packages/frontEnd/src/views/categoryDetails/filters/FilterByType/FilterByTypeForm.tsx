@@ -13,7 +13,7 @@ export const FilterByTypeForm = () => {
           <div className="flex items-center">
             <input
               id="sales"
-              className="form-checkbox rounded border-transparent"
+              className="form-checkbox rounded"
               type="checkbox"
             />
             <label htmlFor="sales" className="ml-2">
@@ -27,7 +27,7 @@ export const FilterByTypeForm = () => {
           <div className="flex items-center">
             <input
               id="rental"
-              className="form-checkbox rounded border-transparent"
+              className="form-checkbox rounded"
               type="checkbox"
             />
             <label htmlFor="rental" className="ml-2">
@@ -40,7 +40,7 @@ export const FilterByTypeForm = () => {
           <div className="flex items-center">
             <input
               id="booking"
-              className="form-checkbox rounded border-transparent"
+              className="form-checkbox rounded"
               type="checkbox"
             />
             <label htmlFor="booking" className="ml-2">
