@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar } from "../navbar/navbar";
 import { FaEye } from "react-icons/fa";
 import { SwiperContainer } from "./swiper/swiper";
 import { slidesMap } from "./swiper/Slides";
@@ -7,7 +6,6 @@ import { slidesMap } from "./swiper/Slides";
 export const Header: React.FC = () => {
   return (
     <header className="bg-gray-400 relative">
-      <Navbar />
       <div className="bg-cover bg-no-repeat bg-center bg-hero-image bg-gray-400 w-full">
         <div className="bg-[#0044bb]/50 w-full h-full pt-20 pb-44">
           <div className="md:container mx-4 flex flex-wrap justify-center">

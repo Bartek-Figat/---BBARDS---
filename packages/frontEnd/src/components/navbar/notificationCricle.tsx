@@ -2,7 +2,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { GrMail } from "react-icons/gr";
 import { GoBell } from "react-icons/go";
 
-export const NotificationCircle: React.FC = () => {
+export const NotificationCircle = () => {
   return (
     <div className="flex-row hidden sm:flex">
       <ul className="flex">

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Dialog, Tab, Transition } from "@headlessui/react";
-import logo from "../../../../assets/images/logo.png";
+import logo from "assets/images/logo.png";
 import avatar from "assets/images/avatar/01.jpg";
 import { FaPlusCircle } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
