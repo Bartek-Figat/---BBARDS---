@@ -15,6 +15,10 @@
     {
       "name": "User",
       "description": "User routes"
+    },
+    {
+      "name": "Adds",
+      "description": "User adds"
     }
   ],
   "paths": {
@@ -183,6 +187,66 @@
         "tags": ["User"],
         "description": "User Login",
         "required": true
+      }
+    },
+    "/filter": {
+      "get": {
+        "tags": ["Adds"],
+        "summary": "Get Adds by searching query: page, productCategory, price, priceCondition, productCondition,  adCategory, city",
+        "required": true,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Current page",
+                    "example": "1"
+                  },
+                  "productCategory": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Product Category",
+                    "example": "Sale"
+                  },
+                  "price": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Price",
+                    "example": "10"
+                  },
+                  "priceCondition": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Price Condition",
+                    "example": "Monthly"
+                  },
+                  "adCategory": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Sale",
+                    "example": "Sale"
+                  },
+                  "productCondition": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Product Condition",
+                    "example": "Used"
+                  },
+                  "city": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "City",
+                    "example": "New York"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

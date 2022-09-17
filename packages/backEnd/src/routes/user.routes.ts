@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { UserService } from "../services/user.services";
+import { Repository } from "../repositories/user.repositories";
 import { Middleware } from "../middleware/index";
 import {
   userLoginValidation,
@@ -10,6 +11,7 @@ const router = Router({
   strict: true,
 });
 
+const repository = new Repository();
 const service = new UserService();
 const middleware = new Middleware();
 

@@ -7,6 +7,8 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./api/documentation.json";
 import userRouter from "./routes/user.routes";
+import addsRouter from "./routes/adds.routes";
+import { connect } from "./db/db";
 
 config({ path: "../../.env" });
 const { origin } = process.env;
@@ -16,6 +18,8 @@ const Port = 8080;
 process.on("SIGINT", (err) => {
   process.exit(0);
 });
+
+connect();
 
 const server: Express = express();
 server.use(express.urlencoded({ limit: "50mb", extended: true }));
@@ -37,6 +41,8 @@ server.use(morgan("tiny"));
 server.enable("trust proxy");
 
 server.use("/api/v1", userRouter);
+server.use("/api/v1", addsRouter);
+
 server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 server.listen(Port, () =>
   console.log(`Server is starting cleanup at: http://localhost:${Port}`)

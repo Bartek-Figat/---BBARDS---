@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import { ObjectId } from "mongodb";
-import { Request, Response, NextFunction, RequestHandler } from "express";
-import { Repository } from "../repositories/repositories";
+import { Request, Response, NextFunction } from "express";
+import { Repository } from "../repositories/user.repositories";
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
@@ -23,6 +23,7 @@ export class UserService {
 
   async userRegister(req: Request, res: Response, next: NextFunction) {
     const { email, password, name }: User = req.body;
+
     const userEmail = await this.repository.findOne(
       { email },
       { email: 1, _id: 0 }
