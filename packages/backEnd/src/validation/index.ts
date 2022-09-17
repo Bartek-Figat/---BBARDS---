@@ -125,9 +125,9 @@ export const userPostAddValidation: RequestHandler = async (req, res, next) => {
     presence: { allowEmpty: false },
     length: {
       minimum: 2,
-      maximum: 300,
+      maximum: 30,
       tooShort: "must be at least %{count} characters",
-      tooLong: "it musn't be longer than %{count} characters"
+      tooLong: "it musn't be longer than %{count} character"
     },
     
   },
