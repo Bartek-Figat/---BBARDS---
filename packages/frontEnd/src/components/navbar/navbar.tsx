@@ -4,13 +4,13 @@ import { Search } from "components/search/search";
 import { NotificationCircle } from "./notificationCricle";
 import userImage from "assets/images/user.png";
 import logo from "assets/images/logo.png";
-import { Dropdown } from "./dropdown/dropdown";
 import { FaPlusCircle } from "react-icons/fa";
 import { PrimaryButton } from "components/buttons/PrimaryButton";
 import { useCollapsed } from "util/useReduxToggle";
 import { Link } from "react-router-dom";
+import { Dropdown } from "./dropdown/dropdown";
 
-export const Navbar: React.FC = () => {
+export const Navbar = () => {
   const [handleToggle, collapsed] = useCollapsed();
   const [isSearchCollapsed, setSearchCollapsed] = useState(false);
 

@@ -6,10 +6,13 @@ interface NavigationItemProps {
   children: ReactNode;
 }
 
-export function NavigationItem({ path, children }: NavigationItemProps) {
+export const NavigationItem: React.FC<NavigationItemProps> = ({
+  path,
+  children,
+}) => {
   return (
     <li className="p-3 border-b-[1px] border-[#e8e8e8]">
       <Link to={path}>{children}</Link>
     </li>
   );
-}
+};
