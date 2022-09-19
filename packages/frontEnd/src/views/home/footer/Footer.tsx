@@ -44,7 +44,7 @@ export const Footer = () => {
   const information = [
     {
       name: "About Us",
-      href: "/",
+      href: "/about/About",
     },
     {
       name: "Delivery System",
