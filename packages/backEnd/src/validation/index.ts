@@ -81,3 +81,55 @@ export const userLoginValidation: RequestHandler = async (req, res, next) => {
     });
   }
 };
+
+
+export const userPostAddValidation: RequestHandler = async (req, res, next) => {
+ const constraints = {
+  productTitle: {
+    type: "string",
+    presence: { allowEmpty: false },
+    length: {
+      minimum: 2,
+      tooShort: "must be at least %{count} characters",
+    },
+  },
+  productImages: {
+    type: "string",
+    presence: { allowEmpty: false },
+
+  },
+  productCategory: {
+    type: "array",
+    presence: { allowEmpty: false },
+  },
+  price: {
+    numericality: { 
+      greaterThan: 0,
+      lessThanOrEqualTo: 30,
+      even: true,
+    },
+    presence: { allowEmpty: false },
+
+  },
+  productCondition: {
+    type: "array",
+    presence: { allowEmpty: false },
+    length: {
+      minimum: 2,
+      tooShort: "must be at least %{count} characters",
+    },
+    
+  },
+  addDescription: {
+    type: "string",
+    presence: { allowEmpty: false },
+    length: {
+      minimum: 2,
+      maximum: 300,
+      tooShort: "must be at least %{count} characters",
+      tooLong: "it musn't be longer than %{count} characters"
+    },
+    
+  },
+ }
+}
