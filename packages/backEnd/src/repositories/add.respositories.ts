@@ -16,42 +16,35 @@ export class Repository {
     }
   }
 
-  async filter({
-    parsePage,
-    pageSize,
-    productCategory,
-    price,
-    priceCondition,
-    adCategory,
-    productCondition,
-    city,
-  }: IPagination) {
-    console.log(parsePage);
+  async filterOnlyWithPagination(
+    { parsePage, pageSize },
+    projection?: any
+  ): Promise<Document[]> {
     try {
       const filterResult = await db
-        .collection(Index.Add)
-        .find({
-          $or: [
-            { productCategory },
-            { price },
-            { adCategory },
-            { priceCondition },
-            { productCondition },
-            { city },
-          ],
-        })
-        .limit(pageSize)
-        .skip(pageSize * parsePage)
-        .toArray();
-
-      const result = await db
         .collection(Index.Add)
         .find({})
         .limit(pageSize)
         .skip(pageSize * parsePage)
         .toArray();
 
-      if (filterResult.length <= 0) return result;
+      return filterResult;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async advancedFiltration({ parsePage, pageSize, resultFromCheckQuey }) {
+    const { page, ...res } = resultFromCheckQuey;
+    try {
+      const filterResult = await db
+        .collection(Index.Add)
+        .find({
+          $and: [res],
+        })
+        .limit(pageSize)
+        .skip(pageSize * parsePage)
+        .toArray();
 
       return filterResult;
     } catch (err) {
