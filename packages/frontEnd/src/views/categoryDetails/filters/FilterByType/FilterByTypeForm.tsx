@@ -1,9 +1,9 @@
 import { SaleBadge } from "components/badge/SaleBadge";
 import React from "react";
 import { FaBroom } from "react-icons/fa";
-import { SubmitSecondary } from "../../../../components/buttons/Input/SubmitSecondary";
 import { BookingBadge } from "../../../../components/badge/BookingBadge";
 import { RentalBadge } from "../../../../components/badge/RentalBadge";
+import { SubmitInput } from "components/buttons/Input/SubmitInput";
 
 export const FilterByTypeForm = () => {
   return (
@@ -50,9 +50,9 @@ export const FilterByTypeForm = () => {
           <p className="text-cold-gray">({15})</p>
         </div>
       </form>
-      <SubmitSecondary>
+      <SubmitInput variant="outlined">
         <FaBroom /> Clear filter
-      </SubmitSecondary>
+      </SubmitInput>
     </>
   );
 };

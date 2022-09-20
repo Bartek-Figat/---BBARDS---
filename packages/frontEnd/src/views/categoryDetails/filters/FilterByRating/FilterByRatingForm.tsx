@@ -1,6 +1,6 @@
-import { SubmitSecondary } from "components/buttons/Input/SubmitSecondary";
 import React from "react";
 import { FaBroom, FaRegStar, FaStar } from "react-icons/fa";
+import { SubmitInput } from "components/buttons/Input/SubmitInput";
 
 export const FilterByRatingForm = () => {
   const getStars = (rate: number) => {
@@ -31,9 +31,9 @@ export const FilterByRatingForm = () => {
           <p className="text-cold-gray">({15})</p>
         </div>
       </form>
-      <SubmitSecondary>
+      <SubmitInput variant="outlined">
         <FaBroom /> Clear filter
-      </SubmitSecondary>
+      </SubmitInput>
     </>
   );
 };

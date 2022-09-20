@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { signUp } from "../../../../slice/register";
-import { SubmitSecondary } from "../../../../components/buttons/Input/SubmitSecondary";
+import { SubmitInput } from "components/buttons/Input/SubmitInput";
 
 export const FilterByPriceForm = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
@@ -32,9 +32,9 @@ export const FilterByPriceForm = () => {
           {...register("max")}
         />
       </form>
-      <SubmitSecondary>
+      <SubmitInput variant="outlined">
         <FaSearch /> Search
-      </SubmitSecondary>
+      </SubmitInput>
     </>
   );
 };
