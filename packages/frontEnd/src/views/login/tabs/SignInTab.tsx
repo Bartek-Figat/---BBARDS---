@@ -5,6 +5,8 @@ import FormSubmit from "../form/FormSubmit";
 import FormCheckboxInput from "../form/FormCheckboxInput";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInputWithTooltip from "../form/FormInputWithTooltip";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { signIn } from "../../../slice/login";
 
 function SignInTab() {
   const {
@@ -12,7 +14,13 @@ function SignInTab() {
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.login.status);
+
+  const onSubmit: SubmitHandler<IFormInput> = ({ email, password }) => {
+    dispatch(signIn({ email, password }));
+  };
 
   interface IFormInput {
     email: string;
@@ -60,6 +68,18 @@ function SignInTab() {
           <p className="ml-2">Enter your account</p>
         </FormSubmit>
       </form>
+
+      {status === "success" && (
+        <p className="mt-5 text-green-400">You are successfully logged!</p>
+      )}
+      {status === "pending" && (
+        <p className="mt-5">Your data is processing...</p>
+      )}
+      {status === "error" && (
+        <p className="mt-5 text-red-400">
+          Something wrong happened... Try again!
+        </p>
+      )}
 
       <p className="mt-12 text-center text-lg w-[290px] m-auto">
         Don't have an account? click on the{" "}
