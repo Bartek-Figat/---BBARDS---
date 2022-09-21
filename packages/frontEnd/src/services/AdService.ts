@@ -2,8 +2,8 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080";
 
-const getPage = (pageNumber: number) => {
-  return axios({
+const getPage = async (pageNumber: number) => {
+  const data = await axios({
     method: "GET",
     url: `${API_URL}/api/v1/filter`,
     headers: { "Content-Type": "application/json" },
@@ -11,6 +11,8 @@ const getPage = (pageNumber: number) => {
       page: pageNumber,
     },
   });
+
+  return data;
 };
 
 const adService = {

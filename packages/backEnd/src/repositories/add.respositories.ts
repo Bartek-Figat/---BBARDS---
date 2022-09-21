@@ -46,7 +46,14 @@ export class Repository {
         .skip(pageSize * parsePage)
         .toArray();
 
-      return filterResult;
+      const dataLength = await db
+        .collection(Index.Add)
+        .find({
+          $and: [res],
+        })
+        .toArray();
+
+      return { filterResult, dataLength };
     } catch (err) {
       console.log(err);
     }

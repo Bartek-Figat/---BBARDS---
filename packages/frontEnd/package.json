@@ -17,6 +17,7 @@
     "@types/superagent": "^4.1.15",
     "clsx": "^1.2.1",
     "node-fetch": "^3.2.10",
+    "rc-pagination": "^3.1.17",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.34.2",

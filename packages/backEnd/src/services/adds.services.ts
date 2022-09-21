@@ -50,7 +50,7 @@ export class AddService {
     const resultFromCheckQuey = check(req.query);
 
     try {
-      const parsePage: number = parseInt(page || "0");
+      const parsePage: number = parseInt(page || "1");
       const pageSize: number = 10;
 
       if (resultFromCheckQuey === undefined) {
@@ -61,9 +61,10 @@ export class AddService {
         const data = await this.repository.filterOnlyWithPagination(
           paginationProps
         );
-        res.status(StatusCode.NOT_FOUND).json({
-          dataLength: data.length,
-          msg: StatusCode.NOT_FOUND,
+        const dataLength = await this.repository.find({});
+        res.status(StatusCode.SUCCESS).json({
+          dataLength: dataLength.length,
+          msg: 200,
           data,
         });
       } else {
@@ -72,11 +73,12 @@ export class AddService {
           pageSize,
           resultFromCheckQuey,
         };
-        const filter = await this.repository.advancedFiltration(props);
+        const { filterResult, dataLength } =
+          await this.repository.advancedFiltration(props);
 
         res.status(StatusCode.SUCCESS).json({
-          filterLength: filter.length,
-          filter,
+          dataLength: dataLength.length,
+          data: filterResult,
         });
       }
     } catch (err) {
