@@ -4,17 +4,22 @@ import { FaBroom } from "react-icons/fa";
 import { BookingBadge } from "../../../../components/badge/BookingBadge";
 import { RentalBadge } from "../../../../components/badge/RentalBadge";
 import { SubmitInput } from "components/buttons/Input/SubmitInput";
+import { useFormContext } from "react-hook-form";
 
 export const FilterByTypeForm = () => {
+  const { register } = useFormContext();
+
   return (
     <>
-      <form className="mt-4 mb-4 flex flex-col">
+      <div className="mt-4 mb-4 flex flex-col">
         <div className="flex justify-between">
           <div className="flex items-center">
             <input
               id="sales"
               className="form-checkbox rounded"
               type="checkbox"
+              {...register("sales")}
+              defaultValue="saaa"
             />
             <label htmlFor="sales" className="ml-2">
               <SaleBadge />
@@ -29,6 +34,7 @@ export const FilterByTypeForm = () => {
               id="rental"
               className="form-checkbox rounded"
               type="checkbox"
+              {...register("rental")}
             />
             <label htmlFor="rental" className="ml-2">
               <RentalBadge />
@@ -42,6 +48,7 @@ export const FilterByTypeForm = () => {
               id="booking"
               className="form-checkbox rounded"
               type="checkbox"
+              {...register("booking")}
             />
             <label htmlFor="booking" className="ml-2">
               <BookingBadge />
@@ -49,7 +56,7 @@ export const FilterByTypeForm = () => {
           </div>
           <p className="text-cold-gray">({15})</p>
         </div>
-      </form>
+      </div>
       <SubmitInput variant="outlined">
         <FaBroom /> Clear filter
       </SubmitInput>
