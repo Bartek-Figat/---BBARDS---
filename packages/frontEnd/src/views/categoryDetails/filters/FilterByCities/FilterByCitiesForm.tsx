@@ -1,8 +1,27 @@
-import React from "react";
+import { ChangeEvent, useState } from "react";
 import { FaBroom } from "react-icons/fa";
 import { SubmitInput } from "components/buttons/Input/SubmitInput";
+import { useSearchParams } from "react-router-dom";
 
 export const FilterByCitiesForm = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [currentCheckbox, setCurrentCheckbox] = useState("");
+
+  const onChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    city: "Los Angeles" | "San Francisco"
+  ) => {
+    let value = event.target.checked;
+    if (value) {
+      searchParams.set("city", city);
+      setSearchParams(searchParams);
+      setCurrentCheckbox(city);
+    } else {
+      searchParams.delete("city");
+      setSearchParams(searchParams);
+      setCurrentCheckbox("");
+    }
+  };
   return (
     <>
       <form className="mt-4 mb-4 flex flex-col">
@@ -18,6 +37,8 @@ export const FilterByCitiesForm = () => {
               id="los-angeles"
               className="form-checkbox rounded"
               type="checkbox"
+              onChange={(event) => onChange(event, "Los Angeles")}
+              checked={currentCheckbox === "Los Angeles"}
             />
             <label htmlFor="los-angeles" className="ml-2 flex">
               Los Angeles
@@ -32,6 +53,8 @@ export const FilterByCitiesForm = () => {
               id="san-francisco"
               className="form-checkbox rounded"
               type="checkbox"
+              onChange={(event) => onChange(event, "San Francisco")}
+              checked={currentCheckbox === "San Francisco"}
             />
             <label htmlFor="san-francisco" className="ml-2 flex">
               San Francisco

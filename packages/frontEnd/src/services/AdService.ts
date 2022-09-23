@@ -6,6 +6,7 @@ interface PageRequestProps {
   page: number;
   price?: number;
   adCategory?: string;
+  rate?: string;
   city?: string;
   priceCondition?: string;
   productCondition?: string;

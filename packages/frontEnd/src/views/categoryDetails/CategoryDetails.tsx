@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Header } from "./header";
 import { ProductList } from "./ProductList";
-import { FiltersForm } from "./filters/FiltersForm";
 import AdService from "services/AdService";
 import { Pagination } from "./pagination/Pagination";
-import { FieldValues } from "react-hook-form";
+import { FilterList } from "./filters/FilterList";
+import { useSearchParams } from "react-router-dom";
+import { Button } from "components/buttons/Button";
 
 interface ProductProps {
   _id: string;
@@ -20,6 +21,9 @@ export const CategoryDetails = () => {
   const [products, setProducts] = useState<null | ProductProps[]>(null);
   const [totalPages, setTotalPages] = useState(0);
   const [category, setCategory] = useState("");
+  const [rate, setRate] = useState("");
+  const [city, setCity] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const productData = async () => {
@@ -27,6 +31,8 @@ export const CategoryDetails = () => {
         const { data } = await AdService.getPage({
           page: currentPage,
           adCategory: category,
+          rate: rate,
+          city: city,
         });
         setTotalPages(data.dataLength);
         setProducts(data.data);
@@ -37,25 +43,12 @@ export const CategoryDetails = () => {
     };
 
     productData();
-  }, [currentPage, category]);
+  }, [currentPage, category, rate, city]);
 
-  const applyFilters = (data: FieldValues) => {
-    console.log(data);
-
-    if (data.sales) {
-      setCategory("Sale");
-      return;
-    }
-    if (data.booking) {
-      setCategory("Booking");
-      return;
-    }
-    if (data.rental) {
-      setCategory("Rent");
-      return;
-    }
-
-    setCategory("");
+  const applyFilters = () => {
+    setCategory(searchParams.get("type") || "");
+    setRate(searchParams.get("rate") || "");
+    setCity(searchParams.get("city") || "");
   };
 
   return (
@@ -63,8 +56,13 @@ export const CategoryDetails = () => {
       <Header />
       <div className="container my-12">
         <div className="flex">
-          <aside>
-            <FiltersForm submit={applyFilters} />
+          <aside className="flex flex-col">
+            <FilterList />
+            <div className="mt-4">
+              <Button variant="filled" onClick={applyFilters}>
+                Apply filters
+              </Button>
+            </div>
           </aside>
           <div className="">
             {products && <ProductList products={products} />}
