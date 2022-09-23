@@ -16,7 +16,7 @@ const getPage = async (params: PageRequestProps) => {
     method: "GET",
     url: `${API_URL}/api/v1/filter`,
     headers: { "Content-Type": "application/json" },
-    params: params,
+    params,
   });
 
   return data;
