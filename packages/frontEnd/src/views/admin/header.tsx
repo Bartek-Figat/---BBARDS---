@@ -4,7 +4,7 @@ import { Nav } from "./nav";
 
 export const Header: React.FC = () => {
   return (
-    <div className="w-[70vw] pt-10 bg-white rounded-lg laptop:text-xs mb-5">
+    <div className="w-[70vw] pt-10 bg-white rounded-lg text-sm mb-5">
       <div className="flex laptop:flex-col w-full px-3 mb-5">
         <div className="flex px-3 w-[40%] laptop:w-full">
           <div className="mr-5">
