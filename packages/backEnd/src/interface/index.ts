@@ -27,3 +27,35 @@ interface ReqQuery {
   bar: string;
   something?: string;
 }
+
+export interface IUser extends IUserAddress, IUserProfile  {
+  name: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+};
+
+interface IUserProfile{
+  company: string;
+  firstName: string;
+  lastName: string;
+  website: string;
+  phone: string;
+  birthDay: Date;
+  imageLink: string;
+  image: IFile;
+}
+
+interface IUserAddress{
+  address: string;
+  city: string;
+  state: string;
+  postCode: string;
+  country: string;
+}
+
+interface IFile{
+  originalName: string,
+  mimetype: string
+  data: string
+}

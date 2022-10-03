@@ -5,28 +5,11 @@ import { Repository } from "../repositories/user.repositories";
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
+import { IUser } from "../interface/index"
+import { uploadedFilesToSpaces } from "../tools/image"
 
 config({ path: "../../.env" });
 const { secret } = process.env;
-
-type User = {
-  email: string;
-  password: string;
-  repeatPassword: string;
-  name: string;
-  firstName: string;
-  lastName: string;
-  company: string;
-  address: string;
-  city: string;
-  state: string;
-  postCode: string;
-  country: string;
-  website: string;
-  phone: string;
-  birthDay: Date;
-  image: Binary
-};
 
 const saltRounds: number = 10;
 
@@ -34,7 +17,7 @@ export class UserService {
   constructor(private repository: Repository = new Repository()) {}
 
   async userRegister(req: Request, res: Response, next: NextFunction) {
-    const { email, password, name }: User = req.body;
+    const { email, password, name }: IUser = req.body;
 
     const userEmail = await this.repository.findOne(
       { email },
@@ -64,7 +47,7 @@ export class UserService {
   }
 
   async userLogin(req: Request, res: Response, next: NextFunction) {
-    const { email, password }: User = req.body;
+    const { email, password }: IUser = req.body;
     console.log(email, password);
     const user = await this.repository.findOne(
       { email },
@@ -150,7 +133,7 @@ export class UserService {
       const user = await this.repository.findOne(
         { _id: new ObjectId(token.token) },
         { firstName: 1, lastName: 1, company: 1, address: 1, city: 1,state: 1,
-          postCode: 1, country: 1, website: 1, phone: 1, birthDay: 1, image: 1, _id: 0 }
+          postCode: 1, country: 1, website: 1, phone: 1, birthDay: 1, imageLink: 1, _id: 0 }
       );
 
       res.status(StatusCode.SUCCESS).json({ user });
@@ -161,7 +144,7 @@ export class UserService {
 
   async userInsertProfile(req: Request, res: Response, next: NextFunction) {
     const { firstName, lastName, company, address, city, state, postCode,
-    country, website, phone, birthDay, image }: User = req.body;
+    country, website, phone, birthDay, image }: IUser = req.body.user;
 
     const { token } = req.user as {
       token: {
@@ -173,6 +156,7 @@ export class UserService {
       { _id: new ObjectId(token.token) },
       { _id: 0 }
     );
+      var imageLink = await uploadedFilesToSpaces(image)
 
       await this.repository.updateOne(
         { _id: new ObjectId(token.token) },
@@ -188,7 +172,7 @@ export class UserService {
           website: website,
           phone: phone,
           birthDay: birthDay,
-          image: image }},
+          imageLink: imageLink }},
       {});
       return res
         .status(StatusCode.SUCCESS)
