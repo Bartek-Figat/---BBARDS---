@@ -1,10 +1,12 @@
 import { config } from "dotenv";
 import { ObjectId } from "mongodb";
+import { validate } from "class-validator";
 import { Request, Response, NextFunction } from "express";
 import { Repository } from "../repositories/user.repositories";
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
+import { UserDto } from "../dto/user.dto";
 
 config({ path: "../../.env" });
 const { secret } = process.env;
@@ -22,7 +24,19 @@ export class UserService {
   constructor(private repository: Repository = new Repository()) {}
 
   async userRegister(req: Request, res: Response, next: NextFunction) {
-    const { email, password, name }: User = req.body;
+    const { email, password, name }: UserDto = req.body;
+
+    let credentialValidation = new UserDto();
+
+    credentialValidation.email = email;
+    credentialValidation.password = password;
+    credentialValidation.name = name;
+
+    const errors = await validate(credentialValidation);
+    if (errors.length > 0)
+      return res.status(StatusCode.BAD_REQUEST).json({
+        errors,
+      });
 
     const userEmail = await this.repository.findOne(
       { email },
@@ -52,13 +66,24 @@ export class UserService {
   }
 
   async userLogin(req: Request, res: Response, next: NextFunction) {
-    const { email, password }: User = req.body;
-    console.log(email, password);
-    const user = await this.repository.findOne(
-      { email },
-      { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }
-    );
     try {
+      const { email, password }: UserDto = req.body;
+
+      let credentialValidation = new UserDto();
+
+      credentialValidation.email = email;
+      credentialValidation.password = password;
+
+      const errors = await validate(credentialValidation);
+      if (errors.length > 0)
+        return res.status(StatusCode.BAD_REQUEST).json({
+          errors,
+        });
+      const user = await this.repository.findOne(
+        { email },
+        { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }
+      );
+
       const match = user && (await compare(password, user.password));
       if (!match)
         return res

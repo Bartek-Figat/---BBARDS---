@@ -8,6 +8,10 @@ export interface IAdds {
   city: string;
 }
 
+export interface IFiles {
+  files: any;
+}
+
 export interface IPagination extends IAdds {
   parsePage: number;
   pageSize: number;

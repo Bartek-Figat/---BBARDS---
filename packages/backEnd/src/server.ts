@@ -25,6 +25,7 @@ const server: Express = express();
 server.use(express.urlencoded({ limit: "50mb", extended: true }));
 server.use(express.json({ limit: "50mb" }));
 server.use(compression());
+server.use(express.static("avatar"));
 server.use(
   cors({
     methods: ["GET, POST, PUT, DELETE, OPTIONS"],

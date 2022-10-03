@@ -17,15 +17,15 @@ export class Repository {
   }
 
   async filterOnlyWithPagination(
-    { parsePage, pageSize },
+    { pageNumber, nPerPage },
     projection?: any
   ): Promise<Document[]> {
     try {
       const filterResult = await db
         .collection(Index.Add)
         .find({})
-        .limit(pageSize)
-        .skip(pageSize * parsePage)
+        .limit(nPerPage)
+        .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
         .toArray();
 
       return filterResult;
@@ -34,7 +34,7 @@ export class Repository {
     }
   }
 
-  async advancedFiltration({ parsePage, pageSize, resultFromCheckQuey }) {
+  async advancedFiltration({ pageNumber, nPerPage, resultFromCheckQuey }) {
     const { page, ...res } = resultFromCheckQuey;
     try {
       const filterResult = await db
@@ -42,8 +42,8 @@ export class Repository {
         .find({
           $and: [res],
         })
-        .limit(pageSize)
-        .skip(pageSize * parsePage)
+        .limit(nPerPage)
+        .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
         .toArray();
 
       return filterResult;
