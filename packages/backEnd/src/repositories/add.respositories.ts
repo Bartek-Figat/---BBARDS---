@@ -34,8 +34,10 @@ export class Repository {
     }
   }
 
-  async advancedFiltration({ pageNumber, nPerPage, resultFromCheckQuey }) {
-    const { page, ...res } = resultFromCheckQuey;
+  async advancedFiltration({ pageNumber, nPerPage, filterQuery }) {
+    const { page, ...res } = filterQuery;
+    console.log("resultFromCheckQuey------------->", res);
+    console.log(res);
     try {
       const filterResult = await db
         .collection(Index.Add)
@@ -46,7 +48,14 @@ export class Repository {
         .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
         .toArray();
 
-      return filterResult;
+      const dataLength = await db
+        .collection(Index.Add)
+        .find({
+          $and: [res],
+        })
+        .toArray();
+
+      return { filterResult, dataLength };
     } catch (err) {
       console.log(err);
     }

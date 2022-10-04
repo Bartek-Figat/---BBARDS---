@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { ProductCard } from "views/home/recommended/ProductCard";
-import AdService from "../../services/AdService";
-import { Pagination } from "./pagination/Pagination";
+import { FC } from "react";
 
+interface Props {
+  products: ProductProps[];
+}
 interface ProductProps {
+  _id: string;
   productImages: Array<string>;
   productTitle: string;
   price: number;
@@ -11,27 +13,15 @@ interface ProductProps {
   city: string;
 }
 
-export const ProductList = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [products, setProducts] = useState<null | ProductProps[]>(null);
-  const [totalPages, setTotalPages] = useState(0);
-
-  useEffect(() => {
-    AdService.getPage(currentPage).then((res) => {
-      setTotalPages(res.data.totalPages);
-      setProducts(res.data.filter);
-    });
-  }, [currentPage]);
-
+export const ProductList: FC<Props> = ({ products }) => {
   const mapProducts = () => {
-    if (!products) {
-      return;
-    }
+    if (!products) return <p>No products</p>;
+
     return products.map(
-      ({ productImages, productTitle, price, adCategory, city }, index) => {
+      ({ _id, productImages, productTitle, price, adCategory, city }) => {
         return (
           <ProductCard
-            key={index}
+            key={_id}
             img={productImages[0]}
             location={city}
             price={price}
@@ -44,13 +34,12 @@ export const ProductList = () => {
     );
   };
   return (
-    <div>
+    <>
       {products && (
         <div className="ml-4 mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {mapProducts()}
         </div>
       )}
-      <Pagination totalPages={totalPages} changeCurrentPage={setCurrentPage} />
-    </div>
+    </>
   );
 };

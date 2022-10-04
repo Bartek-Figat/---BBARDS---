@@ -6,6 +6,7 @@ export interface IAdds {
   adCategory: string;
   productCondition: string;
   city: string;
+  rate: string;
 }
 
 export interface IFiles {

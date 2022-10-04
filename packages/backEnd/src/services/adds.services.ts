@@ -87,60 +87,30 @@ export class AddService {
     res: Response,
     next: NextFunction
   ) {
-    const {
-      page,
-      productCategory,
-      price,
-      priceCondition,
-      adCategory,
-      productCondition,
-      city,
-    }: IAdds = req.query;
+    const { page }: IAdds = req.query;
 
-    const check = (object: IAdds) => {
-      for (let key in {
-        productCategory,
-        price,
-        priceCondition,
-        adCategory,
-        productCondition,
-        city,
-      }) {
-        if (object[key] !== undefined) return req.query;
-      }
+    const filterQuery = (obj: IAdds) => {
+      return Object.fromEntries(Object.entries(obj).filter(([k, v]) => v));
     };
-    const resultFromCheckQuey = check(req.query);
 
     try {
       const pageNumber: number = parseInt(page);
       const nPerPage: number = 10;
 
-      if (resultFromCheckQuey === undefined) {
-        const paginationProps: { pageNumber: number; nPerPage: number } = {
-          pageNumber,
-          nPerPage,
-        };
-        const data = await this.repository.filterOnlyWithPagination(
-          paginationProps
-        );
-        res.status(StatusCode.NOT_FOUND).json({
-          dataLength: data.length,
-          msg: StatusCode.NOT_FOUND,
-          data,
-        });
-      } else {
-        const props: any = {
-          pageNumber,
-          nPerPage,
-          resultFromCheckQuey,
-        };
-        const filter = await this.repository.advancedFiltration(props);
+      const props: any = {
+        pageNumber,
+        nPerPage,
+        filterQuery: filterQuery(req.query),
+      };
+      const { filterResult, dataLength } =
+        await this.repository.advancedFiltration(props);
 
-        res.status(StatusCode.SUCCESS).json({
-          filterLength: filter.length,
-          filter,
-        });
-      }
+      console.log("dataLength.length-------->", dataLength.length);
+
+      res.status(StatusCode.SUCCESS).json({
+        dataLength: dataLength.length,
+        data: filterResult,
+      });
     } catch (err) {
       console.log(err);
       res.status(StatusCode.INTERNAL_SERVER_ERROR);
