@@ -21,13 +21,9 @@ router.get(
   service.userData.bind(service)
 );
 
-router.post(
-  "/registration",
-  userRegisterValidatioin,
-  service.userRegister.bind(service)
-);
+router.post("/registration", service.userRegister.bind(service));
 
-router.post("/login", userLoginValidation, service.userLogin.bind(service));
+router.post("/login", service.userLogin.bind(service));
 
 router.get(
   "/user",

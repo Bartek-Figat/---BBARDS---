@@ -6,6 +6,11 @@ export interface IAdds {
   adCategory: string;
   productCondition: string;
   city: string;
+  rate: string;
+}
+
+export interface IFiles {
+  files: any;
 }
 
 export interface IPagination extends IAdds {
