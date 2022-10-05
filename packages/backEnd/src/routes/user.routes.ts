@@ -5,6 +5,7 @@ import { Middleware } from "../middleware/index";
 import {
   userLoginValidation,
   userRegisterValidatioin,
+  userPostUpdateProfileValidation,
 } from "../validation/index";
 const router = Router({
   caseSensitive: true,
@@ -44,6 +45,7 @@ router.get(
 router.post(
   "/user/profile",
   middleware.isAuthenticated.bind(middleware),
+  userPostUpdateProfileValidation,
   service.userInsertProfile.bind(service)
 );
 

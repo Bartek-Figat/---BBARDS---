@@ -56,6 +56,5 @@ interface IUserAddress{
 
 interface IFile{
   originalName: string,
-  mimetype: string
   data: string
 }

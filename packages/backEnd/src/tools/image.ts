@@ -12,17 +12,19 @@ const s3 = new S3({
   },
 });
 
-export const uploadedFilesToSpaces = async (file) => {
+export const uploadFile = async (file) => {
+const data = Buffer.from(file.data.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+const mimeType = file.data.substring(file.data.indexOf(":")+1, file.data.indexOf(";"))
+const extension = mimeType.split('/')[1]
 
-      const spacesFiles = {
-        Bucket: bucketName,
-        Key: `bbardsImages/${uuidv4() + "-" + file.originalName}`,
-        Body: Buffer.from(file.data),
-        ACL: "public-read",
-        ContentEncoding: 'base64',
-        ContentType: file.mimetype,
-      };
-      const { Location } = await s3.upload(spacesFiles).promise()
-      return Location
-    };
-  
+const fileToUpload = {
+    Bucket: bucketName,
+    Key: `bbardsImages/${uuidv4() + "-extension" + file.originalName + "." + extension}`,
+    Body: data,
+    ACL: "public-read",
+    ContentEncoding: 'base64',
+    ContentType: mimeType
+  };
+  const { Location } = await s3.upload(fileToUpload).promise()
+  return Location
+};

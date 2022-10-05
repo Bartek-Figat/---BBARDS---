@@ -6,7 +6,7 @@ import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
 import { IUser } from "../interface/index"
-import { uploadedFilesToSpaces } from "../tools/image"
+import { uploadFile } from "../tools/image"
 
 config({ path: "../../.env" });
 const { secret } = process.env;
@@ -152,12 +152,8 @@ export class UserService {
       };
     };
     try{
-    const user = await this.repository.findOne(
-      { _id: new ObjectId(token.token) },
-      { _id: 0 }
-    );
-      var imageLink = await uploadedFilesToSpaces(image)
-
+      var imageLink = await uploadFile(image)
+      
       await this.repository.updateOne(
         { _id: new ObjectId(token.token) },
         { $set:
