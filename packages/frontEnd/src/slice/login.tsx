@@ -42,9 +42,7 @@ export const signIn = createAsyncThunk<
   }
 });
 
-const token = localStorage.getItem("token")
-  ? localStorage.getItem("token")
-  : null;
+const token = localStorage.getItem("token") ?? null;
 
 const initialState: LoginState = {
   status: "waiting",
@@ -66,7 +64,7 @@ export const loginSlice = createSlice({
     });
     builder.addCase(signIn.rejected, (state, action) => {
       state.status = "error";
-      if (action.payload?.error) {
+      if (action.payload) {
         state.errorMessage = action.payload.error;
       } else {
         state.errorMessage = "Something went wrong, please try later";

@@ -16,7 +16,7 @@ function SignInTab() {
   } = useForm<IFormInput>();
 
   const dispatch = useAppDispatch();
-  const isError = useAppSelector((state) => state.login.status === "error");
+  const isError = useAppSelector((state) => state.login.status) === "error";
   const isPending = useAppSelector((state) => state.login.status) === "pending";
   const errorMessage = useAppSelector((state) => state.login.errorMessage);
 
