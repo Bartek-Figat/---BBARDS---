@@ -1,12 +1,13 @@
 import { config } from "dotenv";
-import { Binary, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
+import { validate } from "class-validator";
 import { Request, Response, NextFunction } from "express";
 import { Repository } from "../repositories/user.repositories";
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
-import { IUser } from "../interface/index"
 import { uploadFile } from "../tools/image"
+import { UserDto, UserProfileDto } from "../dto/user.dto";
 
 config({ path: "../../.env" });
 const { secret } = process.env;
@@ -17,7 +18,19 @@ export class UserService {
   constructor(private repository: Repository = new Repository()) {}
 
   async userRegister(req: Request, res: Response, next: NextFunction) {
-    const { email, password, name }: IUser = req.body;
+    const { email, password, name }: UserDto = req.body;
+
+    let credentialValidation = new UserDto();
+
+    credentialValidation.email = email;
+    credentialValidation.password = password;
+    credentialValidation.name = name;
+
+    const errors = await validate(credentialValidation);
+    if (errors.length > 0)
+      return res.status(StatusCode.BAD_REQUEST).json({
+        errors,
+      });
 
     const userEmail = await this.repository.findOne(
       { email },
@@ -47,13 +60,24 @@ export class UserService {
   }
 
   async userLogin(req: Request, res: Response, next: NextFunction) {
-    const { email, password }: IUser = req.body;
-    console.log(email, password);
-    const user = await this.repository.findOne(
-      { email },
-      { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }
-    );
     try {
+      const { email, password }: UserDto = req.body;
+
+      let credentialValidation = new UserDto();
+
+      credentialValidation.email = email;
+      credentialValidation.password = password;
+
+      const errors = await validate(credentialValidation);
+      if (errors.length > 0)
+        return res.status(StatusCode.BAD_REQUEST).json({
+          errors,
+        });
+      const user = await this.repository.findOne(
+        { email },
+        { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }
+      );
+
       const match = user && (await compare(password, user.password));
       if (!match)
         return res
@@ -144,16 +168,41 @@ export class UserService {
 
   async userInsertProfile(req: Request, res: Response, next: NextFunction) {
     const { firstName, lastName, company, address, city, state, postCode,
-    country, website, phone, birthDay, image }: IUser = req.body.user;
+    country, website, phone, birthDay, image }: UserProfileDto = req.body.user;
 
     const { token } = req.user as {
       token: {
         token: string;
       };
     };
+    let imageLink = null;
+    if (image != null){
+      imageLink = await uploadFile(image)
+    }
+
+    let userProfileValidation = new UserProfileDto();
+    
+    userProfileValidation.firstName = firstName;
+    userProfileValidation.lastName = lastName;
+    userProfileValidation.company = company;
+    userProfileValidation.address = address;
+    userProfileValidation.city = city;
+    userProfileValidation.state = state;
+    userProfileValidation.postCode = postCode;
+    userProfileValidation.country = country;
+    userProfileValidation.website = website;
+    userProfileValidation.phone = phone;
+    userProfileValidation.birthDay = birthDay
+    userProfileValidation.image = image;
+    userProfileValidation.imageLink = imageLink;
+
+    const errors = await validate(userProfileValidation);
+    if (errors.length > 0)
+      return res.status(StatusCode.BAD_REQUEST).json({
+        errors,
+      });
+
     try{
-      var imageLink = await uploadFile(image)
-      
       await this.repository.updateOne(
         { _id: new ObjectId(token.token) },
         { $set:

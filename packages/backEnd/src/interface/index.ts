@@ -6,6 +6,11 @@ export interface IAdds {
   adCategory: string;
   productCondition: string;
   city: string;
+  rate: string;
+}
+
+export interface IFiles {
+  files: any;
 }
 
 export interface IPagination extends IAdds {
@@ -28,14 +33,14 @@ interface ReqQuery {
   something?: string;
 }
 
-export interface IUser extends IUserAddress, IUserProfile  {
+export interface IUser {
   name: string;
   email: string;
   password: string;
   repeatPassword: string;
 };
 
-interface IUserProfile{
+export interface IUserProfile{
   company: string;
   firstName: string;
   lastName: string;
@@ -46,7 +51,7 @@ interface IUserProfile{
   image: IFile;
 }
 
-interface IUserAddress{
+export interface IUserAddress{
   address: string;
   city: string;
   state: string;
@@ -54,7 +59,7 @@ interface IUserAddress{
   country: string;
 }
 
-interface IFile{
+export interface IFile{
   originalName: string,
   data: string
 }

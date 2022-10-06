@@ -2,15 +2,25 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080";
 
-const getPage = (pageNumber: number) => {
-  return axios({
+interface PageRequestProps {
+  page: number;
+  price?: number;
+  adCategory?: string;
+  rate?: string;
+  city?: string;
+  priceCondition?: string;
+  productCondition?: string;
+}
+
+const getPage = async (params: PageRequestProps) => {
+  const data = await axios({
     method: "GET",
     url: `${API_URL}/api/v1/filter`,
     headers: { "Content-Type": "application/json" },
-    params: {
-      page: pageNumber,
-    },
+    params,
   });
+
+  return data;
 };
 
 const adService = {

@@ -19,10 +19,9 @@ const extension = mimeType.split('/')[1]
 
 const fileToUpload = {
     Bucket: bucketName,
-    Key: `bbardsImages/${uuidv4() + "-extension" + file.originalName + "." + extension}`,
+    Key: `bbardsImages/${uuidv4() + file.originalName + "." + extension}`,
     Body: data,
     ACL: "public-read",
-    ContentEncoding: 'base64',
     ContentType: mimeType
   };
   const { Location } = await s3.upload(fileToUpload).promise()

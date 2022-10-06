@@ -10,7 +10,7 @@ export function PublicRouter() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/category-details" element={<CategoryDetails />} />
+        <Route path="category-details" element={<CategoryDetails />} />
       </Route>
     </Routes>
   );

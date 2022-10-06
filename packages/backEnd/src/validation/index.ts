@@ -1,7 +1,6 @@
 import { RequestHandler } from "express";
 import validate from "validate.js";
 
-var unallowedCharacters = new RegExp("^.*?(?=[\^#%&$\*:<>\?/\{\|\}]).*$")
 export const userRegisterValidatioin: RequestHandler = async (
   req,
   res,
@@ -134,98 +133,3 @@ export const userPostAddValidation: RequestHandler = async (req, res, next) => {
   },
  }
 }
-
-export const userPostUpdateProfileValidation: RequestHandler = async (req, res, next) => {
-  const constraints = {
-   company: {
-     type: "string",
-     presence: { allowEmpty: true },
-     exclusion: { unallowedCharacters },
-     length: {
-       minimum: 2,
-       tooShort: "must be at least %{count} characters",
-     },
-   },
-   firstName: {
-    type: "string",
-    presence: { allowEmpty: false },
-    exclusion: { unallowedCharacters },
-    length: {
-      minimum: 2,
-      tooShort: "must be at least %{count} characters",
-    },
-  },
-  lastName: {
-    type: "string",
-    presence: { allowEmpty: false },
-    exclusion: { unallowedCharacters },
-    length: {
-      minimum: 2,
-      tooShort: "must be at least %{count} characters",
-    },
-  },
-  website: {
-    presence: { allowEmpty: true },
-    url: true
-  },
-  phone: {
-    presence: { allowEmpty: true },
-    numericality: true,
-    length: {
-      minimum: 9,
-      tooShort: "must be at least %{count} characters",
-    },
-  },
-  birthDay: {
-    type: "string",
-    presence: { allowEmpty: true },
-    length: {
-      minimum: 6,
-      tooShort: "must be at least %{count} characters",
-    },
-  },
-  imageLink: {
-    url: true,
-    presence: { allowEmpty: true },
-  },
-  image: {
-    presence: { allowEmpty: true },
-  },
-  address: {
-    type: "string",
-    presence: { allowEmpty: true },
-  },
-  city: {
-    type: "string",
-    presence: { allowEmpty: true },
-    length: {
-      minimum: 3,
-      tooShort: "must be at least %{count} characters",
-    },
-  },
-  state: {
-    type: "string",
-    presence: { allowEmpty: true },
-    length: {
-      minimum: 3,
-      tooShort: "must be at least %{count} characters",
-    },
-  },
-  postCode: {
-    type: "string",
-    presence: { allowEmpty: true },
-    length: {
-      minimum: 6,
-      tooShort: "must be at least %{count} characters",
-    },
-  },
-  country: {
-    type: "string",
-    presence: { allowEmpty: true },
-    length: {
-      minimum: 4,
-      tooShort: "must be at least %{count} characters",
-    },
-  },
-  }
- }

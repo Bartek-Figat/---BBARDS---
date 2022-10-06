@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { AddService } from "../services/adds.services";
+import { upload } from "../multer";
 const router = Router({
   caseSensitive: true,
   strict: true,
@@ -7,7 +8,11 @@ const router = Router({
 
 const service = new AddService();
 
-router.get("/get-adds", service.AdvertisingData.bind(service));
+router.post(
+  "/get-adds",
+  upload.array("images", 6),
+  service.AddAdvertising.bind(service)
+);
 
 router.get("/filter", service.filterAdvertising.bind(service));
 

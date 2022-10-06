@@ -5,7 +5,6 @@ import { Middleware } from "../middleware/index";
 import {
   userLoginValidation,
   userRegisterValidatioin,
-  userPostUpdateProfileValidation,
 } from "../validation/index";
 const router = Router({
   caseSensitive: true,
@@ -22,13 +21,9 @@ router.get(
   service.userData.bind(service)
 );
 
-router.post(
-  "/registration",
-  userRegisterValidatioin,
-  service.userRegister.bind(service)
-);
+router.post("/registration", service.userRegister.bind(service));
 
-router.post("/login", userLoginValidation, service.userLogin.bind(service));
+router.post("/login", service.userLogin.bind(service));
 
 router.get(
   "/user",
@@ -45,7 +40,6 @@ router.get(
 router.post(
   "/user/profile",
   middleware.isAuthenticated.bind(middleware),
-  userPostUpdateProfileValidation,
   service.userInsertProfile.bind(service)
 );
 
