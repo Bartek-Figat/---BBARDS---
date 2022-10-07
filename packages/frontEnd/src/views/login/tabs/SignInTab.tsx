@@ -16,7 +16,9 @@ function SignInTab() {
   } = useForm<IFormInput>();
 
   const dispatch = useAppDispatch();
-  const status = useAppSelector((state) => state.login.status);
+  const isError = useAppSelector((state) => state.login.status) === "error";
+  const isPending = useAppSelector((state) => state.login.status) === "pending";
+  const errorMessage = useAppSelector((state) => state.login.errorMessage);
 
   const onSubmit: SubmitHandler<IFormInput> = ({ email, password }) => {
     dispatch(signIn({ email, password }));
@@ -64,22 +66,21 @@ function SignInTab() {
         </div>
 
         <FormSubmit>
-          <FaUnlock />
-          <p className="ml-2">Enter your account</p>
+          {isPending ? (
+            <div className=" flex justify-center items-center">
+              <div className="animate-spin rounded-full border-b-2 w-4 h-4 border-white"></div>
+              <p className="ml-2">Loading...</p>
+            </div>
+          ) : (
+            <>
+              <FaUnlock />
+              <p className="ml-2">Enter your account</p>
+            </>
+          )}
         </FormSubmit>
       </form>
 
-      {status === "success" && (
-        <p className="mt-5 text-green-400">You are successfully logged!</p>
-      )}
-      {status === "pending" && (
-        <p className="mt-5">Your data is processing...</p>
-      )}
-      {status === "error" && (
-        <p className="mt-5 text-red-400">
-          Something wrong happened... Try again!
-        </p>
-      )}
+      {isError && <p className="mt-5 text-red-600">{errorMessage}</p>}
 
       <p className="mt-12 text-center text-lg w-[290px] m-auto">
         Don't have an account? click on the{" "}

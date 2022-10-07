@@ -39,3 +39,34 @@ export interface MulterRequest extends Request {
   files: any;
   file: any;
 }
+
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+}
+
+export interface IUserProfile {
+  company: string;
+  firstName: string;
+  lastName: string;
+  website: string;
+  phone: string;
+  birthDay: Date;
+  imageLink: string;
+  image: IFile;
+}
+
+export interface IUserAddress {
+  address: string;
+  city: string;
+  state: string;
+  postCode: string;
+  country: string;
+}
+
+export interface IFile {
+  originalName: string;
+  data: string;
+}

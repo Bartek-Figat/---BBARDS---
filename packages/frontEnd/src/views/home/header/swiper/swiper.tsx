@@ -10,7 +10,7 @@ interface Props {
 export function SwiperContainer({ images }: Props) {
   return (
     <div className="md:container relative">
-      <div className="absolute -bottom-24 w-full">
+      <div className="absolute -bottom-24 w-full px-16 ">
         <Swiper
           modules={[Autoplay, A11y]}
           spaceBetween={16}

@@ -32,6 +32,18 @@ router.get(
 );
 
 router.get(
+  "/user/profile",
+  middleware.isAuthenticated.bind(middleware),
+  service.userProfile.bind(service)
+);
+
+router.post(
+  "/user/profile",
+  middleware.isAuthenticated.bind(middleware),
+  service.userInsertProfile.bind(service)
+);
+
+router.get(
   "/logout",
   middleware.isAuthenticated.bind(middleware),
   service.userLogout.bind(service)

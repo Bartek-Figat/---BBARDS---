@@ -6,7 +6,7 @@ import { data } from "../data";
 
 export const ReadOurRecentArticles = () => {
   return (
-    <section className="mt-32 flex flex-col justify-center">
+    <section className="flex flex-col justify-center  -translate-y-40">
       <h2 className="text-4xl font-bold mb-4 text-center">
         Read Our <span className="text-dark-blue">Recent Articles</span>
       </h2>
