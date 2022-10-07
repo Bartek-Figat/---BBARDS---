@@ -1,5 +1,12 @@
 import { config } from "dotenv";
-import express, { Express } from "express";
+import express, {
+  Express,
+  ErrorRequestHandler,
+  Request,
+  Response,
+  NextFunction,
+  RequestHandler,
+} from "express";
 import helemt from "helmet";
 import compression from "compression";
 import morgan from "morgan";
@@ -9,6 +16,7 @@ import swaggerDocument from "./api/documentation.json";
 import userRouter from "./routes/user.routes";
 import addsRouter from "./routes/adds.routes";
 import { connect } from "./db/db";
+import { HttpError } from "./httpError/httpErrorException";
 
 config({ path: "../../.env" });
 const { origin } = process.env;
@@ -37,8 +45,25 @@ server.use(
   })
 );
 
+server.use(
+  (
+    error: ErrorRequestHandler,
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (error instanceof HttpError) {
+      res.status(error.statusCode).json({
+        data: {},
+        error: error.message,
+      });
+    }
+    next();
+  }
+);
+
 server.use(helemt());
-server.use(morgan("tiny"));
+server.use(morgan("dev"));
 server.enable("trust proxy");
 
 server.use("/api/v1", userRouter);

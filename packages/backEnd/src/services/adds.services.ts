@@ -7,7 +7,7 @@ import { db } from "../db/db";
 import { Index } from "../enum";
 import { Repository } from "../repositories/add.respositories";
 import { StatusCode } from "../enum";
-import { IAdds } from "../interface/index";
+import { IAdds, MulterRequest } from "../interface/index";
 
 config({ path: "../../.env" });
 const { endpoint, region, accessKeyId, secretAccessKey, bucketName } =
@@ -21,11 +21,6 @@ const s3 = new S3({
     secretAccessKey,
   },
 });
-
-interface MulterRequest extends Request {
-  files: any;
-  file: any;
-}
 
 const uploadedFilesToSpaces = async (requsetFiles) => {
   const spacesFiles = requsetFiles.map(async (file) => {
@@ -63,19 +58,14 @@ export class AddService {
   }
 
   async AddAdvertising(req: MulterRequest, res: Response, next: NextFunction) {
+    const whitelist = ["image/png", "image/jpeg", "image/jpg"];
     try {
-      if (req.files > 0) {
-        if (
-          req.files.mimetype !== "image/png" ||
-          req.files.mimetype !== "image/jpg" ||
-          req.files.mimetype !== "image/jpeg"
-        )
-          return res
-            .status(StatusCode.BAD_REQUEST)
-            .json({ error: "Only .png, .jpg and .jpeg format allowed!" });
-        // const spacesFiles = await uploadedFilesToSpaces(req.files);
-        return res.status(StatusCode.SUCCESS).json({ msg: 200 });
-      }
+      // console.log(req.files[0].mimetype);
+      // if (!whitelist.includes(req.files[0].mimetype)) {
+      //   console.log("file is not allowed");
+      // }
+      // const spacesFiles = await uploadedFilesToSpaces(req.files);
+      return res.status(StatusCode.SUCCESS).json({ msg: 200 });
     } catch (err) {
       console.log(err);
       res.status(StatusCode.INTERNAL_SERVER_ERROR);
@@ -105,7 +95,7 @@ export class AddService {
       const { filterResult, dataLength } =
         await this.repository.advancedFiltration(props);
 
-      console.log("dataLength.length-------->", dataLength.length);
+      console.log("dataLength.length-------->", filterResult);
 
       res.status(StatusCode.SUCCESS).json({
         dataLength: dataLength.length,

@@ -43,6 +43,11 @@ export class Repository {
         .collection(Index.Add)
         .find({
           $and: [res],
+          $expr: {
+            $sum: {
+              $multiply: [{ $toInt: "$rating.twoStar" }, 2],
+            },
+          },
         })
         .limit(nPerPage)
         .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
@@ -54,6 +59,17 @@ export class Repository {
           $and: [res],
         })
         .toArray();
+
+      //   $where: function () {
+      //   console.log("rating", this.rating);
+      //   const total =
+      //     this.rating.oneStar +
+      //     this.rating.twoStar +
+      //     this.rating.threeStar +
+      //     this.rating.fourStar +
+      //     this.rating.fiveStar;
+      //   return total;
+      // },
 
       return { filterResult, dataLength };
     } catch (err) {

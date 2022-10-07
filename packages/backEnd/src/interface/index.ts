@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface IAdds {
   page?: string;
   productCategory: string;
@@ -31,4 +33,9 @@ interface ReqQuery {
   foo: string;
   bar: string;
   something?: string;
+}
+
+export interface MulterRequest extends Request {
+  files: any;
+  file: any;
 }
