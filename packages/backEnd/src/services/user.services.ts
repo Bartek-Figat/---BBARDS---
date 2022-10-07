@@ -6,17 +6,11 @@ import { Repository } from "../repositories/user.repositories";
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
-import { UserDto } from "../dto/user.dto";
+import { uploadFile } from "../tools/image"
+import { UserDto, UserProfileDto } from "../dto/user.dto";
 
 config({ path: "../../.env" });
 const { secret } = process.env;
-
-type User = {
-  email: string;
-  password: string;
-  repeatPassword: string;
-  name: string;
-};
 
 const saltRounds: number = 10;
 
@@ -147,6 +141,87 @@ export class UserService {
       return res
         .status(200)
         .json({ message: "You have been logged out successfully" });
+    } catch (err) {
+      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async userProfile(req: Request, res: Response){
+    const { token } = req.user as {
+      token: {
+        token: string;
+      };
+    };
+
+    try {
+      const user = await this.repository.findOne(
+        { _id: new ObjectId(token.token) },
+        { firstName: 1, lastName: 1, company: 1, address: 1, city: 1,state: 1,
+          postCode: 1, country: 1, website: 1, phone: 1, birthDay: 1, imageLink: 1, _id: 0 }
+      );
+
+      res.status(StatusCode.SUCCESS).json({ user });
+    } catch (err) {
+      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async userInsertProfile(req: Request, res: Response, next: NextFunction) {
+    const { firstName, lastName, company, address, city, state, postCode,
+    country, website, phone, birthDay, image }: UserProfileDto = req.body.user;
+
+    const { token } = req.user as {
+      token: {
+        token: string;
+      };
+    };
+    let imageLink = null;
+    if (image != null){
+      imageLink = await uploadFile(image)
+    }
+
+    let userProfileValidation = new UserProfileDto();
+    
+    userProfileValidation.firstName = firstName;
+    userProfileValidation.lastName = lastName;
+    userProfileValidation.company = company;
+    userProfileValidation.address = address;
+    userProfileValidation.city = city;
+    userProfileValidation.state = state;
+    userProfileValidation.postCode = postCode;
+    userProfileValidation.country = country;
+    userProfileValidation.website = website;
+    userProfileValidation.phone = phone;
+    userProfileValidation.birthDay = birthDay
+    userProfileValidation.image = image;
+    userProfileValidation.imageLink = imageLink;
+
+    const errors = await validate(userProfileValidation);
+    if (errors.length > 0)
+      return res.status(StatusCode.BAD_REQUEST).json({
+        errors,
+      });
+
+    try{
+      await this.repository.updateOne(
+        { _id: new ObjectId(token.token) },
+        { $set:
+          { firstName: firstName,
+          lastName: lastName,
+          company: company,
+          address: address,
+          city: city,
+          state: state,
+          postCode: postCode,
+          country: country,
+          website: website,
+          phone: phone,
+          birthDay: birthDay,
+          imageLink: imageLink }},
+      {});
+      return res
+        .status(StatusCode.SUCCESS)
+        .json({ message: "User profile updated." });
     } catch (err) {
       res.status(StatusCode.INTERNAL_SERVER_ERROR);
     }
