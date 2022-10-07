@@ -11,11 +11,9 @@ services:
     env_file:
       - ./.env
   backend:
-    #image: bbards-backend:dev
     build:
       dockerfile: Dockerfile
       context: ./packages/backEnd
-    #image: bbards-backend:dev
     networks: 
       - bbards-network
     depends_on:
@@ -29,7 +27,6 @@ services:
     env_file:
       - ./.env
   frontend:
-    #image: bbards-frontend:dev
     build:
       dockerfile: Dockerfile
       context: ./packages/frontEnd
@@ -40,7 +37,7 @@ services:
     restart: on-failure
     container_name: 'bbards-frontend'
     volumes:
-      - ./packages/backEnd/:/bbards/frontend
+      - ./packages/frontEnd/:/bbards/frontend
     env_file:
       - ./.env
 networks:

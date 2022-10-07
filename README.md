@@ -2,6 +2,7 @@
 
 - [Download](#Download)
 - [Installation](#Installation)
+- [Docker compose](#Docker)
 - [Modules](#Modules)
 - [API Documentation](#API)
 - [Contributing](#Contributing)
@@ -27,6 +28,31 @@ The command will start the front-end and back-end
 
 ```bash
   yarn start
+```
+
+## Docker compose
+If you want code using Docker, create `.env` file in root directory:
+
+```bash
+  MONGO_INITDB_ROOT_USERNAME=developer
+  MONGO_INITDB_ROOT_PASSWORD=password
+  MONGO_INITDB_DATABASE=bbardslocal
+  dbDEV=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@database/${MONGO_INITDB_DATABASE}?retryWrites=true&w=majority&authSource=admin
+```
+
+Then run below in root directory
+
+Docker will bind ports:
+3000 - Frontend
+8080 - Backend
+27017 - MongoDb
+
+If you want to use other port, open and modify the file ```docker-compose.yml```
+
+To run the project, in the root directory use.
+
+```bash
+  docker compose up
 ```
 
 ## Modules
