@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  database:
+    image: mongo:6
+    networks:
+     - bbards-network
+    ports:
+      - '27017-27019:27017-27019'
+    restart: on-failure
+    container_name: 'bbards-database'
+    env_file:
+      - ./.env
+  backend:
+    #image: bbards-backend:dev
+    build:
+      dockerfile: Dockerfile
+      context: ./packages/backEnd
+    #image: bbards-backend:dev
+    networks: 
+      - bbards-network
+    depends_on:
+      - database
+    ports:
+      - '8080:8080'
+    restart: on-failure
+    container_name: 'bbards-backend'
+    volumes:
+      - ./packages/backEnd/:/bbards/backend
+    env_file:
+      - ./.env
+  frontend:
+    #image: bbards-frontend:dev
+    build:
+      dockerfile: Dockerfile
+      context: ./packages/frontEnd
+    networks: 
+      - bbards-network
+    ports:
+      - '3000:3000'
+    restart: on-failure
+    container_name: 'bbards-frontend'
+    volumes:
+      - ./packages/backEnd/:/bbards/frontend
+    env_file:
+      - ./.env
+networks:
+ bbards-network:
+  name: bbards-network
