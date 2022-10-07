@@ -6,7 +6,7 @@ import { productsMap } from "./Products";
 
 export const RecommendedAds = () => {
   return (
-    <section className="container mt-32">
+    <section className="container mt-32  px-12">
       <hgroup>
         <h2 className="text-4xl font-bold text-center">
           Our Recommend

@@ -4,7 +4,7 @@ import { productsMap } from "./Products";
 
 export const TrendingAds = () => {
   return (
-    <section className="container mt-32">
+    <section className="container mt-32 px-16">
       <hgroup>
         <h2 className="text-4xl font-bold text-center">
           Popular Trending
