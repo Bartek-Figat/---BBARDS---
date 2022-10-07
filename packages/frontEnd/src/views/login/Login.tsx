@@ -4,8 +4,14 @@ import { Tab } from "@headlessui/react";
 import AsideSection from "./AsideSection";
 import SignInTab from "./tabs/SignInTab";
 import SignUpTab from "./tabs/SignUpTab";
+import { useAppSelector } from "store/hooks";
+import { Navigate } from "react-router-dom";
 
 function Login() {
+  const isLogged = useAppSelector((store) => store.login.token);
+  if (isLogged) {
+    return <Navigate replace to="/dashboard" />;
+  }
   return (
     <div className="flex h-screen w-screen">
       <AsideSection />
