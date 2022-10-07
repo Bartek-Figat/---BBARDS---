@@ -179,7 +179,7 @@ export const Footer = () => {
               </li>
               <li>
                 <h5 className="text-white">242,789</h5>
-                <p>Community Ads</p>
+                <p>Community Ads </p>
               </li>
             </ul>
           </div>
