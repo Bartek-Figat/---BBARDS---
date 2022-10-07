@@ -98,14 +98,14 @@ export const Footer = () => {
     },
   ];
   return (
-    <div className="flex flex-col items-center bg-black-blue w-full sm:text-xs lg:text-lg md:text-base">
+    <div className="flex flex-col items-center bg-black-blue w-full sm:text-xs lg:text-lg md:text-base ">
       <div className="container items-center pt-10 ">
-        <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-4 mb-16">
+        <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-4 mb-16 px-3">
           <div className="w-full">
             <h2 className="text-white text-4xl font-bold">
               Subscribe for Latest Offers
             </h2>
-            <p className="text-cold-gray mt-5">
+            <p className="text-cold-gray mt-5 text-base">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Laboriosam, aliquid reiciendis! Exercitationem soluta provident
               non.
@@ -124,7 +124,7 @@ export const Footer = () => {
             </form>
           </div>
         </div>
-        <div className="grid lg:grid-cols-4 sm:grid-cols-2  gap-4 border-b border-cold-gray">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2  gap-4 border-b border-cold-gray mx-10">
           <div className="w-full">
             <h3 className={h3Class}>Contact us</h3>
             <ul className="text-cold-gray">
@@ -166,7 +166,7 @@ export const Footer = () => {
               ))}
             </ul>
           </div>
-          <div className="w-full">
+          <div className="w-full ">
             <Link to="/">
               <div className="w-3/4 tablet:w-[40%] xs:w-[40%]">
                 <img src={logo} alt="logo" />
@@ -184,8 +184,8 @@ export const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="flex w-full my-12 xs:flex-col xs:items-center xs:justify-around xs:h-40">
-          <div className="flex justify-around w-1/3">
+        <div className="flex flex-wrap sm:flex-nowrap my-12 flex-col sm:flex-row m-4 md:m-14 sm:justify-center sm:m-12 sm:justify-items-center ">
+          <div className="flex  sm:flex-wrap lg:flex-row justify-center space-x-2 sm:gap-3 sm:w-1/3 sm:space-x-0 lg:space-x-2 w-4/4 ">
             <Link to="/">
               <img src={master} alt="Master Card" />
             </Link>
@@ -199,15 +199,15 @@ export const Footer = () => {
               <img src={payPal} alt="PayPal" />
             </Link>
           </div>
-          <div className="flex justify-around  text-gray-dark w-1/3">
-            <button className="border w-2/5 rounded-md border-gray-dark duration-500 hover:border-white hover:text-white">
+          <div className="flex lg:flex-row sm:flex-wrap sm:flex-col  justify-center sm:content-center space-x-2 sm:space-x-0 sm:justify-evenly  text-gray-dark sm:w-1/3  sm:px-4 py-3 sm:py-0 md:space-y-2 lg:space-y-0 lg:gap-2  ">
+            <button className=" border p-2 rounded-md border-gray-dark  duration-500 hover:border-white hover:text-white sm:w-4/5  w-1/5 lg:w-1/3">
               English
             </button>
-            <button className="border w-2/5 rounded-md border-gray-dark duration-500 hover:border-white hover:text-white">
+            <button className="border p-2 rounded-md border-gray-dark duration-500 hover:border-white hover:text-white sm:w-4/5 w-1/5 lg:w-1/3 ">
               USD
             </button>
           </div>
-          <div className="flex justify-around w-1/3">
+          <div className="flex lg:flex-row sm:flex-wrap sm:flex-col sm:justify-center justify-center space-x-2 sm:space-x-0 sm:px-4 sm:w-1/3 sm:space-y-2 lg:space-y-0 lg:gap-2">
             <Link to="/">
               <img src={play} alt="Google Play" />
             </Link>

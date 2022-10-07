@@ -41,8 +41,8 @@ export const FeaturedAds = () => {
   console.log("sliderIndex", [sliderIndex]);
 
   return (
-    <div className="flex justify-center w-[70%] mt-44 m-auto">
-      <div className="w-1/2">
+    <div className="flex flex-col md:flex-row justify-center  mt-44  px-32">
+      <div className="w-full md:w-1/2 ">
         <hgroup>
           <h2 className="text-4xl font-bold">
             Find your needs in our best{" "}
@@ -59,7 +59,7 @@ export const FeaturedAds = () => {
           view all featured
         </button>
       </div>
-      <div className="w-1/2 ml-12">
+      <div className="w-full md:ml-12 mt-16 md:mt-0 md:w-1/2 ">
         <Swiper
           modules={[Autoplay, A11y, Navigation, Thumbs, Controller]}
           spaceBetween={6}
