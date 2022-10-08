@@ -42,6 +42,10 @@ If you want code using Docker, create `.env` file in root directory:
 
 Then run below in root directory
 
+```bash
+  docker compose up
+```
+
 Docker will bind ports:
 3000 - Frontend
 8080 - Backend
@@ -49,11 +53,9 @@ Docker will bind ports:
 
 If you want to use other port, open and modify the file ```docker-compose.yml```
 
-To run the project, in the root directory use.
-
-```bash
-  docker compose up
-```
+You can also run specific service:
+```docker compose up backend``` - will run backend service and mongodb
+```docker compose up frontend``` - will run frontend service
 
 ## Modules
 
