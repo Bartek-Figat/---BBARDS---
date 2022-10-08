@@ -23,7 +23,7 @@ services:
     restart: on-failure
     container_name: 'bbards-backend'
     volumes:
-      - ./packages/backEnd/:/bbards/backend
+      - ./packages/backEnd/:/packages/backEnd/
     env_file:
       - ./.env
   frontend:
@@ -37,7 +37,7 @@ services:
     restart: on-failure
     container_name: 'bbards-frontend'
     volumes:
-      - ./packages/frontEnd/:/bbards/frontend
+      - ./packages/frontEnd/:/packages/frontEnd/
     env_file:
       - ./.env
 networks:
