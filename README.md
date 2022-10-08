@@ -47,6 +47,7 @@ Then run below in root directory
 ```
 
 Docker will bind ports:
+
 3000 - Frontend
 
 8080 - Backend
