@@ -24,6 +24,7 @@ services:
     container_name: 'bbards-backend'
     volumes:
       - ./packages/backEnd/:/packages/backEnd/
+      - backEnd_node_modules:/packages/backEnd/node_modules
     env_file:
       - ./.env
   frontend:
@@ -38,8 +39,13 @@ services:
     container_name: 'bbards-frontend'
     volumes:
       - ./packages/frontEnd/:/packages/frontEnd/
+      - frontEnd_node_modules:/packages/frontEnd/node_modules
     env_file:
       - ./.env
 networks:
  bbards-network:
   name: bbards-network
+
+volumes:
+  backEnd_node_modules:
+  frontEnd_node_modules:

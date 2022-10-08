@@ -7,6 +7,6 @@ COPY package-lock.json .
 
 RUN yarn install
 
-COPY . .
+VOLUME "/packages/frontEnd/node_modules"
 
 CMD ["yarn", "start"]

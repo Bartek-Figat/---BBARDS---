@@ -6,6 +6,6 @@ COPY package.json .
 
 RUN yarn install
 
-COPY . .
+VOLUME "/packages/backEnd/node_modules"
 
 CMD ["yarn", "dev"]
