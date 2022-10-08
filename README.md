@@ -48,13 +48,17 @@ Then run below in root directory
 
 Docker will bind ports:
 3000 - Frontend
+
 8080 - Backend
+
 27017 - MongoDb
 
 If you want to use other port, open and modify the file ```docker-compose.yml```
 
 You can also run specific service:
+
 ```docker compose up backend``` - will run backend service and mongodb
+
 ```docker compose up frontend``` - will run frontend service
 
 ## Modules
