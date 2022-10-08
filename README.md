@@ -31,6 +31,7 @@ The command will start the front-end and back-end
 ```
 
 ## Docker compose
+
 If you want code using Docker, create `.env` file in root directory:
 
 ```bash
@@ -54,13 +55,13 @@ Docker will bind ports:
 
 27017 - MongoDb
 
-If you want to use other port, open and modify the file ```docker-compose.yml```
+If you want to use other port, open and modify the file `docker-compose.yml`
 
 You can also run specific service:
 
-```docker compose up backend``` - will run backend service and mongodb
+`docker compose up backend` - will run backend service and mongodb
 
-```docker compose up frontend``` - will run frontend service
+`docker compose up frontend` - will run frontend service
 
 ## Modules
 
@@ -74,6 +75,10 @@ Example:
 
 ```bash
   yarn workspace @bbards-ts/front-end add react react-dom --dev
+```
+
+```bash
+  yarn workspace @bbards-ts/back-end add cors
 ```
 
 If you want to remove a package:

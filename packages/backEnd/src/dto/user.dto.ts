@@ -1,8 +1,21 @@
-import { IsNotEmpty, IsEmail, Min, IsUrl, IsAlphanumeric, IsDateString, IsNumberString, IsAlpha, IsPostalCode, IsOptional } from "class-validator";
+import {
+  IsNotEmpty,
+  IsEmail,
+  Min,
+  IsUrl,
+  IsAlphanumeric,
+  IsDateString,
+  IsNumberString,
+  IsAlpha,
+  IsPostalCode,
+  IsOptional,
+  Max,
+} from "class-validator";
 import { IUserProfile, IUserAddress, IFile } from "../interface";
 
 export class UserDto {
   @Min(3)
+  @Max(255)
   @IsNotEmpty()
   password: string;
   @IsEmail()
@@ -11,7 +24,7 @@ export class UserDto {
   name: string;
 }
 
-export class UserProfileDto implements IUserProfile, IUserAddress{
+export class UserProfileDto implements IUserProfile, IUserAddress {
   @IsAlpha()
   company: string;
   @IsAlpha()
@@ -37,7 +50,7 @@ export class UserProfileDto implements IUserProfile, IUserAddress{
   city: string;
   @IsAlpha()
   state: string;
-  @IsPostalCode('any')
+  @IsPostalCode("any")
   postCode: string;
   @IsAlpha()
   country: string;

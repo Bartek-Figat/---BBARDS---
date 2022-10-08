@@ -6,6 +6,7 @@ import {
   userLoginValidation,
   userRegisterValidatioin,
 } from "../validation/index";
+import { Controller } from "../controller/controller";
 const router = Router({
   caseSensitive: true,
   strict: true,
@@ -14,6 +15,7 @@ const router = Router({
 const repository = new Repository();
 const service = new UserService();
 const middleware = new Middleware();
+const cotroller = new Controller();
 
 router.get(
   "/user",
@@ -21,7 +23,7 @@ router.get(
   service.userData.bind(service)
 );
 
-router.post("/registration", service.userRegister.bind(service));
+router.post("/registration", cotroller.userRegister.bind(cotroller));
 
 router.post("/login", service.userLogin.bind(service));
 

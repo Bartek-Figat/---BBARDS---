@@ -16,7 +16,8 @@ import swaggerDocument from "./api/documentation.json";
 import userRouter from "./routes/user.routes";
 import addsRouter from "./routes/adds.routes";
 import { connect } from "./db/db";
-import { HttpError } from "./httpError/httpErrorException";
+import { BaseHttpResponse } from "./httpError/baseHttpResponse";
+import { ValidationErrorException } from "./httpError";
 
 config({ path: "../../.env" });
 const { origin } = process.env;
@@ -52,11 +53,9 @@ server.use(
     res: Response,
     next: NextFunction
   ) => {
-    if (error instanceof HttpError) {
-      res.status(error.statusCode).json({
-        data: {},
-        error: error.message,
-      });
+    if (error instanceof ValidationErrorException) {
+      const response = BaseHttpResponse.failedResponse(error.message, 400);
+      res.status(response.statusCode).json(response);
     }
     next();
   }
