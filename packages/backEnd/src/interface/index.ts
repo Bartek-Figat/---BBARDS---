@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface IAdds {
   page?: string;
   productCategory: string;
@@ -33,14 +35,19 @@ interface ReqQuery {
   something?: string;
 }
 
+export interface MulterRequest extends Request {
+  files: any;
+  file: any;
+}
+
 export interface IUser {
   name: string;
   email: string;
   password: string;
   repeatPassword: string;
-};
+}
 
-export interface IUserProfile{
+export interface IUserProfile {
   company: string;
   firstName: string;
   lastName: string;
@@ -51,7 +58,7 @@ export interface IUserProfile{
   image: IFile;
 }
 
-export interface IUserAddress{
+export interface IUserAddress {
   address: string;
   city: string;
   state: string;
@@ -59,7 +66,7 @@ export interface IUserAddress{
   country: string;
 }
 
-export interface IFile{
-  originalName: string,
-  data: string
+export interface IFile {
+  originalName: string;
+  data: string;
 }

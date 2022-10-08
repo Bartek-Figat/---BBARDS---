@@ -36,7 +36,7 @@ export class Repository {
 
   async advancedFiltration({ pageNumber, nPerPage, filterQuery }) {
     const { page, ...res } = filterQuery;
-    console.log("resultFromCheckQuey------------->", res);
+
     console.log(res);
     try {
       const filterResult = await db

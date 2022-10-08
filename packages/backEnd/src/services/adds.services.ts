@@ -1,13 +1,14 @@
 import { config } from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
-import { Request, Response, NextFunction, RequestHandler } from "express";
 import { S3 } from "aws-sdk";
 import { db } from "../db/db";
 import { Index } from "../enum";
 import { Repository } from "../repositories/add.respositories";
 import { StatusCode } from "../enum";
-import { IAdds } from "../interface/index";
+import { ICategories } from "../dto/user.dto";
+import { MulterRequest } from "../interface/index";
+import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 
 config({ path: "../../.env" });
 const { endpoint, region, accessKeyId, secretAccessKey, bucketName } =
@@ -21,11 +22,6 @@ const s3 = new S3({
     secretAccessKey,
   },
 });
-
-interface MulterRequest extends Request {
-  files: any;
-  file: any;
-}
 
 const uploadedFilesToSpaces = async (requsetFiles) => {
   const spacesFiles = requsetFiles.map(async (file) => {
@@ -50,46 +46,51 @@ const uploadedFilesToSpaces = async (requsetFiles) => {
 export class AddService {
   constructor(private repository: Repository = new Repository()) {}
 
-  async AdvertisingData(req: Request, res: Response, next: NextFunction) {
+  async advertisingData() {
     try {
       const adds = await this.repository.find({});
       const total = await db.collection(Index.Add).countDocuments({});
 
-      return res.status(StatusCode.SUCCESS).json({ total, adds });
+      return BaseHttpResponse.sucessResponse(
+        { total, adds },
+        StatusCode.SUCCESS,
+        {}
+      );
     } catch (err) {
       console.log(err);
-      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+      return BaseHttpResponse.failedResponse(
+        err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
     }
   }
 
-  async AddAdvertising(req: MulterRequest, res: Response, next: NextFunction) {
+  async addAdvertising(files: MulterRequest) {
+    const whitelist = ["image/png", "image/jpeg", "image/jpg"];
     try {
-      if (req.files > 0) {
-        if (
-          req.files.mimetype !== "image/png" ||
-          req.files.mimetype !== "image/jpg" ||
-          req.files.mimetype !== "image/jpeg"
-        )
-          return res
-            .status(StatusCode.BAD_REQUEST)
-            .json({ error: "Only .png, .jpg and .jpeg format allowed!" });
-        // const spacesFiles = await uploadedFilesToSpaces(req.files);
-        return res.status(StatusCode.SUCCESS).json({ msg: 200 });
+      console.log(files[0].mimetype);
+      if (!whitelist.includes(files[0].mimetype)) {
+        console.log("file is not allowed");
       }
+      const uploadedFiles = await uploadedFilesToSpaces(files);
+      return BaseHttpResponse.sucessResponse(
+        uploadedFiles,
+        StatusCode.SUCCESS,
+        {}
+      );
     } catch (err) {
       console.log(err);
-      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+      return BaseHttpResponse.failedResponse(
+        err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
     }
   }
 
-  async filterAdvertising(
-    req: Request<{}, {}, {}, IAdds>,
-    res: Response,
-    next: NextFunction
-  ) {
-    const { page }: IAdds = req.query;
+  async filterCategories(categories: ICategories) {
+    const { page } = categories;
 
-    const filterQuery = (obj: IAdds) => {
+    const filterQuery = (obj: ICategories) => {
       return Object.fromEntries(Object.entries(obj).filter(([k, v]) => v));
     };
 
@@ -100,20 +101,23 @@ export class AddService {
       const props: any = {
         pageNumber,
         nPerPage,
-        filterQuery: filterQuery(req.query),
+        filterQuery: filterQuery(categories),
       };
       const { filterResult, dataLength } =
         await this.repository.advancedFiltration(props);
-
-      console.log("dataLength.length-------->", dataLength.length);
-
-      res.status(StatusCode.SUCCESS).json({
-        dataLength: dataLength.length,
-        data: filterResult,
-      });
+      return BaseHttpResponse.sucessResponse(
+        {
+          dataLength: dataLength.length,
+          data: filterResult,
+        },
+        200,
+        {}
+      );
     } catch (err) {
-      console.log(err);
-      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+      return BaseHttpResponse.failedResponse(
+        err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
     }
   }
 }
