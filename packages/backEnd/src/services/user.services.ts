@@ -1,13 +1,12 @@
 import { config } from "dotenv";
 import { ObjectId } from "mongodb";
 import { validate } from "class-validator";
-import { Request, Response, NextFunction } from "express";
 import { Repository } from "../repositories/user.repositories";
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
 import { uploadFile } from "../tools/image";
-import { UserDto, UserProfileDto } from "../dto/user.dto";
+import { UserDto, UserProfileDto, TokenDto, LogoutDto } from "../dto/user.dto";
 import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 
 config({ path: "../../.env" });
@@ -63,9 +62,9 @@ export class UserService {
     }
   }
 
-  async userLogin(req: Request, res: Response, next: NextFunction) {
+  async userLogin(credentials: UserDto) {
     try {
-      const { email, password }: UserDto = req.body;
+      const { email, password }: UserDto = credentials;
 
       let credentialValidation = new UserDto();
 
@@ -74,9 +73,7 @@ export class UserService {
 
       const errors = await validate(credentialValidation);
       if (errors.length > 0)
-        return res.status(StatusCode.BAD_REQUEST).json({
-          errors,
-        });
+        return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
       const user = await this.repository.findOne(
         { email },
         { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }
@@ -84,13 +81,12 @@ export class UserService {
 
       const match = user && (await compare(password, user.password));
       if (!match)
-        return res
-          .status(StatusCode.BAD_REQUEST)
-          .json({ error: ErrorMessage.WRONG })
-          .end();
+        return BaseHttpResponse.failedResponse(
+          ErrorMessage.WRONG,
+          StatusCode.BAD_REQUEST
+        );
 
       const token: string = sign({ token: user._id.toString() }, `${secret}`);
-      console.log("token -> line 70", token);
 
       await this.repository.updateOne(
         { email: user.email },
@@ -99,40 +95,35 @@ export class UserService {
         },
         {}
       );
-
-      return res.status(200).json({ token });
+      return BaseHttpResponse.sucessResponse(token, 200, {});
     } catch (err) {
-      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+      return BaseHttpResponse.failedResponse(
+        err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
     }
   }
 
-  async userData(req: Request, res: Response, next: NextFunction) {
-    const { token } = req.user as {
-      token: {
-        token: string;
-      };
-    };
+  async userData(verificationToken: TokenDto) {
+    const { token } = verificationToken;
 
     try {
       const user = await this.repository.findOne(
         { _id: new ObjectId(token.token) },
         { email: 1, name: 1, lastLoggedIn: 1, logOutDate: 1, _id: 0 }
       );
-
-      res.status(StatusCode.SUCCESS).json({ user });
+      return BaseHttpResponse.sucessResponse(user, 200, {});
     } catch (err) {
-      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+      return BaseHttpResponse.failedResponse(
+        err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
     }
   }
 
-  async userLogout(req: Request, res: Response, next: NextFunction) {
-    const { token, authHeader } = req.user as {
-      token: {
-        token: string;
-      };
-      authHeader: string;
-    };
-    console.log(authHeader);
+  async userLogout(logout: LogoutDto) {
+    const { token, authHeader } = logout;
+
     try {
       const v = await this.repository.updateOne(
         { _id: new ObjectId(token.token) },
@@ -141,21 +132,21 @@ export class UserService {
         },
         {}
       );
-      console.log("line 119", v);
-      return res
-        .status(200)
-        .json({ message: "You have been logged out successfully" });
+      return BaseHttpResponse.sucessResponse(
+        "You have been logged out successfully",
+        200,
+        {}
+      );
     } catch (err) {
-      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+      return BaseHttpResponse.failedResponse(
+        err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
     }
   }
 
-  async userProfile(req: Request, res: Response) {
-    const { token } = req.user as {
-      token: {
-        token: string;
-      };
-    };
+  async userProfile(verificationToken: TokenDto) {
+    const { token } = verificationToken;
 
     try {
       const user = await this.repository.findOne(
@@ -176,14 +167,19 @@ export class UserService {
           _id: 0,
         }
       );
-
-      res.status(StatusCode.SUCCESS).json({ user });
+      return BaseHttpResponse.sucessResponse(user, 200, {});
     } catch (err) {
-      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+      return BaseHttpResponse.failedResponse(
+        err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
     }
   }
 
-  async userInsertProfile(req: Request, res: Response, next: NextFunction) {
+  async userInsertProfile(
+    userProfile: UserProfileDto,
+    verificationToken: TokenDto
+  ) {
     const {
       firstName,
       lastName,
@@ -197,13 +193,9 @@ export class UserService {
       phone,
       birthDay,
       image,
-    }: UserProfileDto = req.body.user;
+    } = userProfile;
 
-    const { token } = req.user as {
-      token: {
-        token: string;
-      };
-    };
+    const { token } = verificationToken;
     let imageLink = null;
     if (image != null) {
       imageLink = await uploadFile(image);
@@ -227,9 +219,7 @@ export class UserService {
 
     const errors = await validate(userProfileValidation);
     if (errors.length > 0)
-      return res.status(StatusCode.BAD_REQUEST).json({
-        errors,
-      });
+      return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
 
     try {
       await this.repository.updateOne(
@@ -252,11 +242,17 @@ export class UserService {
         },
         {}
       );
-      return res
-        .status(StatusCode.SUCCESS)
-        .json({ message: "User profile updated." });
+
+      return BaseHttpResponse.sucessResponse(
+        "User profile updated.",
+        StatusCode.SUCCESS,
+        {}
+      );
     } catch (err) {
-      res.status(StatusCode.INTERNAL_SERVER_ERROR);
+      return BaseHttpResponse.failedResponse(
+        err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
     }
   }
 }

@@ -36,18 +36,13 @@ export class Repository {
 
   async advancedFiltration({ pageNumber, nPerPage, filterQuery }) {
     const { page, ...res } = filterQuery;
-    console.log("resultFromCheckQuey------------->", res);
+
     console.log(res);
     try {
       const filterResult = await db
         .collection(Index.Add)
         .find({
           $and: [res],
-          $expr: {
-            $sum: {
-              $multiply: [{ $toInt: "$rating.twoStar" }, 2],
-            },
-          },
         })
         .limit(nPerPage)
         .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
@@ -59,17 +54,6 @@ export class Repository {
           $and: [res],
         })
         .toArray();
-
-      //   $where: function () {
-      //   console.log("rating", this.rating);
-      //   const total =
-      //     this.rating.oneStar +
-      //     this.rating.twoStar +
-      //     this.rating.threeStar +
-      //     this.rating.fourStar +
-      //     this.rating.fiveStar;
-      //   return total;
-      // },
 
       return { filterResult, dataLength };
     } catch (err) {

@@ -10,6 +10,7 @@ import {
   IsPostalCode,
   IsOptional,
   Max,
+  IsString,
 } from "class-validator";
 import { IUserProfile, IUserAddress, IFile } from "../interface";
 
@@ -22,6 +23,36 @@ export class UserDto {
   email: string;
   @IsNotEmpty()
   name: string;
+}
+
+export class TokenDto {
+  @IsString()
+  token: {
+    token: string;
+  };
+}
+export class LogoutDto extends TokenDto {
+  @IsString()
+  authHeader: string;
+}
+
+export class ICategories {
+  @IsString()
+  page?: string;
+  @IsString()
+  productCategory: string;
+  @IsString()
+  price: string;
+  @IsString()
+  priceCondition: string;
+  @IsString()
+  adCategory: string;
+  @IsString()
+  productCondition: string;
+  @IsString()
+  city: string;
+  @IsString()
+  rate: string;
 }
 
 export class UserProfileDto implements IUserProfile, IUserAddress {

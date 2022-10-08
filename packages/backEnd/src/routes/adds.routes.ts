@@ -1,19 +1,13 @@
 import { Router } from "express";
-import { AddService } from "../services/adds.services";
+import { Controller } from "../controller/controller";
 import { upload } from "../multer";
 const router = Router({
   caseSensitive: true,
   strict: true,
 });
 
-const service = new AddService();
+const controller = new Controller();
 
-router.post(
-  "/get-adds",
-  upload.array("images", 6),
-  service.AddAdvertising.bind(service)
-);
-
-router.get("/filter", service.filterAdvertising.bind(service));
+router.get("/filter", controller.filterCategories.bind(controller));
 
 export default router;
