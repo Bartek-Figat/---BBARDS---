@@ -3,7 +3,7 @@ import { verify, JwtPayload } from "jsonwebtoken";
 import { StatusCode } from "../enum";
 import { Repository } from "../repositories/user.repositories";
 
-export class Middleware {
+export class AuthMiddleware {
   constructor(private repository: Repository = new Repository()) {}
 
   async isAuthenticated(req: Request, res: Response, next: NextFunction) {
