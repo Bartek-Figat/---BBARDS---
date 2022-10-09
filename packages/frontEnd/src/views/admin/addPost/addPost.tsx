@@ -278,6 +278,85 @@ export const AddPost = () => {
           </li>
         </ul>
       </div>
+      <div className="w-full p-5 bg-white rounded-lg text-sm mb-5">
+        <form>
+          <label className="flex items-start text-cold-gray">
+            <input className="mr-2 leading-tight mt-1" type="checkbox" />
+            <p className="text-sm">
+              Send me Trade Email/SMS Alerts for people looking to buy mobile
+              handsets in www By clicking "Post", you agree to our Terms of Use
+              and Privacy Policy and acknowledge that you are the rightful owner
+              of this item and using Trade to find a genuine buyer.
+            </p>
+          </label>
+        </form>
+        <div className="w-full flex justify-end mt-4">
+          <button className="text-white font-bold bg-dark-blue rounded px-7 py-3 hover:bg-dark-blue-hover duration-500">
+            PUBLISHED YOUR AD
+          </button>
+        </div>
+      </div>
+      <div className="w-full p-5 bg-white rounded-lg text-sm mb-5">
+        <h2 className="font-bold relative mt-2 text-lg border-b pb-2 before:content-[''] before:absolute before:w-1/6 before:h-0.5 before:bg-dark-blue before:-bottom-[1px]">
+          Safety Tips
+        </h2>
+        <ul className="list-disc w-full px-4  text-cold-gray">
+          <li className="pt-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio
+            perferendis placeat at aperiam.
+          </li>
+          <li className="pt-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio
+            perferendis placeat at aperiam.
+          </li>
+          <li className="pt-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio
+            perferendis placeat at aperiam.
+          </li>
+          <li className="pt-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio
+            perferendis placeat at aperiam.
+          </li>
+          <li className="pt-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio
+            perferendis placeat at aperiam.
+          </li>
+        </ul>
+      </div>
+      <div className="w-full p-5 bg-white rounded-lg text-sm mb-5">
+        <h2 className="font-bold relative mt-2 text-lg border-b pb-2 before:content-[''] before:absolute before:w-1/6 before:h-0.5 before:bg-dark-blue before:-bottom-[1px]">
+          Custom Offer
+        </h2>
+        <form className="my-5">
+          <div className="mb-4">
+            <input
+              className="bg-gray-chalk appearance-none w-full p-4 text-cold-gray leading-tight border-b-2 outline-none focus:border-dark-blue duration-500"
+              id="name"
+              type="text"
+              placeholder="Name"
+            />
+          </div>
+          <div className="mb-4">
+            <input
+              className="bg-gray-chalk appearance-none w-full p-4 text-cold-gray leading-tight border-b-2 outline-none focus:border-dark-blue duration-500"
+              id="email"
+              type="email"
+              placeholder="Email"
+            />
+          </div>
+          <div className="mb-4">
+            <textarea
+              placeholder="Message"
+              className="bg-gray-chalk appearance-none w-full h-[20vh] p-4 text-cold-gray leading-tight border-b-2 outline-none focus:border-dark-blue duration-500"
+            ></textarea>
+          </div>
+          <div className="mb-4 w-full">
+            <button className="text-white font-bold bg-dark-blue rounded px-7 py-3 w-full hover:bg-dark-blue-hover duration-500">
+              SEND MESSAGE
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
