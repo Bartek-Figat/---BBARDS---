@@ -19,7 +19,7 @@ export const LayoutAdmin = () => {
           <Navbar />
           <Banner />
           <div className="flex flex-col w-[100vw] h-[]justify-center items-center bg-gray-chalk positi">
-            <div className="w-[70vw] top-[20%] z-10">
+            <div className="w-[70vw] tablet:w-[95vw] top-[20%] z-10">
               <Header />
               <Outlet />
             </div>
