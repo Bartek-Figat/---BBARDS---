@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { Middleware } from "../middleware/index";
-import { UserController } from "../controller/controller";
+import { AuthMiddleware } from "../middleware/index";
+import { UserController } from "../controller/user.controller";
 const router = Router({
   caseSensitive: true,
   strict: true,
 });
 
-const middleware = new Middleware();
+const middleware = new AuthMiddleware();
 const cotroller = new UserController();
 
 router.get(

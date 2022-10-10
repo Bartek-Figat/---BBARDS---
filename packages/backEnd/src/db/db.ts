@@ -1,5 +1,6 @@
 import { config } from "dotenv";
 import { Db, MongoClient, MongoClientOptions } from "mongodb";
+import Logger from "jet-logger";
 
 import { Index } from "../enum";
 
@@ -15,10 +16,10 @@ export let db: Db;
 export const connect = async () => {
   const connection = await client.connect();
   if (!connection) {
-    console.log("Db not connected");
+    Logger.imp("Db not connected");
   } else {
-    console.log("Db connected");
-    console.log("Database Max Listeners: ->", connection.getMaxListeners());
+    Logger.imp("Db connected");
+    Logger.imp(`Database Max Listeners: -> ${connection.getMaxListeners()}`);
 
     db = connection.db(Index.Db);
     return client;

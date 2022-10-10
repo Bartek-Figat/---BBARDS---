@@ -5,10 +5,12 @@ import helemt from "helmet";
 import compression from "compression";
 import morgan from "morgan";
 import cors from "cors";
+import Logger from "jet-logger";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./api/documentation.json";
 import { connect } from "./db/db";
-import { UserController } from "./controller/controller";
+import { UserController } from "./controller/user.controller";
+import { AdvertController } from "./controller/advert.controller";
 
 config({ path: "../../.env" });
 const { origin } = process.env;
@@ -53,15 +55,13 @@ export class SampleServer extends Server {
 
   private setupControllers(): void {
     const userController = new UserController();
-
-    // super.addControllers() must be called, and can be passed a single controller or an array of
-    // controllers. Optional router object can also be passed as second argument.
-    super.addControllers([userController]);
+    const advertController = new AdvertController();
+    super.addControllers([userController, advertController]);
   }
 
   public start(port: number): void {
     this.app.listen(port, () => {
-      console.log(`Server listening on port: ${port}`);
+      Logger.imp(`Server listening on port: ${port}`);
     });
   }
 }

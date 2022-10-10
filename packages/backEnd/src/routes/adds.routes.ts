@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UserController } from "../controller/controller";
+import { UserController } from "../controller/user.controller";
 import { upload } from "../multer";
 const router = Router({
   caseSensitive: true,
