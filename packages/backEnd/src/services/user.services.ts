@@ -104,7 +104,7 @@ export class UserService {
     }
   }
 
-  async userData(verificationToken: TokenDto) {
+  async getUserData(verificationToken: TokenDto) {
     const { token } = verificationToken;
 
     try {
@@ -145,7 +145,7 @@ export class UserService {
     }
   }
 
-  async userProfile(verificationToken: TokenDto) {
+  async getUserProfile(verificationToken: TokenDto) {
     const { token } = verificationToken;
 
     try {

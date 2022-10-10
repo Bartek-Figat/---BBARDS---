@@ -21,8 +21,8 @@ export class UserController {
 
   @Get("user")
   @Middleware(middleware.isAuthenticated)
-  async userData(req: Request, res: Response, next: NextFunction) {
-    const response = await this.service.userData(req.user);
+  async getUserData(req: Request, res: Response, next: NextFunction) {
+    const response = await this.service.getUserData(req.user);
     res.status(response.statusCode).json(response);
   }
 
@@ -35,8 +35,8 @@ export class UserController {
 
   @Get("user/profile")
   @Middleware(middleware.isAuthenticated)
-  async userProfile(req: Request, res: Response, next: NextFunction) {
-    const response = await this.service.userProfile(req.user);
+  async getUserProfile(req: Request, res: Response, next: NextFunction) {
+    const response = await this.service.getUserProfile(req.user);
     res.status(response.statusCode).json(response);
   }
 

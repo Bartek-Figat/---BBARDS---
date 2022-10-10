@@ -24,8 +24,8 @@ export class AdvertController {
   }
 
   @Get("data")
-  async advertisingData(req: Request, res: Response, next: NextFunction) {
-    const response = await this.addService.advertisingData();
+  async getAdvertisingData(req: Request, res: Response, next: NextFunction) {
+    const response = await this.addService.getAdvertisingData();
     res.status(response.statusCode).json(response);
   }
 }

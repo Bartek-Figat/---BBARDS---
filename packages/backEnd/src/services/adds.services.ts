@@ -46,7 +46,7 @@ const uploadedFilesToSpaces = async (requsetFiles) => {
 export class AddService {
   constructor(private repository: Repository = new Repository()) {}
 
-  async advertisingData() {
+  async getAdvertisingData() {
     try {
       const adds = await this.repository.find({});
       const total = await db.collection(Index.Add).countDocuments({});
