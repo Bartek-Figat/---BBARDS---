@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/tsx-react/static/css/main.9fdeb07e.css",
-    "main.js": "/tsx-react/static/js/main.cbe48d8d.js",
+    "main.css": "/tsx-react/static/css/main.75f96cde.css",
+    "main.js": "/tsx-react/static/js/main.580a1bfe.js",
     "static/js/415.d6694569.chunk.js": "/tsx-react/static/js/415.d6694569.chunk.js",
     "static/media/02.png": "/tsx-react/static/media/02.f30f92d3ea16aaf26d5d.png",
+    "static/media/04.png": "/tsx-react/static/media/04.aab1d97025467af6e75a.png",
     "static/media/03.jpg": "/tsx-react/static/media/03.cdbd3d52574f72ea1393.jpg",
     "static/media/01.jpg": "/tsx-react/static/media/01.96783b04746c92b102f4.jpg",
-    "static/media/photo-1599566150163-29194dcaad36.avif": "/tsx-react/static/media/photo-1599566150163-29194dcaad36.f8bcfdcc4637cc5b8373.avif",
     "static/media/04.jpg": "/tsx-react/static/media/04.24762cf4c631f3bb09c4.jpg",
     "static/media/05.jpg": "/tsx-react/static/media/05.7a4900c09e49e74ea0cb.jpg",
     "static/media/02.jpg": "/tsx-react/static/media/02.635f01de1774c74fe606.jpg",
@@ -23,12 +23,12 @@
     "static/media/electronics.jpg": "/tsx-react/static/media/electronics.97e6ae1fedba3c1ece99.jpg",
     "static/media/education.png": "/tsx-react/static/media/education.fabd0f7b98046d6d8a4e.png",
     "index.html": "/tsx-react/index.html",
-    "main.9fdeb07e.css.map": "/tsx-react/static/css/main.9fdeb07e.css.map",
-    "main.cbe48d8d.js.map": "/tsx-react/static/js/main.cbe48d8d.js.map",
+    "main.75f96cde.css.map": "/tsx-react/static/css/main.75f96cde.css.map",
+    "main.580a1bfe.js.map": "/tsx-react/static/js/main.580a1bfe.js.map",
     "415.d6694569.chunk.js.map": "/tsx-react/static/js/415.d6694569.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9fdeb07e.css",
-    "static/js/main.cbe48d8d.js"
+    "static/css/main.75f96cde.css",
+    "static/js/main.580a1bfe.js"
   ]
 }
