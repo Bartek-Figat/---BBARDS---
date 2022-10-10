@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tsx-react/static/css/main.9fdeb07e.css",
-    "main.js": "/tsx-react/static/js/main.da71f0d7.js",
+    "main.js": "/tsx-react/static/js/main.cbe48d8d.js",
     "static/js/415.d6694569.chunk.js": "/tsx-react/static/js/415.d6694569.chunk.js",
     "static/media/02.png": "/tsx-react/static/media/02.f30f92d3ea16aaf26d5d.png",
     "static/media/03.jpg": "/tsx-react/static/media/03.cdbd3d52574f72ea1393.jpg",
@@ -24,11 +24,11 @@
     "static/media/education.png": "/tsx-react/static/media/education.fabd0f7b98046d6d8a4e.png",
     "index.html": "/tsx-react/index.html",
     "main.9fdeb07e.css.map": "/tsx-react/static/css/main.9fdeb07e.css.map",
-    "main.da71f0d7.js.map": "/tsx-react/static/js/main.da71f0d7.js.map",
+    "main.cbe48d8d.js.map": "/tsx-react/static/js/main.cbe48d8d.js.map",
     "415.d6694569.chunk.js.map": "/tsx-react/static/js/415.d6694569.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9fdeb07e.css",
-    "static/js/main.da71f0d7.js"
+    "static/js/main.cbe48d8d.js"
   ]
 }
