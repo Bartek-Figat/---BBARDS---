@@ -34,9 +34,8 @@ export const CategoryDetails = () => {
           rate: rate,
           city: city,
         });
-        setTotalPages(data.dataLength);
-        setProducts(data.data);
-        console.log(data);
+        setTotalPages(data.data.dataLength);
+        setProducts(data.data.data);
       } catch (err) {
         console.log(err);
       }

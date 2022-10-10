@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { Controller } from "../controller/controller";
+import { UserController } from "../controller/user.controller";
 import { upload } from "../multer";
 const router = Router({
   caseSensitive: true,
   strict: true,
 });
 
-const controller = new Controller();
+const controller = new UserController();
 
 router.get("/filter", controller.filterCategories.bind(controller));
 
