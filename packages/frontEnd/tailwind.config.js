@@ -42,6 +42,7 @@ module.exports = {
         "hero-image": "url('assets/images/01.jpg')",
         "los-angeles": "url('assets/images/cities/01.jpg')",
         "san-francisco": "url('assets/images/cities/02.jpg')",
+        "city-fog": "url('assets/images/bg/04.png')",
         california: "url('assets/images/cities/03.jpg')",
         "new-york": "url('assets/images/cities/04.jpg')",
         manhattan: "url('assets/images/cities/05.jpg')",

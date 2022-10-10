@@ -1,9 +1,8 @@
 import { currencyNumberFormat, fromatPhoneNumber } from "util/helpers";
-
 export const Profile: React.FC = () => {
   return (
-    <div className="flex justify-center w-full p-4">
-      <div className="flex justify-center w-full">
+    <div className="flex flex-col justify-center items-center w-full p-4">
+      <div className="flex justify-center w-[70%]">
         <div className="grid grid-cols-1 gap-x-8 gap-y-2 lg:grid-cols-16 desktop:grid-cols-14 sm:grid-cols-12">
           <div className="flex justify-center items-center flex-col rounded-md mb-8 p-2 bg-white">
             <div className="flex flex-col w-[100%] h-[15rem] p-4">

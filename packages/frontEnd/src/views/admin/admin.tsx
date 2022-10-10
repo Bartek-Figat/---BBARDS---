@@ -1,18 +1,38 @@
 import React from "react";
-import { LSideBar } from "./sidebar/sidebar";
-import { Content } from "./content";
-import { Navbar } from "./navbar/navbar";
+import avatar from "assets/images/avatar/01.jpg";
+import { Nav } from "./nav";
 
 export const Dasboard: React.FC = () => {
   return (
-    <div className="flex">
-      <div className="flex w-screen">
-        <div className="grow-[0.1] h-screen bg-purple 3">
-          <LSideBar />
+    <div>
+      <div className="w-[70vw] py-3 px-3 bg-white rounded-lg">
+        <div className="w-full relative">
+          <h4 className="font-bold mt-2 text-lg border-b pb-3 before:content-[''] before:absolute before:w-[10%] before:h-0.5 before:bg-dark-blue before:bottom-[-1px]">
+            Newsletter
+          </h4>
         </div>
-        <div className="grow-[0.9] h-screen overflow-y-auto">
-          <Navbar />
-          <Content />
+        <div className="pt-5">
+          <p className="text-cold-gray">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
+            aspernatur quis quo reiciendis maxime dolores eveniet sit asperiores
+            labore, necessitatibus reprehenderit accusantium excepturi hic
+            accusamus provident optio culpa doloremque facere!
+          </p>
+        </div>
+      </div>
+      <div className="w-[70vw] py-3 px-3 bg-white rounded-lg my-5">
+        <div className="w-full relative">
+          <h4 className="font-bold mt-2 text-lg border-b pb-3 before:content-[''] before:absolute before:w-[10%] before:h-0.5 before:bg-dark-blue before:bottom-[-1px]">
+            Reviews
+          </h4>
+        </div>
+        <div className="pt-5">
+          <p className="text-cold-gray">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
+            aspernatur quis quo reiciendis maxime dolores eveniet sit asperiores
+            labore, necessitatibus reprehenderit accusantium excepturi hic
+            accusamus provident optio culpa doloremque facere!
+          </p>
         </div>
       </div>
     </div>
