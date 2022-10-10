@@ -15,12 +15,22 @@
     {
       "name": "User",
       "description": "User routes"
+    },
+    {
+      "name": "Adds",
+      "description": "User adds"
+    },
+    {
+      "name": "User Profile",
+      "description": "User profile"
     }
   ],
   "paths": {
     "/registration": {
       "post": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "description": "User Registration",
         "required": true,
         "requestBody": {
@@ -105,7 +115,9 @@
     },
     "/login": {
       "post": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "description": "User Login",
         "required": true,
         "requestBody": {
@@ -173,16 +185,302 @@
     },
     "/user": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "description": "User Login",
         "required": true
       }
     },
     "/logout": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "description": "User Login",
         "required": true
+      }
+    },
+    "/user/profile": {
+      "post": {
+        "tags": [
+          "User Profile"
+        ],
+        "description": "Update user profile",
+        "required": true,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user":{
+                    "type": "object",
+                    "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "description": "User first name",
+                    "required": true,
+                    "example": "Bartek"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "description": "User last name",
+                    "required": true,
+                    "example": "Komenda"
+                  },
+                  "company": {
+                    "type": "string",
+                    "description": "Company name",
+                    "example": "Best Company"
+                  },
+                  "website": {
+                    "type": "string",
+                    "description": "Website",
+                    "example": "https://www.devopsowy.pl"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "User phone number",
+                    "example": "517123456"
+                  },
+                  "birthDay": {
+                    "type": "string",
+                    "description": "User birthday",
+                    "example": "1970-01-01"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "User address",
+                    "example": "Warszawska 15"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "User city",
+                    "example": "Warsaw"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "User state",
+                    "example": "Mazovia"
+                  },
+                  "postCode": {
+                    "type": "string",
+                    "description": "User postal code",
+                    "example": "21-200"
+                  },
+                  "country": {
+                    "type": "string",
+                    "description": "User country",
+                    "example": "Poland"
+                  },
+                  "image": {
+                    "type": "object",
+                    "properties": {
+                      "originalName": {
+                        "type": "string",
+                        "description": "Name of image",
+                        "example": "BestImage"
+                      },
+                      "data": {
+                        "type": "string",
+                        "description": "Image in DataUri",
+                        "example": "data:image/jpeg;base64,/9j/4AAQS"
+                      }
+                    }
+                    }
+                  }
+                }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User profile updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User profile updated."
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Invalid request body from user profile update",
+                    "errors": {
+                      "firstName": [
+                        "Name can't be blank",
+                        "Name must be at least 3 characters or more"
+                      ],
+                      "lastName": [
+                        "Last name should not be empty",
+                        "Last name must contain only letters (a-zA-Z)"
+                      ],
+                      "company": [
+                        "Company must contain only letters (a-zA-Z)"
+                      ],
+                      "website": [
+                        "Website must be an URL address"
+                      ],
+                      "phone": [
+                        "Phone must be a number string"
+                      ],
+                      "birthDay": [
+                        "Birthday must be a valid ISO 8601 date string"
+                      ],
+                      "address": [
+                        "Address must contain only letters and numbers"
+                      ],
+                      "city": [
+                        "City must contain only letters (a-zA-Z)"
+                      ],
+                      "postCode": [
+                        "Post Code must be a postal code"
+                      ],
+                      "country": [
+                        "Country must contain only letters (a-zA-Z)"
+                      ]
+                    },
+                    "error": "Bad request"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "type": "object",
+                "example": {
+                  "message": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User Profile"
+        ],
+        "description": "Get user profile data",
+        "required": true,
+      "responses": {
+        "200": {
+          "description": "User data received",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "user": {
+                    "type": "object",
+                    "properties": {
+                      "firstName": "Bartek",
+                      "lastName": "Komenda",
+                      "company": "Best Company",
+                      "website": "https://www.devopsowy.pl",
+                      "phone": "517123456",
+                      "birthDay": "1970-01-01",
+                      "address": "Warszawska 15",
+                      "city": "Warsaw",
+                      "state": "Mazovia",
+                      "postCode": "21-200",
+                      "country": "Poland",
+                      "imageLink": "https://www.google.pl/image/apple1.jpg"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "type": "object",
+              "example": {
+                "message": "Unauthorized"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+    "/filter": {
+      "get": {
+        "tags": [
+          "Adds"
+        ],
+        "summary": "Get Adds by searching query: page, productCategory, price, priceCondition, productCondition,  adCategory, city",
+        "required": true,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Current page",
+                    "example": "1"
+                  },
+                  "productCategory": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Product Category",
+                    "example": "Sale"
+                  },
+                  "price": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Price",
+                    "example": "10"
+                  },
+                  "priceCondition": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Price Condition",
+                    "example": "Monthly"
+                  },
+                  "adCategory": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Sale",
+                    "example": "Sale"
+                  },
+                  "productCondition": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "Product Condition",
+                    "example": "Used"
+                  },
+                  "city": {
+                    "type": "string",
+                    "in": "query",
+                    "description": "City",
+                    "example": "New York"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

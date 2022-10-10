@@ -1,5 +1,6 @@
 export enum Index {
   Users = "users",
+  Add = "advertising",
   Db = "test",
 }
 
@@ -19,4 +20,5 @@ export enum ErrorMessage {
   AGAIN = "Something went wrong please try again",
   BEDREQ = "Bad request",
   NOT_FOUND = "NOT_FOUND",
+  SERVER_ERROR = "Server error",
 }

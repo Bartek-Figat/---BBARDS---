@@ -4,8 +4,8 @@ import { TopRatings } from "./topRatings";
 
 export const BrowseOurTop = () => {
   return (
-    <div className="container mt-40">
-      <div className="flex justify-center">
+    <div className="container mt-40 lg:px-0 lg:mx-0 lg:max-w-full">
+      <div className="flex justify-center ">
         <h2 className="text-4xl font-bold">Browse Our Top</h2>
         <span className="text-dark-blue italic text-4xl font-bold ml-2">
           Niche
@@ -18,10 +18,10 @@ export const BrowseOurTop = () => {
           fugiat eaque alias nobis doloremque culpa nam.
         </p>
       </div>
-      <div className="flex justify-center mt-11">
-        <nav className="flex">
-          <ul className="flex items-center justify-center p-2">
-            <li className="bg-gray-chalk p-4  lg:w-80 md:w-64 sm:w-60 text-center text-dark-blue border-b-2 border-b-blue-500">
+      <div className="flex justify-center mt-11 ">
+        <nav className="flex ">
+          <ul className="flex items-center justify-center p-2 ">
+            <li className="bg-gray-chalk p-4  lg:w-80 md:w-64 sm:w-60 text-center text-dark-blue border-b-2 border-b-blue-500 ">
               <Link
                 to="/"
                 className="text-center tracking-wide uppercase font-medium"
@@ -43,7 +43,7 @@ export const BrowseOurTop = () => {
         </nav>
       </div>
       <TopRatings />
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <button className="bg-dark-blue border-2 border-dark-blue hover:bg-dark-blue text-white px-5 py-3 rounded-md uppercase font-medium flex justify-center items-center mt-11">
           <FaEye className="text-xl mr-2" />
           view all ads

@@ -3,7 +3,7 @@ import { citiesContent } from "./cityData";
 
 export const CityPart = () => {
   return (
-    <div className="flex justify-center w-full mt-11">
+    <div className="flex justify-center px-16 mt-11 ">
       <div className="grid gap-4 xs:grid-cols-32 sm:grid-cols-30 md:grid-cols-28 lg:grid-cols-26">
         {citiesContent.map(({ city, ads, image, span }) => {
           return (

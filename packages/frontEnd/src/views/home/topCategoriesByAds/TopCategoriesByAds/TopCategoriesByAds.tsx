@@ -4,7 +4,7 @@ import { data } from "../data";
 
 export const TopCategoriesByAds = () => {
   return (
-    <section className="max-w-6xl mx-auto text-center px-4 mt-32">
+    <section className="max-w-6xl mx-auto text-center px-16 mt-32">
       <h2 className="text-4xl font-bold mb-4">
         Top Categories by<span className="text-dark-blue"> Ads</span>
       </h2>
@@ -12,7 +12,7 @@ export const TopCategoriesByAds = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit aspernatur illum
         vel sunt libero voluptatum repudiandae veniam maxime tenetur.
       </p>
-      <ul className="flex flex-wrap justify-center gap-8">
+      <ul className="flex flex-wrap justify-center gap-8 px-16">
         {data.map(({ category, amount, products }) => {
           return (
             <Card

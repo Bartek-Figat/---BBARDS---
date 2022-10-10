@@ -1,42 +1,46 @@
-import { Router, Request, Response, NextFunction } from "express";
-import { UserService } from "../services/user.services";
-import { Middleware } from "../middleware/index";
-import {
-  userLoginValidation,
-  userRegisterValidatioin,
-} from "../validation/index";
+import { Router } from "express";
+import { AuthMiddleware } from "../middleware/index";
+import { UserController } from "../controller/user.controller";
 const router = Router({
   caseSensitive: true,
   strict: true,
 });
 
-const service = new UserService();
-const middleware = new Middleware();
+const middleware = new AuthMiddleware();
+const cotroller = new UserController();
 
 router.get(
   "/user",
   middleware.isAuthenticated.bind(middleware),
-  service.userData.bind(service)
+  cotroller.userData.bind(cotroller)
+);
+
+router.post("/registration", cotroller.userRegister.bind(cotroller));
+
+router.post("/login", cotroller.userLogin.bind(cotroller));
+
+router.get(
+  "/user",
+  middleware.isAuthenticated.bind(middleware),
+  cotroller.userData.bind(cotroller)
+);
+
+router.get(
+  "/user/profile",
+  middleware.isAuthenticated.bind(middleware),
+  cotroller.userProfile.bind(cotroller)
 );
 
 router.post(
-  "/registration",
-  userRegisterValidatioin,
-  service.userRegister.bind(service)
-);
-
-router.post("/login", userLoginValidation, service.userLogin.bind(service));
-
-router.get(
-  "/user",
+  "/user/profile",
   middleware.isAuthenticated.bind(middleware),
-  service.userData.bind(service)
+  cotroller.userInsertProfile.bind(cotroller)
 );
 
 router.get(
   "/logout",
   middleware.isAuthenticated.bind(middleware),
-  service.userLogout.bind(service)
+  cotroller.userLogout.bind(cotroller)
 );
 
 export default router;

@@ -1,12 +1,16 @@
 import { config } from "dotenv";
-import express, { Express } from "express";
+import { Server } from "@overnightjs/core";
+import express, { json, urlencoded } from "express";
 import helemt from "helmet";
 import compression from "compression";
 import morgan from "morgan";
 import cors from "cors";
+import Logger from "jet-logger";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./api/documentation.json";
-import userRouter from "./routes/user.routes";
+import { connect } from "./db/db";
+import { UserController } from "./controller/user.controller";
+import { AdvertController } from "./controller/advert.controller";
 
 config({ path: "../../.env" });
 const { origin } = process.env;
@@ -17,27 +21,51 @@ process.on("SIGINT", (err) => {
   process.exit(0);
 });
 
-const server: Express = express();
-server.use(express.urlencoded({ limit: "50mb", extended: true }));
-server.use(express.json({ limit: "50mb" }));
-server.use(compression());
-server.use(
-  cors({
-    methods: ["GET, POST, PUT, DELETE, OPTIONS"],
-    credentials: true,
-    origin,
-    allowedHeaders: [
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-    ],
-  })
-);
+connect();
 
-server.use(helemt());
-server.use(morgan("tiny"));
-server.enable("trust proxy");
+export class SampleServer extends Server {
+  constructor() {
+    super(process.env.NODE_ENV === "development"); // setting showLogs to true
+    this.app.use(json());
+    this.app.use(urlencoded({ extended: true }));
+    this.app.use(express.urlencoded({ limit: "50mb", extended: true }));
+    this.app.use(express.json({ limit: "50mb" }));
+    this.app.use(compression());
+    this.app.use(express.static("avatar"));
+    this.app.use(
+      cors({
+        methods: ["GET, POST, PUT, DELETE, OPTIONS"],
+        credentials: true,
+        origin,
+        allowedHeaders: [
+          "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+        ],
+      })
+    );
+    this.app.use(helemt());
+    this.app.use(morgan("dev"));
+    this.app.enable("trust proxy");
+    this.app.use(
+      "/api-docs",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDocument)
+    );
+    this.setupControllers();
+  }
 
-server.use("/api/v1", userRouter);
-server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-server.listen(Port, () =>
-  console.log(`Server is starting cleanup at: http://localhost:${Port}`)
-);
+  private setupControllers(): void {
+    const userController = new UserController();
+    const advertController = new AdvertController();
+    super.addControllers([userController, advertController]);
+  }
+
+  public start(port: number): void {
+    this.app.listen(port, () => {
+      Logger.imp(`Server listening on port: ${port}`);
+    });
+  }
+}
+
+const server = new SampleServer();
+
+server.start(Port);
