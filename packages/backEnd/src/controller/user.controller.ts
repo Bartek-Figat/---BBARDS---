@@ -21,7 +21,6 @@ export class UserController {
 
   @Get("user")
   @Middleware(middleware.isAuthenticated)
-  @Middleware(middleware.isAuthenticated)
   async userData(req: Request, res: Response, next: NextFunction) {
     const response = await this.service.userData(req.user);
     res.status(response.statusCode).json(response);
