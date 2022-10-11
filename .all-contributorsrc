@@ -1,0 +1,25 @@
+{
+  "projectName": "bbards",
+  "projectOwner": "Bartek-Figat",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "gitmoji",
+  "contributorsPerLine": 7,
+  "linkToUsage": true,
+  "contributors": [
+    {
+      "login": "adrianixGit",
+      "name": "adrianixGit",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69733145?v=4",
+      "profile": "https://github.com/adrianixGit",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ]
+}
