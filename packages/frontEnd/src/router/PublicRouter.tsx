@@ -3,7 +3,7 @@ import { Home } from "../views/home";
 import Login from "../views/login/Login";
 import { CategoryDetails } from "../views/categoryDetails/CategoryDetails";
 import { Layout } from "./Layout";
-import NotFound from "views/NotFound/NotFound";
+import { NotFound } from "views/NotFound/NotFound";
 
 export function PublicRouter() {
   return (

@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { ButtonLink } from "components/buttons/ButtonLink";
 import { ImHome } from "react-icons/im";
 
-const NotFound: FC = () => {
+export const NotFound: FC = () => {
   return (
     <div className="bg-gray-chalk flex flex-col items-center py-20">
       <h1 className="text-[10rem] md:text-[22rem] mb-6 leading-none text-dark-blue font-bold">
@@ -18,5 +18,3 @@ const NotFound: FC = () => {
     </div>
   );
 };
-
-export default NotFound;
