@@ -1,5 +1,4 @@
-import React from "react";
-import { SecondaryLink } from "components/buttons/SecondaryLink";
+import { ButtonLink } from "components/buttons/ButtonLink";
 import { HiPlusCircle } from "react-icons/hi";
 
 export const PostAd = () => {
@@ -13,12 +12,12 @@ export const PostAd = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit aspernatur
           illum vel sunt libero voluptatum repudiandae veniam maxime tenetur.
         </p>
-        <SecondaryLink to="#">
+        <ButtonLink to="#" variant="secondary">
           <>
             <HiPlusCircle className="text-xl" />
             post your ad
           </>
-        </SecondaryLink>
+        </ButtonLink>
       </div>
     </section>
   );
