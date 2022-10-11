@@ -1,6 +1,6 @@
 ## Table of Contents
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 - [Download](#Download)
@@ -112,6 +112,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/adrianixGit"><img src="https://avatars.githubusercontent.com/u/69733145?v=4?s=100" width="100px;" alt="adrianixGit"/><br /><sub><b>adrianixGit</b></sub></a><br /><a href="https://github.com/Bartek-Figat/bbards/commits?author=adrianixGit" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://devopsowy.pl/"><img src="https://avatars.githubusercontent.com/u/11333925?v=4?s=100" width="100px;" alt="Bartlomiej Komendarczuk"/><br /><sub><b>Bartlomiej Komendarczuk</b></sub></a><br /><a href="https://github.com/Bartek-Figat/bbards/commits?author=BElluu" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/jsgostkowski"><img src="https://avatars.githubusercontent.com/u/93486712?v=4?s=100" width="100px;" alt="jsgostkowski"/><br /><sub><b>jsgostkowski</b></sub></a><br /><a href="https://github.com/Bartek-Figat/bbards/commits?author=jsgostkowski" title="Documentation">📖</a></td>
     </tr>
   </tbody>
   <tfoot>
