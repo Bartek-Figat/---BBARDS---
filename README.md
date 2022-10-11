@@ -1,6 +1,6 @@
 ## Table of Contents
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 - [Download](#Download)
@@ -115,6 +115,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jsgostkowski"><img src="https://avatars.githubusercontent.com/u/93486712?v=4?s=100" width="100px;" alt="jsgostkowski"/><br /><sub><b>jsgostkowski</b></sub></a><br /><a href="https://github.com/Bartek-Figat/bbards/commits?author=jsgostkowski" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/kuprelweronika"><img src="https://avatars.githubusercontent.com/u/110784022?v=4?s=100" width="100px;" alt="kuprelweronika"/><br /><sub><b>kuprelweronika</b></sub></a><br /><a href="https://github.com/Bartek-Figat/bbards/commits?author=kuprelweronika" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/masterHAWK99"><img src="https://avatars.githubusercontent.com/u/60447475?v=4?s=100" width="100px;" alt="masterHAWK99"/><br /><sub><b>masterHAWK99</b></sub></a><br /><a href="https://github.com/Bartek-Figat/bbards/commits?author=masterHAWK99" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/namelessolo"><img src="https://avatars.githubusercontent.com/u/34840936?v=4?s=100" width="100px;" alt="Aleksander Skorek"/><br /><sub><b>Aleksander Skorek</b></sub></a><br /><a href="https://github.com/Bartek-Figat/bbards/commits?author=namelessolo" title="Documentation">📖</a></td>
     </tr>
   </tbody>
   <tfoot>
