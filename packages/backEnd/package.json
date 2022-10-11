@@ -17,6 +17,7 @@
     "@types/morgan": "^1.9.3",
     "@types/node": "^18.7.15",
     "@types/validator": "^13.7.6",
+    "all-contributors-cli": "^6.24.0",
     "concurrently": "^7.3.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",

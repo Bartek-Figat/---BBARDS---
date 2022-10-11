@@ -6,7 +6,7 @@ import { db } from "../db/db";
 import { Index } from "../enum";
 import { Repository } from "../repositories/add.respositories";
 import { StatusCode } from "../enum";
-import { ICategories } from "../dto/user.dto";
+import { ICategories } from "../dto/dto";
 import { MulterRequest } from "../interface/index";
 import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 
@@ -65,14 +65,11 @@ export class AddService {
     }
   }
 
-  async addAdvertising(files: MulterRequest) {
+  async addAdvertising(files: string[]) {
     const whitelist = ["image/png", "image/jpeg", "image/jpg"];
     try {
-      console.log(files[0].mimetype);
-      if (!whitelist.includes(files[0].mimetype)) {
-        console.log("file is not allowed");
-      }
       const uploadedFiles = await uploadedFilesToSpaces(files);
+
       return BaseHttpResponse.sucessResponse(
         uploadedFiles,
         StatusCode.SUCCESS,

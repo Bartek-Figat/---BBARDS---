@@ -24,8 +24,8 @@ export class Repository {
       const filterResult = await db
         .collection(Index.Add)
         .find({})
-        .limit(nPerPage)
         .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
+        .limit(nPerPage)
         .toArray();
 
       return filterResult;
@@ -44,8 +44,8 @@ export class Repository {
         .find({
           $and: [res],
         })
-        .limit(nPerPage)
         .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
+        .limit(nPerPage)
         .toArray();
 
       const dataLength = await db

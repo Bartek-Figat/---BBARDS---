@@ -6,7 +6,7 @@ import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
 import { uploadFile } from "../tools/image";
-import { UserDto, UserProfileDto, TokenDto, LogoutDto } from "../dto/user.dto";
+import { UserDto, UserProfileDto, TokenDto, LogoutDto } from "../dto/dto";
 import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 
 config({ path: "../../.env" });

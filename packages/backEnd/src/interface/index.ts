@@ -36,7 +36,7 @@ interface ReqQuery {
 }
 
 export interface MulterRequest extends Request {
-  files: any;
+  files: Array<string>;
   file: any;
 }
 

@@ -1,6 +1,6 @@
 export class BaseHttpResponse<T = {}> {
   constructor(
-    public readonly data: T,
+    public data: T,
     public readonly error: string | null = null,
     public readonly statusCode: number
   ) {}

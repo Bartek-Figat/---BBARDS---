@@ -1,7 +1,7 @@
 import { Controller, Get, Post } from "@overnightjs/core";
 import { Request, Response, NextFunction } from "express";
 import { AddService } from "../services/adds.services";
-import { ICategories } from "../dto/user.dto";
+import { ICategories } from "../dto/dto";
 import { MulterRequest } from "../interface";
 
 @Controller("api/v1")

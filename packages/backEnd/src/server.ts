@@ -25,7 +25,7 @@ connect();
 
 export class SampleServer extends Server {
   constructor() {
-    super(process.env.NODE_ENV === "development"); // setting showLogs to true
+    super(process.env.NODE_ENV === "development");
     this.app.use(json());
     this.app.use(urlencoded({ extended: true }));
     this.app.use(express.urlencoded({ limit: "50mb", extended: true }));
