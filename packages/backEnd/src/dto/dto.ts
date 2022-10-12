@@ -12,7 +12,7 @@ import {
   Max,
   IsString,
 } from "class-validator";
-import { IUserProfile, IUserAddress, IFile } from "../interface";
+import { IUserProfile, IUserAddress, IFile, IStripePrice, IStripeProductData, IStripePriceData, IStripeLineItem } from "../interface";
 
 export class UserDto {
   @Min(3)
@@ -85,4 +85,31 @@ export class UserProfileDto implements IUserProfile, IUserAddress {
   postCode: string;
   @IsAlpha()
   country: string;
+}
+
+export class StripeCheckoutDto implements IStripePrice{
+  price_id: string;
+  quantity: number;
+  mode: any;
+}
+
+export class StripeProductData implements IStripeProductData{
+  id: string;
+  name: string;
+  description: string;
+  images: string[];
+
+}
+
+export class StripePriceData implements IStripePriceData{
+  currency: string;
+  product_data: IStripeProductData;
+  quantity: number;
+
+}
+
+export class StripeLineItem implements IStripeLineItem{
+  quantity: number;
+  price_data: IStripePriceData;
+
 }

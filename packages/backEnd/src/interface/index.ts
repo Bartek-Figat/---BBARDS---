@@ -1,4 +1,5 @@
 import { Request } from "express";
+import { Stripe } from 'stripe'
 
 export interface IAdds {
   page?: string;
@@ -69,4 +70,28 @@ export interface IUserAddress {
 export interface IFile {
   originalName: string;
   data: string;
+}
+
+export interface IStripePrice{
+  price_id: string;
+  quantity: number;
+  mode: Stripe.Checkout.SessionCreateParams.Mode
+}
+
+export interface IStripePriceData{
+  currency: string;
+  product_data: IStripeProductData
+  quantity: number;
+}
+
+export interface IStripeProductData{
+  id: string;
+  name: string;
+  description: string;
+  images: string[];
+}
+
+export interface IStripeLineItem extends Stripe.Checkout.SessionCreateParams.LineItem{
+  price_data: IStripePriceData;
+  quantity: number;
 }

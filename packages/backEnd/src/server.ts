@@ -11,6 +11,7 @@ import swaggerDocument from "./api/documentation.json";
 import { connect } from "./db/db";
 import { UserController } from "./controller/user.controller";
 import { AdvertController } from "./controller/advert.controller";
+import { PaymentController } from "./controller/payment.controller";
 
 config({ path: "../../.env" });
 const { origin } = process.env;
@@ -56,7 +57,8 @@ export class SampleServer extends Server {
   private setupControllers(): void {
     const userController = new UserController();
     const advertController = new AdvertController();
-    super.addControllers([userController, advertController]);
+    const paymentController = new PaymentController();
+    super.addControllers([userController, advertController, paymentController]);
   }
 
   public start(port: number): void {
