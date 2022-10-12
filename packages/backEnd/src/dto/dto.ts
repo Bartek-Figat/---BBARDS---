@@ -1,3 +1,5 @@
+import { Request } from "express";
+import { NumBatchResults } from "aws-sdk/clients/personalize";
 import {
   IsNotEmpty,
   IsEmail,
@@ -11,8 +13,9 @@ import {
   IsOptional,
   Max,
   IsString,
+  IsNumber,
 } from "class-validator";
-import { IUserProfile, IUserAddress, IFile } from "../interface";
+import { IUserProfile, IUserAddress, IFile, MulterRequest } from "../interface";
 
 export class UserDto {
   @Min(3)
@@ -53,6 +56,41 @@ export class ICategories {
   city: string;
   @IsString()
   rate: string;
+}
+
+export class IAdvertising {
+  @IsString()
+  productTitle?: string;
+  @IsString()
+  productImages?: Array<string>;
+  @IsString()
+  productCategory?: string;
+  @IsString()
+  price?: string;
+  @IsString()
+  priceCondition?: string;
+  @IsString()
+  adCategory?: string;
+  @IsString()
+  productCondition?: string;
+  @IsString()
+  addDescription?: string;
+  @IsString()
+  city?: string;
+  @IsNumber()
+  oneStar: number;
+  @IsNumber()
+  twoStar: number;
+  @IsNumber()
+  threeStar: number;
+  @IsNumber()
+  fourStar: number;
+  @IsNumber()
+  fiveStar: number;
+  @IsNumber()
+  click?: number;
+  @IsNumber()
+  views?: number;
 }
 
 export class UserProfileDto implements IUserProfile, IUserAddress {

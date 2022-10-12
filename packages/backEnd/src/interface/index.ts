@@ -36,8 +36,7 @@ interface ReqQuery {
 }
 
 export interface MulterRequest extends Request {
-  files: Array<string>;
-  file: any;
+  files: any;
 }
 
 export interface IUser {

@@ -68,4 +68,23 @@ export class Repository {
       console.log(err);
     }
   }
+
+  async insertOne<T>(document: T) {
+    try {
+      await db.collection(Index.Add).insertOne(document);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async updateOne<T>(filter: T, updateDoc: T, options: T): Promise<Document> {
+    try {
+      const result = await db
+        .collection(Index.Users)
+        .updateOne(filter, updateDoc, options);
+      return result;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
