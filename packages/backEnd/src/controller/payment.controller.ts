@@ -1,9 +1,7 @@
 import { Controller, Post } from "@overnightjs/core";
 import { Request, Response, NextFunction } from "express";
 import { PaymentService } from "../services/payment.services";
-import { AuthMiddleware } from "../middleware/index";
 
-const middleware = new AuthMiddleware();
 @Controller("api/v1")
 
 export class PaymentController {
