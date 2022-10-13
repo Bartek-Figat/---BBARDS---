@@ -1,86 +1,60 @@
-//import Stripe from 'stripe'
-import { StripeLineItem, StripePriceData, StripeProductData } from '../dto/dto';
+import { StripePayment } from '../dto/dto';
+import { StripeMode, StripeStandardPlan, PricingPlan, StripePremiumPlan } from '../enum/index'
 import { StatusCode } from '../enum';
 import { BaseHttpResponse } from '../httpError/baseHttpResponse';
-import { stripe } from '../tools/stripe'
+import { stripe } from '../provider/payment/stripe'
+
 export class PaymentService {
 
-    // async payStripe(stripePayment: StripeCheckoutDto) {
-    //     const { price_id, quantity, mode } = stripePayment
+  async payStripe(payment: StripePayment) {
+    const { mode, pricingPlan } = payment
+    let price_id
 
-    //     const session = await stripe.checkout.sessions.create({
-    //         line_items: [
-    //           {
-    //             name: "bbards item",
-    //             //price: price_id,
-    //             quantity: quantity,
-    //           },
-    //         ],
-    //         mode: mode,
-    //         success_url: `http://localhost:3000/success.html`,
-    //         cancel_url: `http://localhost:3000/cancel.html`,
-    //       });
-
-    //       return BaseHttpResponse.sucessResponse(
-    //         session.url,
-    //         StatusCode.SUCCESS,
-    //         {}
-    //       );
-    //     } catch (err) {
-    //       return BaseHttpResponse.failedResponse(
-    //         err.message,
-    //         StatusCode.INTERNAL_SERVER_ERROR
-    //       );
-    //     }
-
-    async payStripe(
-        stripePriceData: StripePriceData) {
-        const { id, name, description, images} = new StripeProductData
-        const { currency, product_data = {name, description, images}, quantity} = stripePriceData
-
-        const lineItem = new StripeLineItem()
-        lineItem.price_data = stripePriceData
-
-        const session = await stripe.checkout.sessions.create({
-            line_items: [
-                {
-                    "price_data":{
-                    "currency": "PLN",
-                    "unit_amount_decimal": "4500",
-                    "product_data":{
-                        "name": "Testy",
-                        "description": "Test opis",
-                    }
-                    },
-                    quantity: 5
-                },
-                {
-                    "price_data":{
-                    "currency": "PLN",
-                    "unit_amount_decimal": "20000",
-                    "product_data":{
-                        "name": "Testowe itemy",
-                        "description": "najlepszy opis",
-                    }
-                    },
-                    quantity: 1
-                }
-                 
-            ],
-            mode: 'payment',
-            success_url: `http://localhost:3000/success.html`,
-            cancel_url: `http://localhost:3000/cancel.html`,
-          });
-
-          return BaseHttpResponse.sucessResponse(
-            session.url,
-            StatusCode.SUCCESS,
-            {}
-          );
-        } catch (err) {
-          return BaseHttpResponse.failedResponse(
-            err.message,
-            StatusCode.INTERNAL_SERVER_ERROR
-          );
+    switch (pricingPlan) {
+      case (PricingPlan.STANDARD):
+        switch (mode) {
+          case (StripeMode.ONE_TIME_PAYMENT):
+            price_id = StripeStandardPlan.ONE_TIME_PAYMENT
+            break
+          case (StripeMode.SUBSCRIPTION):
+            price_id = StripeStandardPlan.SUBSCRIPTION
+            break
         }
+        break
+      case (PricingPlan.PREMIUM):
+        switch (mode) {
+          case (StripeMode.ONE_TIME_PAYMENT):
+            price_id = StripePremiumPlan.ONE_TIME_PAYMENT
+            break
+          case (StripeMode.SUBSCRIPTION):
+            price_id = StripePremiumPlan.SUBSCRIPTION
+            break
+        }
+        break
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price: price_id,
+          quantity: 1,
+        },
+      ],
+      mode: mode,
+      //TODO frontend
+      success_url: `http://localhost:3000/success.html`,
+      cancel_url: `http://localhost:3000/cancel.html`,
+    });
+
+    return BaseHttpResponse.sucessResponse(
+      session.url,
+      StatusCode.SUCCESS,
+      {}
+    );
+  } catch(err) {
+    return BaseHttpResponse.failedResponse(
+      err.message,
+      StatusCode.INTERNAL_SERVER_ERROR
+    );
+  }
 }
