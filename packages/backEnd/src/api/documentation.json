@@ -23,6 +23,10 @@
     {
       "name": "User Profile",
       "description": "User profile"
+    },
+    {
+      "name": "Payments",
+      "description": "Payment methods"
     }
   ],
   "paths": {
@@ -475,6 +479,53 @@
                     "in": "query",
                     "description": "City",
                     "example": "New York"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment/stripe": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "description": "Payment by Stripe",
+        "required": true,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mode": {
+                    "type": "string",
+                    "description": "Allowed modes: payment, subscription",
+                    "example": "payment"
+                  },
+                  "pricingPlan": {
+                    "type": "int",
+                    "description": "Pricing plan. 1 = Standard, 2 = Premium",
+                    "example": "1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "URL to online payment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "data": "https://checkout.stripe.com/c/pay/cs_test_a1aXx42gwXvujFQSNujBZ5v8k0vdsuLlp1KNhafamM3qOeGPfPw8cJd8yE#fidkdWxOYHwnPyd1blpxYHZxWjA0SXY9MTZCYHZPajVKVlJ8VkA0cF09NHFEanJgNG81PTBrQU5wUERWTHJ3MGtINUxGUjFfZElwVzNMd3VtMFVoYzFfblcxYm19YzcxMXVqc21VN0JSTGw1NTVmcEJCb3VuaycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",
+                    "error": "{}",
+                    "statusCode": 200
                   }
                 }
               }

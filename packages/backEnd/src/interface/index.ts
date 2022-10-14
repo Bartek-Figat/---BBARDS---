@@ -1,4 +1,6 @@
 import { Request } from "express";
+import { Stripe } from 'stripe'
+import { PricingPlan } from "../enum";
 
 export interface IAdds {
   page?: string;
@@ -69,4 +71,9 @@ export interface IUserAddress {
 export interface IFile {
   originalName: string;
   data: string;
+}
+
+export interface IStripePayment{
+  mode: Stripe.Checkout.SessionCreateParams.Mode;
+  pricingPlan: PricingPlan
 }

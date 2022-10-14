@@ -12,7 +12,9 @@ import {
   Max,
   IsString,
 } from "class-validator";
-import { IUserProfile, IUserAddress, IFile } from "../interface";
+import Stripe from "stripe";
+import { PricingPlan } from "../enum";
+import { IUserProfile, IUserAddress, IFile, IStripePayment } from "../interface";
 
 export class UserDto {
   @Min(3)
@@ -85,4 +87,9 @@ export class UserProfileDto implements IUserProfile, IUserAddress {
   postCode: string;
   @IsAlpha()
   country: string;
+}
+
+export class StripePayment implements IStripePayment{
+  mode: Stripe.Checkout.SessionCreateParams.Mode;
+  pricingPlan: PricingPlan;
 }
