@@ -40,7 +40,7 @@ export const Pagination: React.FC<Props> = ({
   };
 
   return (
-    <div className="mt-8">
+    <div className="my-8">
       {totalPages > 0 && (
         <div className="flex justify-center">{mapPages()}</div>
       )}
