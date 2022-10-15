@@ -5,7 +5,6 @@ import AdService from "services/AdService";
 import { Pagination } from "./pagination/Pagination";
 import { FilterList } from "./filters/FilterList";
 import { useSearchParams } from "react-router-dom";
-import { Button } from "components/buttons/Button";
 
 interface ProductProps {
   _id: string;
@@ -20,18 +19,22 @@ export const CategoryDetails = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState<null | ProductProps[]>(null);
   const [totalPages, setTotalPages] = useState(0);
-  const [category, setCategory] = useState("");
-  const [rate, setRate] = useState("");
-  const [city, setCity] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    let params = {};
+
+    // @ts-ignore
+    for (const [key, value] of searchParams.entries()) {
+      // @ts-ignore
+      params[key] = value;
+    }
+
     const productData = async () => {
       try {
         const { data } = await AdService.getPage({
           page: currentPage,
-          adCategory: category,
-          city: city,
+          ...params,
         });
         setTotalPages(data.data.dataLength);
         setProducts(data.data.data);
@@ -41,13 +44,7 @@ export const CategoryDetails = () => {
     };
 
     productData();
-  }, [currentPage, category, rate, city]);
-
-  const applyFilters = () => {
-    setCategory(searchParams.get("type") || "");
-    setRate(searchParams.get("rate") || "");
-    setCity(searchParams.get("city") || "");
-  };
+  }, [currentPage, searchParams]);
 
   return (
     <>
@@ -57,11 +54,6 @@ export const CategoryDetails = () => {
         <div className="flex flex-col-reverse lg:flex-row">
           <aside className="">
             <FilterList />
-            <div className="mt-4">
-              <Button variant="filled" onClick={applyFilters}>
-                Apply filters
-              </Button>
-            </div>
           </aside>
           <div className="">
             {products && <ProductList products={products} />}
