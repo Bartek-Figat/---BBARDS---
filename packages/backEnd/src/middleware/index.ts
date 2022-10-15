@@ -20,8 +20,6 @@ export class AuthMiddleware {
       { authorizationToken: 1, _id: 0 }
     );
 
-    console.log("23 -> authorizationToken", authorizationToken);
-
     if (!authorizationToken) {
       return res
         .status(StatusCode.UNAUTHORIZED)

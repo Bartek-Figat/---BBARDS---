@@ -8,7 +8,7 @@ import cors from "cors";
 import Logger from "jet-logger";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./api/documentation.json";
-import { connect } from "./db/db";
+import { connect } from "./db/mongo";
 import { UserController } from "./controller/user.controller";
 import { AdvertController } from "./controller/advert.controller";
 

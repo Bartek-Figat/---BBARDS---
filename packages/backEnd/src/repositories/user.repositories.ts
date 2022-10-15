@@ -1,5 +1,5 @@
 import { Document, UpdateResult, InsertManyResult } from "mongodb";
-import { db } from "../db/db";
+import { db } from "../db/mongo";
 import { Index } from "../enum";
 
 export class Repository {

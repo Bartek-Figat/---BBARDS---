@@ -1,12 +1,13 @@
 import { config } from "dotenv";
 import { v4 as uuidv4 } from "uuid";
+import { ObjectId } from "mongodb";
 import fs from "fs";
 import { S3 } from "aws-sdk";
-import { db } from "../db/db";
+import { db } from "../db/mongo";
 import { Index } from "../enum";
 import { Repository } from "../repositories/add.respositories";
 import { StatusCode } from "../enum";
-import { ICategories } from "../dto/dto";
+import { IAdvertising, ICategories, TokenDto } from "../dto/dto";
 import { MulterRequest } from "../interface/index";
 import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 
@@ -65,22 +66,58 @@ export class AddService {
     }
   }
 
-  async addAdvertising(files: string[]) {
-    const whitelist = ["image/png", "image/jpeg", "image/jpg"];
+  async addAdvertising(
+    files: MulterRequest,
+    { token }: TokenDto,
+    advertising: IAdvertising
+  ) {
+    const {
+      productTitle,
+      productCategory,
+      price,
+      priceCondition,
+      adCategory,
+      productCondition,
+      addDescription,
+      city,
+      oneStar,
+      twoStar,
+      threeStar,
+      fourStar,
+      fiveStar,
+      click,
+      views,
+    } = advertising;
     try {
       const uploadedFiles = await uploadedFilesToSpaces(files);
-
+      const response = await this.repository.insertOne({
+        author: new ObjectId(token.token),
+        productTitle,
+        productImages: uploadedFiles,
+        productCategory,
+        price,
+        priceCondition,
+        adCategory,
+        productCondition,
+        addDescription,
+        city,
+        rating: {
+          oneStar: oneStar || 0,
+          twoStar: twoStar || 0,
+          threeStar: threeStar || 0,
+          fourStar: fourStar || 0,
+          fiveStar: fiveStar || 0,
+        },
+        click: click || 0,
+        views: views || 0,
+      });
       return BaseHttpResponse.sucessResponse(
-        uploadedFiles,
+        { response },
         StatusCode.SUCCESS,
         {}
       );
     } catch (err) {
       console.log(err);
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
     }
   }
 
@@ -107,7 +144,7 @@ export class AddService {
           dataLength: dataLength.length,
           data: filterResult,
         },
-        200,
+        StatusCode.SUCCESS,
         {}
       );
     } catch (err) {
