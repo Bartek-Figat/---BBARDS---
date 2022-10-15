@@ -31,7 +31,6 @@ export const CategoryDetails = () => {
         const { data } = await AdService.getPage({
           page: currentPage,
           adCategory: category,
-          rate: rate,
           city: city,
         });
         setTotalPages(data.data.dataLength);
@@ -55,8 +54,8 @@ export const CategoryDetails = () => {
       <Header />
 
       <div className="container my-12">
-        <div className="flex">
-          <aside className="flex flex-col">
+        <div className="flex flex-col-reverse lg:flex-row">
+          <aside className="">
             <FilterList />
             <div className="mt-4">
               <Button variant="filled" onClick={applyFilters}>
