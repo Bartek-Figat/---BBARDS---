@@ -91,6 +91,8 @@ export class IAdvertising {
   click?: number;
   @IsNumber()
   views?: number;
+  @IsNumber()
+  average: number;
 }
 
 export class UserProfileDto implements IUserProfile, IUserAddress {

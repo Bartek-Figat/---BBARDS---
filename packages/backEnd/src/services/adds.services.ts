@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { ObjectId } from "mongodb";
 import fs from "fs";
 import { S3 } from "aws-sdk";
-import { db } from "../db/db";
+import { db } from "../db/mongo";
 import { Index } from "../enum";
 import { Repository } from "../repositories/add.respositories";
 import { StatusCode } from "../enum";
@@ -102,14 +102,14 @@ export class AddService {
         addDescription,
         city,
         rating: {
-          oneStar,
-          twoStar,
-          threeStar,
-          fourStar,
-          fiveStar,
+          oneStar: oneStar || 0,
+          twoStar: twoStar || 0,
+          threeStar: threeStar || 0,
+          fourStar: fourStar || 0,
+          fiveStar: fiveStar || 0,
         },
-        click,
-        views,
+        click: click || 0,
+        views: views || 0,
       });
       return BaseHttpResponse.sucessResponse(
         { response },

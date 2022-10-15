@@ -1,5 +1,5 @@
 import { Document } from "mongodb";
-import { db } from "../db/db";
+import { db } from "../db/mongo";
 import { Index } from "../enum";
 import { IAdds, IPagination } from "../interface/index";
 
