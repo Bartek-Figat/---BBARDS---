@@ -34,6 +34,11 @@ export class TokenDto {
     token: string;
   };
 }
+
+export class IAuthToken {
+  @IsString()
+  token: string;
+}
 export class LogoutDto extends TokenDto {
   @IsString()
   authHeader: string;
@@ -125,4 +130,9 @@ export class UserProfileDto implements IUserProfile, IUserAddress {
   postCode: string;
   @IsAlpha()
   country: string;
+}
+
+export class ICredentials {
+  email: string;
+  authToken: string;
 }

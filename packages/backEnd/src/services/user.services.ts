@@ -1,21 +1,86 @@
 import { config } from "dotenv";
 import { ObjectId } from "mongodb";
 import { validate } from "class-validator";
-import { Repository } from "../repositories/user.repositories";
 import { hash, compare } from "bcrypt";
+import sgMail from "@sendgrid/mail";
+import { Repository } from "../repositories/user.repositories";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
 import { uploadFile } from "../tools/image";
-import { UserDto, UserProfileDto, TokenDto, LogoutDto } from "../dto/dto";
+import {
+  UserDto,
+  UserProfileDto,
+  TokenDto,
+  LogoutDto,
+  ICredentials,
+  IAuthToken,
+} from "../dto/dto";
 import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 
 config({ path: "../../.env" });
-const { secret } = process.env;
+const { secret, sendgridApi } = process.env;
 
 const saltRounds: number = 10;
+sgMail.setApiKey(sendgridApi);
 
 export class UserService {
   constructor(private repository: Repository = new Repository()) {}
+
+  async emailConfirmation({ email, authToken }: ICredentials): Promise<void> {
+    const msg = {
+      to: `${email}`,
+      from: "team.bbards@gmail.com",
+      subject: "Thank you for registering.",
+      text: "Team bbards",
+      html: `Hello.
+      Thank you for registering. Please click the link to complete yor activation
+      <a href='http://localhost:3000/activate/${authToken}'>Activation Link</a>`,
+    };
+
+    try {
+      await sgMail.send(msg);
+    } catch (error) {
+      console.error(error);
+      if (error.response) {
+        console.error(error.response.body);
+      }
+    }
+  }
+
+  async updateAccountAfterEmailConfirmation(token: {
+    authToken: string;
+  }): Promise<void> {
+    const { email } = await this.repository.findOne(
+      { authToken: token.authToken },
+      { email: 1, _id: 0 }
+    );
+    await this.repository.updateOne(
+      { email },
+      {
+        $set: {
+          authToken: null,
+          isVerified: true,
+        },
+      },
+      {}
+    );
+    const msg = {
+      to: `${email}`,
+      from: "team.bbards@gmail.com",
+      subject: "Thank you for registering.",
+      text: "Team bbards",
+      html: `Your account has benne successfully activated`,
+    };
+
+    try {
+      await sgMail.send(msg);
+    } catch (error) {
+      console.error(error);
+      if (error.response) {
+        console.error(error.response.body);
+      }
+    }
+  }
 
   async userRegister(credentials: UserDto) {
     const { email, password, name } = credentials;
@@ -41,13 +106,25 @@ export class UserService {
         );
 
       const credentials = {
-        email,
+        email: email.toLowerCase(),
         name,
+        authToken: sign(
+          { iat: new Date().getTime(), data: email },
+          `${secret}`
+        ),
+        isVerified: false,
+        dateAdded: new Date(),
+        lastLoggedIn: null,
+        logOutDate: null,
       };
 
       await this.repository.insertOne({
         ...credentials,
         password: await hash(password, saltRounds),
+      });
+      await this.emailConfirmation({
+        email: credentials.email,
+        authToken: credentials.authToken,
       });
       return BaseHttpResponse.sucessResponse(
         "User registered successfully",
@@ -57,6 +134,31 @@ export class UserService {
     } catch (err) {
       return BaseHttpResponse.failedResponse(
         err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
+    }
+  }
+
+  async emailConfiramtion({ token }: IAuthToken) {
+    const authToken = await this.repository.findOne(
+      { authToken: token },
+      { authToken: 1, _id: 0 }
+    );
+
+    try {
+      if (!authToken)
+        return BaseHttpResponse.failedResponse(
+          { error: StatusCode.BAD_REQUEST },
+          StatusCode.BAD_REQUEST
+        );
+
+      await this.updateAccountAfterEmailConfirmation({
+        authToken: authToken.authToken,
+      });
+      return BaseHttpResponse.sucessResponse({}, StatusCode.SUCCESS, {});
+    } catch (error) {
+      return BaseHttpResponse.failedResponse(
+        error.message,
         StatusCode.INTERNAL_SERVER_ERROR
       );
     }

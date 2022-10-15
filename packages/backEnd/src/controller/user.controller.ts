@@ -46,4 +46,13 @@ export class UserController {
     const response = await this.service.userInsertProfile(req.body, req.user);
     res.status(response.statusCode).json(response);
   }
+
+  @Get("activate/:token")
+  async userEmailConfiramtion(
+    req: Request<{ token: string }, {}, {}, {}>,
+    res: Response,
+    next: NextFunction
+  ) {
+    const response = await this.service.emailConfiramtion(req.params);
+  }
 }
