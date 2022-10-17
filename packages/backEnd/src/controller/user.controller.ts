@@ -54,5 +54,6 @@ export class UserController {
     next: NextFunction
   ) {
     const response = await this.service.emailConfiramtion(req.params);
+    res.status(response.statusCode).json(response);
   }
 }

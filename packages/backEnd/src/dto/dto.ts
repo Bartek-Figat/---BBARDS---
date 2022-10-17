@@ -18,8 +18,6 @@ import {
 import { IUserProfile, IUserAddress, IFile, MulterRequest } from "../interface";
 
 export class UserDto {
-  @Min(3)
-  @Max(255)
   @IsNotEmpty()
   password: string;
   @IsEmail()

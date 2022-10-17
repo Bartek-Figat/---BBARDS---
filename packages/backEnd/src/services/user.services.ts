@@ -20,7 +20,6 @@ import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 config({ path: "../../.env" });
 const { secret, sendgridApi } = process.env;
 
-const saltRounds: number = 10;
 sgMail.setApiKey(sendgridApi);
 
 export class UserService {
@@ -47,11 +46,13 @@ export class UserService {
     }
   }
 
-  async updateAccountAfterEmailConfirmation(token: {
+  async updateAccountAfterEmailConfirmation({
+    authToken,
+  }: {
     authToken: string;
   }): Promise<void> {
     const { email } = await this.repository.findOne(
-      { authToken: token.authToken },
+      { authToken },
       { email: 1, _id: 0 }
     );
     await this.repository.updateOne(
@@ -82,19 +83,17 @@ export class UserService {
     }
   }
 
-  async userRegister(credentials: UserDto) {
-    const { email, password, name } = credentials;
-
+  async userRegister({ email, password, name }: UserDto) {
     let credentialValidation = new UserDto();
     credentialValidation.email = email;
     credentialValidation.password = password;
     credentialValidation.name = name;
 
-    try {
-      const errors = await validate(credentialValidation);
-      if (errors.length > 0)
-        return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
+    const errors = await validate(credentialValidation);
+    if (errors.length > 0)
+      return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
 
+    try {
       const userEmail = await this.repository.findOne(
         { email },
         { email: 1, _id: 0 }
@@ -106,12 +105,9 @@ export class UserService {
         );
 
       const credentials = {
-        email: email.toLowerCase(),
+        email,
         name,
-        authToken: sign(
-          { iat: new Date().getTime(), data: email },
-          `${secret}`
-        ),
+        authToken: sign({ data: email }, secret),
         isVerified: false,
         dateAdded: new Date(),
         lastLoggedIn: null,
@@ -120,10 +116,10 @@ export class UserService {
 
       await this.repository.insertOne({
         ...credentials,
-        password: await hash(password, saltRounds),
+        password: await hash(password, 10),
       });
       await this.emailConfirmation({
-        email: credentials.email,
+        email,
         authToken: credentials.authToken,
       });
       return BaseHttpResponse.sucessResponse(
@@ -133,14 +129,14 @@ export class UserService {
       );
     } catch (err) {
       return BaseHttpResponse.failedResponse(
-        err.message,
+        err,
         StatusCode.INTERNAL_SERVER_ERROR
       );
     }
   }
 
   async emailConfiramtion({ token }: IAuthToken) {
-    const authToken = await this.repository.findOne(
+    const { authToken } = await this.repository.findOne(
       { authToken: token },
       { authToken: 1, _id: 0 }
     );
@@ -153,7 +149,7 @@ export class UserService {
         );
 
       await this.updateAccountAfterEmailConfirmation({
-        authToken: authToken.authToken,
+        authToken,
       });
       return BaseHttpResponse.sucessResponse({}, StatusCode.SUCCESS, {});
     } catch (error) {
@@ -164,12 +160,9 @@ export class UserService {
     }
   }
 
-  async userLogin(credentials: UserDto) {
+  async userLogin({ email, password }: UserDto) {
     try {
-      const { email, password }: UserDto = credentials;
-
       let credentialValidation = new UserDto();
-
       credentialValidation.email = email;
       credentialValidation.password = password;
 
@@ -206,9 +199,7 @@ export class UserService {
     }
   }
 
-  async getUserData(verificationToken: TokenDto) {
-    const { token } = verificationToken;
-
+  async getUserData({ token }: TokenDto) {
     try {
       const user = await this.repository.findOne(
         { _id: new ObjectId(token.token) },
@@ -223,9 +214,7 @@ export class UserService {
     }
   }
 
-  async userLogout(logout: LogoutDto) {
-    const { token, authHeader } = logout;
-
+  async userLogout({ token, authHeader }: LogoutDto) {
     try {
       const v = await this.repository.updateOne(
         { _id: new ObjectId(token.token) },
@@ -247,9 +236,7 @@ export class UserService {
     }
   }
 
-  async getUserProfile(verificationToken: TokenDto) {
-    const { token } = verificationToken;
-
+  async getUserProfile({ token }: TokenDto) {
     try {
       const user = await this.repository.findOne(
         { _id: new ObjectId(token.token) },
