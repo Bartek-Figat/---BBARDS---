@@ -18,8 +18,6 @@ import {
 import { IUserProfile, IUserAddress, IFile, MulterRequest } from "../interface";
 
 export class UserDto {
-  @Min(3)
-  @Max(255)
   @IsNotEmpty()
   password: string;
   @IsEmail()
@@ -33,6 +31,11 @@ export class TokenDto {
   token: {
     token: string;
   };
+}
+
+export class IAuthToken {
+  @IsString()
+  token: string;
 }
 export class LogoutDto extends TokenDto {
   @IsString()
@@ -125,4 +128,9 @@ export class UserProfileDto implements IUserProfile, IUserAddress {
   postCode: string;
   @IsAlpha()
   country: string;
+}
+
+export class ICredentials {
+  email: string;
+  authToken: string;
 }
