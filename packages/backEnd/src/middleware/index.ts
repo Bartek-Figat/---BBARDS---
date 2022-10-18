@@ -1,47 +1,35 @@
+import { config } from "dotenv";
 import { Request, Response, NextFunction } from "express";
 import { verify, JwtPayload } from "jsonwebtoken";
 import { StatusCode } from "../enum";
+import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 import { Repository } from "../repositories/user.repositories";
+
+config();
+const { secret } = process.env;
 
 export class AuthMiddleware {
   constructor(private repository: Repository = new Repository()) {}
 
   async isAuthenticated(req: Request, res: Response, next: NextFunction) {
-    const authHeader = req.headers.authorization;
-    const token: string = authHeader && authHeader.split(" ")[1];
+    if (!req.session || !req.session.user)
+      return BaseHttpResponse.failedResponse(
+        StatusCode.UNAUTHORIZED,
+        StatusCode.UNAUTHORIZED
+      );
 
-    if (!token)
-      return res
-        .status(StatusCode.UNAUTHORIZED)
-        .json({ status: `${StatusCode.UNAUTHORIZED}` });
+    const { user } = req.session;
 
-    const authorizationToken = await this.repository.find(
-      { authorizationToken: { $in: [token] } },
-      { authorizationToken: 1, _id: 0 }
-    );
-
-    if (!authorizationToken) {
-      return res
-        .status(StatusCode.UNAUTHORIZED)
-        .json({ status: `${StatusCode.UNAUTHORIZED}` });
-    } else {
-      try {
-        verify(token, `secret`, (err, tokenVerify) => {
-          if (err)
-            return res.status(StatusCode.UNAUTHORIZED).json({
-              status: `${StatusCode.UNAUTHORIZED}`,
-            });
-          req.user = {
-            token: tokenVerify as JwtPayload,
-            authHeader: token,
-          };
-          next();
-        });
-      } catch (err) {
-        return res
-          .status(StatusCode.UNAUTHORIZED)
-          .json({ status: `${StatusCode.UNAUTHORIZED}` });
-      }
-    }
+    return verify(user, `${secret}`, (err, session) => {
+      if (err)
+        return BaseHttpResponse.failedResponse(
+          err.message,
+          StatusCode.UNAUTHORIZED
+        );
+      req.user = {
+        token: session,
+      };
+      next();
+    });
   }
 }
