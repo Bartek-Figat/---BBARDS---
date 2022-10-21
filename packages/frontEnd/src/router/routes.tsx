@@ -15,6 +15,7 @@ interface IRoutes {
   LEGAL_NOTICE: string;
   NOTIFICATION: string;
   WISHLIST: string;
+  BLOG_LIST: string;
 }
 
 export const ROUTES: IRoutes = {
@@ -34,4 +35,5 @@ export const ROUTES: IRoutes = {
   LEGAL_NOTICE: "legal-notice",
   NOTIFICATION: "notification",
   WISHLIST: "wishlist",
+  BLOG_LIST: "blog-list",
 };

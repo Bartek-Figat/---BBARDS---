@@ -148,7 +148,9 @@ export const Dropdown: React.FC<Props> = ({ handleToggle, collapsed }) => {
                       <Accordion>
                         <AccordionItem title="Blogs">
                           <ul>
-                            <NavigationItem path="">Blog List</NavigationItem>
+                            <NavigationItem path="/blog-list">
+                              Blog List
+                            </NavigationItem>
                             <NavigationItem path="">
                               Blog Details
                             </NavigationItem>
