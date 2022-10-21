@@ -15,7 +15,7 @@ export class UserController {
   }
   @Post("login")
   async userLogin(req: Request, res: Response, next: NextFunction) {
-    const response = await this.service.userLogin(req.body);
+    const response = await this.service.userLogin(req.body, req);
     res.status(response.statusCode).json(response);
   }
 

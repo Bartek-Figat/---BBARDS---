@@ -23,7 +23,7 @@ export class UserDto {
   @IsEmail()
   email: string;
   @IsNotEmpty()
-  name: string;
+  name?: string;
 }
 
 export class TokenDto {

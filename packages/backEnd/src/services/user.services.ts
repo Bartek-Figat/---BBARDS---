@@ -4,7 +4,7 @@ import { validate } from "class-validator";
 import { hash, compare } from "bcrypt";
 import sgMail from "@sendgrid/mail";
 import { Repository } from "../repositories/user.repositories";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
 import { uploadFile } from "../tools/image";
 import {
@@ -106,7 +106,6 @@ export class UserService {
 
       const credentials = {
         email,
-        name,
         authToken: sign({ data: email }, secret),
         isVerified: false,
         dateAdded: new Date(),
@@ -160,7 +159,7 @@ export class UserService {
     }
   }
 
-  async userLogin({ email, password }: UserDto) {
+  async userLogin({ email, password }: UserDto, req) {
     try {
       let credentialValidation = new UserDto();
       credentialValidation.email = email;
@@ -175,22 +174,16 @@ export class UserService {
       );
 
       const match = user && (await compare(password, user.password));
-      if (!match)
+
+      if (!match || user.isVerified === false || user.authToken !== null)
         return BaseHttpResponse.failedResponse(
           ErrorMessage.WRONG,
           StatusCode.BAD_REQUEST
         );
 
-      const token: string = sign({ token: user._id.toString() }, `${secret}`);
+      req.session.user = sign({ token: user._id }, `${secret}`);
 
-      await this.repository.updateOne(
-        { email: user.email },
-        {
-          $addToSet: { authorizationToken: { $each: [`${token}`] } },
-        },
-        {}
-      );
-      return BaseHttpResponse.sucessResponse(token, 200, {});
+      return BaseHttpResponse.sucessResponse({}, 200, {});
     } catch (err) {
       return BaseHttpResponse.failedResponse(
         err.message,
