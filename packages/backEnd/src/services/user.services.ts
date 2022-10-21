@@ -106,7 +106,6 @@ export class UserService {
 
       const credentials = {
         email,
-        name,
         authToken: sign({ data: email }, secret),
         isVerified: false,
         dateAdded: new Date(),
@@ -160,13 +159,11 @@ export class UserService {
     }
   }
 
-  async userLogin({ email, password, name }: UserDto, req) {
-    console.log(email, password);
+  async userLogin({ email, password }: UserDto, req) {
     try {
       let credentialValidation = new UserDto();
       credentialValidation.email = email;
       credentialValidation.password = password;
-      credentialValidation.name = name;
 
       const errors = await validate(credentialValidation);
       if (errors.length > 0)
@@ -177,7 +174,8 @@ export class UserService {
       );
 
       const match = user && (await compare(password, user.password));
-      if (!match)
+
+      if (!match || user.isVerified === false || user.authToken !== null)
         return BaseHttpResponse.failedResponse(
           ErrorMessage.WRONG,
           StatusCode.BAD_REQUEST
