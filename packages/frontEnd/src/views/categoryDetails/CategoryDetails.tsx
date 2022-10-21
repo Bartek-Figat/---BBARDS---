@@ -15,6 +15,8 @@ interface ProductProps {
   city: string;
 }
 
+type Obj = Record<string, string>;
+
 export const CategoryDetails = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState<null | ProductProps[]>(null);
@@ -22,11 +24,9 @@ export const CategoryDetails = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    let params = {};
+    let params: Obj = {};
 
-    // @ts-ignore
     for (const [key, value] of searchParams.entries()) {
-      // @ts-ignore
       params[key] = value;
     }
 
