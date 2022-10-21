@@ -28,7 +28,7 @@ export const ProductCard = ({
     <div className="">
       <div className="bg-gray-chalk rounded-lg">
         <div className="w-full relative group">
-          <div className="w-full overflow-hidden relative">
+          <div className="w-full overflow-hidden relative rounded-t-lg">
             <img
               className="group-hover:scale-110 duration-1000 rounded-t-lg w-full"
               src={img}
