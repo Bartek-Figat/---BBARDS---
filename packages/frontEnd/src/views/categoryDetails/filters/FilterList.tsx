@@ -55,7 +55,7 @@ export const FilterList = () => {
 
   return (
     <form
-      className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 p-12 sm:p-0"
+      className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 p-16 sm:p-12 lg:p-0"
       onSubmit={handleSubmit(onSubmit)}
     >
       {filtersList.map(({ name, inputs }, i) => {

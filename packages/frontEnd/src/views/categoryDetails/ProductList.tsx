@@ -36,7 +36,7 @@ export const ProductList: FC<Props> = ({ products }) => {
   return (
     <>
       {products && (
-        <div className="p-12 sm:p-0 lg:ml-4 mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <div className="p-16 sm:p-12 lg:p-0 lg:ml-8 grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
           {mapProducts()}
         </div>
       )}
