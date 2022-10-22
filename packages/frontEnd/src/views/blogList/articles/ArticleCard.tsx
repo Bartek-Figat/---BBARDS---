@@ -22,14 +22,15 @@ export const ArticleCard = ({
   content,
 }: ArticleCardProps) => {
   let colorBadge = function (category: string) {
-    if (category === "Marketing") {
-      return "bg-green-600";
-    } else if (category === "Advertise") {
-      return "bg-purple-blog";
-    } else if (category === "Safety") {
-      return "bg-red-600";
-    } else if (category === "Security") {
-      return "bg-yellow-600";
+    switch (category) {
+      case "Marketing":
+        return "bg-green-600";
+      case "Advertise":
+        return "bg-purple-blog";
+      case "Safety":
+        return "bg-red-600";
+      case "Security":
+        return "bg-yellow-600";
     }
   };
 
