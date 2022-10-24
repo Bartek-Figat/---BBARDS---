@@ -17,7 +17,7 @@ export const BlogList = () => {
 
       <div className="flex container pt-20 px-4 pb-16 ">
         <div className="flex xl:flex-row-reverse flex-col gap-6">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center ">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
               {articlesMap.map(
                 ({ img, title, date, category, author, avatar, content }) => {

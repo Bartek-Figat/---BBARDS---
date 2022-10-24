@@ -1,12 +1,12 @@
-import article1 from "../../../assets/images/blog-suggest/01.jpg";
-import article2 from "../../../assets/images/blog-suggest/02.jpg";
-import article3 from "../../../assets/images/blog-suggest/03.jpg";
-import article4 from "../../../assets/images/blog-suggest/04.jpg";
+import article1 from "assets/images/blog-suggest/01.jpg";
+import article2 from "assets/images/blog-suggest/02.jpg";
+import article3 from "assets/images/blog-suggest/03.jpg";
+import article4 from "assets/images/blog-suggest/04.jpg";
 
-import avatar1 from "../../../assets/images/avatar/01.jpg";
-import avatar2 from "../../../assets/images/avatar/02.jpg";
-import avatar3 from "../../../assets/images/avatar/03.jpg";
-import avatar4 from "../../../assets/images/avatar/04.jpg";
+import avatar1 from "assets/images/avatar/01.jpg";
+import avatar2 from "assets/images/avatar/02.jpg";
+import avatar3 from "assets/images/avatar/03.jpg";
+import avatar4 from "assets/images/avatar/04.jpg";
 
 export interface IArticles {
   img: string;

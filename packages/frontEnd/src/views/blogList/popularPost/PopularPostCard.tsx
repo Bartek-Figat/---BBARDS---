@@ -16,9 +16,7 @@ export const PopularPostCard = ({
 }: ArticleCardProps) => {
   return (
     <div className="flex  mb-6 md:max-w-xl">
-      <div className="w-[12rem] h-[7rem] ">
-        <img className="w-full h-full rounded-lg object-cover" src={img} />
-      </div>
+      <img className="w-[100px] rounded-lg object-cover" src={img} />
       <div className="ml-3.5">
         <p className="font-bold text-black-heading">{title}</p>
         <div className="flex gap-6 pt-2 ">

@@ -35,9 +35,14 @@ export const ArticleCard = ({
   };
 
   return (
-    <div>
-      <div className="relative max-w-lg pb-6 border rounded-lg bg-gray-chalk mx-3  basis-1/2">
-        <img src={img} className="rounded-t-lg" />
+    <div className="relative  w-full  ">
+      <div className="w-full relative group max-w-lg pb-6 border rounded-lg bg-gray-chalk mx-3  basis-1/2 hover:bg-white hover:shadow-gray-400 hover:shadow-xl ease-in duration-300">
+        <div className="overflow-hidden ">
+          <img
+            src={img}
+            className=" w-full rounded-t-lg group-hover:scale-110 duration-1000 rounded-t-lg w-full group-hover:rotate-3"
+          />
+        </div>
         <div
           className={`absolute top-0 m-3 px-2 py-1 rounded-md text-white font-semibold ${colorBadge(
             category
@@ -60,12 +65,14 @@ export const ArticleCard = ({
             </div>
           </div>
           <div className="pb-6">
-            <h4 className="text-lg text-gray-500 bold font-bold ">{title}</h4>
+            <h4 className="text-lg text-gray-500 bold font-bold hover:text-dark-blue">
+              {title}
+            </h4>
             <p className="text-md text-gray-600">{content}</p>
           </div>
-          <div className="flex items-center gap-3 font-bold">
+          <div className="group flex items-center gap-3 font-bold hover:text-dark-blue ">
             <a href="">READ MORE</a>
-            <FaLongArrowAltRight />
+            <FaLongArrowAltRight className="group-hover:translate-x-2 duration-300" />
           </div>
         </div>
       </div>
