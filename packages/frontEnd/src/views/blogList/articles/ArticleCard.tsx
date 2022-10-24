@@ -65,7 +65,7 @@ export const ArticleCard = ({
             </div>
           </div>
           <div className="pb-6">
-            <h4 className="text-lg text-gray-500 bold font-bold hover:text-dark-blue">
+            <h4 className="text-lg text-gray-500 bold font-bold hover:text-dark-blue transition duration-300">
               {title}
             </h4>
             <p className="text-md text-gray-600">{content}</p>
