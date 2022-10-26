@@ -19,7 +19,7 @@
 
 ## Installation
 
-Use the falwing script to install modules in the front-end and back-end directory
+Use the following script to install modules in the front-end and back-end directory
 
 ```bash
   yarn install
@@ -33,9 +33,9 @@ The command will start the front-end and back-end
   yarn start
 ```
 
-## Docker compose
+## Docker
 
-If you want code using Docker, create `.env` file in root directory:
+If you want to code using Docker, create `.env` file in root directory:
 
 ```bash
   MONGO_INITDB_ROOT_USERNAME=developer
@@ -44,7 +44,7 @@ If you want code using Docker, create `.env` file in root directory:
   dbDEV=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@database/${MONGO_INITDB_DATABASE}?retryWrites=true&w=majority&authSource=admin
 ```
 
-Then run below in root directory
+Then run below in the root directory
 
 ```bash
   docker compose up
@@ -58,9 +58,9 @@ Docker will bind ports:
 
 27017 - MongoDb
 
-If you want to use other port, open and modify the file `docker-compose.yml`
+If you want to use other ports, open and modify the file `docker-compose.yml`
 
-You can also run specific service:
+You can also run specific services:
 
 `docker compose up backend` - will run backend service and mongodb
 
@@ -98,11 +98,11 @@ Open [http://localhost:8080/api-docs/](http://localhost:8080/api-docs/) in the b
 
 ## Contributing
 
-Take a look at our [CONTRIBUTING.md](https://github.com/Bartek-Figat/tsx-react/blob/main/CONTRIBUTING.md) file to learn how to get started with gitflow.
+Look at our [CONTRIBUTING.md](https://github.com/Bartek-Figat/tsx-react/blob/main/CONTRIBUTING.md) file to learn how to get started with gitflow.
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -134,4 +134,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
