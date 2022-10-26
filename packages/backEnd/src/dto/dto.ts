@@ -22,8 +22,6 @@ export class UserDto {
   password: string;
   @IsEmail()
   email: string;
-  @IsNotEmpty()
-  name?: string;
 }
 
 export class TokenDto {

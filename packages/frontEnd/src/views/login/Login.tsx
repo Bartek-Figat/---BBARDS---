@@ -1,17 +1,22 @@
-import React from "react";
+import { useEffect } from "react";
 import { TabButton } from "components/tabs/TabButton";
 import { Tab } from "@headlessui/react";
 import AsideSection from "./AsideSection";
 import SignInTab from "./tabs/SignInTab";
 import SignUpTab from "./tabs/SignUpTab";
 import { useAppSelector } from "store/hooks";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Login() {
-  const isLogged = useAppSelector((store) => store.login.token);
-  if (isLogged) {
-    return <Navigate replace to="/dashboard" />;
-  }
+  let navigate = useNavigate();
+  const { isLogin, successResponse } = useAppSelector((store) => store.login);
+
+  useEffect(() => {
+    if (isLogin && successResponse.statusCode === 200) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [isLogin, navigate, successResponse]);
+
   return (
     <div className="flex h-screen w-screen">
       <AsideSection />

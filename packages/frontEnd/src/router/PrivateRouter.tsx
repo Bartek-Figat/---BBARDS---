@@ -3,6 +3,7 @@ import { Dasboard } from "../views/admin/admin";
 import { AddPost } from "views/admin/addPost/addPost";
 import { Profile } from "views/admin/profile/profile";
 import { LayoutAdmin } from "./LayoutAdmin";
+import { ProtectedRoute } from "../router/protectedRoutes";
 
 export function PrivateRouter() {
   return (

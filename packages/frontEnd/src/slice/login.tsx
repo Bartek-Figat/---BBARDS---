@@ -8,12 +8,14 @@ interface LoginProps {
 }
 
 interface ResponseProps {
-  token: string;
+  isLogin: boolean;
+  successResponse: null | string;
 }
 
 interface LoginState {
   status: "waiting" | "success" | "pending" | "error";
-  token: null | string;
+  isLogin: boolean;
+  successResponse: any | string;
   errorMessage: null | string;
 }
 
@@ -31,7 +33,7 @@ export const signIn = createAsyncThunk<
       email,
       password,
     });
-    localStorage.setItem("token", response.data.token);
+    console.log(response.data);
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ValidationErrors>;
@@ -42,11 +44,10 @@ export const signIn = createAsyncThunk<
   }
 });
 
-const token = localStorage.getItem("token") ?? null;
-
 const initialState: LoginState = {
   status: "waiting",
-  token,
+  isLogin: false,
+  successResponse: null,
   errorMessage: null,
 };
 
@@ -55,9 +56,10 @@ export const loginSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(signIn.fulfilled, (state, action) => {
+    builder.addCase(signIn.fulfilled, (state, { payload }) => {
       state.status = "success";
-      state.token = action.payload.token;
+      state.isLogin = true;
+      state.successResponse = payload;
     });
     builder.addCase(signIn.pending, (state, action) => {
       state.status = "pending";
