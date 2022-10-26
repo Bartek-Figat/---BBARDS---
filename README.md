@@ -33,7 +33,7 @@ The command will start the front-end and back-end
   yarn start
 ```
 
-## Docker compose
+## Docker
 
 If you want to code using Docker, create `.env` file in root directory:
 
