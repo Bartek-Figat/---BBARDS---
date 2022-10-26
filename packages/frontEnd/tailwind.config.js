@@ -37,6 +37,8 @@ module.exports = {
         "black-blue": "#080229",
         "purple-blue": "#0d0633",
         "black-heading": "#232d3b",
+        "purple-blog": "#982fd5",
+        "gray-light": "#555555",
       },
       backgroundImage: {
         "hero-image": "url('assets/images/01.jpg')",
