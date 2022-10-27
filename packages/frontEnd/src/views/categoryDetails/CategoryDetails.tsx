@@ -50,7 +50,7 @@ export const CategoryDetails = () => {
     <>
       <Header />
 
-      <div className="container my-12">
+      <div className="container my-12 px-12 xl:w-[1280px]">
         <div className="flex flex-col-reverse lg:flex-row">
           <aside className="">
             <FilterList />
