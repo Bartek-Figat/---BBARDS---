@@ -21,7 +21,7 @@ export const BrowseOurTop = () => {
       <div className="flex justify-center mt-11 ">
         <nav className="flex">
           <div className="grid gap-0 lg:grid-cols-27 md:grid-cols-27 sm:grid-cols-27 tablet:flex">
-            <div className="bg-gray-chalk p-4 lg:w-full  md:w-64 sm:w-60 text-center text-dark-blue border-b-2 border-b-blue-500 ">
+            <div className="bg-gray-chalk p-4 w-full text-center text-dark-blue border-b-2 border-b-blue-500 ">
               <Link
                 to="/"
                 className="text-center tracking-wide uppercase font-medium"
@@ -29,12 +29,12 @@ export const BrowseOurTop = () => {
                 top ratings
               </Link>
             </div>
-            <div className="hover:bg-gray-chalk p-4 lg:w-full md:w-64 sm:w-60 text-center text-[#2F3946] border-b-2 border-slate-100">
+            <div className="hover:bg-gray-chalk p-4 w-full text-center text-[#2F3946] border-b-2 border-gray-mercury-100">
               <Link to="/" className="tracking-wide uppercase font-medium">
                 top advertiser
               </Link>
             </div>
-            <div className="hover:bg-gray-chalk p-4 lg:w-full md:w-64 sm:w-60 text-center text-[#2F3946] border-b-2 border-slate-100">
+            <div className="hover:bg-gray-chalk p-4 w-full text-center text-[#2F3946] border-b-2 border-gray-mercury-100">
               <Link to="/" className="tracking-wide uppercase font-medium">
                 top engaged
               </Link>
