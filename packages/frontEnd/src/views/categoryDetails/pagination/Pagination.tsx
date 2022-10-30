@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 
 interface Props {
   totalPages: number;
@@ -23,27 +24,48 @@ export const Pagination: React.FC<Props> = ({
     }
     return pages2.map((page) => {
       return (
-        <div
+        <button
           className={clsx(
-            "p-4 ml-4 cursor-pointer",
+            "w-[35px] h-[35px] cursor-pointer rounded-full font-medium text-lg grid place-content-center",
             currentPage === page
               ? "bg-dark-blue text-white"
-              : "bg-white text-dark-blue"
+              : "bg-white text-gray-dark"
           )}
           key={page}
           onClick={() => changeCurrentPage(page)}
         >
           {page}
-        </div>
+        </button>
       );
     });
   };
 
   return (
-    <div className="my-8">
-      {totalPages > 0 && (
-        <div className="flex justify-center">{mapPages()}</div>
-      )}
+    <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-2">
+      <p className="font-medium text-lg text-gray-dark">
+        Showing 12 of 60 Results
+      </p>
+      <div className="flex justify-center items-center gap-2">
+        <FaLongArrowAltLeft className="text-gray-dark" />
+        {totalPages > 0 && (
+          <>
+            <div className="flex justify-center">{mapPages()}</div>
+            <p>...</p>
+            <div
+              className={clsx(
+                "w-[35px] h-[35px] cursor-pointer rounded-full font-medium text-lg grid place-content-center",
+                currentPage === totalPages
+                  ? "bg-dark-blue text-white"
+                  : "bg-white text-gray-dark"
+              )}
+              onClick={() => changeCurrentPage(totalPages)}
+            >
+              {totalPages}
+            </div>
+          </>
+        )}
+        <FaLongArrowAltRight className="text-gray-dark" />
+      </div>
     </div>
   );
 };

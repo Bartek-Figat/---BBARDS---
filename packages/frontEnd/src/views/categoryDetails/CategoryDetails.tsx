@@ -57,11 +57,13 @@ export const CategoryDetails = () => {
           </aside>
           <div className="">
             {products && <ProductList products={products} />}
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              changeCurrentPage={setCurrentPage}
-            />
+            <div className="border-t-[1px] border-gray-mercury py-8 mt-8">
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                changeCurrentPage={setCurrentPage}
+              />
+            </div>
           </div>
         </div>
       </div>
