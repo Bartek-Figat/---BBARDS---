@@ -22,7 +22,7 @@ export const FilterByTypeForm: FC<UseFormRegister<any>> = (register) => {
               <div className="flex items-center">
                 <input
                   id={name}
-                  className="form-checkbox rounded"
+                  className="form-radio rounded"
                   type="radio"
                   {...register("adCategory")}
                   value={name}

@@ -27,7 +27,7 @@ export const FilterByCitiesForm: FC<UseFormRegister<any>> = (register) => {
               <div className="flex items-center">
                 <input
                   id={name}
-                  className="form-checkbox rounded"
+                  className="form-radio rounded"
                   type="radio"
                   {...register("city")}
                   value={name}
