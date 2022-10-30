@@ -1,7 +1,6 @@
 import { Document } from "mongodb";
 import { db } from "../db/mongo";
 import { Index } from "../enum";
-import { IAdds, IPagination } from "../interface/index";
 
 export class Repository {
   async find<T>(query: T, projection?: T): Promise<Document[]> {

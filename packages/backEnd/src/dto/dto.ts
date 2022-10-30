@@ -1,21 +1,17 @@
-import { Request } from "express";
-import { NumBatchResults } from "aws-sdk/clients/personalize";
 import {
-  IsNotEmpty,
-  IsEmail,
-  Min,
-  IsUrl,
+  IsAlpha,
   IsAlphanumeric,
   IsDateString,
-  IsNumberString,
-  IsAlpha,
-  IsPostalCode,
-  IsOptional,
-  Max,
-  IsString,
+  IsEmail,
+  IsNotEmpty,
   IsNumber,
+  IsNumberString,
+  IsOptional,
+  IsPostalCode,
+  IsString,
+  IsUrl,
 } from "class-validator";
-import { IUserProfile, IUserAddress, IFile, MulterRequest } from "../interface";
+import { IFile, IUserAddress, IUserProfile } from "../interface";
 
 export class UserDto {
   @IsNotEmpty()

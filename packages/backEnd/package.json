@@ -29,9 +29,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.171.0",
-    "@decorators/di": "^1.0.3",
-    "@decorators/express": "^2.6.0",
-    "@overnightjs/core": "^1.7.6",
     "@sendgrid/mail": "^7.7.0",
     "aws-sdk": "^2.1223.0",
     "bcrypt": "^5.0.1",

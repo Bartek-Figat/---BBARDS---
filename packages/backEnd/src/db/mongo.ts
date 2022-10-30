@@ -1,13 +1,10 @@
-import { config } from "dotenv";
 import { Db, MongoClient, MongoClientOptions } from "mongodb";
 import Logger from "jet-logger";
+import { appConfig } from "../config";
 
 import { Index } from "../enum";
 
-config({ path: "../../.env" });
-const { dbDEV } = process.env;
-
-const client = new MongoClient(dbDEV, {
+const client = new MongoClient(appConfig.dbURL, {
   useNewUrlParser: true,
 } as MongoClientOptions);
 
