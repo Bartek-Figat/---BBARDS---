@@ -1,26 +1,16 @@
-import { config } from "dotenv";
 import { ObjectId } from "mongodb";
 import { validate } from "class-validator";
-import { hash, compare } from "bcrypt";
+import { hash } from "bcrypt";
 import sgMail from "@sendgrid/mail";
 import { Repository } from "../repositories/user.repositories";
-import { sign, verify } from "jsonwebtoken";
-import { StatusCode, ErrorMessage } from "../enum";
+import { sign } from "jsonwebtoken";
+import { StatusCode } from "../enum";
 import { uploadFile } from "../tools/image";
-import {
-  UserDto,
-  UserProfileDto,
-  TokenDto,
-  LogoutDto,
-  ICredentials,
-  IAuthToken,
-} from "../dto/dto";
+import { ICredentials, TokenDto, UserDto, UserProfileDto } from "../dto/dto";
 import { BaseHttpResponse } from "../httpError/baseHttpResponse";
+import { appConfig } from "../config";
 
-config({ path: "../../.env" });
-const { secret, sendgridApi } = process.env;
-
-sgMail.setApiKey(sendgridApi);
+sgMail.setApiKey(appConfig.sendgridApiKey);
 
 export class UserService {
   constructor(private repository: Repository = new Repository()) {}
@@ -31,6 +21,7 @@ export class UserService {
       from: "team.bbards@gmail.com",
       subject: "Thank you for registering.",
       text: "Team bbards",
+      //TODO replace hardcoded URL
       html: `Hello.
       Thank you for registering. Please click the link to complete yor activation
       <a href='http://localhost:3000/activate/${authToken}'>Activation Link</a>`,
@@ -106,7 +97,7 @@ export class UserService {
 
       const credentials = {
         email,
-        authToken: sign({ data: email }, secret),
+        authToken: sign({ data: email }, appConfig.secret),
         isVerified: false,
         dateAdded: new Date(),
         lastLoggedIn: null,
@@ -134,7 +125,7 @@ export class UserService {
     }
   }
 
-  async emailConfiramtion({ token }: IAuthToken) {
+  async emailConfiramtion(token: string) {
     const { authToken } = await this.repository.findOne(
       { authToken: token },
       { authToken: 1, _id: 0 }
@@ -159,39 +150,6 @@ export class UserService {
     }
   }
 
-  async userLogin({ email, password }: UserDto, req) {
-    try {
-      let credentialValidation = new UserDto();
-      credentialValidation.email = email;
-      credentialValidation.password = password;
-
-      const errors = await validate(credentialValidation);
-      if (errors.length > 0)
-        return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
-      const user = await this.repository.findOne(
-        { email },
-        { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }
-      );
-
-      const match = user && (await compare(password, user.password));
-
-      if (!match || user.isVerified === false || user.authToken !== null)
-        return BaseHttpResponse.failedResponse(
-          ErrorMessage.WRONG,
-          StatusCode.BAD_REQUEST
-        );
-
-      req.session.user = sign({ token: user._id }, `${secret}`);
-
-      return BaseHttpResponse.sucessResponse({}, 200, {});
-    } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
-    }
-  }
-
   async getUserData({ token }: TokenDto) {
     try {
       const user = await this.repository.findOne(
@@ -206,29 +164,6 @@ export class UserService {
       );
     }
   }
-
-  async userLogout({ token, authHeader }: LogoutDto) {
-    try {
-      const v = await this.repository.updateOne(
-        { _id: new ObjectId(token.token) },
-        {
-          $pull: { authorizationToken: authHeader },
-        },
-        {}
-      );
-      return BaseHttpResponse.sucessResponse(
-        "You have been logged out successfully",
-        200,
-        {}
-      );
-    } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
-    }
-  }
-
   async getUserProfile({ token }: TokenDto) {
     try {
       const user = await this.repository.findOne(
@@ -338,3 +273,5 @@ export class UserService {
     }
   }
 }
+
+export const usersService = new UserService();

@@ -1,4 +1,4 @@
-import { Document, UpdateResult, InsertManyResult } from "mongodb";
+import { Document, UpdateResult } from "mongodb";
 import { db } from "../db/mongo";
 import { Index } from "../enum";
 

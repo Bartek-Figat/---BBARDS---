@@ -1,4 +1,3 @@
-import { config } from "dotenv";
 import { Db, MongoClient, MongoClientOptions } from "mongodb";
 import Logger from "jet-logger";
 import { appConfig } from "../config";

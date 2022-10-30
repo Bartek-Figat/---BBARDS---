@@ -10,9 +10,11 @@ import logger from "jet-logger";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./api/documentation.json";
 import { connect } from "./db/mongo";
-import { Credentials } from "aws-sdk";
+
 import { appConfig } from "./config";
-import { advertsRouter, authRouter, usersRouter } from "./routes";
+import { authRouter } from "./auth/router";
+import { usersRouter } from "./users/router";
+import { advertsRouter } from "./adverts/router";
 
 process.on("SIGINT", (err) => {
   process.exit(0);
@@ -32,7 +34,7 @@ const app = express();
 app.use(json({ limit: "50mb" }));
 app.use(urlencoded({ limit: "50mb", extended: true }));
 app.use(compression());
-app.use(express.static("avatar"));
+app.use(express.static("static"));
 app.enable("trust proxy");
 app.use(
   cors({
