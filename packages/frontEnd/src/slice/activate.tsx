@@ -11,7 +11,7 @@ interface ActivateState {
 }
 
 const initialState: ActivateState = {
-  status: "error",
+  status: "waiting",
   errorMessage: null,
 };
 
