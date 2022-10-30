@@ -15,7 +15,7 @@ export class UserController {
   }
   @Post("login")
   async userLogin(req: Request, res: Response, next: NextFunction) {
-    const response = await this.service.userLogin(req.body);
+    const response = await this.service.userLogin(req.body, req);
     res.status(response.statusCode).json(response);
   }
 
@@ -44,6 +44,16 @@ export class UserController {
   @Middleware(middleware.isAuthenticated)
   async userInsertProfile(req: Request, res: Response, next: NextFunction) {
     const response = await this.service.userInsertProfile(req.body, req.user);
+    res.status(response.statusCode).json(response);
+  }
+
+  @Get("activate/:token")
+  async userEmailConfiramtion(
+    req: Request<{ token: string }, {}, {}, {}>,
+    res: Response,
+    next: NextFunction
+  ) {
+    const response = await this.service.emailConfiramtion(req.params);
     res.status(response.statusCode).json(response);
   }
 }

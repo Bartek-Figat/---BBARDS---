@@ -1,5 +1,5 @@
 import { Document } from "mongodb";
-import { db } from "../db/db";
+import { db } from "../db/mongo";
 import { Index } from "../enum";
 import { IAdds, IPagination } from "../interface/index";
 
@@ -64,6 +64,25 @@ export class Repository {
   async insertMany<T>(document: T[]) {
     try {
       await db.collection(Index.Add).insertMany(document);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async insertOne<T>(document: T) {
+    try {
+      await db.collection(Index.Add).insertOne(document);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async updateOne<T>(filter: T, updateDoc: T, options: T): Promise<Document> {
+    try {
+      const result = await db
+        .collection(Index.Users)
+        .updateOne(filter, updateDoc, options);
+      return result;
     } catch (err) {
       console.log(err);
     }

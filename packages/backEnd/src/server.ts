@@ -1,6 +1,9 @@
 import { config } from "dotenv";
 import { Server } from "@overnightjs/core";
 import express, { json, urlencoded } from "express";
+import session from "express-session";
+import connectRedis from "connect-redis";
+import Redis from "ioredis";
 import helemt from "helmet";
 import compression from "compression";
 import morgan from "morgan";
@@ -8,12 +11,13 @@ import cors from "cors";
 import Logger from "jet-logger";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./api/documentation.json";
-import { connect } from "./db/db";
+import { connect } from "./db/mongo";
 import { UserController } from "./controller/user.controller";
 import { AdvertController } from "./controller/advert.controller";
+import { Credentials } from "aws-sdk";
 
-config({ path: "../../.env" });
-const { origin } = process.env;
+config();
+const { origin, Redishost, Redispassword, Redisusername } = process.env;
 
 const Port = 8080;
 
@@ -22,6 +26,12 @@ process.on("SIGINT", (err) => {
 });
 
 connect();
+
+const rediClient = new Redis(
+  `redis://${Redisusername}:${Redispassword}@${Redishost}`
+);
+
+const RedisStore = connectRedis(session);
 
 export class SampleServer extends Server {
   constructor() {
@@ -45,6 +55,20 @@ export class SampleServer extends Server {
     this.app.use(helemt());
     this.app.use(morgan("dev"));
     this.app.enable("trust proxy");
+    this.app.use(
+      session({
+        secret: "secret",
+        name: "sid",
+        resave: false,
+        saveUninitialized: false,
+        store: new RedisStore({ client: rediClient }),
+        cookie: {
+          secure: process.env.production === "production" ? true : "auto",
+          httpOnly: true,
+          sameSite: process.env.production === "production" ? "none" : "lax",
+        },
+      })
+    );
     this.app.use(
       "/api-docs",
       swaggerUi.serve,
