@@ -14,7 +14,6 @@ import swaggerDocument from "./api/documentation.json";
 import { connect } from "./db/mongo";
 import { UserController } from "./controller/user.controller";
 import { AdvertController } from "./controller/advert.controller";
-import { Credentials } from "aws-sdk";
 
 config();
 const { origin, Redishost, Redispassword, Redisusername } = process.env;
@@ -63,9 +62,9 @@ export class SampleServer extends Server {
         saveUninitialized: false,
         store: new RedisStore({ client: rediClient }),
         cookie: {
-          secure: process.env.production === "production" ? true : "auto",
+          secure: true,
           httpOnly: true,
-          sameSite: process.env.production === "production" ? "none" : "lax",
+          sameSite: "lax",
         },
       })
     );

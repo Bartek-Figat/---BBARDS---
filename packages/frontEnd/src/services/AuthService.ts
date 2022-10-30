@@ -35,6 +35,7 @@ const login = ({ email, password }: LoginProps) => {
       email: email,
       password: password,
     },
+    withCredentials: true,
   });
 };
 

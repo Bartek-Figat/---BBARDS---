@@ -168,15 +168,12 @@ export class UserService {
       if (errors.length > 0)
         return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
 
-      
       const user = await this.repository.findOne(
         { email },
         { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }
       );
 
       const match = user && (await compare(password, user.password));
-      console.log(user);
-      console.log(match);
 
       if (!match || user.isVerified === false || user.authToken !== null)
         return BaseHttpResponse.failedResponse(
@@ -185,6 +182,8 @@ export class UserService {
         );
 
       req.session.user = user._id;
+
+      console.log("Session created===> line 189", req.session.user);
 
       return BaseHttpResponse.sucessResponse({}, 200, {});
     } catch (err) {
