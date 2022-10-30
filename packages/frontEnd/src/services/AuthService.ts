@@ -12,6 +12,10 @@ interface RegisterProps extends LoginProps {
   repeatPassword: string;
 }
 
+interface ActivateProps {
+  token: string;
+}
+
 const register = ({ name, email, password, repeatPassword }: RegisterProps) => {
   return axios({
     method: "post",
@@ -38,8 +42,17 @@ const login = ({ email, password }: LoginProps) => {
   });
 };
 
+const activate = ({ token }: ActivateProps) => {
+  return axios({
+    method: "get",
+    url: `${API_URL}/api/v1/activate/${token}`,
+    headers: { "Content-Type": "application/json" },
+  });
+};
+
 const authService = {
   register,
   login,
+  activate,
 };
 export default authService;

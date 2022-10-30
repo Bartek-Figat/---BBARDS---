@@ -5,6 +5,7 @@ import { CategoryDetails } from "../views/categoryDetails/CategoryDetails";
 import { Layout } from "./Layout";
 import { NotFound } from "views/NotFound/NotFound";
 import { BlogList } from "../views/blogList/BlogList";
+import { Activate } from "views/Activate/Activate";
 
 export function PublicRouter() {
   return (
@@ -16,6 +17,7 @@ export function PublicRouter() {
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route path="/login" element={<Login />} />
+      <Route path="activate/:token" element={<Activate />} />
     </Routes>
   );
 }

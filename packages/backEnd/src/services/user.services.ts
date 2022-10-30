@@ -1,23 +1,16 @@
-import { config } from "dotenv";
-import { ObjectId } from "mongodb";
-import { validate } from "class-validator";
-import { hash, compare } from "bcrypt";
-import sgMail from "@sendgrid/mail";
-import { Repository } from "../repositories/user.repositories";
-import { sign, verify } from "jsonwebtoken";
-import { StatusCode, ErrorMessage } from "../enum";
-import { uploadFile } from "../tools/image";
-import {
-  UserDto,
-  UserProfileDto,
-  TokenDto,
-  LogoutDto,
-  ICredentials,
-  IAuthToken,
-} from "../dto/dto";
-import { BaseHttpResponse } from "../httpError/baseHttpResponse";
+import { config } from 'dotenv';
+import { ObjectId } from 'mongodb';
+import { validate } from 'class-validator';
+import { hash, compare } from 'bcrypt';
+import sgMail from '@sendgrid/mail';
+import { Repository } from '../repositories/user.repositories';
+import { sign, verify } from 'jsonwebtoken';
+import { StatusCode, ErrorMessage } from '../enum';
+import { uploadFile } from '../tools/image';
+import { UserDto, UserProfileDto, TokenDto, LogoutDto, ICredentials, IAuthToken } from '../dto/dto';
+import { BaseHttpResponse } from '../httpError/baseHttpResponse';
 
-config({ path: "../../.env" });
+config({ path: '../../.env' });
 const { secret, sendgridApi } = process.env;
 
 sgMail.setApiKey(sendgridApi);
@@ -28,12 +21,12 @@ export class UserService {
   async emailConfirmation({ email, authToken }: ICredentials): Promise<void> {
     const msg = {
       to: `${email}`,
-      from: "team.bbards@gmail.com",
-      subject: "Thank you for registering.",
-      text: "Team bbards",
+      from: 'team.bbards@gmail.com',
+      subject: 'Thank you for registering.',
+      text: 'Team bbards',
       html: `Hello.
       Thank you for registering. Please click the link to complete yor activation
-      <a href='http://localhost:3000/activate/${authToken}'>Activation Link</a>`,
+      <a href='http://localhost:3000#/activate/${authToken}'>Activation Link</a>`,
     };
 
     try {
@@ -46,15 +39,8 @@ export class UserService {
     }
   }
 
-  async updateAccountAfterEmailConfirmation({
-    authToken,
-  }: {
-    authToken: string;
-  }): Promise<void> {
-    const { email } = await this.repository.findOne(
-      { authToken },
-      { email: 1, _id: 0 }
-    );
+  async updateAccountAfterEmailConfirmation({ authToken }: { authToken: string }): Promise<void> {
+    const { email } = await this.repository.findOne({ authToken }, { email: 1, _id: 0 });
     await this.repository.updateOne(
       { email },
       {
@@ -67,10 +53,10 @@ export class UserService {
     );
     const msg = {
       to: `${email}`,
-      from: "team.bbards@gmail.com",
-      subject: "Thank you for registering.",
-      text: "Team bbards",
-      html: `Your account has benne successfully activated`,
+      from: 'team.bbards@gmail.com',
+      subject: 'Thank you for registering.',
+      text: 'Team bbards',
+      html: `Your account has been successfully activated`,
     };
 
     try {
@@ -90,19 +76,11 @@ export class UserService {
     credentialValidation.name = name;
 
     const errors = await validate(credentialValidation);
-    if (errors.length > 0)
-      return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
+    if (errors.length > 0) return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
 
     try {
-      const userEmail = await this.repository.findOne(
-        { email },
-        { email: 1, _id: 0 }
-      );
-      if (userEmail)
-        return BaseHttpResponse.failedResponse(
-          "User email found",
-          StatusCode.BAD_REQUEST
-        );
+      const userEmail = await this.repository.findOne({ email }, { email: 1, _id: 0 });
+      if (userEmail) return BaseHttpResponse.failedResponse('User email found', StatusCode.BAD_REQUEST);
 
       const credentials = {
         email,
@@ -121,41 +99,24 @@ export class UserService {
         email,
         authToken: credentials.authToken,
       });
-      return BaseHttpResponse.sucessResponse(
-        "User registered successfully",
-        200,
-        {}
-      );
+      return BaseHttpResponse.sucessResponse('User registered successfully', 200, {});
     } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
+      return BaseHttpResponse.failedResponse(err, StatusCode.INTERNAL_SERVER_ERROR);
     }
   }
 
   async emailConfiramtion({ token }: IAuthToken) {
-    const { authToken } = await this.repository.findOne(
-      { authToken: token },
-      { authToken: 1, _id: 0 }
-    );
+    const { authToken } = await this.repository.findOne({ authToken: token }, { authToken: 1, _id: 0 });
 
     try {
-      if (!authToken)
-        return BaseHttpResponse.failedResponse(
-          { error: StatusCode.BAD_REQUEST },
-          StatusCode.BAD_REQUEST
-        );
+      if (!authToken) return BaseHttpResponse.failedResponse({ error: StatusCode.BAD_REQUEST }, StatusCode.BAD_REQUEST);
 
       await this.updateAccountAfterEmailConfirmation({
         authToken,
       });
       return BaseHttpResponse.sucessResponse({}, StatusCode.SUCCESS, {});
     } catch (error) {
-      return BaseHttpResponse.failedResponse(
-        error.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
+      return BaseHttpResponse.failedResponse(error.message, StatusCode.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -166,8 +127,7 @@ export class UserService {
       credentialValidation.password = password;
 
       const errors = await validate(credentialValidation);
-      if (errors.length > 0)
-        return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
+      if (errors.length > 0) return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
       const user = await this.repository.findOne(
         { email },
         { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }
@@ -176,19 +136,13 @@ export class UserService {
       const match = user && (await compare(password, user.password));
 
       if (!match || user.isVerified === false || user.authToken !== null)
-        return BaseHttpResponse.failedResponse(
-          ErrorMessage.WRONG,
-          StatusCode.BAD_REQUEST
-        );
+        return BaseHttpResponse.failedResponse(ErrorMessage.WRONG, StatusCode.BAD_REQUEST);
 
       req.session.user = sign({ token: user._id }, `${secret}`);
 
       return BaseHttpResponse.sucessResponse({}, 200, {});
     } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
+      return BaseHttpResponse.failedResponse(err.message, StatusCode.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -200,10 +154,7 @@ export class UserService {
       );
       return BaseHttpResponse.sucessResponse(user, 200, {});
     } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
+      return BaseHttpResponse.failedResponse(err.message, StatusCode.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -216,16 +167,9 @@ export class UserService {
         },
         {}
       );
-      return BaseHttpResponse.sucessResponse(
-        "You have been logged out successfully",
-        200,
-        {}
-      );
+      return BaseHttpResponse.sucessResponse('You have been logged out successfully', 200, {});
     } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
+      return BaseHttpResponse.failedResponse(err.message, StatusCode.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -251,31 +195,13 @@ export class UserService {
       );
       return BaseHttpResponse.sucessResponse(user, 200, {});
     } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
+      return BaseHttpResponse.failedResponse(err.message, StatusCode.INTERNAL_SERVER_ERROR);
     }
   }
 
-  async userInsertProfile(
-    userProfile: UserProfileDto,
-    verificationToken: TokenDto
-  ) {
-    const {
-      firstName,
-      lastName,
-      company,
-      address,
-      city,
-      state,
-      postCode,
-      country,
-      website,
-      phone,
-      birthDay,
-      image,
-    } = userProfile;
+  async userInsertProfile(userProfile: UserProfileDto, verificationToken: TokenDto) {
+    const { firstName, lastName, company, address, city, state, postCode, country, website, phone, birthDay, image } =
+      userProfile;
 
     const { token } = verificationToken;
     let imageLink = null;
@@ -300,8 +226,7 @@ export class UserService {
     userProfileValidation.imageLink = imageLink;
 
     const errors = await validate(userProfileValidation);
-    if (errors.length > 0)
-      return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
+    if (errors.length > 0) return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
 
     try {
       await this.repository.updateOne(
@@ -325,16 +250,9 @@ export class UserService {
         {}
       );
 
-      return BaseHttpResponse.sucessResponse(
-        "User profile updated.",
-        StatusCode.SUCCESS,
-        {}
-      );
+      return BaseHttpResponse.sucessResponse('User profile updated.', StatusCode.SUCCESS, {});
     } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
+      return BaseHttpResponse.failedResponse(err.message, StatusCode.INTERNAL_SERVER_ERROR);
     }
   }
 }
