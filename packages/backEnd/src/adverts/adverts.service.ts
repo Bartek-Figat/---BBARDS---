@@ -11,18 +11,18 @@ import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 import { appConfig } from "../config";
 
 const s3 = new S3({
-  endpoint: appConfig.digitalOceanUrl,
-  region: appConfig.digitalOceanRegion,
+  endpoint: appConfig.endpoint,
+  region: appConfig.region,
   credentials: {
-    accessKeyId: appConfig.digitalOceanAccessKeyId,
-    secretAccessKey: appConfig.digitalOceanSecretKey,
+    accessKeyId: appConfig.accessKeyId,
+    secretAccessKey: appConfig.secretAccessKey,
   },
 });
 
 const uploadedFilesToSpaces = async (requsetFiles) => {
   const spacesFiles = requsetFiles.map(async (file) => {
     const spacesFiles = {
-      Bucket: appConfig.digitalOceanBucketName,
+      Bucket: appConfig.bucketName,
       Key: `bbardsImages/${uuidv4() + file.originalname}`,
       Body: fs.createReadStream(file.path),
       // "authenticated-read" | "aws-exec-read" | "bucket-owner-full-control" | "bucket-owner-read" | "private" | "public-read" | "public-read-write"

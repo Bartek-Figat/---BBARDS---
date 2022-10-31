@@ -12,6 +12,6 @@ export const usersRouter = Router({});
 
 usersRouter.get("", isAuthenticated, getUser);
 usersRouter.post("", register);
-usersRouter.post("profile", isAuthenticated, updateUserProfile);
-usersRouter.get("profile", isAuthenticated, getUserProfile);
-usersRouter.post("activate/:token", confirmEmail);
+usersRouter.post("/profile", isAuthenticated, updateUserProfile);
+usersRouter.get("/profile", isAuthenticated, getUserProfile);
+usersRouter.get("/activate/:token", confirmEmail);

@@ -11,15 +11,19 @@ import { appConfig } from "../config";
 class AuthService {
   constructor(private repository: Repository = new Repository()) {}
 
-  async userLogin({ email, password }: UserDto, req) {
+  async userLogin(
+    { email, password }: { email: string; password: string },
+    req
+  ) {
     try {
-      let credentialValidation = new UserDto();
-      credentialValidation.email = email;
-      credentialValidation.password = password;
+      // let credentialValidation = new UserDto();
+      // credentialValidation.email = email;
+      // credentialValidation.password = password;
 
-      const errors = await validate(credentialValidation);
-      if (errors.length > 0)
-        return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
+      // const errors = await validate(credentialValidation);
+      // console.log(errors);
+      // if (errors.length > 0)
+      //   return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
       const user = await this.repository.findOne(
         { email },
         { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }

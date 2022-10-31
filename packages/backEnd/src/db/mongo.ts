@@ -4,7 +4,7 @@ import { appConfig } from "../config";
 
 import { Index } from "../enum";
 
-const client = new MongoClient(appConfig.dbURL, {
+const client = new MongoClient(appConfig.dbDEV, {
   useNewUrlParser: true,
 } as MongoClientOptions);
 

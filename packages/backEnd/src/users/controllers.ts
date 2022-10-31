@@ -1,4 +1,4 @@
-import { Handler } from "express";
+import { Handler, Request } from "express";
 import { usersService } from "./users.service";
 
 export const register: Handler = async (req, res, next) => {
@@ -24,6 +24,6 @@ export const updateUserProfile: Handler = async (req, res, next) => {
 export const confirmEmail: Handler = async (req, res, next) => {
   const token = req.params?.token;
   if (!token) return res.sendStatus(400);
-  const response = await usersService.emailConfiramtion(token);
+  const response = await usersService.emailConfiramtion({ token });
   res.status(response.statusCode).json(response);
 };

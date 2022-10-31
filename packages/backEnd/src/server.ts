@@ -23,7 +23,7 @@ process.on("SIGINT", (err) => {
 connect();
 
 const redisClient = new Redis(
-  `redis://${appConfig.redisUsername}:${appConfig.redisPassword}@${appConfig.redisHost}`
+  `redis://${appConfig.Redisusername}:${appConfig.Redispassword}@${appConfig.Redishost}`
 );
 
 const RedisStore = connectRedis(session);
@@ -56,9 +56,9 @@ app.use(
     saveUninitialized: false,
     store: new RedisStore({ client: redisClient }),
     cookie: {
-      secure: process.env.production === "production" ? true : "auto",
+      secure: "auto",
       httpOnly: true,
-      sameSite: process.env.production === "production" ? "none" : "lax",
+      sameSite: "lax",
     },
   })
 );
@@ -70,6 +70,6 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/adverts", advertsRouter);
 
-app.listen(appConfig.backendPort, () => {
-  logger.info(`App listening on port ${appConfig.backendPort}`);
+app.listen(appConfig.Port, () => {
+  logger.info(`App listening on port ${appConfig.Port}`);
 });

@@ -1,16 +1,27 @@
+import { config } from "dotenv";
 import { ObjectId } from "mongodb";
 import { validate } from "class-validator";
-import { hash } from "bcrypt";
+import { hash, compare } from "bcrypt";
 import sgMail from "@sendgrid/mail";
 import { Repository } from "../repositories/user.repositories";
 import { sign } from "jsonwebtoken";
-import { StatusCode } from "../enum";
+import { StatusCode, ErrorMessage } from "../enum";
 import { uploadFile } from "../tools/image";
-import { ICredentials, TokenDto, UserDto, UserProfileDto } from "../dto/dto";
+import {
+  UserDto,
+  UserProfileDto,
+  TokenDto,
+  LogoutDto,
+  ICredentials,
+  IAuthToken,
+} from "../dto/dto";
 import { BaseHttpResponse } from "../httpError/baseHttpResponse";
 import { appConfig } from "../config";
 
-sgMail.setApiKey(appConfig.sendgridApiKey);
+config({ path: "../../.env" });
+const { secret, sendgridApi } = process.env;
+
+sgMail.setApiKey(sendgridApi);
 
 export class UserService {
   constructor(private repository: Repository = new Repository()) {}
@@ -21,10 +32,9 @@ export class UserService {
       from: "team.bbards@gmail.com",
       subject: "Thank you for registering.",
       text: "Team bbards",
-      //TODO replace hardcoded URL
       html: `Hello.
       Thank you for registering. Please click the link to complete yor activation
-      <a href='http://localhost:3000/activate/${authToken}'>Activation Link</a>`,
+      <a href='http://localhost:3000#/activate/${authToken}'>Activation Link</a>`,
     };
 
     try {
@@ -37,15 +47,15 @@ export class UserService {
     }
   }
 
-  async updateAccountAfterEmailConfirmation({
-    authToken,
-  }: {
-    authToken: string;
+  async updateAccountAfterEmailConfirmation(authToken: {
+    authToken: { authToken: string };
   }): Promise<void> {
+    console.log("authToken -->51", authToken);
     const { email } = await this.repository.findOne(
       { authToken },
       { email: 1, _id: 0 }
     );
+    console.log("email", email);
     await this.repository.updateOne(
       { email },
       {
@@ -61,7 +71,7 @@ export class UserService {
       from: "team.bbards@gmail.com",
       subject: "Thank you for registering.",
       text: "Team bbards",
-      html: `Your account has benne successfully activated`,
+      html: `Your account has been successfully activated`,
     };
 
     try {
@@ -74,12 +84,14 @@ export class UserService {
     }
   }
 
-  async userRegister({ email, password }: UserDto) {
+  async userRegister({ email, password, name }: UserDto) {
     let credentialValidation = new UserDto();
     credentialValidation.email = email;
     credentialValidation.password = password;
+    credentialValidation.name = name;
 
     const errors = await validate(credentialValidation);
+    console.log("errors", errors);
     if (errors.length > 0)
       return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
 
@@ -88,6 +100,7 @@ export class UserService {
         { email },
         { email: 1, _id: 0 }
       );
+      console.log(userEmail);
       if (userEmail)
         return BaseHttpResponse.failedResponse(
           "User email found",
@@ -101,6 +114,7 @@ export class UserService {
         dateAdded: new Date(),
         lastLoggedIn: null,
         logOutDate: null,
+        name,
       };
 
       await this.repository.insertOne({
@@ -124,8 +138,8 @@ export class UserService {
     }
   }
 
-  async emailConfiramtion(token: string) {
-    const { authToken } = await this.repository.findOne(
+  async emailConfiramtion({ token }: IAuthToken) {
+    const authToken = await this.repository.findOne(
       { authToken: token },
       { authToken: 1, _id: 0 }
     );
@@ -137,9 +151,7 @@ export class UserService {
           StatusCode.BAD_REQUEST
         );
 
-      await this.updateAccountAfterEmailConfirmation({
-        authToken,
-      });
+      await this.updateAccountAfterEmailConfirmation(authToken.authToken);
       return BaseHttpResponse.sucessResponse({}, StatusCode.SUCCESS, {});
     } catch (error) {
       return BaseHttpResponse.failedResponse(
@@ -149,7 +161,6 @@ export class UserService {
     }
   }
 
-<<<<<<< HEAD:packages/backEnd/src/services/user.services.ts
   async userLogin({ email, password }: UserDto, req) {
     try {
       let credentialValidation = new UserDto();
@@ -157,6 +168,7 @@ export class UserService {
       credentialValidation.password = password;
 
       const errors = await validate(credentialValidation);
+
       if (errors.length > 0)
         return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
 
@@ -186,8 +198,6 @@ export class UserService {
     }
   }
 
-=======
->>>>>>> e3da0dcf5236edda44ce5f236b414ecb16084906:packages/backEnd/src/users/users.service.ts
   async getUserData({ token }: TokenDto) {
     try {
       const user = await this.repository.findOne(
@@ -202,6 +212,29 @@ export class UserService {
       );
     }
   }
+
+  async userLogout({ token, authHeader }: LogoutDto) {
+    try {
+      const v = await this.repository.updateOne(
+        { _id: new ObjectId(token.token) },
+        {
+          $pull: { authorizationToken: authHeader },
+        },
+        {}
+      );
+      return BaseHttpResponse.sucessResponse(
+        "You have been logged out successfully",
+        200,
+        {}
+      );
+    } catch (err) {
+      return BaseHttpResponse.failedResponse(
+        err.message,
+        StatusCode.INTERNAL_SERVER_ERROR
+      );
+    }
+  }
+
   async getUserProfile({ token }: TokenDto) {
     try {
       const user = await this.repository.findOne(
