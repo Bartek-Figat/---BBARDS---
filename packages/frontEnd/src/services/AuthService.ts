@@ -2,6 +2,10 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080";
 
+export const instance = axios.create({
+  baseURL: "http://localhost:8080/api/v1",
+});
+
 interface LoginProps {
   email: string;
   password: string;

@@ -31,7 +31,7 @@ export class AuthService {
       text: "Team bbards",
       html: `Hello.
       Thank you for registering. Please click the link to complete yor activation
-      <a href='http://localhost:3000/activate/${authToken}'>Activation Link</a>`,
+      <a href='http://localhost:3000/#/activate/${authToken}'>Activation Link</a>`,
     };
 
     try {
@@ -44,13 +44,10 @@ export class AuthService {
     }
   }
 
-  async updateAccountAfterEmailConfirmation({
-    authToken,
-  }: {
-    authToken: string;
-  }): Promise<void> {
+  async updateAccountAfterEmailConfirmation(authToken): Promise<void> {
+    console.log("authToken line 48------>", authToken.authToken);
     const { email } = await this.repository.findOne(
-      { authToken },
+      { authToken: authToken.authToken },
       { email: 1, _id: 0 }
     );
     await this.repository.updateOne(
@@ -134,7 +131,7 @@ export class AuthService {
   }
 
   async emailConfiramtion({ token }: IAuthToken) {
-    const { authToken } = await this.repository.findOne(
+    const authToken = await this.repository.findOne(
       { authToken: token },
       { authToken: 1, _id: 0 }
     );
@@ -147,7 +144,7 @@ export class AuthService {
         );
 
       await this.updateAccountAfterEmailConfirmation({
-        authToken,
+        authToken: authToken.authToken,
       });
       return BaseHttpResponse.sucessResponse({}, StatusCode.SUCCESS, {});
     } catch (error) {

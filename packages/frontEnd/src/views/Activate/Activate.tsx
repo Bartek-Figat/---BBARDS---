@@ -17,18 +17,32 @@ export const Activate = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        if (token) {
-          dispatch(confirmEmail({ token }));
-          navigate("/login");
-        }
-      } catch (err) {
-        navigate("/login");
-      }
+    if (token) {
+      dispatch(confirmEmail({ token }));
     }
-    fetchData();
-  }, [dispatch, navigate, token]);
+  }, [dispatch, token]);
 
-  return <div className="flex justify-center items-center mt-20">...</div>;
+  useEffect(() => {
+    if (isSuccess) {
+      const timer = setTimeout(() => {
+        navigate("/login");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess, navigate]);
+
+  return (
+    <div className="flex justify-center items-center mt-20">
+      {isPending && <p>Loading ...</p>}
+      {isSuccess && <p>Success! Redirect to login page</p>}
+      {isError && (
+        <div className="flex justify-center items-center flex-col gap-5">
+          <p>{errorMessage}</p>
+          <ButtonLink to="/login" variant="primary">
+            Back to login page
+          </ButtonLink>
+        </div>
+      )}
+    </div>
+  );
 };
