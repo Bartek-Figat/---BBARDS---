@@ -6,24 +6,21 @@ import sgMail from "@sendgrid/mail";
 import { Repository } from "../repositories/user.repositories";
 import { sign } from "jsonwebtoken";
 import { StatusCode, ErrorMessage } from "../enum";
-import { uploadFile } from "../tools/image";
 import {
-  UserDto,
-  UserProfileDto,
-  TokenDto,
+  RegisterDto,
+  LoginDto,
   LogoutDto,
   ICredentials,
   IAuthToken,
-} from "../dto/dto";
+} from "../dto/auth.dto";
 import { BaseHttpResponse } from "../httpError/baseHttpResponse";
-import { appConfig } from "../config";
 
 config({ path: "../../.env" });
 const { secret, sendgridApi } = process.env;
 
 sgMail.setApiKey(sendgridApi);
 
-export class UserService {
+export class AuthService {
   constructor(private repository: Repository = new Repository()) {}
 
   async emailConfirmation({ email, authToken }: ICredentials): Promise<void> {
@@ -34,7 +31,7 @@ export class UserService {
       text: "Team bbards",
       html: `Hello.
       Thank you for registering. Please click the link to complete yor activation
-      <a href='http://localhost:3000#/activate/${authToken}'>Activation Link</a>`,
+      <a href='http://localhost:3000/activate/${authToken}'>Activation Link</a>`,
     };
 
     try {
@@ -47,15 +44,15 @@ export class UserService {
     }
   }
 
-  async updateAccountAfterEmailConfirmation(authToken: {
-    authToken: { authToken: string };
+  async updateAccountAfterEmailConfirmation({
+    authToken,
+  }: {
+    authToken: string;
   }): Promise<void> {
-    console.log("authToken -->51", authToken);
     const { email } = await this.repository.findOne(
       { authToken },
       { email: 1, _id: 0 }
     );
-    console.log("email", email);
     await this.repository.updateOne(
       { email },
       {
@@ -71,7 +68,7 @@ export class UserService {
       from: "team.bbards@gmail.com",
       subject: "Thank you for registering.",
       text: "Team bbards",
-      html: `Your account has been successfully activated`,
+      html: `Your account has benne successfully activated`,
     };
 
     try {
@@ -84,14 +81,13 @@ export class UserService {
     }
   }
 
-  async userRegister({ email, password, name }: UserDto) {
-    let credentialValidation = new UserDto();
+  async userRegister({ email, password, name }: RegisterDto) {
+    let credentialValidation = new RegisterDto();
     credentialValidation.email = email;
     credentialValidation.password = password;
     credentialValidation.name = name;
 
     const errors = await validate(credentialValidation);
-    console.log("errors", errors);
     if (errors.length > 0)
       return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
 
@@ -100,7 +96,6 @@ export class UserService {
         { email },
         { email: 1, _id: 0 }
       );
-      console.log(userEmail);
       if (userEmail)
         return BaseHttpResponse.failedResponse(
           "User email found",
@@ -109,12 +104,12 @@ export class UserService {
 
       const credentials = {
         email,
-        authToken: sign({ data: email }, appConfig.secret),
+        name,
+        authToken: sign({ data: email }, secret),
         isVerified: false,
         dateAdded: new Date(),
         lastLoggedIn: null,
         logOutDate: null,
-        name,
       };
 
       await this.repository.insertOne({
@@ -139,7 +134,7 @@ export class UserService {
   }
 
   async emailConfiramtion({ token }: IAuthToken) {
-    const authToken = await this.repository.findOne(
+    const { authToken } = await this.repository.findOne(
       { authToken: token },
       { authToken: 1, _id: 0 }
     );
@@ -151,7 +146,9 @@ export class UserService {
           StatusCode.BAD_REQUEST
         );
 
-      await this.updateAccountAfterEmailConfirmation(authToken.authToken);
+      await this.updateAccountAfterEmailConfirmation({
+        authToken,
+      });
       return BaseHttpResponse.sucessResponse({}, StatusCode.SUCCESS, {});
     } catch (error) {
       return BaseHttpResponse.failedResponse(
@@ -161,17 +158,15 @@ export class UserService {
     }
   }
 
-  async userLogin({ email, password }: UserDto, req) {
+  async userLogin({ email, password }: LoginDto, req) {
     try {
-      let credentialValidation = new UserDto();
+      let credentialValidation = new LoginDto();
       credentialValidation.email = email;
       credentialValidation.password = password;
 
       const errors = await validate(credentialValidation);
-
       if (errors.length > 0)
         return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
-
       const user = await this.repository.findOne(
         { email },
         { email: 1, password: 1, isVerified: 1, authToken: 1, _id: 1 }
@@ -185,26 +180,16 @@ export class UserService {
           StatusCode.BAD_REQUEST
         );
 
-      req.session.user = user._id;
+      const token: string = sign({ token: user._id.toString() }, `${secret}`);
 
-      console.log("Session created===> line 189", req.session.user);
-
-      return BaseHttpResponse.sucessResponse({}, 200, {});
-    } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
+      await this.repository.updateOne(
+        { email: user.email },
+        {
+          $addToSet: { authorizationToken: { $each: [`${token}`] } },
+        },
+        {}
       );
-    }
-  }
-
-  async getUserData({ token }: TokenDto) {
-    try {
-      const user = await this.repository.findOne(
-        { _id: new ObjectId(token.token) },
-        { email: 1, name: 1, lastLoggedIn: 1, logOutDate: 1, _id: 0 }
-      );
-      return BaseHttpResponse.sucessResponse(user, 200, {});
+      return BaseHttpResponse.sucessResponse(token, 200, {});
     } catch (err) {
       return BaseHttpResponse.failedResponse(
         err.message,
@@ -215,7 +200,7 @@ export class UserService {
 
   async userLogout({ token, authHeader }: LogoutDto) {
     try {
-      const v = await this.repository.updateOne(
+      await this.repository.updateOne(
         { _id: new ObjectId(token.token) },
         {
           $pull: { authorizationToken: authHeader },
@@ -234,115 +219,4 @@ export class UserService {
       );
     }
   }
-
-  async getUserProfile({ token }: TokenDto) {
-    try {
-      const user = await this.repository.findOne(
-        { _id: new ObjectId(token.token) },
-        {
-          firstName: 1,
-          lastName: 1,
-          company: 1,
-          address: 1,
-          city: 1,
-          state: 1,
-          postCode: 1,
-          country: 1,
-          website: 1,
-          phone: 1,
-          birthDay: 1,
-          imageLink: 1,
-          _id: 0,
-        }
-      );
-      return BaseHttpResponse.sucessResponse(user, 200, {});
-    } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
-    }
-  }
-
-  async userInsertProfile(
-    userProfile: UserProfileDto,
-    verificationToken: TokenDto
-  ) {
-    const {
-      firstName,
-      lastName,
-      company,
-      address,
-      city,
-      state,
-      postCode,
-      country,
-      website,
-      phone,
-      birthDay,
-      image,
-    } = userProfile;
-
-    const { token } = verificationToken;
-    let imageLink = null;
-    if (image != null) {
-      imageLink = await uploadFile(image);
-    }
-
-    let userProfileValidation = new UserProfileDto();
-
-    userProfileValidation.firstName = firstName;
-    userProfileValidation.lastName = lastName;
-    userProfileValidation.company = company;
-    userProfileValidation.address = address;
-    userProfileValidation.city = city;
-    userProfileValidation.state = state;
-    userProfileValidation.postCode = postCode;
-    userProfileValidation.country = country;
-    userProfileValidation.website = website;
-    userProfileValidation.phone = phone;
-    userProfileValidation.birthDay = birthDay;
-    userProfileValidation.image = image;
-    userProfileValidation.imageLink = imageLink;
-
-    const errors = await validate(userProfileValidation);
-    if (errors.length > 0)
-      return BaseHttpResponse.failedResponse(errors, StatusCode.BAD_REQUEST);
-
-    try {
-      await this.repository.updateOne(
-        { _id: new ObjectId(token.token) },
-        {
-          $set: {
-            firstName: firstName,
-            lastName: lastName,
-            company: company,
-            address: address,
-            city: city,
-            state: state,
-            postCode: postCode,
-            country: country,
-            website: website,
-            phone: phone,
-            birthDay: birthDay,
-            imageLink: imageLink,
-          },
-        },
-        {}
-      );
-
-      return BaseHttpResponse.sucessResponse(
-        "User profile updated.",
-        StatusCode.SUCCESS,
-        {}
-      );
-    } catch (err) {
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.INTERNAL_SERVER_ERROR
-      );
-    }
-  }
 }
-
-export const usersService = new UserService();

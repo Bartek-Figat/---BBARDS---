@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/AuthService";
 
 interface ActivateProps {
-  token: string | undefined;
+  token: string;
 }
 
 interface ActivateState {
@@ -11,15 +11,15 @@ interface ActivateState {
 }
 
 const initialState: ActivateState = {
-  status: "waiting",
+  status: "error",
   errorMessage: null,
 };
 
 export const confirmEmail = createAsyncThunk(
   "auth/activate",
-  async (token: ActivateProps, { rejectWithValue }) => {
+  async ({ token }: ActivateProps, { rejectWithValue }) => {
     try {
-      await AuthService.activate(token);
+      await AuthService.activate({ token });
     } catch (err) {
       const error = err as Error;
       return rejectWithValue(error.message);

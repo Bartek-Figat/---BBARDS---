@@ -19,14 +19,16 @@ export const Activate = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        dispatch(confirmEmail({ token }));
-        navigate("/login");
+        if (token) {
+          dispatch(confirmEmail({ token }));
+          navigate("/login");
+        }
       } catch (err) {
         navigate("/login");
       }
     }
     fetchData();
-  }, [dispatch, isSuccess, navigate, token]);
+  }, [dispatch, navigate, token]);
 
   return <div className="flex justify-center items-center mt-20">...</div>;
 };

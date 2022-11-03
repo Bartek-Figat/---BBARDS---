@@ -19,13 +19,13 @@ interface ActivateProps {
 const register = ({ name, email, password, repeatPassword }: RegisterProps) => {
   return axios({
     method: "post",
-    url: `${API_URL}/api/v1/users`,
+    url: `${API_URL}/api/v1/registration`,
     headers: { "Content-Type": "application/json" },
     data: {
-      name: name,
-      email: email,
-      password: password,
-      repeatPassword: repeatPassword,
+      name,
+      email,
+      password,
+      repeatPassword,
     },
   });
 };
@@ -33,11 +33,11 @@ const register = ({ name, email, password, repeatPassword }: RegisterProps) => {
 const login = ({ email, password }: LoginProps) => {
   return axios({
     method: "post",
-    url: `${API_URL}/api/v1/auth`,
+    url: `${API_URL}/api/v1/login`,
     headers: { "Content-Type": "application/json" },
     data: {
-      email: email,
-      password: password,
+      email,
+      password,
     },
     withCredentials: true,
   });
@@ -46,7 +46,7 @@ const login = ({ email, password }: LoginProps) => {
 const activate = ({ token }: ActivateProps) => {
   return axios({
     method: "get",
-    url: `${API_URL}/api/v1/users/activate/${token}`,
+    url: `${API_URL}/api/v1/activate/${token}`,
     headers: { "Content-Type": "application/json" },
   });
 };

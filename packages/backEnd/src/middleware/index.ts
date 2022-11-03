@@ -1,51 +1,42 @@
-import { Handler, NextFunction, Request, Response } from "express";
-import { verify } from "jsonwebtoken";
+import { Request, Response, NextFunction } from "express";
+import { verify, JwtPayload } from "jsonwebtoken";
 import { StatusCode } from "../enum";
-import { BaseHttpResponse } from "../httpError/baseHttpResponse";
-import { appConfig } from "../config";
+import { Repository } from "../repositories/user.repositories";
 
 export class AuthMiddleware {
+  constructor(private repository: Repository = new Repository()) {}
+
   async isAuthenticated(req: Request, res: Response, next: NextFunction) {
-    if (!req.session || !req.session.user)
-      return BaseHttpResponse.failedResponse(
-        StatusCode.UNAUTHORIZED,
-        StatusCode.UNAUTHORIZED
-      );
+    const authHeader = req.headers.authorization;
+    const token: string = authHeader && authHeader.split(" ")[1];
 
-    const { user } = req.session;
+    if (!token)
+      return res
+        .status(StatusCode.UNAUTHORIZED)
+        .json({ status: `${StatusCode.UNAUTHORIZED}` });
 
-    return verify(user, appConfig.secret, (err, session) => {
-      if (err)
-        return BaseHttpResponse.failedResponse(
-          err.message,
-          StatusCode.UNAUTHORIZED
-        );
-      req.user = {
-        token: session,
-      };
-      next();
-    });
-  }
-}
-
-export const isAuthenticated: Handler = async (req, res, next) => {
-  if (!req.session || !req.session.user)
-    return BaseHttpResponse.failedResponse(
-      StatusCode.UNAUTHORIZED,
-      StatusCode.UNAUTHORIZED
+    const authorizationToken = await new Repository().find(
+      { authorizationToken: { $in: [token] } },
+      { authorizationToken: 1, _id: 0 }
     );
 
-  const { user } = req.session;
+    if (authorizationToken.length === 0)
+      return res.sendStatus(StatusCode.UNAUTHORIZED);
 
-  return verify(user, appConfig.secret, (err, session) => {
-    if (err)
-      return BaseHttpResponse.failedResponse(
-        err.message,
-        StatusCode.UNAUTHORIZED
-      );
-    req.user = {
-      token: session,
-    };
-    next();
-  });
-};
+    try {
+      verify(token, `secret`, (err, tokenVerify) => {
+        if (err)
+          return res.status(StatusCode.UNAUTHORIZED).json({
+            status: `${StatusCode.UNAUTHORIZED}`,
+          });
+        req.user = {
+          token: tokenVerify as JwtPayload,
+          authHeader: token,
+        };
+        next();
+      });
+    } catch (err) {
+      return res.sendStatus(StatusCode.INTERNAL_SERVER_ERROR);
+    }
+  }
+}

@@ -17,7 +17,7 @@ export function PublicRouter() {
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route path="/login" element={<Login />} />
-      <Route path="activate/:token" element={<Activate />} />
+      <Route path="/activate/:token" element={<Activate />} />
     </Routes>
   );
 }

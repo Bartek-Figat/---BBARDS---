@@ -1,20 +1,22 @@
+import { config } from "dotenv";
+import { Server } from "@overnightjs/core";
 import express, { json, urlencoded } from "express";
-import session from "express-session";
-import connectRedis from "connect-redis";
-import Redis from "ioredis";
-import helmet from "helmet";
+import helemt from "helmet";
 import compression from "compression";
 import morgan from "morgan";
 import cors from "cors";
-import logger from "jet-logger";
+import Logger from "jet-logger";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./api/documentation.json";
 import { connect } from "./db/mongo";
+import { UserController } from "./controller/user.controller";
+import { AdvertController } from "./controller/advert.controller";
+import { AuthController } from "./controller/auth.controller";
 
-import { appConfig } from "./config";
-import { authRouter } from "./auth/router";
-import { usersRouter } from "./users/router";
-import { advertsRouter } from "./adverts/router";
+config();
+const { origin } = process.env;
+
+const Port = 8080;
 
 process.on("SIGINT", (err) => {
   process.exit(0);
@@ -22,54 +24,50 @@ process.on("SIGINT", (err) => {
 
 connect();
 
-const redisClient = new Redis(
-  `redis://${appConfig.Redisusername}:${appConfig.Redispassword}@${appConfig.Redishost}`
-);
+export class SampleServer extends Server {
+  constructor() {
+    super(process.env.NODE_ENV === "development");
+    this.app.use(json());
+    this.app.use(urlencoded({ extended: true }));
+    this.app.use(express.urlencoded({ limit: "50mb", extended: true }));
+    this.app.use(express.json({ limit: "50mb" }));
+    this.app.use(compression());
+    this.app.use(express.static("avatar"));
+    this.app.use(
+      cors({
+        methods: ["GET, POST, PUT, DELETE, OPTIONS"],
+        credentials: true,
+        origin,
+        allowedHeaders: [
+          "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+        ],
+      })
+    );
+    this.app.use(helemt());
+    this.app.use(morgan("dev"));
+    this.app.enable("trust proxy");
+    this.app.use(
+      "/api-docs",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDocument)
+    );
+    this.setupControllers();
+  }
 
-const RedisStore = connectRedis(session);
+  private setupControllers(): void {
+    const userController = new UserController();
+    const advertController = new AdvertController();
+    const authController = new AuthController();
+    super.addControllers([userController, advertController, authController]);
+  }
 
-const app = express();
+  public start(port: number): void {
+    this.app.listen(port, () => {
+      Logger.imp(`Server listening on port: ${port}`);
+    });
+  }
+}
 
-//configure app
-app.use(json({ limit: "50mb" }));
-app.use(urlencoded({ limit: "50mb", extended: true }));
-app.use(compression());
-app.use(express.static("static"));
-app.enable("trust proxy");
-app.use(
-  cors({
-    methods: ["GET, POST, PUT, DELETE, OPTIONS"],
-    credentials: true,
-    origin: appConfig.origin,
-    allowedHeaders: [
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-    ],
-  })
-);
-app.use(helmet());
-app.use(morgan("dev"));
-app.use(
-  session({
-    secret: "secret",
-    name: "sid",
-    resave: false,
-    saveUninitialized: false,
-    store: new RedisStore({ client: redisClient }),
-    cookie: {
-      secure: "auto",
-      httpOnly: true,
-      sameSite: "lax",
-    },
-  })
-);
-//mount swagger docs
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const server = new SampleServer();
 
-//mount routes
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/users", usersRouter);
-app.use("/api/v1/adverts", advertsRouter);
-
-app.listen(appConfig.Port, () => {
-  logger.info(`App listening on port ${appConfig.Port}`);
-});
+server.start(Port);

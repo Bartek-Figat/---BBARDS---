@@ -1,28 +1,34 @@
+import { config } from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 import { ObjectId } from "mongodb";
 import fs from "fs";
 import { S3 } from "aws-sdk";
 import { db } from "../db/mongo";
-import { Index, StatusCode } from "../enum";
+import { Index } from "../enum";
 import { Repository } from "../repositories/add.respositories";
-import { IAdvertising, ICategories, TokenDto } from "../dto/dto";
-import { MulterRequest } from "../interface";
+import { StatusCode } from "../enum";
+import { TokenDto } from "../dto/auth.dto";
+import { IAdvertising, ICategories } from "../dto/advert.dto";
+import { MulterRequest } from "../interface/index";
 import { BaseHttpResponse } from "../httpError/baseHttpResponse";
-import { appConfig } from "../config";
+
+config({ path: "../../.env" });
+const { endpoint, region, accessKeyId, secretAccessKey, bucketName } =
+  process.env;
 
 const s3 = new S3({
-  endpoint: appConfig.endpoint,
-  region: appConfig.region,
+  endpoint,
+  region,
   credentials: {
-    accessKeyId: appConfig.accessKeyId,
-    secretAccessKey: appConfig.secretAccessKey,
+    accessKeyId,
+    secretAccessKey,
   },
 });
 
 const uploadedFilesToSpaces = async (requsetFiles) => {
   const spacesFiles = requsetFiles.map(async (file) => {
     const spacesFiles = {
-      Bucket: appConfig.bucketName,
+      Bucket: bucketName,
       Key: `bbardsImages/${uuidv4() + file.originalname}`,
       Body: fs.createReadStream(file.path),
       // "authenticated-read" | "aws-exec-read" | "bucket-owner-full-control" | "bucket-owner-read" | "private" | "public-read" | "public-read-write"
@@ -150,5 +156,3 @@ export class AddService {
     }
   }
 }
-
-export const advertsService = new AddService();

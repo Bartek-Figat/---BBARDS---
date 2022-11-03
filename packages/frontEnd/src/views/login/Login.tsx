@@ -15,7 +15,7 @@ function Login() {
     if (isLogin) {
       navigate("/dashboard", { replace: true });
     }
-  }, [isLogin]);
+  }, [isLogin, navigate]);
 
   return (
     <div className="flex h-screen w-screen">
