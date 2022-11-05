@@ -26,24 +26,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"RegisterDto": {
-				"properties": {
-					"password": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
-					"name": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"password"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"LoginDto": {
 				"properties": {
 					"password": {
@@ -90,9 +72,7 @@
 					"required": true,
 					"content": {
 						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/RegisterDto"
-							}
+							"schema": {}
 						}
 					}
 				}

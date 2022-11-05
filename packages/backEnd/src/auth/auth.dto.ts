@@ -9,6 +9,12 @@ export class RegisterDto {
   name: string | undefined;
 }
 
+export interface RegisterProps {
+  password: string;
+  email: string | undefined;
+  name: string | undefined;
+}
+
 export class LoginDto {
   @IsNotEmpty()
   password: string | undefined;

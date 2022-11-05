@@ -78,39 +78,41 @@ export class AuthService {
   }
 
   async userRegister({ email, password, name }: RegisterDto) {
-    let credentialValidation = new RegisterDto();
-    credentialValidation.email = email;
-    credentialValidation.password = password;
-    credentialValidation.name = name;
+    try {
+      let credentialValidation = new RegisterDto();
+      credentialValidation.email = email;
+      credentialValidation.password = password;
+      credentialValidation.name = name;
+      const errors = await validate(credentialValidation);
 
-    const errors = await validate(credentialValidation);
-    if (errors.length > 0) return HttpResponse.failed(errors, 400);
+      if (errors.length > 0) return HttpResponse.failed(errors, 400);
+      const useEmail = await db.collection(Index.Users).findOne({ email });
+      console.log(useEmail);
 
-    const useEmail = await db.collection(Index.Users).findOne({ email });
+      if (useEmail) return HttpResponse.failed("User email found", 400);
 
-    if (useEmail) return HttpResponse.failed("User email found", 400);
+      const credentials = {
+        email,
+        name,
+        authToken: sign({ data: email }, `${secret}`),
+        isVerified: false,
+        dateAdded: new Date(),
+        lastLoggedIn: null,
+        logOutDate: null,
+        password: await hash(password, 10),
+      };
 
-    const credentials = {
-      email,
-      name,
-      authToken: sign({ data: email }, `${secret}`),
-      isVerified: false,
-      dateAdded: new Date(),
-      lastLoggedIn: null,
-      logOutDate: null,
-      password: await hash(password, 10),
-    };
+      await db.collection(Index.Users).insertOne({
+        ...credentials,
+      });
 
-    await db.collection(Index.Users).insertOne({
-      ...credentials,
-    });
-
-    await this.userEmailConfiramtion({
-      email,
-      authToken: credentials.authToken,
-    });
-
-    return HttpResponse.sucess({}, 201, {});
+      await this.userEmailConfiramtion({
+        email,
+        authToken: credentials.authToken,
+      });
+    } catch (err) {
+      console.log("Error: ", err);
+    }
   }
 
   async userLogin({ email, password }: LoginDto) {

@@ -9,19 +9,17 @@ import {
   Security,
   Request,
 } from "tsoa";
-import { RegisterDto, LoginDto } from "./auth.dto";
+import { LoginDto } from "./auth.dto";
 import { AuthService } from "./authServer";
 
 @Route("api/v1")
 export class AuthController extends Controller {
   @Post("registration")
-  public async userRegister(@Body() requestBody: RegisterDto) {
-    console.log(requestBody);
+  async userRegister(@Body() requestBody: any) {
     return await new AuthService().userRegister(requestBody);
   }
   @Post("login")
-  public async userLogin(@Body() requestBody: LoginDto) {
-    console.log(requestBody);
+  async userLogin(@Body() requestBody: LoginDto) {
     return await new AuthService().userLogin(requestBody);
   }
 
