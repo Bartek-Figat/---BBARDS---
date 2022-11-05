@@ -4,7 +4,7 @@ import { useAppSelector } from "store/hooks";
 
 export const ProtectedRoute = () => {
   const { isLogin } = useAppSelector((store) => store.login);
-  return isLogin ? (
+  return localStorage.getItem("token") ? (
     <Outlet />
   ) : (
     <Navigate to="/" state={{ from: location }} replace />
