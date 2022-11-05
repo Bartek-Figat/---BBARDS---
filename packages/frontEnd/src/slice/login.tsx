@@ -33,7 +33,7 @@ export const signIn = createAsyncThunk<
       email,
       password,
     });
-    console.log(response.data);
+
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ValidationErrors>;

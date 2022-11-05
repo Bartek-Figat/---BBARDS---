@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import avatar from "assets/images/avatar/01.jpg";
 import { Nav } from "./nav";
+import axios from "axios";
 
 export const Header: React.FC = () => {
+  const [userCredentials, setUserCredentials] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const token = localStorage.getItem("token");
+        const { data } = await axios.get(`http://localhost:8080/api/v1/user`, {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(data);
+        setUserCredentials(data);
+      } catch (err) {
+        console.log("Error", err);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
     <div className="w-[70vw] pt-10 bg-white rounded-lg text-sm mb-5">
       <div className="flex laptop:flex-col w-full px-3 mb-5">
@@ -17,11 +39,18 @@ export const Header: React.FC = () => {
             </p>
           </div>
           <div className="flex flex-col">
-            <h4 className="font-bold mt-2 text-lg">Jackon Honson</h4>
-            <h5 className="text-cold-gray mb-2">New seller</h5>
             <ul className="text-gray-dark">
-              <li>(123) 000-1234</li>
-              <li>gackon@gmail.com</li>
+              {userCredentials
+                ? Object.values(userCredentials).map(({ email, name }) => {
+                    return (
+                      <>
+                        <h4 className="font-bold mt-2 text-lg">{name}</h4>
+                        <li key={email}>{email}</li>
+                      </>
+                    );
+                  })
+                : null}
+
               <li>Los Angeles, West America</li>
             </ul>
           </div>

@@ -12,10 +12,12 @@ function Login() {
   const { isLogin, successResponse } = useAppSelector((store) => store.login);
 
   useEffect(() => {
-    if (isLogin) {
+    if (successResponse && successResponse.statusCode === 200) {
+      console.log(successResponse);
+      localStorage.setItem("token", successResponse.data);
       navigate("/dashboard", { replace: true });
     }
-  }, [isLogin, navigate]);
+  }, [isLogin, navigate, successResponse]);
 
   return (
     <div className="flex h-screen w-screen">

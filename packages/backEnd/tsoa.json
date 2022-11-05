@@ -1,0 +1,18 @@
+{
+  "entryFile": "src/app.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/**/*Controller.ts"],
+  "spec": {
+    "outputDirectory": "build",
+    "specVersion": 3,
+    "jwt": {
+      "type": "jwt",
+      "name": "token",
+      "in": "headers"
+    }
+  },
+  "routes": {
+    "routesDir": "build",
+    "authenticationModule": "../backEnd/src/authentication/authentication"
+  }
+}
