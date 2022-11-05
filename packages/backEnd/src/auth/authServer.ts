@@ -1,3 +1,6 @@
+import { config } from "dotenv";
+import sgMail from "@sendgrid/mail";
+import { ObjectId } from "mongodb";
 import { validate } from "class-validator";
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
@@ -6,9 +9,74 @@ import { db } from "../db/mongo";
 import { HttpResponse } from "../httpError/httpError";
 import { LoginDto, RegisterDto } from "./auth.dto";
 
+config();
+const { secret, sendgridApi } = process.env;
+sgMail.setApiKey(`${sendgridApi}`);
+
 export class AuthService {
-  async emailConfirmation() {}
-  async updateAccountAfterEmailConfirmation() {}
+  async userEmailConfiramtion({
+    email,
+    authToken,
+  }: {
+    email: string | undefined;
+    authToken: string | undefined;
+  }): Promise<void> {
+    const msg = {
+      to: `${email}`,
+      from: "team.bbards@gmail.com",
+      subject: "Thank you for registering.",
+      text: "Team bbards",
+      html: `Hello.
+      Thank you for registering. Please click the link to complete yor activation
+      <a href='http://localhost:3000/#/activate/${authToken}'>Activation Link</a>`,
+    };
+
+    await sgMail.send(msg);
+  }
+
+  async emailConfiramtion({ token }: { token: string }) {
+    const authToken = await db.collection(Index.Users).findOne(
+      { authToken: token },
+      {
+        projection: {
+          authToken: 1,
+          _id: 0,
+        },
+      }
+    );
+
+    if (!authToken) return HttpResponse.failed("Not modified", 400);
+
+    const email = await db
+      .collection(Index.Users)
+      .findOne({ authToken: authToken.authToken });
+
+    if (!email) return HttpResponse.failed("Not modified", 400);
+    await db.collection(Index.Users).updateOne(
+      { email: email.email },
+      {
+        $set: {
+          authToken: null,
+          isVerified: true,
+        },
+      }
+    );
+
+    const msg = {
+      to: `${email.email}`,
+      from: "team.bbards@gmail.com",
+      subject: "Thank you for registering.",
+      text: "Team bbards",
+      html: `Your account has benne successfully activated`,
+    };
+    sgMail
+      .send(msg)
+      .then(() => {
+        return HttpResponse.sucess({}, 200, {});
+      })
+      .catch(() => HttpResponse.failed("User email found", 400));
+  }
+
   async userRegister({ email, password, name }: RegisterDto) {
     let credentialValidation = new RegisterDto();
     credentialValidation.email = email;
@@ -25,7 +93,7 @@ export class AuthService {
     const credentials = {
       email,
       name,
-      authToken: sign({ data: email }, "secret"),
+      authToken: sign({ data: email }, `${secret}`),
       isVerified: false,
       dateAdded: new Date(),
       lastLoggedIn: null,
@@ -35,6 +103,11 @@ export class AuthService {
 
     await db.collection(Index.Users).insertOne({
       ...credentials,
+    });
+
+    await this.userEmailConfiramtion({
+      email,
+      authToken: credentials.authToken,
     });
 
     return HttpResponse.sucess({}, 201, {});
@@ -69,7 +142,29 @@ export class AuthService {
       },
       {}
     );
+
     return HttpResponse.sucess(token, 200, {});
   }
-  async userLogout() {}
+  async userLogout({
+    decoded: { token, authHeader },
+  }: {
+    decoded: { token: string; authHeader: string };
+  }) {
+    try {
+      await db.collection(Index.Users).updateOne(
+        { _id: new ObjectId(token) },
+        {
+          $pull: { authorizationToken: authHeader },
+        },
+        {}
+      );
+      return HttpResponse.sucess(
+        "You have been logged out successfully",
+        200,
+        {}
+      );
+    } catch (err: any) {
+      return HttpResponse.failed(err.message, 500);
+    }
+  }
 }

@@ -12,7 +12,8 @@ function Login() {
   const { isLogin, successResponse } = useAppSelector((store) => store.login);
 
   useEffect(() => {
-    if (isLogin && successResponse) {
+    if (successResponse && successResponse.statusCode === 200) {
+      console.log(successResponse);
       localStorage.setItem("token", successResponse.data);
       navigate("/dashboard", { replace: true });
     }

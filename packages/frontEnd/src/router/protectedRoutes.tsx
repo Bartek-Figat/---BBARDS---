@@ -4,7 +4,9 @@ import { useAppSelector } from "store/hooks";
 
 export const ProtectedRoute = () => {
   const { isLogin } = useAppSelector((store) => store.login);
-  return localStorage.getItem("token") ? (
+  const token = localStorage.getItem("token");
+  // eslint-disable-next-line no-extra-boolean-cast
+  return !!token ? (
     <Outlet />
   ) : (
     <Navigate to="/" state={{ from: location }} replace />
