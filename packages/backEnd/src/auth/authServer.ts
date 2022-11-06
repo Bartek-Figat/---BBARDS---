@@ -1,16 +1,19 @@
-import { config } from "dotenv";
-import sgMail from "@sendgrid/mail";
-import { ObjectId } from "mongodb";
-import { validate } from "class-validator";
-import { hash, compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
-import { Index } from "../enum/index";
-import { db } from "../db/mongo";
-import { HttpResponse } from "../httpError/httpError";
-import { LoginDto, RegisterDto } from "./auth.dto";
+import { config } from 'dotenv';
+import sgMail from '@sendgrid/mail';
+import { ObjectId } from 'mongodb';
+import { validate } from 'class-validator';
+import { hash, compare } from 'bcrypt';
+import { sign } from 'jsonwebtoken';
+import { Index } from '../enum/index';
+import { db } from '../db/mongo';
+import { HttpResponse } from '../httpError/httpError';
+import { LoginDto, RegisterDto } from './auth.dto';
 
-config();
+config({ path: '../../.env' });
 const { secret, sendgridApi } = process.env;
+
+console.log(secret);
+console.log(sendgridApi);
 sgMail.setApiKey(`${sendgridApi}`);
 
 export class AuthService {
@@ -23,9 +26,9 @@ export class AuthService {
   }): Promise<void> {
     const msg = {
       to: `${email}`,
-      from: "team.bbards@gmail.com",
-      subject: "Thank you for registering.",
-      text: "Team bbards",
+      from: 'team.bbards@gmail.com',
+      subject: 'Thank you for registering.',
+      text: 'Team bbards',
       html: `Hello.
       Thank you for registering. Please click the link to complete yor activation
       <a href='http://localhost:3000/#/activate/${authToken}'>Activation Link</a>`,
@@ -45,13 +48,11 @@ export class AuthService {
       }
     );
 
-    if (!authToken) return HttpResponse.failed("Not modified", 400);
+    if (!authToken) return HttpResponse.failed('Not modified', 400);
 
-    const email = await db
-      .collection(Index.Users)
-      .findOne({ authToken: authToken.authToken });
+    const email = await db.collection(Index.Users).findOne({ authToken: authToken.authToken });
 
-    if (!email) return HttpResponse.failed("Not modified", 400);
+    if (!email) return HttpResponse.failed('Not modified', 400);
     await db.collection(Index.Users).updateOne(
       { email: email.email },
       {
@@ -64,9 +65,9 @@ export class AuthService {
 
     const msg = {
       to: `${email.email}`,
-      from: "team.bbards@gmail.com",
-      subject: "Thank you for registering.",
-      text: "Team bbards",
+      from: 'team.bbards@gmail.com',
+      subject: 'Thank you for registering.',
+      text: 'Team bbards',
       html: `Your account has benne successfully activated`,
     };
     sgMail
@@ -74,7 +75,7 @@ export class AuthService {
       .then(() => {
         return HttpResponse.sucess({}, 200, {});
       })
-      .catch(() => HttpResponse.failed("User email found", 400));
+      .catch(() => HttpResponse.failed('User email found', 400));
   }
 
   async userRegister({ email, password, name }: RegisterDto) {
@@ -89,7 +90,7 @@ export class AuthService {
       const useEmail = await db.collection(Index.Users).findOne({ email });
       console.log(useEmail);
 
-      if (useEmail) return HttpResponse.failed("User email found", 400);
+      if (useEmail) return HttpResponse.failed('User email found', 400);
 
       const credentials = {
         email,
@@ -111,7 +112,7 @@ export class AuthService {
         authToken: credentials.authToken,
       });
     } catch (err) {
-      console.log("Error: ", err);
+      console.log('Error: ', err);
     }
   }
 
@@ -133,9 +134,9 @@ export class AuthService {
     );
     const match = user && (await compare(`${password}`, user.password));
 
-    if (!match) return HttpResponse.failed("Bad Request", 400);
+    if (!match) return HttpResponse.failed('Bad Request', 400);
 
-    const token: string = sign({ token: user._id }, "secret");
+    const token: string = sign({ token: user._id }, 'secret');
 
     await db.collection(Index.Users).updateOne(
       { email: user.email },
@@ -147,11 +148,7 @@ export class AuthService {
 
     return HttpResponse.sucess(token, 200, {});
   }
-  async userLogout({
-    decoded: { token, authHeader },
-  }: {
-    decoded: { token: string; authHeader: string };
-  }) {
+  async userLogout({ decoded: { token, authHeader } }: { decoded: { token: string; authHeader: string } }) {
     try {
       await db.collection(Index.Users).updateOne(
         { _id: new ObjectId(token) },
@@ -160,11 +157,7 @@ export class AuthService {
         },
         {}
       );
-      return HttpResponse.sucess(
-        "You have been logged out successfully",
-        200,
-        {}
-      );
+      return HttpResponse.sucess('You have been logged out successfully', 200, {});
     } catch (err: any) {
       return HttpResponse.failed(err.message, 500);
     }
