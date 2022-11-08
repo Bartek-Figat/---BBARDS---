@@ -1,6 +1,7 @@
 import product1 from "assets/images/product/01.jpg";
 
 export interface IProducts {
+  id: number;
   img: string;
   title: string;
   price: number;
@@ -11,6 +12,7 @@ export interface IProducts {
 
 export const productsMap: IProducts[] = [
   {
+    id: 0,
     img: product1,
     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
     price: 3000,
@@ -19,6 +21,7 @@ export const productsMap: IProducts[] = [
     time: "30 min",
   },
   {
+    id: 1,
     img: product1,
     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
     price: 3000,
@@ -27,6 +30,7 @@ export const productsMap: IProducts[] = [
     time: "30 min",
   },
   {
+    id: 2,
     img: product1,
     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
     price: 3000,
@@ -35,6 +39,7 @@ export const productsMap: IProducts[] = [
     time: "30 min",
   },
   {
+    id: 3,
     img: product1,
     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
     price: 3000,

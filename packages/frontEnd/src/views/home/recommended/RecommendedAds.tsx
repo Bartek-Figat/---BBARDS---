@@ -36,20 +36,22 @@ export const RecommendedAds = () => {
             },
           }}
         >
-          {productsMap.map(({ img, title, price, type, location, time }) => {
-            return (
-              <SwiperSlide key={title}>
-                <ProductCard
-                  img={img}
-                  title={title}
-                  price={price}
-                  type={type}
-                  location={location}
-                  time={time}
-                />
-              </SwiperSlide>
-            );
-          })}
+          {productsMap.map(
+            ({ img, title, price, type, location, time, id }) => {
+              return (
+                <SwiperSlide key={id}>
+                  <ProductCard
+                    img={img}
+                    title={title}
+                    price={price}
+                    type={type}
+                    location={location}
+                    time={time}
+                  />
+                </SwiperSlide>
+              );
+            }
+          )}
         </Swiper>
       </div>
 

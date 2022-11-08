@@ -13,7 +13,6 @@ import { Profile } from "views/admin/profile/profile";
 import { AddPost } from "views/admin/addPost/addPost";
 
 const token = localStorage.getItem("token") || null;
-console.log(!!token);
 
 export const routes = [
   {
