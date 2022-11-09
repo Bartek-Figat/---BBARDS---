@@ -9,8 +9,11 @@ import { db } from "../db/mongo";
 import { HttpResponse } from "../httpError/httpError";
 import { LoginDto, RegisterDto } from "./auth.dto";
 
-config();
+config({ path: "../../.env" });
 const { secret, sendgridApi } = process.env;
+
+console.log(secret);
+console.log(sendgridApi);
 sgMail.setApiKey(`${sendgridApi}`);
 
 export class AuthService {
@@ -152,8 +155,6 @@ export class AuthService {
   }: {
     decoded: { token: string; authHeader: string };
   }) {
-    console.log(token);
-    console.log(authHeader);
     try {
       await db.collection(Index.Users).updateOne(
         { _id: new ObjectId(token) },
