@@ -8,6 +8,7 @@ import { Accordion } from "components/accordion/Accordion";
 import { AccordionItem } from "components/accordion/AccordionItem";
 import { TabButton } from "components/tabs/TabButton";
 import { NavigationItem } from "./NavigationItem";
+import Logout from "../../../views/logout/logout";
 
 interface Props {
   handleToggle: () => void;
@@ -171,7 +172,12 @@ export const Dropdown: React.FC<Props> = ({ handleToggle, collapsed }) => {
                     <NavigationItem path="">Bookmark</NavigationItem>
                     <NavigationItem path="">Message</NavigationItem>
                     <NavigationItem path="">Notification</NavigationItem>
-                    <NavigationItem path="">Logout</NavigationItem>
+                    <button
+                      className="w-full p-3 border-b-[1px] border-[#e8e8e8] bg-dark-blue text-white"
+                      onClick={() => Logout()}
+                    >
+                      Logout
+                    </button>
                   </ul>
                 </Tab.Panel>
               </Tab.Panels>

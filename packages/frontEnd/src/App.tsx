@@ -12,7 +12,7 @@ import { Dasboard } from "views/admin/admin";
 import { Profile } from "views/admin/profile/profile";
 import { AddPost } from "views/admin/addPost/addPost";
 
-const token = localStorage.getItem("token") || null;
+const token = localStorage.getItem("token");
 console.log(!!token);
 
 export const routes = [
@@ -26,6 +26,7 @@ export const routes = [
       { path: `*`, element: <NotFound /> },
     ],
   },
+
   {
     path: `/login`,
     // eslint-disable-next-line no-extra-boolean-cast

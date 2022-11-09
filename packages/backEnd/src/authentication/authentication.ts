@@ -12,6 +12,7 @@ export async function expressAuthentication(
   if (securityName === "jwt") {
     const authHeader = req.headers.authorization;
     const token: string | undefined = authHeader && authHeader.split(" ")[1];
+    console.log(token);
 
     return new Promise(async (resolve) => {
       if (!token) return HttpResponse.failed("Unauthorized", 401);
@@ -30,7 +31,7 @@ export async function expressAuthentication(
         )
         .toArray();
 
-      if (authorizationToken[0].authorizationToken.length === 0)
+      if (authorizationToken.length === 0)
         return HttpResponse.failed("Unauthorized", 401);
 
       return jwt.verify(

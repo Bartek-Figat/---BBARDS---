@@ -4,23 +4,21 @@ import { Nav } from "./nav";
 import axios from "axios";
 
 export const Header: React.FC = () => {
-  const [userCredentials, setUserCredentials] = useState([]);
+  const [userData, useUserData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const token = localStorage.getItem("token");
-        const { data } = await axios.get(`http://localhost:8080/api/v1/user`, {
+      const { data }: any = await axios.get(
+        "http://localhost:8080/api/v1/user",
+        {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        });
-        console.log(data);
-        setUserCredentials(data);
-      } catch (err) {
-        console.log("Error", err);
-      }
+        }
+      );
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useUserData(data);
     }
     fetchData();
   }, []);
@@ -40,12 +38,12 @@ export const Header: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <ul className="text-gray-dark">
-              {userCredentials
-                ? Object.values(userCredentials).map(({ email, name }) => {
+              {userData
+                ? Object.values(userData).map((user: any) => {
                     return (
                       <>
-                        <h4 className="font-bold mt-2 text-lg">{name}</h4>
-                        <li key={email}>{email}</li>
+                        <h4 className="font-bold mt-2 text-lg">{user.name}</h4>
+                        <li key={user.email}>{user.email}</li>
                       </>
                     );
                   })

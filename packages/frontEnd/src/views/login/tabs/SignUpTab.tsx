@@ -46,6 +46,7 @@ function SignUpTab() {
         <div className="mt-11">
           <FormInputWithTooltip
             id="name"
+            type="text"
             placeholder="Name"
             register={register}
             options={{
@@ -55,6 +56,7 @@ function SignUpTab() {
           />
           <FormInputWithTooltip
             id="email"
+            type="email"
             placeholder="E-mail"
             register={register}
             options={{
@@ -68,6 +70,7 @@ function SignUpTab() {
           />
           <FormInputWithTooltip
             id="password"
+            type="password"
             placeholder="Password"
             register={register}
             options={{
@@ -81,6 +84,7 @@ function SignUpTab() {
           />
           <FormInputWithTooltip
             id="repeatPassword"
+            type="password"
             placeholder="Repeat Password"
             register={register}
             options={{

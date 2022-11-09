@@ -7,6 +7,7 @@ interface Props {
   register: UseFormRegister<any>;
   options: object;
   tooltip: string | undefined;
+  type?: string | undefined;
 }
 
 function FormInputWithTooltip({
@@ -15,12 +16,13 @@ function FormInputWithTooltip({
   register,
   options,
   tooltip,
+  type,
 }: Props) {
   return (
     <label>
       <input
         className="mt-5 w-full border-b-[2px] border-gray-mercury focus:border-dark-blue focus:outline-none py-2.5 pl-5"
-        type="text"
+        type={type}
         placeholder={placeholder}
         {...register(id, options)}
       />

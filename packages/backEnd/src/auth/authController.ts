@@ -5,7 +5,6 @@ import {
   Body,
   Path,
   Get,
-  Delete,
   Security,
   Request,
 } from "tsoa";
@@ -16,7 +15,8 @@ import { AuthService } from "./authServer";
 export class AuthController extends Controller {
   @Post("registration")
   async userRegister(@Body() requestBody: any) {
-    return await new AuthService().userRegister(requestBody);
+    const response: any = await new AuthService().userRegister(requestBody);
+    this.setStatus(response.statusCode);
   }
   @Post("login")
   async userLogin(@Body() requestBody: LoginDto) {
@@ -28,8 +28,9 @@ export class AuthController extends Controller {
     return await new AuthService().emailConfiramtion({ token });
   }
   @Security("jwt")
-  @Delete("logout")
+  @Get("logout")
   async userLogout(@Request() req: any) {
+    console.log(req.user);
     return await new AuthService().userLogout(req.user);
   }
 }

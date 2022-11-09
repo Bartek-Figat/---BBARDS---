@@ -152,6 +152,8 @@ export class AuthService {
   }: {
     decoded: { token: string; authHeader: string };
   }) {
+    console.log(token);
+    console.log(authHeader);
     try {
       await db.collection(Index.Users).updateOne(
         { _id: new ObjectId(token) },
