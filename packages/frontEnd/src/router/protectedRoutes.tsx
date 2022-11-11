@@ -4,17 +4,17 @@ import { useAppSelector, useAppDispatch } from "store/hooks";
 import { getUserData } from "slice/user";
 
 export const ProtectedRoute = () => {
-  const { status, isLogin } = useAppSelector((state) => state.user);
+  const { status, isLogin, email } = useAppSelector((state) => state.user);
   const token = localStorage.getItem("token");
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (token && !isLogin) {
+    if (token && !email) {
       dispatch(getUserData({ token }));
     }
-  }, [token, dispatch, isLogin]);
+  }, [token, dispatch, isLogin, email]);
 
-  if (status === "success" || (token && isLogin)) {
+  if (status === "success" || (token && email)) {
     return <Outlet />;
   }
 
