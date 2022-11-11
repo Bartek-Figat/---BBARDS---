@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaUserCheck } from "react-icons/fa";
 import FormSubmit from "../form/FormSubmit";
@@ -124,7 +123,10 @@ function SignUpTab() {
       </form>
 
       {status === "success" && (
-        <p className="mt-5 text-green-400">You are successfully registered!</p>
+        <p className="mt-5 text-green-400">
+          You are successfully registered! Before login you must confirm your
+          email.
+        </p>
       )}
       {status === "pending" && (
         <p className="mt-5">Your data is processing...</p>

@@ -12,9 +12,6 @@ import { Dasboard } from "views/admin/admin";
 import { Profile } from "views/admin/profile/profile";
 import { AddPost } from "views/admin/addPost/addPost";
 
-const token = localStorage.getItem("token");
-console.log(!!token);
-
 export const routes = [
   {
     path: `/`,
@@ -30,7 +27,7 @@ export const routes = [
   {
     path: `/login`,
     // eslint-disable-next-line no-extra-boolean-cast
-    element: !!token ? <Navigate to={`/dashboard`} /> : <Login />,
+    element: <Login />,
   },
   { path: `/activate/:token`, element: <Activate /> },
   {

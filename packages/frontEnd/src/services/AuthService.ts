@@ -55,9 +55,21 @@ const activate = ({ token }: ActivateProps) => {
   });
 };
 
+const confirmUser = ({ token }: ActivateProps) => {
+  return axios({
+    method: "get",
+    url: `${API_URL}/api/v1/user`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    withCredentials: true,
+  });
+};
+
 const authService = {
   register,
   login,
   activate,
+  confirmUser,
 };
 export default authService;
