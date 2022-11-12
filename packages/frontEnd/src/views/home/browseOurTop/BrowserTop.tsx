@@ -19,27 +19,27 @@ export const BrowseOurTop = () => {
         </p>
       </div>
       <div className="flex justify-center mt-11 ">
-        <nav className="flex ">
-          <ul className="flex items-center justify-center p-2 ">
-            <li className="bg-gray-chalk p-4  lg:w-80 md:w-64 sm:w-60 text-center text-dark-blue border-b-2 border-b-blue-500 ">
+        <nav className="flex">
+          <div className="grid gap-0 lg:grid-cols-27 md:grid-cols-27 sm:grid-cols-27 tablet:flex">
+            <div className="bg-gray-chalk p-4 w-full text-center text-dark-blue border-b-2 border-b-blue-500 ">
               <Link
                 to="/"
                 className="text-center tracking-wide uppercase font-medium"
               >
                 top ratings
               </Link>
-            </li>
-            <li className="hover:bg-gray-chalk p-4 lg:w-80 md:w-64 sm:w-60 text-center text-dark-blue">
+            </div>
+            <div className="hover:bg-gray-chalk p-4 w-full text-center text-[#2F3946] border-b-2 border-gray-mercury-100">
               <Link to="/" className="tracking-wide uppercase font-medium">
                 top advertiser
               </Link>
-            </li>
-            <li className="hover:bg-gray-chalk p-4 lg:w-80 md:w-64 sm:w-60 text-center text-dark-blue">
+            </div>
+            <div className="hover:bg-gray-chalk p-4 w-full text-center text-[#2F3946] border-b-2 border-gray-mercury-100">
               <Link to="/" className="tracking-wide uppercase font-medium">
                 top engaged
               </Link>
-            </li>
-          </ul>
+            </div>
+          </div>
         </nav>
       </div>
       <TopRatings />

@@ -14,6 +14,7 @@ module.exports = {
         32: "repeat(auto-fit, minmax(25rem, 25rem))",
         30: "repeat(2, minmax(20rem, 15rem))",
         28: "repeat(3, minmax(15rem, 20rem))",
+        27: "repeat(3, minmax(21.2rem, 20rem))",
         26: "repeat(4, minmax(15rem, 15rem))",
         24: "repeat(1, minmax(15rem, 20rem))",
         22: "repeat(2, minmax(15rem, 20rem))",
