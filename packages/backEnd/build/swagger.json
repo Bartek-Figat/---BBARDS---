@@ -136,7 +136,7 @@
 			}
 		},
 		"/api/v1/logout": {
-			"delete": {
+			"get": {
 				"operationId": "UserLogout",
 				"responses": {
 					"200": {

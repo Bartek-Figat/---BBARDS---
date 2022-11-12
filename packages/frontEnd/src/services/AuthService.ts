@@ -1,11 +1,5 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080";
-
-export const instance = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
-});
-
 interface LoginProps {
   email: string;
   password: string;
@@ -19,6 +13,12 @@ interface RegisterProps extends LoginProps {
 interface ActivateProps {
   token: string | undefined;
 }
+
+const API_URL = "http://localhost:8080";
+
+export const instance = axios.create({
+  baseURL: "http://localhost:8080/api/v1",
+});
 
 const register = ({ name, email, password, repeatPassword }: RegisterProps) => {
   return axios({
@@ -55,9 +55,21 @@ const activate = ({ token }: ActivateProps) => {
   });
 };
 
+const confirmUser = ({ token }: ActivateProps) => {
+  return axios({
+    method: "get",
+    url: `${API_URL}/api/v1/user`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    withCredentials: true,
+  });
+};
+
 const authService = {
   register,
   login,
   activate,
+  confirmUser,
 };
 export default authService;

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaUserCheck } from "react-icons/fa";
 import FormSubmit from "../form/FormSubmit";
@@ -46,6 +45,7 @@ function SignUpTab() {
         <div className="mt-11">
           <FormInputWithTooltip
             id="name"
+            type="text"
             placeholder="Name"
             register={register}
             options={{
@@ -55,6 +55,7 @@ function SignUpTab() {
           />
           <FormInputWithTooltip
             id="email"
+            type="email"
             placeholder="E-mail"
             register={register}
             options={{
@@ -68,6 +69,7 @@ function SignUpTab() {
           />
           <FormInputWithTooltip
             id="password"
+            type="password"
             placeholder="Password"
             register={register}
             options={{
@@ -81,6 +83,7 @@ function SignUpTab() {
           />
           <FormInputWithTooltip
             id="repeatPassword"
+            type="password"
             placeholder="Repeat Password"
             register={register}
             options={{
@@ -120,7 +123,10 @@ function SignUpTab() {
       </form>
 
       {status === "success" && (
-        <p className="mt-5 text-green-400">You are successfully registered!</p>
+        <p className="mt-5 text-green-400">
+          You are successfully registered! Before login you must confirm your
+          email.
+        </p>
       )}
       {status === "pending" && (
         <p className="mt-5">Your data is processing...</p>

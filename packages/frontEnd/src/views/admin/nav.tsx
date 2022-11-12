@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import Logout from "../logout/logout";
 export const Nav = () => {
   const dashNav = [
     {
       id: 1,
       name: "DASHBOARD",
-      path: "dashboard",
+      path: "/dashboard",
     },
     {
       id: 2,
@@ -41,26 +42,30 @@ export const Nav = () => {
       name: "NOTIFICATION",
       path: "notification",
     },
-    {
-      id: 9,
-      name: "LOGOUT",
-      path: "logout",
-    },
   ];
   return (
-    <div className="flex justify-center items-center w-full px-3 overflow-auto whitespace-nowrap">
-      <ul className="w-full flex justify-between px-3 font-medium">
-        {dashNav.map((navItem) => (
-          <li className="pb-3 mr-3" key={navItem.id}>
+    <div className="flex w-full items-center px-3 overflow-auto whitespace-nowrap p-2">
+      <ul className="flex w-full justify-between px-3 font-medium">
+        {dashNav.map(({ id, path, name }) => (
+          <li className="p-2" key={id}>
             <Link
-              className="focus:text-dark-blue focus:border-b-[2px] focus:border-dark-blue pb-3"
-              to={navItem.path}
+              className="hover:border-b-[2px] hover:border-dark-blue"
+              to={path}
             >
-              {navItem.name}
+              {name}
             </Link>
           </li>
         ))}
       </ul>
+
+      <div className="flex">
+        <button
+          className="rounded-md bg-dark-blue p-2 text-white font-medium"
+          onClick={() => Logout()}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

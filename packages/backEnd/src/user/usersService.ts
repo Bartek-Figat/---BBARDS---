@@ -18,6 +18,8 @@ export class UsersService {
       }
     );
 
+    console.log("User -->", user);
+
     return HttpResponse.sucess(user, 200, {});
   }
 }

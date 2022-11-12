@@ -1,16 +1,21 @@
-import { Request } from 'express';
-import * as jwt from 'jsonwebtoken';
-import { db } from '../db/mongo';
-import { Index } from '../enum/index';
-import { HttpResponse } from '../httpError/httpError';
+import { Request } from "express";
+import * as jwt from "jsonwebtoken";
+import { db } from "../db/mongo";
+import { Index } from "../enum/index";
+import { HttpResponse } from "../httpError/httpError";
 
-export async function expressAuthentication(req: Request, securityName: string, _scopes?: string[]) {
-  if (securityName === 'jwt') {
+export async function expressAuthentication(
+  req: Request,
+  securityName: string,
+  _scopes?: string[]
+) {
+  if (securityName === "jwt") {
     const authHeader = req.headers.authorization;
-    const token: string | undefined = authHeader && authHeader.split(' ')[1];
+    const token: string | undefined = authHeader && authHeader.split(" ")[1];
+    console.log(token);
 
     return new Promise(async (resolve) => {
-      if (!token) return HttpResponse.failed('Unauthorized', 401);
+      if (!token) return HttpResponse.failed("Unauthorized", 401);
 
       const authorizationToken = await db
         .collection(Index.Users)
@@ -26,16 +31,21 @@ export async function expressAuthentication(req: Request, securityName: string, 
         )
         .toArray();
 
-      if (authorizationToken.length === 0) return HttpResponse.failed('Unauthorized', 401);
+      if (authorizationToken.length === 0)
+        return HttpResponse.failed("Unauthorized", 401);
 
-      return jwt.verify(`${token}`, 'secret', function (err: any, decoded: any) {
-        if (err) return HttpResponse.failed('Unauthorized', 401);
+      return jwt.verify(
+        `${token}`,
+        "secret",
+        function (err: any, decoded: any) {
+          if (err) return HttpResponse.failed("Unauthorized", 401);
 
-        resolve({
-          decoded,
-          authHeader: token,
-        });
-      });
+          resolve({
+            decoded,
+            authHeader: token,
+          });
+        }
+      );
     });
   }
 }
