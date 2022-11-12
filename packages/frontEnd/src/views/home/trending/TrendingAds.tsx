@@ -17,10 +17,10 @@ export const TrendingAds = () => {
       </hgroup>
 
       <div className="flex flex-col items-center xl:columns-2 xl:block mt-11">
-        {productsMap.map(({ img, title, price, type, location, time }) => {
+        {productsMap.map(({ img, title, price, type, location, time, id }) => {
           return (
             <ProductCard
-              key={title}
+              key={id}
               img={img}
               title={title}
               price={price}

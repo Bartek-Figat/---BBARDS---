@@ -38,8 +38,6 @@ export const FeaturedAds = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
   const [sliderIndex, setSliderIndex] = useState<number>(0);
 
-  console.log("sliderIndex", [sliderIndex]);
-
   return (
     <div className="flex flex-col md:flex-row justify-center  mt-44  px-32">
       <div className="w-full md:w-1/2 ">
