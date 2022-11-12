@@ -1,4 +1,31 @@
+import { useState } from "react";
 export const AdInformation = () => {
+  const priceCond = [
+    {
+      id: 1,
+      condition: "Fixed",
+    },
+    {
+      id: 2,
+      condition: "Negotibale",
+    },
+    {
+      id: 3,
+      condition: "Daily",
+    },
+    {
+      id: 4,
+      condition: "Weekly",
+    },
+    {
+      id: 5,
+      condition: "Monthly",
+    },
+    {
+      id: 6,
+      condition: "Yearly",
+    },
+  ];
   return (
     <div className="w-full p-5 bg-white rounded-lg text-sm mb-5">
       <h2 className="font-bold relative mt-2 text-lg border-b pb-2 before:content-[''] before:absolute before:w-1/6 before:h-0.5 before:bg-dark-blue before:-bottom-[1px]">
@@ -7,7 +34,7 @@ export const AdInformation = () => {
       <form className="my-5">
         <div className="mb-4">
           <label className="block text-cold-gray text-sm font-bold mb-2">
-            Product Name
+            Product Title
           </label>
           <input
             className="bg-gray-chalk appearance-none w-full p-4 text-cold-gray leading-tight border-b-2 outline-none focus:border-dark-blue duration-500"
@@ -21,7 +48,7 @@ export const AdInformation = () => {
             Product Image
           </label>
           <input
-            className="bg-gray-chalk appearance-none w-full p-4 text-cold-gray leading-tight border-b-2 outline-none focus:border-dark-blue duration-500"
+            className="bg-gray-chalk appearance-none w-full p-4 text-cold-gray leading-tight border-b-2 outline-none focus:border-dark-blue duration-500 file:border-none file:bg-transparent file:cursor-pointer"
             id="username"
             type="file"
             placeholder="Wybierz plik"
@@ -29,7 +56,7 @@ export const AdInformation = () => {
         </div>
         <div className="mb-4">
           <label className="block text-cold-gray text-sm font-bold mb-2">
-            Product Name
+            Product Category
           </label>
           <div className="relative">
             <select
@@ -54,7 +81,7 @@ export const AdInformation = () => {
         </div>
         <div className="mb-4">
           <label className="block text-cold-gray text-sm font-bold mb-2">
-            Product Name
+            Pice
           </label>
           <input
             className="bg-gray-chalk appearance-none w-full p-4 text-cold-gray leading-tight border-b-2 outline-none focus:border-dark-blue duration-500"
@@ -69,30 +96,12 @@ export const AdInformation = () => {
               Price Condition
             </label>
             <ul>
-              <li className="flex items-center">
-                <input className="mr-2 leading-tight" type="checkbox" />
-                <label>Fixed</label>
-              </li>
-              <li className="flex items-center">
-                <input className="mr-2 leading-tight" type="checkbox" />
-                <label>Negotibale</label>
-              </li>
-              <li className="flex items-center">
-                <input className="mr-2 leading-tight" type="checkbox" />
-                <label>Daily</label>
-              </li>
-              <li className="flex items-center">
-                <input className="mr-2 leading-tight" type="checkbox" />
-                <label>Weekly</label>
-              </li>
-              <li className="flex items-center">
-                <input className="mr-2 leading-tight" type="checkbox" />
-                <label>Monthly</label>
-              </li>
-              <li className="flex items-center">
-                <input className="mr-2 leading-tight" type="checkbox" />
-                <label>Yearly</label>
-              </li>
+              {priceCond.map((priceCondItem) => (
+                <li className="flex items-center" key={priceCondItem.id}>
+                  <input className="mr-2 leading-tight" type="checkbox" />
+                  <label>{priceCondItem.condition}</label>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="tablet:mb-4">
@@ -102,19 +111,19 @@ export const AdInformation = () => {
             <ul>
               <li className="flex items-center">
                 <input className="mr-2 leading-tight" type="checkbox" />
-                <label className="bg-[#dc3545] text-white py-[1px] px-[2px] rounded mb-2">
+                <label className="bg-[#dc3545] text-white py-[2px] px-[8px] rounded mb-2">
                   Sale
                 </label>
               </li>
               <li className="flex items-center">
                 <input className="mr-2 leading-tight" type="checkbox" />
-                <label className="bg-[#03a70c] text-white py-[1px] px-[2px] rounded mb-2">
+                <label className="bg-[#03a70c] text-white py-[2px] px-[8px] rounded mb-2">
                   Rent
                 </label>
               </li>
               <li className="flex items-center">
                 <input className="mr-2 leading-tight" type="checkbox" />
-                <label className="bg-[#7209af] text-white py-[1px] px-[2px] rounded">
+                <label className="bg-[#7209af] text-white py-[2px] px-[8px] rounded">
                   Booking
                 </label>
               </li>
