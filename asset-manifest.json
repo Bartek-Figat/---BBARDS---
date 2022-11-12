@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/tsx-react/static/css/main.eeaa5f25.css",
-    "main.js": "/tsx-react/static/js/main.6881ee90.js",
+    "main.css": "/tsx-react/static/css/main.bfd505e8.css",
+    "main.js": "/tsx-react/static/js/main.a1a2daf7.js",
     "static/media/02.png": "/tsx-react/static/media/02.f30f92d3ea16aaf26d5d.png",
     "static/media/04.png": "/tsx-react/static/media/04.aab1d97025467af6e75a.png",
     "static/media/03.jpg": "/tsx-react/static/media/03.cdbd3d52574f72ea1393.jpg",
@@ -22,11 +22,11 @@
     "static/media/electronics.jpg": "/tsx-react/static/media/electronics.97e6ae1fedba3c1ece99.jpg",
     "static/media/education.png": "/tsx-react/static/media/education.fabd0f7b98046d6d8a4e.png",
     "index.html": "/tsx-react/index.html",
-    "main.eeaa5f25.css.map": "/tsx-react/static/css/main.eeaa5f25.css.map",
-    "main.6881ee90.js.map": "/tsx-react/static/js/main.6881ee90.js.map"
+    "main.bfd505e8.css.map": "/tsx-react/static/css/main.bfd505e8.css.map",
+    "main.a1a2daf7.js.map": "/tsx-react/static/js/main.a1a2daf7.js.map"
   },
   "entrypoints": [
-    "static/css/main.eeaa5f25.css",
-    "static/js/main.6881ee90.js"
+    "static/css/main.bfd505e8.css",
+    "static/js/main.a1a2daf7.js"
   ]
 }
