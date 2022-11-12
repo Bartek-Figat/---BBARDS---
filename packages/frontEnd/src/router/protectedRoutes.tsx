@@ -1,13 +1,30 @@
-import React from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "store/hooks";
+import { getUserData } from "slice/user";
 
 export const ProtectedRoute = () => {
-  const location = useLocation();
+  const { status, email } = useAppSelector((state) => state.user);
+  const token = localStorage.getItem("token");
+  const dispatch = useAppDispatch();
 
-  // eslint-disable-next-line no-extra-boolean-cast
-  return localStorage.getItem("token") ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/" state={{ from: location }} replace />
-  );
+  useEffect(() => {
+    if (token && !email) {
+      dispatch(getUserData({ token }));
+    }
+  }, [token, dispatch, email]);
+
+  if (status === "success" || (token && email)) {
+    return <Outlet />;
+  }
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (status === "waiting" || status === "pending") {
+    return <div>Loading...</div>;
+  }
+
+  return <Navigate to="/login" replace />;
 };

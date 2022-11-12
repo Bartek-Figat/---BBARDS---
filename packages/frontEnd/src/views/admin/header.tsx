@@ -1,27 +1,9 @@
-import React, { useEffect, useState } from "react";
 import avatar from "assets/images/avatar/01.jpg";
 import { Nav } from "./nav";
-import axios from "axios";
+import { useAppSelector } from "store/hooks";
 
 export const Header: React.FC = () => {
-  const [userData, useUserData] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const { data }: any = await axios.get(
-        "http://localhost:8080/api/v1/user",
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useUserData(data);
-    }
-    fetchData();
-  }, []);
+  const user = useAppSelector((state) => state.user);
 
   return (
     <div className="w-[70vw] pt-10 bg-white rounded-lg text-sm mb-5">
@@ -38,16 +20,12 @@ export const Header: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <ul className="text-gray-dark">
-              {userData
-                ? Object.values(userData).map((user: any) => {
-                    return (
-                      <>
-                        <h4 className="font-bold mt-2 text-lg">{user.name}</h4>
-                        <li key={user.email}>{user.email}</li>
-                      </>
-                    );
-                  })
-                : null}
+              {user && (
+                <>
+                  <h4 className="font-bold mt-2 text-lg">{user.name}</h4>
+                  <li key={user.email}>{user.email}</li>
+                </>
+              )}
 
               <li>Los Angeles, West America</li>
             </ul>

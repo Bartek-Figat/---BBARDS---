@@ -4,25 +4,32 @@ import { Tab } from "@headlessui/react";
 import AsideSection from "./AsideSection";
 import SignInTab from "./tabs/SignInTab";
 import SignUpTab from "./tabs/SignUpTab";
-import { useAppSelector } from "store/hooks";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "store/hooks";
+import { Navigate } from "react-router-dom";
+import { getUserData } from "slice/user";
 
 function Login() {
-  let navigate = useNavigate();
-  const { isLogin, successResponse } = useAppSelector((store) => store.login);
+  const { isLogin, status } = useAppSelector((state) => state.user);
+  const token = localStorage.getItem("token");
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (successResponse && successResponse.statusCode === 200) {
-      console.log(successResponse);
-      localStorage.setItem("token", successResponse.data);
-      navigate("/dashboard", { replace: true });
+    if (token && !isLogin) {
+      dispatch(getUserData({ token }));
     }
-  }, [isLogin, navigate, successResponse]);
+  }, [token, dispatch, isLogin]);
+
+  if (status === "pending") {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "success" || (token && isLogin)) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div className="flex h-screen w-screen">
       <AsideSection />
-
       <div className="w-full md:w-3/6 xl:w-2/5 bg-[#fbfbfb]">
         <Tab.Group>
           <Tab.List className="flex w-full">

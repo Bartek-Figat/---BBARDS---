@@ -6,7 +6,7 @@ import FormCheckboxInput from "../form/FormCheckboxInput";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInputWithTooltip from "../form/FormInputWithTooltip";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { signIn } from "../../../slice/login";
+import { signIn } from "../../../slice/user";
 
 function SignInTab() {
   const {
@@ -16,9 +16,9 @@ function SignInTab() {
   } = useForm<IFormInput>();
 
   const dispatch = useAppDispatch();
-  const isError = useAppSelector((state) => state.login.status) === "error";
-  const isPending = useAppSelector((state) => state.login.status) === "pending";
-  const errorMessage = useAppSelector((state) => state.login.errorMessage);
+  const isError = useAppSelector((state) => state.user.status) === "error";
+  const isPending = useAppSelector((state) => state.user.status) === "pending";
+  const errorMessage = useAppSelector((state) => state.user.errorMessage);
 
   const onSubmit: SubmitHandler<IFormInput> = ({ email, password }) => {
     dispatch(signIn({ email, password }));

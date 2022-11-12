@@ -5,7 +5,7 @@ export const Nav = () => {
     {
       id: 1,
       name: "DASHBOARD",
-      path: "dashboard",
+      path: "/dashboard",
     },
     {
       id: 2,
