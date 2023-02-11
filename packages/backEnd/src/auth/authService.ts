@@ -12,8 +12,6 @@ import { LoginDto, RegisterDto } from "./auth.dto";
 config({ path: "../../.env" });
 const { secret, sendgridApi } = process.env;
 
-console.log(secret);
-console.log(sendgridApi);
 sgMail.setApiKey(`${sendgridApi}`);
 
 export class AuthService {
