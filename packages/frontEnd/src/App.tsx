@@ -1,4 +1,4 @@
-import { Navigate, useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import { Layout } from "router/Layout";
 import Login from "views/login/Login";
 import { BlogList } from "views/blogList/BlogList";
@@ -12,41 +12,39 @@ import { Dasboard } from "views/admin/admin";
 import { Profile } from "views/admin/profile/profile";
 import { AddPost } from "views/admin/addPost/addPost";
 
-export const routes = [
-  {
-    path: `/`,
-    element: <Layout />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: `category-details`, element: <CategoryDetails /> },
-      { path: `blog-list`, element: <BlogList /> },
-      { path: `*`, element: <NotFound /> },
-    ],
-  },
-
-  {
-    path: `/login`,
-    // eslint-disable-next-line no-extra-boolean-cast
-    element: <Login />,
-  },
-  { path: `/activate/:token`, element: <Activate /> },
-  {
-    element: <ProtectedRoute />,
-    children: [
-      {
-        path: `/dashboard`,
-        element: <LayoutAdmin />,
-        children: [
-          { index: true, element: <Dasboard /> },
-          { path: `profile`, element: <Profile /> },
-          { path: `addPost`, element: <AddPost /> },
-        ],
-      },
-    ],
-  },
-];
-
 export function App() {
-  const element = useRoutes(routes);
+  const element = useRoutes([
+    {
+      path: `/`,
+      element: <Layout />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: `category-details`, element: <CategoryDetails /> },
+        { path: `blog-list`, element: <BlogList /> },
+        { path: `*`, element: <NotFound /> },
+      ],
+    },
+
+    {
+      path: `/login`,
+      // eslint-disable-next-line no-extra-boolean-cast
+      element: <Login />,
+    },
+    { path: `/activate/:token`, element: <Activate /> },
+    {
+      element: <ProtectedRoute />,
+      children: [
+        {
+          path: `/dashboard`,
+          element: <LayoutAdmin />,
+          children: [
+            { index: true, element: <Dasboard /> },
+            { path: `profile`, element: <Profile /> },
+            { path: `addPost`, element: <AddPost /> },
+          ],
+        },
+      ],
+    },
+  ]);
   return <>{element}</>;
 }

@@ -19,10 +19,6 @@ function Login() {
     }
   }, [token, dispatch, isLogin]);
 
-  if (status === "pending") {
-    return <div>Loading...</div>;
-  }
-
   if (status === "success" || (token && isLogin)) {
     return <Navigate to="/dashboard" replace />;
   }

@@ -158,6 +158,37 @@
 				"parameters": []
 			}
 		},
+		"/files/uploadFile": {
+			"post": {
+				"operationId": "UploadFile",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"avatar": {
+										"type": "string",
+										"format": "binary"
+									}
+								},
+								"required": [
+									"avatar"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
 		"/api/v1/user": {
 			"get": {
 				"operationId": "GetUser",

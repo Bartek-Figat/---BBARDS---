@@ -3,7 +3,7 @@ import { FaEye } from "react-icons/fa";
 import { SwiperContainer } from "./swiper/swiper";
 import { slidesMap } from "./swiper/Slides";
 
-export const Header: React.FC = () => {
+export const Header = () => {
   return (
     <header className="bg-gray-400 relative">
       <div className="bg-cover bg-no-repeat bg-center bg-hero-image bg-gray-400 w-full">

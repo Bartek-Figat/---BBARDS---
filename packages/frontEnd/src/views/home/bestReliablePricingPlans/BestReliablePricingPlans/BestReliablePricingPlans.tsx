@@ -1,4 +1,3 @@
-import React from "react";
 import { BsBicycle } from "react-icons/bs";
 import { FaCarSide } from "react-icons/fa";
 import { GiCommercialAirplane } from "react-icons/gi";

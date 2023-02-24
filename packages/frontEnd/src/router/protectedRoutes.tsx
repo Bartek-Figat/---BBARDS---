@@ -22,9 +22,5 @@ export const ProtectedRoute = () => {
     return <Navigate to="/login" replace />;
   }
 
-  if (status === "waiting" || status === "pending") {
-    return <div>Loading...</div>;
-  }
-
   return <Navigate to="/login" replace />;
 };
