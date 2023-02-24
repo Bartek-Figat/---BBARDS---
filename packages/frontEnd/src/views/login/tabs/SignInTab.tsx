@@ -39,6 +39,7 @@ function SignInTab() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-11">
           <FormInputWithTooltip
+            type="email"
             id="email"
             placeholder="E-mail"
             register={register}
@@ -49,6 +50,7 @@ function SignInTab() {
           />
 
           <FormInputWithTooltip
+            type="password"
             id="password"
             placeholder="Password"
             register={register}

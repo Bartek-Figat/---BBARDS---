@@ -132,11 +132,16 @@ export class AuthService {
         },
       }
     );
-    const match = user && (await compare(`${password}`, user.password));
+
+    console.log(user);
+    const match: boolean =
+      user && (await compare(`${password}`, user.password));
 
     if (!match) return HttpResponse.failed("Bad Request", 400);
+    console.log("match", match);
 
     const token: string = sign({ token: user._id }, "secret");
+    console.log("token", token);
 
     await db.collection(Index.Users).updateOne(
       { email: user.email },
