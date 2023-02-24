@@ -20,7 +20,7 @@ interface SlideContentProps {
   children: ReactNode;
 }
 
-function SlideContent({ children }: SlideContentProps) {
+const SlideContent = ({ children }: SlideContentProps) => {
   const swiperSlide = useSwiperSlide();
 
   return (
@@ -33,7 +33,7 @@ function SlideContent({ children }: SlideContentProps) {
       {children}
     </div>
   );
-}
+};
 export const FeaturedAds = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
   const [sliderIndex, setSliderIndex] = useState<number>(0);
