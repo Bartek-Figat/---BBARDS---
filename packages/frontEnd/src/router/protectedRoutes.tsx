@@ -1,20 +1,11 @@
-import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "store/hooks";
-import { getUserData } from "slice/user";
+import { useAppSelector } from "store/hooks";
 
 export const ProtectedRoute = () => {
-  const { status, email } = useAppSelector((state) => state.user);
+  const { isLogin } = useAppSelector((state) => state.user);
   const token = localStorage.getItem("token");
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (token && !email) {
-      dispatch(getUserData({ token }));
-    }
-  }, [token, dispatch, email]);
-
-  if (status === "success" || (token && email)) {
+  if (isLogin) {
     return <Outlet />;
   }
 
@@ -22,5 +13,5 @@ export const ProtectedRoute = () => {
     return <Navigate to="/login" replace />;
   }
 
-  return <Navigate to="/login" replace />;
+  return <Navigate to="/authentication" replace />;
 };

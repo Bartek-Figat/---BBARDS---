@@ -1,8 +1,6 @@
 import React from "react";
-import avatar from "assets/images/avatar/01.jpg";
-import { Nav } from "./nav";
 
-export const Dasboard: React.FC = () => {
+export const Dashboard: React.FC = () => {
   return (
     <div>
       <div className="w-[70vw] py-3 px-3 bg-white rounded-lg">
