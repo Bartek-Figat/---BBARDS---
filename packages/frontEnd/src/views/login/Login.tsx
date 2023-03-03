@@ -1,25 +1,20 @@
-import { useEffect } from "react";
 import { TabButton } from "components/tabs/TabButton";
 import { Tab } from "@headlessui/react";
 import AsideSection from "./AsideSection";
 import SignInTab from "./tabs/SignInTab";
 import SignUpTab from "./tabs/SignUpTab";
-import { useAppSelector, useAppDispatch } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 import { Navigate } from "react-router-dom";
-import { getUserData } from "slice/user";
 
 function Login() {
-  const { isLogin, status } = useAppSelector((state) => state.user);
+  const { isLogin } = useAppSelector((state) => state.user);
   const token = localStorage.getItem("token");
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (token && !isLogin) {
-      dispatch(getUserData({ token }));
-    }
-  }, [token, dispatch, isLogin]);
+  if (token && !isLogin) {
+    return <Navigate to="/authentication" replace />;
+  }
 
-  if (status === "success" || (token && isLogin)) {
+  if (isLogin) {
     return <Navigate to="/dashboard" replace />;
   }
 

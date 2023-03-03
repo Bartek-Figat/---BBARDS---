@@ -17,11 +17,11 @@ export const Authentication = () => {
   }, [dispatch, token]);
 
   if (!token || error) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
   if (isLogin) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   return (
