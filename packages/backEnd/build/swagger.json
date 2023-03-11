@@ -61,6 +61,14 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/HttpResponse_any_"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"email": "hello@tsoa.com",
+											"password": "unique password"
+										}
+									}
 								}
 							}
 						}
@@ -88,6 +96,28 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/HttpResponse_any_"
+								},
+								"examples": {
+									"Data Response": {
+										"value": {
+											"email": "hello@tsoa.com",
+											"password": "unique password"
+										}
+									},
+									"Response 200": {
+										"value": {
+											"data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+											"error": null,
+											"statusCode": 200
+										}
+									},
+									"Response 400": {
+										"value": {
+											"data": "null",
+											"error": "400",
+											"statusCode": 400
+										}
+									}
 								}
 							}
 						}
@@ -122,9 +152,11 @@
 						}
 					}
 				},
+				"description": "Email the token to authenticate the user",
 				"security": [],
 				"parameters": [
 					{
+						"description": "Token",
 						"in": "path",
 						"name": "token",
 						"required": true,
@@ -150,11 +182,31 @@
 						}
 					}
 				},
+				"description": "Logout require valid token from header",
 				"security": [
 					{
 						"jwt": []
 					}
 				],
+				"parameters": []
+			}
+		},
+		"/api/v1/profile": {
+			"post": {
+				"operationId": "UserRegister",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
 				"parameters": []
 			}
 		},
@@ -204,6 +256,7 @@
 						}
 					}
 				},
+				"description": "Retrieves the details of an existing user.\r\nSupply the unique user ID from db and receive corresponding user details.",
 				"security": [
 					{
 						"jwt": []

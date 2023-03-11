@@ -70,8 +70,12 @@ export const signIn = createAsyncThunk<
       email,
       password,
     });
+
+    // if no data response.data ------------ {data: null, error: 'Bad Request', statusCode: 400}
+
     return response.data;
   } catch (err) {
+    console.log("error.response ------------", err);
     const error = err as AxiosError<SignInValidationErrors>;
     if (!error.response) {
       throw err;
@@ -98,10 +102,16 @@ export const userSlice = createSlice({
       state.status = "error";
     });
     builder.addCase(signIn.fulfilled, (state, { payload }) => {
-      console.log(payload);
-      state.status = "success";
-      state.isLogin = true;
-      localStorage.setItem("token", payload.data);
+      console.log("payload ------------>", payload);
+      // if no data payload ------------> {data: null, error: 'Bad Request', statusCode: 400}
+      if (payload.data === null) {
+        state.status = "error";
+        state.isLogin = false;
+      } else {
+        state.status = "success";
+        state.isLogin = true;
+        localStorage.setItem("token", payload.data);
+      }
     });
     builder.addCase(signIn.pending, (state) => {
       state.status = "pending";

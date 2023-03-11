@@ -153,16 +153,17 @@ export class AuthService {
 
     return HttpResponse.sucess(token, 200, {});
   }
-  async userLogout({
-    decoded: { token, authHeader },
-  }: {
-    decoded: { token: string; authHeader: string };
-  }) {
+  async userLogout(authData: any) {
+    const {
+      decoded: { token },
+      authHeader,
+    } = authData;
+
     try {
       await db.collection(Index.Users).updateOne(
         { _id: new ObjectId(token) },
         {
-          $pull: { authorizationToken: authHeader },
+          $pull: { authorizationToken: { $in: [authHeader] } },
         },
         {}
       );

@@ -17,8 +17,14 @@ export interface RegisterProps {
 
 export class LoginDto {
   @IsNotEmpty()
+  /**
+   * Unique password
+   */
   password: string | undefined;
   @IsEmail()
+  /**
+   * Valid Email
+   */
   email: string | undefined;
 }
 
