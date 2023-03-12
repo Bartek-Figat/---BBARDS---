@@ -1,7 +1,6 @@
 import {Controller, Get, Middlewares, Path, Post, Request, Route} from "tsoa";
 import {AdsService} from "./ads.service";
 import {upload} from "../multer";
-import express from "express";
 
 @Route("ads")
 export class AdsController extends Controller {
@@ -20,18 +19,15 @@ export class AdsController extends Controller {
     @Post("add")
     public async putAd(@Request() request: any) {
         return await new AdsService().addAd(
-            this.getFileFromRequest(request),
+            this.getImagesFiles(request.files),
             request.token,
             request.body,
         );
     };
 
-    private getFileFromRequest(
-        req: express.Request
+    private getImagesFiles(
+        files: Express.Multer.File[]
     ): Express.Multer.File[] {
-        if (!req.files || (typeof req.files === 'object' && !Array.isArray(req.files))) {
-            return [];
-        }
-        return req.files;
+        return files.filter(file => file.mimetype === "image/jpeg" || file.mimetype === "image/png")
     }
 }
