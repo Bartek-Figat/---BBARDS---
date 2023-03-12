@@ -1,10 +1,11 @@
 ![Screenshot 2021-09-09 at 10 08 54 PM](https://user-images.githubusercontent.com/67811830/198153675-2fe9e6ad-fa44-4a23-b93b-c922ff238a77.png)
 
-
-
 ## Table of Contents
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 - [Download](#Download)
@@ -13,12 +14,12 @@
 - [Modules](#Modules)
 - [API Documentation](#API)
 - [Contributing](#Contributing)
-- [Application demo](https://bartek-figat.github.io/tsx-react/)
+- [Application demo](https://bartek-figat.github.io/---BBARDS---/)
 
 ## Download
 
 ```bash
-   https://github.com/Bartek-Figat/tsx-react.git
+   https://github.com/Bartek-Figat/---BBARDS---.git
 ```
 
 ## Installation

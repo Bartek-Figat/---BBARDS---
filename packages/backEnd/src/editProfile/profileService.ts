@@ -2,8 +2,8 @@ import { config } from "dotenv";
 import { S3 } from "aws-sdk";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
-import { Index } from "src/enum";
-import { db } from "src/db/mongo";
+import { Index } from "../enum";
+import { db } from "../db/mongo";
 
 config({ path: "../../.env" });
 
@@ -28,7 +28,7 @@ export class EditProfile {
         decoded: { token },
       },
     } = request;
-    return await s3
+    const imageProfile = await s3
       .upload({
         Bucket: `${bucketName}`,
         Key: `bbardsImages/${uuidv4() + file?.originalname}`,
@@ -38,14 +38,13 @@ export class EditProfile {
         ContentType: file?.mimetype,
       })
       .promise()
-      .then(
-        async (values) =>
-          await db.collection(Index.Users).insertOne({
-            ...body,
-            profileImage: values.Location,
-            dateAdded: new Date(),
-            user_id: token,
-          })
-      );
+      .then(async (values) => values.Location);
+
+    await db.collection(Index.UserProfile).insertOne({
+      ...body,
+      imageProfile,
+      dateAdded: new Date(),
+      user_id: token,
+    });
   }
 }
