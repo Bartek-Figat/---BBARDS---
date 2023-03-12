@@ -6,4 +6,14 @@ export const upload = multer({
       cb(null, file.fieldname + "-" + Date.now());
     },
   }),
+  limits: {
+    fields: 1,
+  },
+  fileFilter(_req: express.Request, file, callback) {
+    if (file.mimetype.includes("image/jpeg" || "image/png")) {
+      callback(null, true);
+    } else {
+      callback(new Error("File not allowed"));
+    }
+  },
 });
