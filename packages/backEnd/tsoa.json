@@ -16,10 +16,10 @@
         "authorizationUrl": "http://swagger.io/api/oauth/dialog",
         "flow": "implicit"
       }
-    },
-    "routes": {
-      "routesDir": "build",
-      "authenticationModule": "../backEnd/src/authentication/authentication"
     }
+  },
+  "routes": {
+    "routesDir": "build",
+    "authenticationModule": "../backEnd/src/authentication/authentication"
   }
 }

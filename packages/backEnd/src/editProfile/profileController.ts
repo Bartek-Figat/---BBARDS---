@@ -1,18 +1,9 @@
-import {
-  Controller,
-  Route,
-  Post,
-  Request,
-  Middlewares,
-  Security,
-  Example,
-} from "tsoa";
+import { Controller, Route, Post, Request, Middlewares, Example } from "tsoa";
 import express from "express";
 import { EditProfile } from "./profileService";
 import { upload } from "./multer";
 import { EditProfileDto } from "./profile.dto";
 
-@Security("jwt")
 @Route("api/v1")
 export class ProfileController extends Controller {
   @Middlewares([upload.single("avatar")])
