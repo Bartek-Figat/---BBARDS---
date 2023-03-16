@@ -5,10 +5,17 @@
   "spec": {
     "outputDirectory": "build",
     "specVersion": 3,
-    "jwt": {
-      "type": "jwt",
-      "name": "token",
-      "in": "headers"
+    "securityDefinitions": {
+      "jwt": {
+        "type": "jwt",
+        "name": "token",
+        "in": "headers"
+      },
+      "tsoa_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+        "flow": "implicit"
+      }
     }
   },
   "routes": {
