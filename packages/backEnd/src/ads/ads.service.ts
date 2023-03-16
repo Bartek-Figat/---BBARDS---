@@ -6,19 +6,9 @@ import {config} from "dotenv";
 import {v4 as uuidv4} from "uuid";
 import {createReadStream} from "fs";
 import S3 from "aws-sdk/clients/s3";
+import {Categories} from "./Categories";
 
 config({path: "../../.env"});
-
-interface ICategories {
-    page: string;
-    productCategory: string;
-    price: string;
-    priceCondition: string;
-    adCategory: string;
-    productCondition: string;
-    city: string;
-    rate: string;
-}
 
 const s3 = new S3({
     endpoint: process.env.endpoint,
@@ -125,10 +115,10 @@ export class AdsService {
         }
     }
 
-    async filterCategories(categories: ICategories) {
+    async filterCategories(categories: Categories) {
         const {page} = categories;
 
-        const filterQuery = (obj: ICategories): { [k: string]: any; } => {
+        const filterQuery = (obj: Categories): { [k: string]: any; } => {
             return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v));
         };
 
