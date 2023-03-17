@@ -43,7 +43,7 @@
   },
   "scripts": {
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
-    "build": "tsoa spec-and-routes && tsc",
+    "build": "tsoa spec-and-routes && tsc && concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "start": "node build/src/server.js"
   }
 }

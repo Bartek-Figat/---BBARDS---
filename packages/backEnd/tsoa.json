@@ -20,6 +20,6 @@
   },
   "routes": {
     "routesDir": "build",
-    "authenticationModule": "../backEnd/src/authentication/authentication"
+    "authenticationModule": "./src/authentication/authentication"
   }
 }
