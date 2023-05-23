@@ -66,7 +66,26 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/ads/{adId}": {
+		"/api/v1/filter": {
+			"get": {
+				"operationId": "GetFilteredAds",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HttpResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/v1/{adId}": {
 			"get": {
 				"operationId": "GetAd",
 				"responses": {
@@ -94,7 +113,7 @@
 				]
 			}
 		},
-		"/ads/add": {
+		"/api/v1/add": {
 			"post": {
 				"operationId": "PutAd",
 				"responses": {

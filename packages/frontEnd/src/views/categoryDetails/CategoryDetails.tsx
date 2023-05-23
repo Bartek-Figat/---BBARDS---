@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Header } from "./header";
 import { ProductList } from "./ProductList";
 import AdService from "services/AdService";
-import { Pagination } from "./pagination/Pagination";
+import Pagination from "rc-pagination";
 import { FilterList } from "./filters/FilterList";
 import { useSearchParams } from "react-router-dom";
+import "rc-pagination/assets/index.css";
 
 interface ProductProps {
   _id: string;
@@ -36,6 +37,7 @@ export const CategoryDetails = () => {
           page: currentPage,
           ...params,
         });
+
         setTotalPages(data.data.dataLength);
         setProducts(data.data.data);
       } catch (err) {
@@ -59,9 +61,11 @@ export const CategoryDetails = () => {
             {products && <ProductList products={products} />}
             <div className="border-t-[1px] border-gray-mercury py-8 mt-8">
               <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                changeCurrentPage={setCurrentPage}
+                defaultPageSize={10}
+                pageSize={10}
+                current={currentPage}
+                total={totalPages}
+                onChange={(data) => setCurrentPage(data)}
               />
             </div>
           </div>

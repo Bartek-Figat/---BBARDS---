@@ -16,7 +16,6 @@ const getPage = async (params: PageRequestProps) => {
   const data = await axios({
     method: "GET",
     url: `${API_URL}/api/v1/filter`,
-    headers: { "Content-Type": "application/json" },
     params,
   });
 

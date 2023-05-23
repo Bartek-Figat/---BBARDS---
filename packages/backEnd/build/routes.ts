@@ -51,7 +51,32 @@ export function RegisterRoutes(app: Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.get('/ads/:adId',
+        app.get('/api/v1/filter',
+            ...(fetchMiddlewares<RequestHandler>(AdsController)),
+            ...(fetchMiddlewares<RequestHandler>(AdsController.prototype.getFilteredAds)),
+
+            function AdsController_getFilteredAds(request: any, response: any, next: any) {
+            const args = {
+                    request: {"in":"request","name":"request","required":true,"dataType":"object"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new AdsController();
+
+
+              const promise = controller.getFilteredAds.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/api/v1/:adId',
             ...(fetchMiddlewares<RequestHandler>(AdsController)),
             ...(fetchMiddlewares<RequestHandler>(AdsController.prototype.getAd)),
 
@@ -76,7 +101,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/ads/add',
+        app.post('/api/v1/add',
             ...(fetchMiddlewares<RequestHandler>(AdsController)),
             ...(fetchMiddlewares<RequestHandler>(AdsController.prototype.putAd)),
 
