@@ -3622,6 +3622,13 @@
     reflect-metadata "^0.1.13"
     validator "^13.7.0"
 
+"@types/api-error-handler@^1.0.33":
+  version "1.0.33"
+  resolved "https://registry.yarnpkg.com/@types/api-error-handler/-/api-error-handler-1.0.33.tgz#c17477bbf73b2aa74408244df1eaa0776155911d"
+  integrity sha512-cux1uO3Qf30/Ium2wFG8JQGwuI7CrU1yEwlEYh/1fO9Fcjhp0lljk1vZQl1RdWVZRe5FgGSUjQWVIG1n7JQqog==
+  dependencies:
+    "@types/express" "*"
+
 "@types/aria-query@^4.2.0":
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@types/aria-query/-/aria-query-4.2.2.tgz#ed4e0ad92306a704f9fb132a0cfcf77486dbe2bc"
@@ -4488,6 +4495,13 @@ anymatch@^3.0.3, anymatch@~3.1.2:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+api-error-handler@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/api-error-handler/-/api-error-handler-1.0.0.tgz#304403d7f2975473b9e4b79a03dfb8fffd5ac561"
+  integrity sha512-MYtVgPS4zvyixBejpjlr7D1v/RLggk7h5GOgs8PvoXcnkXIgYvdLoA2oR4dWUoIABgQSfdled4DmTubGyf4ndg==
+  dependencies:
+    statuses "^1.2.0"
 
 append-field@^1.0.0:
   version "1.0.0"
@@ -11307,7 +11321,7 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-2.0.1.tgz#55cb000ccf1d48728bd23c685a063998cf1a1b63"
   integrity sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==
 
-"statuses@>= 1.4.0 < 2":
+"statuses@>= 1.4.0 < 2", statuses@^1.2.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==

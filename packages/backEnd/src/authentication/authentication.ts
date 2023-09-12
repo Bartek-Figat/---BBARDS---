@@ -1,8 +1,8 @@
+import { ValidateError } from "tsoa";
 import { Request } from "express";
-import * as jwt from "jsonwebtoken";
+import { verify } from "jsonwebtoken";
 import { db } from "../db/mongo";
 import { Index } from "../enum/index";
-import { HttpResponse } from "../httpError/httpError";
 
 export async function expressAuthentication(
   req: Request,
@@ -12,11 +12,8 @@ export async function expressAuthentication(
   if (securityName === "jwt") {
     const authHeader = req.headers.authorization;
     const token: string | undefined = authHeader && authHeader.split(" ")[1];
-    console.log(token);
 
-    return new Promise(async (resolve) => {
-      if (!token) return HttpResponse.failed("Unauthorized", 401);
-
+    return new Promise(async (resolve, reject) => {
       const authorizationToken = await db
         .collection(Index.Users)
         .find(
@@ -31,21 +28,20 @@ export async function expressAuthentication(
         )
         .toArray();
 
-      if (authorizationToken.length === 0)
-        return HttpResponse.failed("Unauthorized", 401);
+      if (authorizationToken.length === 0) {
+        reject(new ValidateError({}, "Unauthorized"));
+      }
 
-      return jwt.verify(
-        `${token}`,
-        "secret",
-        function (err: any, decoded: any) {
-          if (err) return HttpResponse.failed("Unauthorized", 401);
-
-          resolve({
-            decoded,
-            authHeader: token,
-          });
+      verify(`${token}`, "secret", function (err: any, decoded: any) {
+        if (err) {
+          reject(new ValidateError({ err }, "Unauthorized"));
         }
-      );
+
+        resolve({
+          decoded,
+          authHeader: token,
+        });
+      });
     });
   }
 }

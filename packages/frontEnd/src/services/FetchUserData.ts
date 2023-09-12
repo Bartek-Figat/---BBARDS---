@@ -14,7 +14,6 @@ export const userApi = createApi({
     getUserData: builder.query({
       query: () => `user`,
       providesTags: [{ type: "User" }],
-      keepUnusedDataFor: 5,
     }),
   }),
 });

@@ -1,52 +1,42 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import AuthService from "../services/AuthService";
+import { createSlice } from "@reduxjs/toolkit";
+import { user } from "../api/services/api";
+import type { RootState } from "../store/store";
 
-interface ActivateProps {
-  token: string;
-}
-
-interface ActivateState {
+type ActivateState = {
   status: "waiting" | "success" | "pending" | "error";
   errorMessage: null | string;
-}
+};
 
 const initialState: ActivateState = {
   status: "waiting",
   errorMessage: null,
 };
 
-export const confirmEmail = createAsyncThunk(
-  "auth/activate",
-  async ({ token }: ActivateProps, { rejectWithValue }) => {
-    try {
-      await AuthService.activate({ token });
-    } catch (err) {
-      const error = err as Error;
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const activateSlice = createSlice({
+const slice = createSlice({
   name: "activate",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(confirmEmail.fulfilled, (state) => {
+    builder.addMatcher(user.endpoints.activate.matchFulfilled, (state) => {
       state.status = "success";
     });
-    builder.addCase(confirmEmail.pending, (state) => {
+    builder.addMatcher(user.endpoints.activate.matchPending, (state) => {
       state.status = "pending";
     });
-    builder.addCase(confirmEmail.rejected, (state, action) => {
-      state.status = "error";
-      if (action.error.message) {
-        state.errorMessage = action.error.message;
-      } else {
-        state.errorMessage = "Something went wrong. Try again later";
+    builder.addMatcher(
+      user.endpoints.activate.matchRejected,
+      (state, action) => {
+        state.status = "error";
+        if (action.error.message) {
+          state.errorMessage = action.error.message;
+        } else {
+          state.errorMessage = "Something went wrong. Try again later";
+        }
       }
-    });
+    );
   },
 });
 
-export default activateSlice.reducer;
+export default slice.reducer;
+
+export const selectActivate = (state: RootState) => state.activate;

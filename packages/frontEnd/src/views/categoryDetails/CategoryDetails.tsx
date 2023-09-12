@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "./header";
 import { ProductList } from "./ProductList";
-import AdService from "services/AdService";
+import AdService from "../../services/AdService";
 import Pagination from "rc-pagination";
 import { FilterList } from "./filters/FilterList";
 import { useSearchParams } from "react-router-dom";

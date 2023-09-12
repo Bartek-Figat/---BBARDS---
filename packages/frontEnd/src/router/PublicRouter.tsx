@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home } from "../views/home";
+import { Home } from "../views/home/homePage";
 import Login from "../views/login/Login";
 import { CategoryDetails } from "../views/categoryDetails/CategoryDetails";
 import { Layout } from "./Layout";

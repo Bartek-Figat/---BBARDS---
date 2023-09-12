@@ -3,7 +3,7 @@ import { Layout } from "router/Layout";
 import Login from "views/login/Login";
 import { BlogList } from "views/blogList/BlogList";
 import { CategoryDetails } from "views/categoryDetails/CategoryDetails";
-import { Home } from "views/home";
+import { Home } from "views/home/homePage";
 import { NotFound } from "views/NotFound/NotFound";
 import { Activate } from "views/Activate/Activate";
 import { ProtectedRoute } from "router/protectedRoutes";
@@ -27,7 +27,6 @@ export function App() {
 
     {
       path: `/login`,
-      // eslint-disable-next-line no-extra-boolean-cast
       element: <Login />,
     },
     { path: `/activate/:token`, element: <Activate /> },
@@ -46,5 +45,5 @@ export function App() {
       ],
     },
   ]);
-  return <>{element}</>;
+  return element;
 }

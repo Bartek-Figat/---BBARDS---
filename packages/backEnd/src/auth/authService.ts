@@ -8,6 +8,8 @@ import { Index } from "../enum/index";
 import { db } from "../db/mongo";
 import { HttpResponse } from "../httpError/httpError";
 import { LoginDto, RegisterDto } from "./auth.dto";
+import { LogoutDto } from "../user/dto/user";
+import { ValidateError } from "tsoa";
 
 config({ path: "../../.env" });
 const { secret, sendgridApi } = process.env;
@@ -101,6 +103,7 @@ export class AuthService {
         lastLoggedIn: null,
         logOutDate: null,
         password: await hash(password, 10),
+        isLogin: false,
       };
 
       await db.collection(Index.Users).insertOne({
@@ -121,6 +124,7 @@ export class AuthService {
     credentialValidation.email = email;
     credentialValidation.password = password;
     const errors = await validate(credentialValidation);
+
     if (errors.length > 0) return HttpResponse.failed(errors, 400);
 
     const user: any = await db.collection(Index.Users).findOne(
@@ -132,48 +136,41 @@ export class AuthService {
         },
       }
     );
-
-    console.log(user);
     const match: boolean =
       user && (await compare(`${password}`, user.password));
-
-    if (!match) return HttpResponse.failed("Bad Request", 400);
-    console.log("match", match);
+    if (!match) throw new ValidateError({}, "Bad Request");
 
     const token: string = sign({ token: user._id }, "secret");
-    console.log("token", token);
 
     await db.collection(Index.Users).updateOne(
       { email: user.email },
       {
         $addToSet: { authorizationToken: { $each: [`${token}`] } },
+        $set: { isLogin: true, lastLoggedIn: new Date() },
       },
       {}
     );
 
-    return HttpResponse.sucess(token, 200, {});
+    const isLogin: any = await db
+      .collection(Index.Users)
+      .findOne({ email }, { projection: { isLogin: 1 } });
+    console.log("isLogin", isLogin.isLogin);
+
+    return HttpResponse.sucess({ token, isLogin: isLogin.isLogin }, 200, {});
   }
-  async userLogout(authData: any) {
+  async userLogout(dto: LogoutDto): Promise<void> {
     const {
       decoded: { token },
       authHeader,
-    } = authData;
+    } = dto;
 
-    try {
-      await db.collection(Index.Users).updateOne(
-        { _id: new ObjectId(token) },
-        {
-          $pull: { authorizationToken: { $in: [authHeader] } },
-        },
-        {}
-      );
-      return HttpResponse.sucess(
-        "You have been logged out successfully",
-        200,
-        {}
-      );
-    } catch (err: any) {
-      return HttpResponse.failed(err.message, 500);
-    }
+    await db.collection(Index.Users).updateOne(
+      { _id: new ObjectId(token) },
+      {
+        $pull: { authorizationToken: { $in: [authHeader] } },
+        $set: { isLogin: false, logOutDate: new Date() },
+      },
+      {}
+    );
   }
 }

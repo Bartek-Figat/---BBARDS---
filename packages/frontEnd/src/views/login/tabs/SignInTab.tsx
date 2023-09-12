@@ -1,33 +1,28 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import { useLoginMutation } from "../../../api/services/api";
 import { FaUnlock } from "react-icons/fa";
 import FormSubmit from "../form/FormSubmit";
 import FormCheckboxInput from "../form/FormCheckboxInput";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInputWithTooltip from "../form/FormInputWithTooltip";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { signIn } from "../../../slice/user";
 
 function SignInTab() {
+  interface IFormInput {
+    email: string;
+    password: string;
+  }
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
 
-  const dispatch = useAppDispatch();
-  const isError = useAppSelector((state) => state.user.status) === "error";
-  const isPending = useAppSelector((state) => state.user.status) === "pending";
-  const errorMessage = useAppSelector((state) => state.user.errorMessage);
+  const [userLogin, { isLoading }] = useLoginMutation();
 
   const onSubmit: SubmitHandler<IFormInput> = ({ email, password }) => {
-    dispatch(signIn({ email, password }));
+    userLogin({ email, password });
   };
-
-  interface IFormInput {
-    email: string;
-    password: string;
-  }
 
   return (
     <div className="m-12">
@@ -56,6 +51,7 @@ function SignInTab() {
             register={register}
             options={{
               required: "This is required",
+              minLength: 8,
             }}
             tooltip={errors.password && errors.password.message}
           />
@@ -68,7 +64,7 @@ function SignInTab() {
         </div>
 
         <FormSubmit>
-          {isPending ? (
+          {isLoading ? (
             <div className=" flex justify-center items-center">
               <div className="animate-spin rounded-full border-b-2 w-4 h-4 border-white"></div>
               <p className="ml-2">Loading...</p>

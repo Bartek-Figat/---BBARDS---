@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
+import { useRegisterMutation } from "../../../api/services/api";
 import { FaUserCheck } from "react-icons/fa";
 import FormSubmit from "../form/FormSubmit";
 import FormInputWithTooltip from "../form/FormInputWithTooltip";
 import FormCheckboxInput from "../form/FormCheckboxInput";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { signUp } from "../../../slice/register";
 
 function SignUpTab() {
   const {
@@ -15,8 +14,8 @@ function SignUpTab() {
     handleSubmit,
   } = useForm<IFormInput>();
 
-  const dispatch = useAppDispatch();
-  const status = useAppSelector((state) => state.register.status);
+  const [userRegister, { isLoading, isError, isSuccess }] =
+    useRegisterMutation();
 
   const onSubmit: SubmitHandler<IFormInput> = ({
     name,
@@ -24,7 +23,7 @@ function SignUpTab() {
     password,
     repeatPassword,
   }) => {
-    dispatch(signUp({ name, email, password, repeatPassword }));
+    userRegister({ name, email, password, repeatPassword });
   };
 
   interface IFormInput {
@@ -122,16 +121,14 @@ function SignUpTab() {
         </FormSubmit>
       </form>
 
-      {status === "success" && (
+      {isSuccess && (
         <p className="mt-5 text-green-400">
           You are successfully registered! Before login you must confirm your
           email.
         </p>
       )}
-      {status === "pending" && (
-        <p className="mt-5">Your data is processing...</p>
-      )}
-      {status === "error" && (
+      {isLoading && <p className="mt-5">Your data is processing...</p>}
+      {isError && (
         <p className="mt-5 text-red-400">
           Something wrong happened... Try again!
         </p>

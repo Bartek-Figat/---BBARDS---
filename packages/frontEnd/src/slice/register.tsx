@@ -1,38 +1,10 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import AuthService from "../services/AuthService";
+import { createSlice } from "@reduxjs/toolkit";
+import { user } from "../api/services/api";
+import type { RootState } from "../store/store";
 
-interface RegisterProps {
-  name: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-}
-
-export const signUp = createAsyncThunk(
-  "auth/register",
-  async (
-    { name, email, password, repeatPassword }: RegisterProps,
-    thunkAPI
-  ) => {
-    try {
-      const response = await AuthService.register({
-        name,
-        email,
-        password,
-        repeatPassword,
-      });
-      return response.data;
-    } catch (error) {
-      const errorObject = error as Error;
-
-      return thunkAPI.rejectWithValue(errorObject.message);
-    }
-  }
-);
-
-interface RegisterState {
+type RegisterState = {
   status: "waiting" | "success" | "pending" | "error";
-}
+};
 
 const initialState: RegisterState = {
   status: "waiting",
@@ -43,13 +15,13 @@ export const registerSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(signUp.fulfilled, (state, action) => {
+    builder.addMatcher(user.endpoints.register.matchFulfilled, (state) => {
       state.status = "success";
     });
-    builder.addCase(signUp.pending, (state, action) => {
+    builder.addMatcher(user.endpoints.register.matchPending, (state) => {
       state.status = "pending";
     });
-    builder.addCase(signUp.rejected, (state, action) => {
+    builder.addMatcher(user.endpoints.register.matchRejected, (state) => {
       state.status = "error";
     });
   },

@@ -1,26 +1,15 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { confirmEmail } from "slice/activate";
+import { useActivateQuery } from "../../api/services/api";
+import { selectActivate } from "../../slice/activate";
 import { ButtonLink } from "components/buttons/ButtonLink";
 
 export const Activate = () => {
-  const isError = useAppSelector((state) => state.activate.status) === "error";
-  const isPending =
-    useAppSelector((state) => state.activate.status) === "pending";
-  const isSuccess =
-    useAppSelector((state) => state.activate.status) === "success";
-  const errorMessage = useAppSelector((state) => state.activate.errorMessage);
-
-  const dispatch = useAppDispatch();
   const { token } = useParams();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (token) {
-      dispatch(confirmEmail({ token }));
-    }
-  }, [dispatch, token]);
+  const { isSuccess, isError, isLoading } = useActivateQuery({ token });
+  const { errorMessage } = useSelector(selectActivate);
 
   useEffect(() => {
     if (isSuccess) {
@@ -33,7 +22,7 @@ export const Activate = () => {
 
   return (
     <div className="flex justify-center items-center mt-20">
-      {isPending && <p>Loading ...</p>}
+      {isLoading && <p>Loading ...</p>}
       {isSuccess && <p>Success! Redirect to login page</p>}
       {isError && (
         <div className="flex justify-center items-center flex-col gap-5">

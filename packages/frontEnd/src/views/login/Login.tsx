@@ -1,30 +1,18 @@
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { TabButton } from "components/tabs/TabButton";
 import { Tab } from "@headlessui/react";
 import AsideSection from "./AsideSection";
 import SignInTab from "./tabs/SignInTab";
 import SignUpTab from "./tabs/SignUpTab";
-import { useAppSelector, useAppDispatch } from "store/hooks";
 import { Navigate } from "react-router-dom";
-import { getUserData } from "slice/user";
+import { selectSingIn } from "../../slice/singIn";
 
 function Login() {
-  const { isLogin, status } = useAppSelector((state) => state.user);
-  const token = localStorage.getItem("token");
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (token && !isLogin) {
-      dispatch(getUserData({ token }));
-    }
-  }, [token, dispatch, isLogin]);
-
-  if (status === "success" || (token && isLogin)) {
-    return <Navigate to="/dashboard" replace />;
-  }
+  const { status } = useSelector(selectSingIn);
 
   return (
     <div className="flex h-screen w-screen">
+      {status === "success" && <Navigate to="/dashboard" replace={true} />}
       <AsideSection />
       <div className="w-full md:w-3/6 xl:w-2/5 bg-[#fbfbfb]">
         <Tab.Group>

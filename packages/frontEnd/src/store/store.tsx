@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import config from "../slice/collapsed";
-import register from "../slice/register";
-import activate from "slice/activate";
-import user from "slice/user";
+import { user } from "../api/services/api";
+import ActivateUser from "../slice/activate";
+import SingIn from "../slice/singIn";
+import collapsed from "../slice/collapsed";
 
 export const store = configureStore({
   reducer: {
-    config,
-    register,
-    activate,
-    user,
+    [user.reducerPath]: user.reducer,
+    activate: ActivateUser,
+    login: SingIn,
+    collapsed,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(user.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

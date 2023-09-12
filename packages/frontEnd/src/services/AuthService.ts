@@ -56,9 +56,9 @@ const activate = ({ token }: ActivateProps) => {
 };
 
 const confirmUser = ({ token }: ActivateProps) => {
+  console.log("confirmUser", token);
   return axios({
-    method: "get",
-    url: `${API_URL}/api/v1/user`,
+    url: `${API_URL}/profile/user`,
     headers: {
       Authorization: `Bearer ${token}`,
     },

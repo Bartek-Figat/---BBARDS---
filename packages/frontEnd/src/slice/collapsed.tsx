@@ -22,6 +22,8 @@ export const configSlice = createSlice({
   },
 });
 
-export const { setCollapsed } = configSlice.actions;
 export default configSlice.reducer;
-export const selectConfig = (state: RootState) => state.config.collapsed;
+
+export const { setCollapsed } = configSlice.actions;
+
+export const selectConfigSlice = (state: RootState) => state.collapsed;

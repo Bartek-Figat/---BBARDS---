@@ -1,6 +1,4 @@
 import React from "react";
-import avatar from "assets/images/avatar/01.jpg";
-import { Nav } from "./nav";
 
 export const Dasboard: React.FC = () => {
   return (

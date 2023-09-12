@@ -1,15 +1,8 @@
-import React from "react";
 import { Navbar } from "components/navbar/navbar";
 import { Footer } from "components/footer/Footer";
 import { Banner } from "views/admin/banner/banner";
-import { Profile } from "views/admin/profile/profile";
 import { Header } from "views/admin/header";
-import {
-  BrowserRouter as Router,
-  Outlet,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 export const LayoutAdmin = () => {
   return (

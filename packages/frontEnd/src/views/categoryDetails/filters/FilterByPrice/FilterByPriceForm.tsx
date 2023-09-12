@@ -1,9 +1,5 @@
-import React from "react";
-import { SecondaryButton } from "components/buttons/SecondaryButton";
 import { FaSearch } from "react-icons/fa";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { signUp } from "../../../../slice/register";
 import { SubmitInput } from "components/buttons/Input/SubmitInput";
 
 export const FilterByPriceForm = () => {

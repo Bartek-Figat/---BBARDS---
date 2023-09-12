@@ -1,10 +1,7 @@
 import avatar from "assets/images/avatar/01.jpg";
 import { Nav } from "./nav";
-import { useAppSelector } from "store/hooks";
 
 export const Header: React.FC = () => {
-  const user = useAppSelector((state) => state.user);
-
   return (
     <div className="w-[70vw] pt-10 bg-white rounded-lg text-sm mb-5">
       <div className="flex laptop:flex-col w-full px-3 mb-5">
@@ -18,7 +15,7 @@ export const Header: React.FC = () => {
               />
             </p>
           </div>
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <ul className="text-gray-dark">
               {user && (
                 <>
@@ -29,7 +26,7 @@ export const Header: React.FC = () => {
 
               <li>Los Angeles, West America</li>
             </ul>
-          </div>
+          </div> */}
         </div>
         <div className="flex justify-between w-[60%] laptop:w-full laptop:py-4 px-3">
           <div className=" h-full w-[30%] bg-city-fog bg-cover rounded-lg">
