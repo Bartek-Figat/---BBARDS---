@@ -12,9 +12,15 @@ type RegisterProps = {
   repeatPassword: string;
 };
 
-interface Token {
-  token: string;
-}
+type FilterAndPaginationProductsProps = {
+  page: number;
+  price?: number;
+  adCategory?: string;
+  rate?: string;
+  city?: string;
+  priceCondition?: string;
+  productCondition?: string;
+};
 
 // Define a service using a base URL and expected endpoints
 export const user = createApi({
@@ -63,6 +69,13 @@ export const user = createApi({
         credentials: "include",
       }),
     }),
+    filterAndPaginationProducts: builder.query({
+      query: (params: FilterAndPaginationProductsProps) => ({
+        url: `filter`,
+        method: "GET",
+        params,
+      }),
+    }),
   }),
 });
 
@@ -71,4 +84,5 @@ export const {
   useRegisterMutation,
   useActivateQuery,
   useConfirmUserQuery,
+  useFilterAndPaginationProductsQuery,
 } = user;

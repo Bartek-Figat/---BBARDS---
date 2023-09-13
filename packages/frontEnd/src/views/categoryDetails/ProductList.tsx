@@ -15,8 +15,6 @@ interface ProductProps {
 
 export const ProductList: FC<Props> = ({ products }) => {
   const mapProducts = () => {
-    if (!products) return <p>No products</p>;
-
     return products.map(
       ({ _id, productImages, productTitle, price, adCategory, city }) => {
         return (
