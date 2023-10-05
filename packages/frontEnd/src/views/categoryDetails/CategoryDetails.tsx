@@ -29,6 +29,7 @@ export const CategoryDetails = () => {
   for (const [key, value] of searchParams.entries()) {
     params[key] = value;
   }
+  console.log("32", params);
 
   const { data: productsQuery, isLoading } =
     useFilterAndPaginationProductsQuery({
@@ -40,8 +41,9 @@ export const CategoryDetails = () => {
     const productData = async () => {
       try {
         if (productsQuery) {
-          setTotalPages(productsQuery.data.dataLength);
-          setProducts(productsQuery.data.data);
+          const { dataLength, data } = productsQuery.data;
+          setTotalPages(dataLength);
+          setProducts(data);
         }
       } catch (err) {
         console.log(err);

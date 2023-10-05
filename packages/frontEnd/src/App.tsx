@@ -1,5 +1,5 @@
 import { useRoutes } from "react-router-dom";
-import { Layout } from "router/Layout";
+import { HomeLayout, Layout } from "router/Layout";
 import Login from "views/login/Login";
 import { BlogList } from "views/blogList/BlogList";
 import { CategoryDetails } from "views/categoryDetails/CategoryDetails";
@@ -21,14 +21,19 @@ export function App() {
         { index: true, element: <Home /> },
         { path: `category-details`, element: <CategoryDetails /> },
         { path: `blog-list`, element: <BlogList /> },
-        { path: `*`, element: <NotFound /> },
+        { path: `*`, element: <Home /> },
       ],
     },
-
-    {
-      path: `/login`,
-      element: <Login />,
-    },
+    !localStorage.getItem("token")
+      ? {
+          path: `/login`,
+          element: <Login />,
+        }
+      : {
+          path: `/dashboard`,
+          element: <LayoutAdmin />,
+          children: [{ index: true, element: <Dasboard /> }],
+        },
     { path: `/activate/:token`, element: <Activate /> },
     {
       element: <ProtectedRoute />,

@@ -10,7 +10,7 @@ export const Search: React.FC<{ className: string }> = ({ className }) => {
           <input
             type="search"
             name="search"
-            placeholder="Search, Whatever You Needs..."
+            placeholder="Search By City..."
             className="w-full h-10 pl-10 text-sm appearance-none focus:outline-none bg-[#f5f5fd] rounded-lg"
           />
           <button type="submit" className="absolute top-0 left-0 mt-3 ml-4">

@@ -1,8 +1,8 @@
-import { ValidateError } from "tsoa";
 import { Request } from "express";
 import { verify } from "jsonwebtoken";
 import { db } from "../db/mongo";
 import { Index } from "../enum/index";
+import { Unauthorized } from "../httpError/ErrorHandler";
 
 export async function expressAuthentication(
   req: Request,
@@ -13,7 +13,7 @@ export async function expressAuthentication(
     const authHeader = req.headers.authorization;
     const token: string | undefined = authHeader && authHeader.split(" ")[1];
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, _reject) => {
       const authorizationToken = await db
         .collection(Index.Users)
         .find(
@@ -29,12 +29,12 @@ export async function expressAuthentication(
         .toArray();
 
       if (authorizationToken.length === 0) {
-        reject(new ValidateError({}, "Unauthorized"));
+        throw new Unauthorized("");
       }
 
       verify(`${token}`, "secret", function (err: any, decoded: any) {
         if (err) {
-          reject(new ValidateError({ err }, "Unauthorized"));
+          throw new Unauthorized("");
         }
 
         resolve({

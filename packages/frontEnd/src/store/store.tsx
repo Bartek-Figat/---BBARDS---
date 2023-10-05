@@ -3,6 +3,7 @@ import { user } from "../api/services/api";
 import ActivateUser from "../slice/activate";
 import SingIn from "../slice/singIn";
 import collapsed from "../slice/collapsed";
+import checked from "../slice/checked";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     activate: ActivateUser,
     login: SingIn,
     collapsed,
+    checked,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(user.middleware),

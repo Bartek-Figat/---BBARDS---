@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { FilterHeader } from "./FilterHeader";
 import { FilterItem } from "./FilterItem";
 import { FilterByTypeForm } from "./FilterByType/FilterByTypeForm";
@@ -10,6 +10,7 @@ import { FilterByCitiesForm } from "./FilterByCities/FilterByCitiesForm";
 import { FilterByCategoriesForm } from "./FilterByCategories/FilterByCategoriesForm";
 import { FilterByPopularityForm } from "./FilterByPopularity/FilterByPopularityForm";
 import { FilterByPriceForm } from "./FilterByPrice/FilterByPriceForm";
+import { useCheck } from "util/useReduxToggle";
 
 type StandardInputs = Record<string, string>;
 type CheckboxInputs = {
@@ -17,6 +18,7 @@ type CheckboxInputs = {
 };
 
 type Inputs = StandardInputs & CheckboxInputs;
+
 export const FilterList = () => {
   const filtersList = [
     { name: "Filter by price", inputs: FilterByPriceForm },
@@ -66,9 +68,7 @@ export const FilterList = () => {
           </FilterItem>
         );
       })}
-      <div className="mt-4">
-        <SubmitInput variant="filled">Apply filters</SubmitInput>
-      </div>
+      <div className="mt-4"></div>
     </form>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiMenu, FiSearch } from "react-icons/fi";
 import { Search } from "components/search/search";
+import { SearchByCity } from "components/search/seratchByCity";
 import { NotificationCircle } from "./notificationCricle";
 import userImage from "assets/images/user.png";
 import logo from "assets/images/logo.png";
@@ -31,7 +32,7 @@ export const Navbar = () => {
             <span className="ml-2 font-bold">Join Me</span>
           </Link>
         </div>
-        <Search className="ml-10 hidden lg:flex" />
+        <SearchByCity />
 
         <div className="ml-10 hidden lg:flex">
           <NotificationCircle />
@@ -51,7 +52,7 @@ export const Navbar = () => {
           <FiSearch className="w-4 h-4 stroke-current m-auto" />
         </button>
       </div>
-      {isSearchCollapsed && <Search className="p-3 lg:hidden" />}
+      {isSearchCollapsed && <SearchByCity />}
     </>
   );
 };

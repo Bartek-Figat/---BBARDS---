@@ -4,6 +4,7 @@ import clsx from "clsx";
 type Props = {
   children: React.ReactNode;
   variant: "filled" | "outlined";
+  onClick?: () => React.MouseEvent<HTMLElement>;
 };
 
 export const SubmitInput: React.FC<Props> = ({ children, variant }) => {

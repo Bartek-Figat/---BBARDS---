@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { selectConfigSlice } from "../slice/collapsed";
-import { setCollapsed } from "../slice/collapsed";
+import { selectConfigSlice, setCollapsed } from "../slice/collapsed";
+import { selectCheckSlice, setCheck } from "../slice/checked";
 
 export const useCollapsed = () => {
   const { collapsed } = useSelector(selectConfigSlice);
@@ -17,4 +17,21 @@ export const useCollapsed = () => {
   };
 
   return [handleToggle, collapsed] as const;
+};
+
+export const useCheck = () => {
+  const { checked } = useSelector(selectCheckSlice);
+  const dispatch = useDispatch();
+
+  selectCheckSlice;
+
+  const handleToggle = () => {
+    dispatch(
+      setCheck({
+        checked,
+      })
+    );
+  };
+
+  return [handleToggle, checked] as const;
 };

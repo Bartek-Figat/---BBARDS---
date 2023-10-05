@@ -40,7 +40,6 @@ export const FilterByRatingForm = () => {
               className="form-checkbox rounded"
               type="checkbox"
               onChange={(event) => onChange(event, "5")}
-              checked={currentCheckbox === "5"}
             />
             <label htmlFor="five" className="ml-2 flex">
               {getStars(5)}

@@ -39,7 +39,7 @@ export const FeaturedAds = () => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
 
   return (
-    <div className="flex flex-col md:flex-row justify-center  mt-44  px-32">
+    <div className="flex flex-col md:flex-row justify-center mt-44 lg:px-32 xs:px-10">
       <div className="w-full md:w-1/2 ">
         <hgroup>
           <h2 className="text-4xl font-bold">

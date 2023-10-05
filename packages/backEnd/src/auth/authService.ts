@@ -9,7 +9,7 @@ import { db } from "../db/mongo";
 import { HttpResponse } from "../httpError/httpError";
 import { LoginDto, RegisterDto } from "./auth.dto";
 import { LogoutDto } from "../user/dto/user";
-import { ValidateError } from "tsoa";
+import { BadRequest, NotFound } from "../httpError/ErrorHandler";
 
 config({ path: "../../.env" });
 const { secret, sendgridApi } = process.env;
@@ -92,7 +92,7 @@ export class AuthService {
       const useEmail = await db.collection(Index.Users).findOne({ email });
       console.log(useEmail);
 
-      if (useEmail) return HttpResponse.failed("User email found", 400);
+      if (useEmail) throw new NotFound("");
 
       const credentials = {
         email,
@@ -125,7 +125,7 @@ export class AuthService {
     credentialValidation.password = password;
     const errors = await validate(credentialValidation);
 
-    if (errors.length > 0) return HttpResponse.failed(errors, 400);
+    if (errors.length > 0) throw new NotFound();
 
     const user: any = await db.collection(Index.Users).findOne(
       { email },
@@ -138,7 +138,8 @@ export class AuthService {
     );
     const match: boolean =
       user && (await compare(`${password}`, user.password));
-    if (!match) throw new ValidateError({}, "Bad Request");
+
+    if (!match) throw new BadRequest();
 
     const token: string = sign({ token: user._id }, "secret");
 

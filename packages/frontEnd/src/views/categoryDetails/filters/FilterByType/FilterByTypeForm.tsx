@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import { SaleBadge } from "components/badge/SaleBadge";
 import { FC } from "react";
 import { FaBroom } from "react-icons/fa";
@@ -5,13 +6,21 @@ import { RentalBadge } from "../../../../components/badge/RentalBadge";
 import { SubmitInput } from "components/buttons/Input/SubmitInput";
 import { UseFormRegister } from "react-hook-form";
 import { BookingBadge } from "../../../../components/badge/BookingBadge";
+import { useCheck } from "util/useReduxToggle";
 
 export const FilterByTypeForm: FC<UseFormRegister<any>> = (register) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [handleToggle, checked] = useCheck();
   const typeInputs = [
     { name: "Sale", badge: SaleBadge },
     { name: "Rent", badge: RentalBadge },
     { name: "Booking", badge: BookingBadge },
   ];
+
+  const removeAllParams = () => {
+    // searchParams.delete();
+    // setSearchParams(searchParams);
+  };
 
   return (
     <>
@@ -35,10 +44,11 @@ export const FilterByTypeForm: FC<UseFormRegister<any>> = (register) => {
             </div>
           );
         })}
+        <button onClick={removeAllParams}>Clear </button>
+        <SubmitInput variant="outlined">
+          <FaBroom /> Go
+        </SubmitInput>
       </div>
-      <SubmitInput variant="outlined">
-        <FaBroom /> Clear filter
-      </SubmitInput>
     </>
   );
 };

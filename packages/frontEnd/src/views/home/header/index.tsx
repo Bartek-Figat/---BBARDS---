@@ -1,4 +1,3 @@
-import React from "react";
 import { FaEye } from "react-icons/fa";
 import { SwiperContainer } from "./swiper/swiper";
 import { slidesMap } from "./swiper/Slides";
