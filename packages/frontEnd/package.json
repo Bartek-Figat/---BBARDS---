@@ -6,6 +6,7 @@
   "dependencies": {
     "@headlessui/react": "^1.6.6",
     "@reduxjs/toolkit": "^1.8.3",
+    "@tensorflow/tfjs": "^4.11.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -19,8 +20,10 @@
     "clsx": "^1.2.1",
     "lightgallery": "^2.7.0",
     "node-fetch": "^3.2.10",
-    "rc-pagination": "^3.4.2",
+    "rc-pagination": "^3.6.1",
     "react": "^18.2.0",
+    "react-autosuggest": "^10.1.0",
+    "react-calendar": "^4.6.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.34.2",
     "react-hook-form-resolvers": "^0.0.1",
@@ -33,6 +36,7 @@
     "swiper": "^8.3.2",
     "tailwindcss": "^3.1.7",
     "typescript": "^4.4.2",
+    "uninstall": "^0.0.0",
     "unsplash-js": "^7.0.15",
     "web-vitals": "^2.1.0"
   },
@@ -95,6 +99,8 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
+    "@types/react-autosuggest": "^10.1.7",
+    "@types/spellchecker": "^3.5.0",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "axios": "^0.27.2",

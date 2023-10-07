@@ -1,24 +1,11 @@
-FROM node:18 AS CLIENT
-
+FROM node:18.15.0 as build
 WORKDIR /app
-
-COPY package.json . ./
-
+COPY package* yarn.lock ./
 RUN yarn install
-
 COPY . .
+RUN yarn run build
 
-EXPOSE 3000
-
-CMD ["yarn", "run", "start"]
-
-# FROM node:18 AS CLIENT
-# WORKDIR /app
-# COPY package* yarn.lock ./
-# RUN yarn install
-# COPY public ./public
-# COPY src ./src
-# RUN yarn run build
-
-# FROM nginx:alpine
-# COPY --from=CLIENT /app/build /usr/share/nginx/html
+FROM nginx:1.19.0-alpine as prod-stage
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,10 +1,18 @@
 export interface Categories {
-    page: string;
-    productCategory: string;
-    price: string;
-    priceCondition: string;
-    adCategory: string;
-    productCondition: string;
-    city: string;
-    rate: string;
+  [key: string]: any;
+  page: string;
+  productCategory: string;
+  price: {
+    maxPrice: number;
+    minPrice: number;
+  };
+  date: {
+    startDate: Date;
+    endDate: Date;
+  };
+  priceCondition: string;
+  adCategory: string;
+  productCondition: string;
+  city: string;
+  rate: string;
 }
