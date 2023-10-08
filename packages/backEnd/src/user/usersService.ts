@@ -1,11 +1,13 @@
 import { ObjectId } from "mongodb";
-import { db } from "../db/mongo";
+import { getDb } from "../db/mongo";
 import { Index } from "../enum/index";
 import { Token, User } from "./dto/user";
 
 export class UsersService {
+  private collection = getDb().collection<User>(Index.Users);
+
   async getUser({ decoded: { token } }: Token): Promise<User | null> {
-    const user: User | null = await db.collection<User>(Index.Users).findOne(
+    const user: User | null = await this.collection.findOne(
       { _id: new ObjectId(token) },
       {
         projection: {

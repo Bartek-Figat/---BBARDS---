@@ -5,7 +5,7 @@ import { validate } from "class-validator";
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { Index } from "../enum/index";
-import { db } from "../db/mongo";
+import { getDb } from "../db/mongo";
 import { HttpResponse } from "../httpError/httpError";
 import { LoginDto, RegisterDto } from "./auth.dto";
 import { LogoutDto } from "../user/dto/user";
@@ -17,6 +17,8 @@ const { secret, sendgridApi } = process.env;
 sgMail.setApiKey(`${sendgridApi}`);
 
 export class AuthService {
+  private collection = getDb().collection(Index.Users);
+
   async userEmailConfiramtion({
     email,
     authToken,
@@ -38,7 +40,7 @@ export class AuthService {
   }
 
   async emailConfiramtion({ token }: { token: string }) {
-    const authToken = await db.collection(Index.Users).findOne(
+    const authToken = await this.collection.findOne(
       { authToken: token },
       {
         projection: {
@@ -50,12 +52,12 @@ export class AuthService {
 
     if (!authToken) return HttpResponse.failed("Not modified", 400);
 
-    const email = await db
-      .collection(Index.Users)
-      .findOne({ authToken: authToken.authToken });
+    const email = await this.collection.findOne({
+      authToken: authToken.authToken,
+    });
 
     if (!email) return HttpResponse.failed("Not modified", 400);
-    await db.collection(Index.Users).updateOne(
+    await this.collection.updateOne(
       { email: email.email },
       {
         $set: {
@@ -89,7 +91,7 @@ export class AuthService {
       const errors = await validate(credentialValidation);
 
       if (errors.length > 0) return HttpResponse.failed(errors, 400);
-      const useEmail = await db.collection(Index.Users).findOne({ email });
+      const useEmail = await this.collection.findOne({ email });
       console.log(useEmail);
 
       if (useEmail) throw new NotFound("");
@@ -106,7 +108,7 @@ export class AuthService {
         isLogin: false,
       };
 
-      await db.collection(Index.Users).insertOne({
+      await this.collection.insertOne({
         ...credentials,
       });
 
@@ -127,7 +129,7 @@ export class AuthService {
 
     if (errors.length > 0) throw new NotFound();
 
-    const user: any = await db.collection(Index.Users).findOne(
+    const user: any = await this.collection.findOne(
       { email },
       {
         projection: {
@@ -143,7 +145,7 @@ export class AuthService {
 
     const token: string = sign({ token: user._id }, "secret");
 
-    await db.collection(Index.Users).updateOne(
+    await this.collection.updateOne(
       { email: user.email },
       {
         $addToSet: { authorizationToken: { $each: [`${token}`] } },
@@ -152,9 +154,10 @@ export class AuthService {
       {}
     );
 
-    const isLogin: any = await db
-      .collection(Index.Users)
-      .findOne({ email }, { projection: { isLogin: 1 } });
+    const isLogin: any = await this.collection.findOne(
+      { email },
+      { projection: { isLogin: 1 } }
+    );
     console.log("isLogin", isLogin.isLogin);
 
     return HttpResponse.sucess({ token, isLogin: isLogin.isLogin }, 200, {});
@@ -165,7 +168,7 @@ export class AuthService {
       authHeader,
     } = dto;
 
-    await db.collection(Index.Users).updateOne(
+    await this.collection.updateOne(
       { _id: new ObjectId(token) },
       {
         $pull: { authorizationToken: { $in: [authHeader] } },

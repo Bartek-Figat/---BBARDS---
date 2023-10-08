@@ -1,4 +1,4 @@
-import { Listbox, RadioGroup } from "@headlessui/react";
+import { Combobox, Listbox, RadioGroup } from "@headlessui/react";
 import React, { useState } from "react";
 import Autosuggest, {
   ChangeEvent,
@@ -56,42 +56,36 @@ const WordSuggestions: React.FC<Props> = ({ words }) => {
   );
 
   const rendeuggestion = (suggestion: string) => (
-    <RadioGroup key={suggestion} value={suggestion}>
-      <RadioGroup.Option
+    <Combobox key={suggestion} value={suggestion}>
+      <Combobox.Option
         key={suggestion}
         value={suggestion}
-        className={({ active, checked }) =>
-          `${
-            active
-              ? "ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300"
-              : ""
-          }
-                  ${
-                    checked ? "bg-sky-900 bg-opacity-75 text-white" : "bg-white"
-                  }
-                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
+        className={({ active }) =>
+          `relative cursor-default rounded-md select-none py-2 pl-10 pr-4 ${
+            active ? "bg-teal-600 text-white" : "text-gray-900"
+          }`
         }
       >
-        {({ active, checked }) => (
+        {({ active }) => (
           <>
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center">
                 <div className="text-sm">
-                  <RadioGroup.Label
+                  <Combobox.Label
                     as="p"
-                    className={`font-medium  ${
-                      checked ? "text-white" : "text-gray-900"
+                    className={`font-medium p-6${
+                      active ? "text-gray-600" : "text-gray-900"
                     }`}
                   >
                     {suggestion}
-                  </RadioGroup.Label>
+                  </Combobox.Label>
                 </div>
               </div>
             </div>
           </>
         )}
-      </RadioGroup.Option>
-    </RadioGroup>
+      </Combobox.Option>
+    </Combobox>
   );
 
   return (

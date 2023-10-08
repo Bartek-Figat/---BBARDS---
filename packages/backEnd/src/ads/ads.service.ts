@@ -1,15 +1,12 @@
-import { db } from "../db/mongo";
+import { getDb } from "../db/mongo";
 import { Index } from "../enum";
 import { HttpResponse } from "../httpError/httpError";
 import { ObjectId } from "mongodb";
-import { config } from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 import { createReadStream } from "fs";
 import S3 from "aws-sdk/clients/s3";
 import { Categories } from "./Categories";
 import { buildMongoQuery } from "./buildMongoQuery";
-
-config({ path: "../../.env" });
 
 const s3 = new S3({
   endpoint: process.env.endpoint,
@@ -38,13 +35,14 @@ const uploadedFilesToSpaces = async (requsetFiles: Express.Multer.File[]) => {
 };
 
 export class AdsService {
+  private collection = getDb().collection(Index.Add);
+
   async getAd(adId: string) {
     try {
-      const ads = await db
-        .collection(Index.Add)
+      const ads = await this.collection
         .find({ _id: new ObjectId(adId) })
         .toArray();
-      const total = await db.collection(Index.Add).countDocuments({});
+      const total = await this.collection.countDocuments({});
 
       return HttpResponse.sucess({ total, ads }, 201, {});
     } catch (err: any) {
@@ -72,7 +70,7 @@ export class AdsService {
     } = advertising;
     try {
       const uploadedFiles = await uploadedFilesToSpaces(files);
-      const response = await db.collection(Index.Add).insertOne({
+      const response = await this.collection.insertOne({
         author: token,
         productTitle,
         productImages: uploadedFiles,
@@ -113,6 +111,7 @@ export class AdsService {
         filterQuery: mongoQuery,
       };
       const { filterResult, dataLength } = await this.advancedFiltration(props);
+
       return HttpResponse.sucess(
         {
           dataLength: dataLength.length,
@@ -138,8 +137,7 @@ export class AdsService {
     const { page, ...res } = filterQuery;
 
     try {
-      const filterResult = await db
-        .collection(Index.Add)
+      const filterResult = await this.collection
         .find({
           $and: [res],
         })
@@ -147,8 +145,7 @@ export class AdsService {
         .limit(nPerPage)
         .toArray();
 
-      const dataLength = await db
-        .collection(Index.Add)
+      const dataLength = await this.collection
         .find({
           $and: [res],
         })

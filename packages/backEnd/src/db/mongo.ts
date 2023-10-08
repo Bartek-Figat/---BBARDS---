@@ -1,24 +1,17 @@
 import { config } from "dotenv";
-import { Db, MongoClient, MongoClientOptions } from "mongodb";
+import { MongoClient, Db } from "mongodb";
 import { Index } from "../enum/index";
-
 config({ path: "../../.env" });
-
 const { dbDEV } = process.env;
+let db: Db;
 
-const client = new MongoClient(`${dbDEV}`, {
-  useNewUrlParser: true,
-} as MongoClientOptions);
+export async function connectToDb() {
+  const client = new MongoClient(`${dbDEV}`);
+  await client.connect();
+  db = client.db(Index.Db);
+  console.log("Connect To Db");
+}
 
-export let db: Db;
-
-export const connect = async () => {
-  const connection = await client.connect();
-  if (!connection) {
-    console.log("Db not connected");
-  } else {
-    console.log("Db connected");
-    db = connection.db(Index.Db);
-    return client;
-  }
-};
+export function getDb() {
+  return db;
+}

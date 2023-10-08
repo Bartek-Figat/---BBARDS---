@@ -1,9 +1,9 @@
 import { config } from "dotenv";
+import { getDb } from "../db/mongo";
 import { S3 } from "aws-sdk";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 import { Index } from "../enum";
-import { db } from "../db/mongo";
 
 config({ path: "../../.env" });
 
@@ -20,6 +20,7 @@ const s3 = new S3({
 });
 
 export class EditProfile {
+  private collection = getDb().collection(Index.UserProfile);
   async profile(request: any) {
     const {
       file,
@@ -40,7 +41,7 @@ export class EditProfile {
       .promise()
       .then(async (values) => values.Location);
 
-    await db.collection(Index.UserProfile).insertOne({
+    await this.collection.insertOne({
       ...body,
       imageProfile,
       dateAdded: new Date(),
