@@ -1,103 +1,82 @@
 import { getDb } from "../db/mongo";
 import { Index } from "../enum";
-import { HttpResponse } from "../httpError/httpError";
+import { InternalServerError, BadRequest } from "../httpError/ErrorHandler";
 import { ObjectId } from "mongodb";
-import { v4 as uuidv4 } from "uuid";
-import { createReadStream } from "fs";
-import S3 from "aws-sdk/clients/s3";
-import { Categories } from "./Categories";
-import { buildMongoQuery } from "./buildMongoQuery";
+import { Categories } from "./util/Categories";
+import { Upolader } from "./util/uploadFile";
+import { buildMongoQuery } from "./util/buildMongoQuery";
+import { Filter } from "./util/filterCategory";
+import { IServiceCategory } from "./util/serviceModel";
 
-const s3 = new S3({
-  endpoint: process.env.endpoint,
-  region: process.env.region,
-  credentials: {
-    accessKeyId: process.env.accessKeyId || "",
-    secretAccessKey: process.env.secretAccessKey || "",
-  },
-});
-
-const uploadedFilesToSpaces = async (requsetFiles: Express.Multer.File[]) => {
-  const spacesFiles = requsetFiles.map(async (file) => {
-    const spacesFiles = {
-      Bucket: process.env.bucketName || "",
-      Key: `bbardsImages/${uuidv4() + file.originalname}`,
-      Body: createReadStream(file.path),
-      ACL: "public-read",
-      ContentType: file.mimetype,
-    };
-    return await s3.upload(spacesFiles).promise();
-  });
-
-  return Promise.all(spacesFiles).then((values) =>
-    values.map(({ Location }) => Location)
-  );
-};
-
-export class AdsService {
+export class CategoriesService implements IServiceCategory {
   private collection = getDb().collection(Index.Add);
+  private categorie = getDb().collection<Categories>(Index.Add);
+  private spaces: Upolader = new Upolader();
+  private advanced: Filter = new Filter();
 
-  async getAd(adId: string) {
+  async getCategoryById(id: string): Promise<Categories[] | null> {
+    try {
+      const categorie: Categories[] | null = await this.categorie
+        .find({ _id: new ObjectId(id) })
+        .toArray();
+
+      return categorie;
+    } catch (err: any) {
+      throw new InternalServerError(err.message);
+    }
+  }
+
+  async getAllCategories(): Promise<Categories[]> {
+    const categories: Categories[] = await this.categorie.find().toArray();
+    return categories;
+  }
+
+  async getAllCategoriesById(id: string) {
     try {
       const ads = await this.collection
-        .find({ _id: new ObjectId(adId) })
+        .find({ _id: new ObjectId(id) })
         .toArray();
       const total = await this.collection.countDocuments({});
 
-      return HttpResponse.sucess({ total, ads }, 201, {});
+      return { total, ...ads };
     } catch (err: any) {
-      return HttpResponse.failed(err.message, 301);
+      throw new InternalServerError(err.message);
     }
   }
 
-  async addAd(files: Express.Multer.File[], token: string, advertising: any) {
-    const {
-      productTitle,
-      productCategory,
-      price,
-      priceCondition,
-      adCategory,
-      productCondition,
-      addDescription,
-      city,
-      oneStar,
-      twoStar,
-      threeStar,
-      fourStar,
-      fiveStar,
-      click,
-      views,
-    } = advertising;
+  async createCategory(
+    files: Express.Multer.File[],
+    token: string,
+    category: Categories
+  ): Promise<void> {
+    const uploadedFiles = await this.spaces.UploadFiles(files);
     try {
-      const uploadedFiles = await uploadedFilesToSpaces(files);
-      const response = await this.collection.insertOne({
+      await this.collection.insertOne({
         author: token,
-        productTitle,
         productImages: uploadedFiles,
-        productCategory,
-        price,
-        priceCondition,
-        adCategory,
-        productCondition,
-        addDescription,
-        city,
-        rating: {
-          oneStar: oneStar || 0,
-          twoStar: twoStar || 0,
-          threeStar: threeStar || 0,
-          fourStar: fourStar || 0,
-          fiveStar: fiveStar || 0,
-        },
-        click: click || 0,
-        views: views || 0,
+        ...category,
       });
-      return HttpResponse.sucess({ response }, 201, {});
-    } catch (err: any) {
-      return HttpResponse.failed(err.message, 400);
+    } catch (err) {
+      throw new BadRequest("Bad Request");
     }
   }
 
-  async filterCategories(categories: Categories) {
+  async updateCategory(id: string, categories: Categories): Promise<void> {
+    try {
+      const mongoQuery = buildMongoQuery(categories);
+      await this.collection.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: mongoQuery }
+      );
+    } catch (err: any) {
+      throw new InternalServerError(err.message);
+    }
+  }
+
+  async filterCategories(categories: Categories): Promise<{
+    dataLength: any;
+    data: Categories[];
+  }> {
     const { page } = categories;
     const mongoQuery = buildMongoQuery(categories);
 
@@ -110,50 +89,19 @@ export class AdsService {
         nPerPage,
         filterQuery: mongoQuery,
       };
-      const { filterResult, dataLength } = await this.advancedFiltration(props);
+      const { filterResult, dataLength } =
+        await this.advanced.categoryFiltration(props);
 
-      return HttpResponse.sucess(
-        {
-          dataLength: dataLength.length,
-          data: filterResult,
-        },
-        200,
-        {}
-      );
+      return {
+        dataLength: dataLength.length,
+        data: filterResult,
+      };
     } catch (err: any) {
-      return HttpResponse.failed(err.message, 400);
+      throw new InternalServerError(err.message);
     }
   }
 
-  async advancedFiltration({
-    pageNumber,
-    nPerPage,
-    filterQuery,
-  }: {
-    pageNumber: number;
-    nPerPage: number;
-    filterQuery: { [k: string]: any };
-  }): Promise<any> {
-    const { page, ...res } = filterQuery;
-
-    try {
-      const filterResult = await this.collection
-        .find({
-          $and: [res],
-        })
-        .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
-        .limit(nPerPage)
-        .toArray();
-
-      const dataLength = await this.collection
-        .find({
-          $and: [res],
-        })
-        .toArray();
-
-      return { filterResult, dataLength };
-    } catch (err) {
-      console.log(err);
-    }
+  async deleteCategory(id: string): Promise<void> {
+    await this.collection.deleteOne({ _id: new ObjectId(id) });
   }
 }

@@ -1,32 +1,64 @@
-import { Controller, Get, Middlewares, Path, Post, Request, Route } from "tsoa";
-import { AdsService } from "./ads.service";
+import {
+  Controller,
+  Get,
+  Middlewares,
+  Path,
+  Post,
+  Request,
+  Route,
+  Tags,
+  Put,
+  Delete,
+  SuccessResponse,
+} from "tsoa";
+import { CategoriesService } from "./ads.service";
 import { upload } from "../multer";
+import { Categories } from "./util/Categories";
+import { Upolader } from "./util/uploadFile";
 
 @Route("api/v1")
-export class AdsController extends Controller {
-  @Get("filter")
-  public async getFilteredAds(@Request() request: any) {
-    return await new AdsService().filterCategories(request.query);
+@Tags("Categories")
+export class CategoriesController extends Controller {
+  private files: Upolader = new Upolader();
+  @Get()
+  public async getAllCategories(): Promise<Categories[]> {
+    return await new CategoriesService().getAllCategories();
+  }
+  @SuccessResponse(200)
+  @Get("{id}")
+  async getAd(@Path() id: string) {
+    return await new CategoriesService().getCategoryById(id);
   }
 
-  @Get("{adId}")
-  public async getAd(@Path() adId: any) {
-    return await new AdsService().getAd(adId);
+  @SuccessResponse(200)
+  @Get("filter")
+  async getFilteredAds(@Request() request: any) {
+    return await new CategoriesService().filterCategories(request.query);
   }
 
   @Middlewares([upload.array("files")])
-  @Post("add")
-  public async putAd(@Request() request: any) {
-    return await new AdsService().addAd(
-      this.getImagesFiles(request.files),
+  @SuccessResponse(201)
+  @Post("create-category")
+  async putAd(@Request() request: any) {
+    return await new CategoriesService().createCategory(
+      this.files.ImagesFromRequset(request.files),
       request.token,
       request.body
     );
   }
 
-  private getImagesFiles(files: Express.Multer.File[]): Express.Multer.File[] {
-    return files.filter(
-      (file) => file.mimetype === "image/jpeg" || file.mimetype === "image/png"
-    );
+  @SuccessResponse(200)
+  @Put("{id}")
+  async updateCategory(
+    @Path() id: any,
+    @Request() request: any
+  ): Promise<void> {
+    await new CategoriesService().updateCategory(id, request.body);
+  }
+
+  @SuccessResponse(200)
+  @Delete("{id}")
+  async deleteCategory(@Path() id: any): Promise<void> {
+    await new CategoriesService().deleteCategory(id);
   }
 }

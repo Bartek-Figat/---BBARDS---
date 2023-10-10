@@ -10,7 +10,7 @@ import { HttpResponse } from "../httpError/httpError";
 import { LoginDto, RegisterDto } from "./auth.dto";
 import { LogoutDto } from "../user/dto/user";
 import { BadRequest, NotFound } from "../httpError/ErrorHandler";
-
+import { SendEmail } from "./util/email";
 config({ path: "../../.env" });
 const { secret, sendgridApi } = process.env;
 
@@ -18,26 +18,7 @@ sgMail.setApiKey(`${sendgridApi}`);
 
 export class AuthService {
   private collection = getDb().collection(Index.Users);
-
-  async userEmailConfiramtion({
-    email,
-    authToken,
-  }: {
-    email: string | undefined;
-    authToken: string | undefined;
-  }): Promise<void> {
-    const msg = {
-      to: `${email}`,
-      from: "team.bbards@gmail.com",
-      subject: "Thank you for registering.",
-      text: "Team bbards",
-      html: `Hello.
-      Thank you for registering. Please click the link to complete yor activation
-      <a href='http://localhost:3000/#/activate/${authToken}'>Activation Link</a>`,
-    };
-
-    await sgMail.send(msg);
-  }
+  private email: SendEmail = new SendEmail();
 
   async emailConfiramtion({ token }: { token: string }) {
     const authToken = await this.collection.findOne(
@@ -94,7 +75,7 @@ export class AuthService {
       const useEmail = await this.collection.findOne({ email });
       console.log(useEmail);
 
-      if (useEmail) throw new NotFound("");
+      if (useEmail) throw new NotFound("Not Found");
 
       const credentials = {
         email,
@@ -111,11 +92,7 @@ export class AuthService {
       await this.collection.insertOne({
         ...credentials,
       });
-
-      await this.userEmailConfiramtion({
-        email,
-        authToken: credentials.authToken,
-      });
+      await this.email.confiramtion(email, credentials.authToken);
     } catch (err) {
       console.log("Error: ", err);
     }
