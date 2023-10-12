@@ -6,6 +6,78 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"Categories": {
+				"properties": {
+					"page": {
+						"type": "string"
+					},
+					"productCategory": {
+						"type": "string"
+					},
+					"price": {
+						"properties": {
+							"minPrice": {
+								"type": "number",
+								"format": "double"
+							},
+							"maxPrice": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"minPrice",
+							"maxPrice"
+						],
+						"type": "object"
+					},
+					"date": {
+						"properties": {
+							"endDate": {
+								"type": "string",
+								"format": "date-time"
+							},
+							"startDate": {
+								"type": "string",
+								"format": "date-time"
+							}
+						},
+						"required": [
+							"endDate",
+							"startDate"
+						],
+						"type": "object"
+					},
+					"priceCondition": {
+						"type": "string"
+					},
+					"adCategory": {
+						"type": "string"
+					},
+					"productCondition": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"rate": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"page",
+					"productCategory",
+					"price",
+					"date",
+					"priceCondition",
+					"adCategory",
+					"productCondition",
+					"city",
+					"rate"
+				],
+				"type": "object",
+				"additionalProperties": {}
+			},
 			"HttpResponse_any_": {
 				"properties": {
 					"data": {},
@@ -95,45 +167,101 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/api/v1/filter": {
+		"/api/v1": {
 			"get": {
-				"operationId": "GetFilteredAds",
+				"operationId": "GetAllCategories",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/HttpResponse_any_"
+									"items": {
+										"$ref": "#/components/schemas/Categories"
+									},
+									"type": "array"
 								}
 							}
 						}
 					}
 				},
+				"tags": [
+					"Categories"
+				],
 				"security": [],
 				"parameters": []
 			}
 		},
-		"/api/v1/{adId}": {
+		"/api/v1/{id}": {
 			"get": {
 				"operationId": "GetAd",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/HttpResponse_any_"
+									"items": {
+										"$ref": "#/components/schemas/Categories"
+									},
+									"type": "array"
 								}
 							}
 						}
 					}
 				},
+				"tags": [
+					"Categories"
+				],
 				"security": [],
 				"parameters": [
 					{
 						"in": "path",
-						"name": "adId",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdateCategory",
+				"responses": {
+					"200": {
+						"description": ""
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteCategory",
+				"responses": {
+					"200": {
+						"description": ""
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
 						"required": true,
 						"schema": {
 							"type": "string"
@@ -142,21 +270,52 @@
 				]
 			}
 		},
-		"/api/v1/add": {
-			"post": {
-				"operationId": "PutAd",
+		"/api/v1/filter": {
+			"get": {
+				"operationId": "GetFilteredAds",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/HttpResponse_any_"
+									"properties": {
+										"data": {
+											"items": {
+												"$ref": "#/components/schemas/Categories"
+											},
+											"type": "array"
+										},
+										"dataLength": {}
+									},
+									"required": [
+										"data",
+										"dataLength"
+									],
+									"type": "object"
 								}
 							}
 						}
 					}
 				},
+				"tags": [
+					"Categories"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/v1/create-category": {
+			"post": {
+				"operationId": "PutAd",
+				"responses": {
+					"201": {
+						"description": ""
+					}
+				},
+				"tags": [
+					"Categories"
+				],
 				"security": [],
 				"parameters": []
 			}
@@ -176,6 +335,9 @@
 						}
 					}
 				},
+				"tags": [
+					"User Auth"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -203,6 +365,9 @@
 						}
 					}
 				},
+				"tags": [
+					"User Auth"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -232,6 +397,9 @@
 						}
 					}
 				},
+				"tags": [
+					"User Auth"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -255,37 +423,6 @@
 				},
 				"security": [],
 				"parameters": []
-			}
-		},
-		"/files/uploadFile": {
-			"post": {
-				"operationId": "UploadFile",
-				"responses": {
-					"204": {
-						"description": "No content"
-					}
-				},
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"multipart/form-data": {
-							"schema": {
-								"type": "object",
-								"properties": {
-									"avatar": {
-										"type": "string",
-										"format": "binary"
-									}
-								},
-								"required": [
-									"avatar"
-								]
-							}
-						}
-					}
-				}
 			}
 		},
 		"/profile/user": {
