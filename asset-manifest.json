@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/---BBARDS---/static/css/main.85e2ba76.css",
-    "main.js": "/---BBARDS---/static/js/main.cda694dd.js",
+    "main.css": "/---BBARDS---/static/css/main.db1b704f.css",
+    "main.js": "/---BBARDS---/static/js/main.5eb679cc.js",
     "static/media/02.png": "/---BBARDS---/static/media/02.f30f92d3ea16aaf26d5d.png",
     "static/media/04.png": "/---BBARDS---/static/media/04.aab1d97025467af6e75a.png",
     "static/media/03.jpg": "/---BBARDS---/static/media/03.cdbd3d52574f72ea1393.jpg",
@@ -22,11 +22,11 @@
     "static/media/electronics.jpg": "/---BBARDS---/static/media/electronics.97e6ae1fedba3c1ece99.jpg",
     "static/media/education.png": "/---BBARDS---/static/media/education.fabd0f7b98046d6d8a4e.png",
     "index.html": "/---BBARDS---/index.html",
-    "main.85e2ba76.css.map": "/---BBARDS---/static/css/main.85e2ba76.css.map",
-    "main.cda694dd.js.map": "/---BBARDS---/static/js/main.cda694dd.js.map"
+    "main.db1b704f.css.map": "/---BBARDS---/static/css/main.db1b704f.css.map",
+    "main.5eb679cc.js.map": "/---BBARDS---/static/js/main.5eb679cc.js.map"
   },
   "entrypoints": [
-    "static/css/main.85e2ba76.css",
-    "static/js/main.cda694dd.js"
+    "static/css/main.db1b704f.css",
+    "static/js/main.5eb679cc.js"
   ]
 }
