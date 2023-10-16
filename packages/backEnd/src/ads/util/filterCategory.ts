@@ -1,5 +1,5 @@
-import { getDb } from "src/db/mongo";
-import { Index } from "src/enum";
+import { getDb } from "../../db/mongo";
+import { Index } from "../../enum/index";
 import { BadRequest } from "../../httpError/ErrorHandler";
 
 export class Filter {

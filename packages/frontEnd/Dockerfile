@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN yarn install --frozen-lockfile
 COPY . .
-EXPOSE 3001
+EXPOSE 3000
 CMD yarn start
 
 # # Stage 2 - the production environment

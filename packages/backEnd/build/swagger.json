@@ -167,7 +167,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/api/v1": {
+		"/api/v1/categories": {
 			"get": {
 				"operationId": "GetAllCategories",
 				"responses": {
@@ -192,7 +192,7 @@
 				"parameters": []
 			}
 		},
-		"/api/v1/{id}": {
+		"/api/v1/categories/{id}": {
 			"get": {
 				"operationId": "GetAd",
 				"responses": {
@@ -213,51 +213,11 @@
 				"tags": [
 					"Categories"
 				],
-				"security": [],
-				"parameters": [
+				"security": [
 					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
+						"jwt": []
 					}
-				]
-			},
-			"put": {
-				"operationId": "UpdateCategory",
-				"responses": {
-					"200": {
-						"description": ""
-					}
-				},
-				"tags": [
-					"Categories"
 				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			},
-			"delete": {
-				"operationId": "DeleteCategory",
-				"responses": {
-					"200": {
-						"description": ""
-					}
-				},
-				"tags": [
-					"Categories"
-				],
-				"security": [],
 				"parameters": [
 					{
 						"in": "path",
@@ -270,9 +230,9 @@
 				]
 			}
 		},
-		"/api/v1/filter": {
+		"/api/v1/categories/filter": {
 			"get": {
-				"operationId": "GetFilteredAds",
+				"operationId": "FilterCategories",
 				"responses": {
 					"200": {
 						"description": "",
@@ -305,9 +265,9 @@
 				"parameters": []
 			}
 		},
-		"/api/v1/create-category": {
+		"/api/v1/categories/create-category": {
 			"post": {
-				"operationId": "PutAd",
+				"operationId": "CreateCategory",
 				"responses": {
 					"201": {
 						"description": ""
@@ -316,8 +276,66 @@
 				"tags": [
 					"Categories"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": []
+			}
+		},
+		"/api/v1/{id}": {
+			"put": {
+				"operationId": "UpdateCategory",
+				"responses": {
+					"200": {
+						"description": ""
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteCategory",
+				"responses": {
+					"200": {
+						"description": ""
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/api/v1/registration": {
@@ -359,7 +377,17 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/HttpResponse_any_"
+									"properties": {
+										"isLogin": {},
+										"token": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"isLogin",
+										"token"
+									],
+									"type": "object"
 								}
 							}
 						}
@@ -423,6 +451,66 @@
 				},
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/api/v1/subscription/conf": {
+			"get": {
+				"operationId": "Conf",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"publishshableKey": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"publishshableKey"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/v1/subscription/create-checkout-session": {
+			"post": {
+				"operationId": "CreateSubscriptionSession",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"session": {}
+									},
+									"required": [
+										"session"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
 			}
 		},
 		"/profile/user": {

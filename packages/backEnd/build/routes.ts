@@ -9,6 +9,8 @@ import { AuthController } from './../src/auth/authController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ProfileController } from './../src/editProfile/profileController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { SubscriptionController } from './../src/stripeSubscription/subscriptionController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../src/user/userController';
 import { expressAuthentication } from './../src/authentication/authentication';
 // @ts-ignore - no great way to install types from subpackage
@@ -80,7 +82,7 @@ export function RegisterRoutes(app: Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.get('/api/v1',
+        app.get('/api/v1/categories',
             ...(fetchMiddlewares<RequestHandler>(CategoriesController)),
             ...(fetchMiddlewares<RequestHandler>(CategoriesController.prototype.getAllCategories)),
 
@@ -104,7 +106,8 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/api/v1/:id',
+        app.get('/api/v1/categories/:id',
+            authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(CategoriesController)),
             ...(fetchMiddlewares<RequestHandler>(CategoriesController.prototype.getAd)),
 
@@ -129,11 +132,11 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/api/v1/filter',
+        app.get('/api/v1/categories/filter',
             ...(fetchMiddlewares<RequestHandler>(CategoriesController)),
-            ...(fetchMiddlewares<RequestHandler>(CategoriesController.prototype.getFilteredAds)),
+            ...(fetchMiddlewares<RequestHandler>(CategoriesController.prototype.filterCategories)),
 
-            function CategoriesController_getFilteredAds(request: any, response: any, next: any) {
+            function CategoriesController_filterCategories(request: any, response: any, next: any) {
             const args = {
                     request: {"in":"request","name":"request","required":true,"dataType":"object"},
             };
@@ -147,18 +150,19 @@ export function RegisterRoutes(app: Router) {
                 const controller = new CategoriesController();
 
 
-              const promise = controller.getFilteredAds.apply(controller, validatedArgs as any);
+              const promise = controller.filterCategories.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, 200, next);
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/api/v1/create-category',
+        app.post('/api/v1/categories/create-category',
+            authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(CategoriesController)),
-            ...(fetchMiddlewares<RequestHandler>(CategoriesController.prototype.putAd)),
+            ...(fetchMiddlewares<RequestHandler>(CategoriesController.prototype.createCategory)),
 
-            function CategoriesController_putAd(request: any, response: any, next: any) {
+            function CategoriesController_createCategory(request: any, response: any, next: any) {
             const args = {
                     request: {"in":"request","name":"request","required":true,"dataType":"object"},
             };
@@ -172,7 +176,7 @@ export function RegisterRoutes(app: Router) {
                 const controller = new CategoriesController();
 
 
-              const promise = controller.putAd.apply(controller, validatedArgs as any);
+              const promise = controller.createCategory.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, 201, next);
             } catch (err) {
                 return next(err);
@@ -180,6 +184,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/api/v1/:id',
+            authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(CategoriesController)),
             ...(fetchMiddlewares<RequestHandler>(CategoriesController.prototype.updateCategory)),
 
@@ -206,6 +211,7 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.delete('/api/v1/:id',
+            authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(CategoriesController)),
             ...(fetchMiddlewares<RequestHandler>(CategoriesController.prototype.deleteCategory)),
 
@@ -324,6 +330,55 @@ export function RegisterRoutes(app: Router) {
 
 
               const promise = controller.userRegister.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/api/v1/subscription/conf',
+            ...(fetchMiddlewares<RequestHandler>(SubscriptionController)),
+            ...(fetchMiddlewares<RequestHandler>(SubscriptionController.prototype.conf)),
+
+            function SubscriptionController_conf(request: any, response: any, next: any) {
+            const args = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new SubscriptionController();
+
+
+              const promise = controller.conf.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, 200, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/api/v1/subscription/create-checkout-session',
+            ...(fetchMiddlewares<RequestHandler>(SubscriptionController)),
+            ...(fetchMiddlewares<RequestHandler>(SubscriptionController.prototype.createSubscriptionSession)),
+
+            function SubscriptionController_createSubscriptionSession(request: any, response: any, next: any) {
+            const args = {
+                    requestBody: {"in":"body","name":"requestBody","required":true,"dataType":"any"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new SubscriptionController();
+
+
+              const promise = controller.createSubscriptionSession.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

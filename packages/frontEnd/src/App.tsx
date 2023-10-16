@@ -11,6 +11,8 @@ import { LayoutAdmin } from "router/LayoutAdmin";
 import { Dasboard } from "views/admin/admin";
 import { Profile } from "views/admin/profile/profile";
 import { AddPost } from "views/admin/addPost/addPost";
+import SubscriptionForm from "./views/stripe/stripeSubscryption";
+import Success from "views/stripe/success";
 
 export function App() {
   const element = useRoutes([
@@ -21,6 +23,8 @@ export function App() {
         { index: true, element: <Home /> },
         { path: `category-details`, element: <CategoryDetails /> },
         { path: `blog-list`, element: <BlogList /> },
+        { path: `subscription`, element: <SubscriptionForm /> },
+        { path: `success`, element: <Success /> },
         { path: `*`, element: <Home /> },
       ],
     },

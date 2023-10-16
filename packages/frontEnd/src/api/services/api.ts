@@ -71,7 +71,7 @@ export const user = createApi({
     }),
     filterAndPaginationProducts: builder.query({
       query: (params: FilterAndPaginationProductsProps) => ({
-        url: `filter`,
+        url: `categories/filter`,
         method: "GET",
         params,
       }),

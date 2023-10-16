@@ -11,6 +11,7 @@ import { LoginDto, RegisterDto } from "./auth.dto";
 import { LogoutDto } from "../user/dto/user";
 import { BadRequest, NotFound } from "../httpError/ErrorHandler";
 import { SendEmail } from "./util/email";
+import { TokenService } from "../token/token.service";
 config({ path: "../../.env" });
 const { secret, sendgridApi } = process.env;
 
@@ -19,6 +20,7 @@ sgMail.setApiKey(`${sendgridApi}`);
 export class AuthService {
   private collection = getDb().collection(Index.Users);
   private email: SendEmail = new SendEmail();
+  private token: TokenService = new TokenService();
 
   async emailConfiramtion({ token }: { token: string }) {
     const authToken = await this.collection.findOne(
@@ -118,9 +120,9 @@ export class AuthService {
     const match: boolean =
       user && (await compare(`${password}`, user.password));
 
-    if (!match) throw new BadRequest();
+    if (!match) throw new BadRequest("Bad Request");
 
-    const token: string = sign({ token: user._id }, "secret");
+    const token: string = this.token.generateAccessToken(user._id);
 
     await this.collection.updateOne(
       { email: user.email },
@@ -137,7 +139,7 @@ export class AuthService {
     );
     console.log("isLogin", isLogin.isLogin);
 
-    return HttpResponse.sucess({ token, isLogin: isLogin.isLogin }, 200, {});
+    return { token, isLogin: isLogin.isLogin };
   }
   async userLogout(dto: LogoutDto): Promise<void> {
     const {
