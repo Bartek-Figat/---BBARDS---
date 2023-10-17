@@ -16,6 +16,11 @@
 - [Contributing](#Contributing)
 - [Application demo](https://bartek-figat.github.io/---BBARDS---/)
 
+
+## Buy Me Coffee
+[Coffee](https://www.buymeacoffee.com/bartek1983d)
+
+
 ## Download
 
 ```bash
