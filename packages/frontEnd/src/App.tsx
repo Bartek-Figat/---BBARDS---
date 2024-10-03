@@ -1,5 +1,5 @@
 import { useRoutes } from "react-router-dom";
-import { HomeLayout, Layout } from "router/Layout";
+import { Layout } from "router/Layout";
 import Login from "views/login/Login";
 import { BlogList } from "views/blogList/BlogList";
 import { CategoryDetails } from "views/categoryDetails/CategoryDetails";
@@ -25,7 +25,8 @@ export function App() {
         { path: `blog-list`, element: <BlogList /> },
         { path: `subscription`, element: <SubscriptionForm /> },
         { path: `success`, element: <Success /> },
-        { path: `*`, element: <Home /> },
+
+        { path: `*`, element: <NotFound /> },
       ],
     },
     !localStorage.getItem("token")

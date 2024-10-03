@@ -10,7 +10,6 @@ import {
   Put,
   Delete,
   SuccessResponse,
-  Security,
 } from "tsoa";
 import { CategoriesService } from "./ads.service";
 import { upload } from "../multer";
@@ -21,25 +20,22 @@ import { Upolader } from "./util/uploadFile";
 @Tags("Categories")
 export class CategoriesController extends Controller {
   private files: Upolader = new Upolader();
-  @Get("categories")
-  public async getAllCategories(): Promise<Categories[]> {
-    return await new CategoriesService().getAllCategories();
-  }
 
-  @SuccessResponse(200)
-  @Security("jwt")
-  @Get("categories/{id}")
-  async getAd(@Path() id: string) {
-    return await new CategoriesService().getCategoryById(id);
-  }
-
-  @SuccessResponse(200)
   @Get("categories/filter")
   async filterCategories(@Request() request: any) {
     return await new CategoriesService().filterCategories(request.query);
   }
 
-  @Security("jwt")
+  @Get("categories")
+  public async getAllCategories(): Promise<Categories[]> {
+    return await new CategoriesService().getAllCategories();
+  }
+
+  @Get("categories/{id}")
+  async getAd(@Path() id: string) {
+    return await new CategoriesService().getCategoryById(id);
+  }
+
   @Middlewares([upload.array("files")])
   @SuccessResponse(201)
   @Post("categories/create-category")
@@ -52,7 +48,6 @@ export class CategoriesController extends Controller {
   }
 
   @SuccessResponse(200)
-  @Security("jwt")
   @Put("{id}")
   async updateCategory(
     @Path() id: any,
@@ -62,7 +57,6 @@ export class CategoriesController extends Controller {
   }
 
   @SuccessResponse(200)
-  @Security("jwt")
   @Delete("{id}")
   async deleteCategory(@Path() id: any): Promise<void> {
     await new CategoriesService().deleteCategory(id);

@@ -76,6 +76,23 @@ export const user = createApi({
         params,
       }),
     }),
+    subscriptionConf: builder.query({
+      query: () => ({
+        url: "subscription/conf",
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }),
+    }),
+    retriveSession: builder.mutation({
+      query: ({ sessionId }: { sessionId: string }) => ({
+        url: "registration",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: {
+          sessionId,
+        },
+      }),
+    }),
   }),
 });
 
@@ -85,4 +102,6 @@ export const {
   useActivateQuery,
   useConfirmUserQuery,
   useFilterAndPaginationProductsQuery,
+  useSubscriptionConfQuery,
+  useRetriveSessionMutation,
 } = user;

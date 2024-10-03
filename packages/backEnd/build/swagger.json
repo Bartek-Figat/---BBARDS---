@@ -167,6 +167,41 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+		"/api/v1/categories/filter": {
+			"get": {
+				"operationId": "FilterCategories",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"data": {
+											"items": {
+												"$ref": "#/components/schemas/Categories"
+											},
+											"type": "array"
+										},
+										"dataLength": {}
+									},
+									"required": [
+										"data",
+										"dataLength"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
 		"/api/v1/categories": {
 			"get": {
 				"operationId": "GetAllCategories",
@@ -197,7 +232,7 @@
 				"operationId": "GetAd",
 				"responses": {
 					"200": {
-						"description": "",
+						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -213,11 +248,7 @@
 				"tags": [
 					"Categories"
 				],
-				"security": [
-					{
-						"jwt": []
-					}
-				],
+				"security": [],
 				"parameters": [
 					{
 						"in": "path",
@@ -228,41 +259,6 @@
 						}
 					}
 				]
-			}
-		},
-		"/api/v1/categories/filter": {
-			"get": {
-				"operationId": "FilterCategories",
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"properties": {
-										"data": {
-											"items": {
-												"$ref": "#/components/schemas/Categories"
-											},
-											"type": "array"
-										},
-										"dataLength": {}
-									},
-									"required": [
-										"data",
-										"dataLength"
-									],
-									"type": "object"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Categories"
-				],
-				"security": [],
-				"parameters": []
 			}
 		},
 		"/api/v1/categories/create-category": {
@@ -276,11 +272,7 @@
 				"tags": [
 					"Categories"
 				],
-				"security": [
-					{
-						"jwt": []
-					}
-				],
+				"security": [],
 				"parameters": []
 			}
 		},
@@ -295,11 +287,7 @@
 				"tags": [
 					"Categories"
 				],
-				"security": [
-					{
-						"jwt": []
-					}
-				],
+				"security": [],
 				"parameters": [
 					{
 						"in": "path",
@@ -321,11 +309,7 @@
 				"tags": [
 					"Categories"
 				],
-				"security": [
-					{
-						"jwt": []
-					}
-				],
+				"security": [],
 				"parameters": [
 					{
 						"in": "path",
@@ -476,7 +460,11 @@
 						}
 					}
 				},
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": []
 			}
 		},
@@ -501,7 +489,48 @@
 						}
 					}
 				},
-				"security": [],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/subscription/retrieve-checkout-session": {
+			"post": {
+				"operationId": "RetrieveSubscriptionSession",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"session": {}
+									},
+									"required": [
+										"session"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"jwt": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,

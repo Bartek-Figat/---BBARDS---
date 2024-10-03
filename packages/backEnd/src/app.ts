@@ -1,4 +1,5 @@
-import express from "express";
+import express, { Response as ExResponse, Request as ExRequest } from "express";
+import swaggerUi from "swagger-ui-express";
 import helemt from "helmet";
 import compression from "compression";
 import morgan from "morgan";
@@ -27,5 +28,11 @@ app.use(
 );
 app.use(helemt());
 app.use(morgan("dev"));
+
+app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
+  return res.send(
+    swaggerUi.generateHTML(await import("../build/swagger.json"))
+  );
+});
 
 RegisterRoutes(app);

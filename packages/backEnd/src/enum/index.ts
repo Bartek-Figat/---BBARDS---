@@ -4,4 +4,5 @@ export enum Index {
   Db = "test",
   Token = "refreshTokens",
   UserProfile = "profile",
+  SUBSCRIPTION = "subscription",
 }

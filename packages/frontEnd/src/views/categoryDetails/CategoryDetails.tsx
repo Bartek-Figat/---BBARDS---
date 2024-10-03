@@ -22,8 +22,6 @@ type ProductProps = {
   city: string;
 };
 
-type Obj = Record<string, string>;
-
 export const CategoryDetails = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState<ProductProps[]>([]);

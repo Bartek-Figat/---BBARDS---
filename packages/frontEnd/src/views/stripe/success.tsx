@@ -1,8 +1,23 @@
+import axios from "axios";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const Success = () => {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
+
+  useEffect(() => {
+    async function retriveSession() {
+      await axios.post(
+        "http://localhost:8080/api/v1/subscription/retrieve-checkout-session",
+        {
+          sessionId,
+        }
+      );
+    }
+
+    retriveSession();
+  });
 
   return (
     <div className="flex items-center justify-center h-screen bg-green-100">

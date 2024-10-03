@@ -6,8 +6,6 @@ export const useCollapsed = () => {
   const { collapsed } = useSelector(selectConfigSlice);
   const dispatch = useDispatch();
 
-  selectConfigSlice;
-
   const handleToggle = () => {
     dispatch(
       setCollapsed({

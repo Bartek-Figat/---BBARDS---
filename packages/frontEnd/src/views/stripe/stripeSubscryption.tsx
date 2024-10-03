@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
+import { FaCarSide } from "react-icons/fa";
 import { loadStripe } from "@stripe/stripe-js";
+import { useSubscriptionConfQuery } from "../../api/services/api";
 import axios from "axios";
+import { SubscriptionCard } from "./checkOutForm";
 
 const SubscriptionForm = () => {
   const [stripeLoadStripe, setStripeLoadStripe] = useState("");
 
+  const {
+    data: conf,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useSubscriptionConfQuery("");
+
   useEffect(() => {
     async function getConf() {
-      const r = await axios.get(
-        "http://localhost:8080/api/v1/subscription/conf"
-      );
-      const { publishshableKey } = r.data;
+      const { publishshableKey } = conf;
       setStripeLoadStripe(publishshableKey);
     }
-
     getConf();
   });
 
@@ -21,12 +27,12 @@ const SubscriptionForm = () => {
 
   async function handleClick() {
     const stripe = await stripePromise;
+
     const response = await axios.post(
       "http://localhost:8080/api/v1/subscription/create-checkout-session",
       { priceId: "price_1O0kHFEbggljtPojIWHdeidr" }
     );
     const { session } = response.data;
-    console.log(session);
 
     if (response.data.error) {
       console.error("Response Error", response.data.error.message);
@@ -41,12 +47,7 @@ const SubscriptionForm = () => {
 
   return (
     <>
-      <h1>React Stripe SuB</h1>
-      {stripeLoadStripe && (
-        <button role="link" onClick={handleClick}>
-          Subscribe
-        </button>
-      )}
+      <SubscriptionCard />
     </>
   );
 };
